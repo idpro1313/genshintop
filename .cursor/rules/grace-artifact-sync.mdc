@@ -1,0 +1,22 @@
+---
+description: GRACE — какие файлы в grace/ обновлять при типичных изменениях кода
+alwaysApply: true
+---
+
+# Синхронизация GRACE-артефактов
+
+Все пути ниже — под **`grace/`**. После изменения кода обнови затронутые файлы:
+
+| Что изменилось | Что обновить |
+|----------------|--------------|
+| Новый модуль или класс | `grace/knowledge-graph/knowledge-graph.xml` (M-xxx), `grace/plan/development-plan.xml` (модуль + контракт) |
+| Новая функция или экспорт | `grace/knowledge-graph/knowledge-graph.xml` (аннотации модуля) |
+| Новая зависимость между модулями | `grace/knowledge-graph/knowledge-graph.xml` (связи), `grace/plan/development-plan.xml` (depends) |
+| Новый маршрут | `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml` |
+| Удалён модуль или функция | убрать из `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, при необходимости `grace/verification/verification-plan.xml` |
+| Логика проверки | `grace/verification/verification-plan.xml` (сценарии, лог-маркеры) |
+| Новый юзкейс | `grace/requirements/requirements.xml`, `grace/plan/development-plan.xml`, при важности — `grace/verification/verification-plan.xml` (критический поток) |
+| Версия проекта в графе | узел/поле версии в `grace/knowledge-graph/knowledge-graph.xml`, если так заведено в проекте |
+| Стек, тесты, логирование | `grace/technology/technology.xml`, при необходимости `grace/verification/verification-plan.xml` |
+
+Принципы: граф знаний не отстаёт от кода; сверху вниз Requirements → Plan → Verification → Contract → Code.

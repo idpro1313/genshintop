@@ -1,0 +1,52 @@
+---
+description: GRACE 3.x — все XML и граф только в grace/; AGENTS; семантика в коде и синхронизация
+alwaysApply: true
+---
+
+# docs/AGENTS.md и GRACE
+
+**Данные GRACE (XML, граф знаний, планы)** хранятся **только** в каталоге **`grace/`**. Не веди и не предлагай дублирующие артефакты в `docs/*.xml` — переноси и правь только под `grace/**`. См. также **`grace/README.md`**.
+
+## При старте сессии (перед правками кода)
+
+Перед существенными изменениями прочитай артефакты в таком порядке:
+
+1. `grace/knowledge-graph/knowledge-graph.xml` — модули, зависимости, экспорты
+2. `grace/plan/development-plan.xml` — контракты M-*, фазы, потоки данных
+3. `grace/verification/verification-plan.xml` — гейты, трассы, критические потоки, лог-маркеры
+4. `grace/requirements/requirements.xml` — при добавлении или изменении фич / сценариев
+5. `grace/technology/technology.xml` — при вопросах по стеку и формату семантической разметки
+
+## Карта артефактов
+
+| Роль | Путь |
+|------|------|
+| Требования | `grace/requirements/requirements.xml` |
+| Технологии, семантика | `grace/technology/technology.xml` |
+| План модулей M-* | `grace/plan/development-plan.xml` |
+| Верификация V-* → M-* | `grace/verification/verification-plan.xml` |
+| Граф знаний | `grace/knowledge-graph/knowledge-graph.xml` |
+
+В GRACE 3.x первичен **`grace/verification/verification-plan.xml`** для гейтов и трасс. Upstream: [osovv/grace-marketplace](https://github.com/osovv/grace-marketplace) (3.0.3).
+
+## Чтение AGENTS
+
+- В начале сессии **после** истории (правило read-history-on-start) работай **только** с **`docs/AGENTS.md`** — семантическая карта: стек, модули, API, конвенции. Корневой `AGENTS.md` не использовать как замену.
+- Если файл большой: сначала **Обзор**, **Структура директорий**, при необходимости таблицы API и раздел **GRACE**.
+
+## Семантическая разметка в коде
+
+- Перед правками прочитай маркеры: `# GRACE[M-*][…][BLOCK_*]`, **CONTRACT**, `@grace` в JS/Vue. Ориентир формата — `grace/technology/technology.xml` → semantic-markup.
+- Соблюдай префиксы **M-*** из `grace/plan/development-plan.xml`; не ломай **BLOCK_*** без обновления документов.
+- После изменений модулей, маршрутов, путей, API или потоков данных: поправь якоря/CONTRACT в коде и **синхронно** обнови `grace/knowledge-graph/knowledge-graph.xml`, при необходимости остальные XML в `grace/**` и **`docs/AGENTS.md`**.
+- Задачу не считай завершённой, пока код и GRACE расходятся по затронутой области.
+
+## Контракт-first и верификация
+
+- Не пиши код без актуального контракта: сначала `MODULE_CONTRACT` и секция в `grace/plan/development-plan.xml`.
+- Новый модуль — запись **`V-M-xxx`** в `grace/verification/verification-plan.xml`; сценарии success/failure и лог-маркеры `[Module][function][BLOCK_NAME]`.
+- Соблюдай конвенцию **уникальных имён тегов** в XML (`<M-DATABASE>`, фазы `Phase-N`, потоки `DF-XXX`, юзкейсы `UC-XXX`, верификация `V-M-XXX`, критические потоки `CF-XXX`), если она принята в проекте.
+
+## Логирование
+
+Существенные правки GRACE/AGENTS фиксируй в **`docs/HISTORY.md`** (правило project-history): какие файлы `grace/**/*.xml` или разделы AGENTS изменены.

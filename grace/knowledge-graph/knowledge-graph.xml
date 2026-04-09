@@ -1,0 +1,41 @@
+<KnowledgeGraph>
+  <Project NAME="genshintop" VERSION="0.2.0">
+    <keywords>genshin-impact, markdown, knowledge-base, gi-database</keywords>
+    <annotation>Корпус документов по игре: gi-database/ (тысячи .md по категориям), сопутствующие INDEX.md и database.json.</annotation>
+
+    <M-GI-DATABASE NAME="GiDatabase" TYPE="DATA_LAYER" STATUS="implemented">
+      <purpose>Единый каталог статей и справочных материалов Genshin Impact в Markdown; машиночитаемое оглавление и статистика.</purpose>
+      <path>gi-database/</path>
+      <depends>none</depends>
+      <annotations>
+        <fn-INDEX PURPOSE="Человекочитаемое описание структуры и источников" />
+        <fn-database-json PURPOSE="JSON-метаданные: категории, счётчики, описание" />
+      </annotations>
+    </M-GI-DATABASE>
+
+    <!-- Module declarations use unique ID-based tags.
+         Each module gets a unique ID prefix (e.g., M-CONFIG, M-DB, M-AUTH).
+
+         Example:
+         <M-CONFIG NAME="Config" TYPE="UTILITY" STATUS="planned">
+            <purpose>Application configuration and environment management</purpose>
+            <path>src/config/index.ts</path>
+            <depends>none</depends>
+            <verification-ref>V-M-CONFIG</verification-ref>
+            <annotations>
+              <fn-loadConfig PURPOSE="Load and validate config from environment" />
+              <type-AppConfig PURPOSE="Configuration type definition" />
+              <export-config PURPOSE="Singleton config instance" />
+            </annotations>
+          </M-CONFIG>
+
+          Module types: ENTRY_POINT, CORE_LOGIC, DATA_LAYER, UI_COMPONENT, UTILITY, INTEGRATION
+
+          CrossLinks connect dependent modules:
+          <CrossLink from="M-SOURCE" to="M-TARGET" relation="description" />
+
+          STATUS should usually be one of: planned, partial, implemented
+     -->
+
+  </Project>
+</KnowledgeGraph>
