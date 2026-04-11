@@ -1,0 +1,42 @@
+---
+const path = Astro.url.pathname;
+const link = (href: string, label: string) => {
+  const active = path === href || (href !== '/' && path.startsWith(href));
+  return { href, label, active };
+};
+const nav = [
+  link('/', 'Главная'),
+  link('/characters', 'Персонажи'),
+  link('/guides', 'Гайды'),
+  link('/about', 'О проекте'),
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-teyvat-night/90 backdrop-blur-md">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="group flex items-center gap-2">
+      <span
+        class="font-display text-lg font-semibold tracking-wide text-gradient-gold"
+        >GenshinTop</span
+      >
+      <span class="hidden text-xs text-teyvat-muted sm:inline">genshintop.ru</span>
+    </a>
+    <nav class="flex flex-wrap items-center gap-1 sm:gap-3" aria-label="Основное меню">
+      {
+        nav.map(({ href, label, active }) => (
+          <a
+            href={href}
+            class:list={[
+              'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+              active
+                ? 'bg-white/10 text-teyvat-gold'
+                : 'text-slate-300 hover:bg-white/5 hover:text-white',
+            ]}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

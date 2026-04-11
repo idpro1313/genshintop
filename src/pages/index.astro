@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CharacterCard from '../components/CharacterCard.astro';
+import GuideCard from '../components/GuideCard.astro';
+import { getCollection } from 'astro:content';
+import { contentSlugFromId } from '../lib/slug';
+
+const characters = (await getCollection('characters'))
+  .filter((e) => !e.data.sourceSlug.startsWith('_placeholder'))
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, 'ru'));
+
+const guides = (await getCollection('guides'))
+  .filter((e) => !e.data.sourceSlug.startsWith('_placeholder'))
+  .sort((a, b) => {
+    const da = a.data.date?.getTime() ?? 0;
+    const db = b.data.date?.getTime() ?? 0;
+    return db - da;
+  });
+
+const featuredChars = characters.slice(0, 8);
+const latestGuides = guides.slice(0, 6);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      name: 'GenshinTop',
+      url: 'https://genshintop.ru',
+      inLanguage: 'ru-RU',
+      description:
+        'Гайды, персонажи и обновления Genshin Impact на русском — для игроков и поиска.',
+    },
+    {
+      '@type': 'Organization',
+      name: 'GenshinTop',
+      url: 'https://genshintop.ru',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="GenshinTop — гайды и база по Genshin Impact"
+  description="Персонажи, билды, баннеры и обновления Genshin Impact на русском. Удобный каталог для новичков и опытных игроков."
+  canonicalPath="/"
+  jsonLd={jsonLd}
+>
+  <section class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-teyvat-deep/80 to-teyvat-night px-6 py-16 text-center shadow-card">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-40"
+      style="background: radial-gradient(circle at 30% 20%, rgba(232,180,69,0.25), transparent 45%), radial-gradient(circle at 80% 60%, rgba(78,205,196,0.12), transparent 40%);"
+    >
+    </div>
+    <h1 class="relative font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+      Добро пожаловать в <span class="text-gradient-gold">Teyvat</span>
+    </h1>
+    <p class="relative mx-auto mt-4 max-w-2xl text-lg text-slate-300">
+      Каталог персонажей, гайды по обновлениям и баннерам — всё для комфортной игры в Genshin Impact.
+      Скоро: блок с пополнением кристаллов через проверенных партнёров.
+    </p>
+    <div class="relative mt-8 flex flex-wrap justify-center gap-3">
+      <a
+        href="/characters"
+        class="rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night shadow-glow transition hover:bg-teyvat-gold"
+        >Персонажи</a
+      >
+      <a
+        href="/guides"
+        class="rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-semibold text-white transition hover:border-teyvat-mint/50 hover:bg-white/10"
+        >Гайды</a
+      >
+    </div>
+  </section>
+
+  {
+    featuredChars.length > 0 ? (
+      <section class="mt-16">
+        <div class="mb-6 flex items-end justify-between gap-4">
+          <h2 class="font-display text-2xl font-semibold text-white">Персонажи</h2>
+          <a href="/characters" class="text-sm text-teyvat-mint hover:underline">
+            Все персонажи →
+          </a>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {featuredChars.map((e) => (
+            <CharacterCard
+              name={e.data.name}
+              slug={contentSlugFromId(e.id)}
+              element={e.data.element}
+              weapon={e.data.weapon}
+              rarity={e.data.rarity}
+              rating={e.data.rating}
+            />
+          ))}
+        </div>
+      </section>
+    ) : null
+  }
+
+  {
+    latestGuides.length > 0 ? (
+      <section class="mt-16">
+        <div class="mb-6 flex items-end justify-between gap-4">
+          <h2 class="font-display text-2xl font-semibold text-white">Свежие гайды</h2>
+          <a href="/guides" class="text-sm text-teyvat-mint hover:underline">
+            Все гайды →
+          </a>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {latestGuides.map((g) => (
+            <GuideCard
+              title={g.data.title}
+              slug={contentSlugFromId(g.id)}
+              category={g.data.category}
+              date={g.data.date}
+              summary={g.data.summary}
+            />
+          ))}
+        </div>
+      </section>
+    ) : null
+  }
+</BaseLayout>

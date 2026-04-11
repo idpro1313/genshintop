@@ -1,4 +1,4 @@
-<VerificationPlan VERSION="0.2.0">
+<VerificationPlan VERSION="0.1.0">
   <GlobalPolicy>
     <!-- Project-wide verification expectations.
 
@@ -12,44 +12,43 @@
   </GlobalPolicy>
 
   <CriticalFlows>
-    <!-- Verification flows link product intent to observable evidence.
-
-         <VF-001 NAME="CoreHappyPath" USE_CASES="UC-001" DATA_FLOW="DF-001" PRIORITY="high">
-           <scenario>User completes the primary success path.</scenario>
-           <expected-outcome>The final state is correct.</expected-outcome>
-           <required-signals>
-             <log-marker>[ExampleDomain][run][BLOCK_EXECUTE_CORE_FLOW]</log-marker>
-             <trace-sequence>BLOCK_VALIDATE_INPUT -> BLOCK_EXECUTE_CORE_FLOW -> RETURNED</trace-sequence>
-           </required-signals>
-         </VF-001>
-    -->
+    <VF-001 NAME="StaticSiteBuild" USE_CASES="UC-001" DATA_FLOW="DF-CONTENT-MIGRATE" PRIORITY="high">
+      <scenario>Сборка Astro после миграции контента</scenario>
+      <expected-outcome>npm run build завершается без ошибок, dist/ содержит HTML маршрутов</expected-outcome>
+      <required-signals>
+        <log-marker>[Build] astro build SUCCESS</log-marker>
+      </required-signals>
+    </VF-001>
   </CriticalFlows>
 
   <ModuleVerification>
-    <!-- Per-module verification contracts.
+    <V-M-CONTENT-PIPELINE MODULE="M-CONTENT-PIPELINE" PRIORITY="high">
+      <test-files />
+      <module-checks>
+        <check-1>npm run content:audit — создаёт reports/content-audit.json</check-1>
+        <check-2>npm run content:migrate — заполняет src/content и migration-report.json</check-2>
+        <check-3>npm run content:verify — сверка счётчиков после полной миграции</check-3>
+      </module-checks>
+      <scenarios>
+        <scenario-1 kind="success">Отчёты созданы, число выходных файлов согласовано с отчётом</scenario-1>
+        <scenario-2 kind="failure">Отсутствует gi-database — скрипт завершается с кодом 1</scenario-2>
+      </scenarios>
+      <required-log-markers />
+      <wave-follow-up>Проверка выборочных статей на артефакты скрапинга</wave-follow-up>
+      <phase-follow-up>Удаление gi-database только после ручного подтверждения качества</phase-follow-up>
+    </V-M-CONTENT-PIPELINE>
 
-         <V-M-EXAMPLE MODULE="M-EXAMPLE" PRIORITY="high">
-           <test-files>
-             <file>src/example/index.test.ts</file>
-           </test-files>
-           <module-checks>
-             <check-1>bun test src/example/index.test.ts</check-1>
-             <check-2>bun x tsc --noEmit</check-2>
-           </module-checks>
-           <scenarios>
-             <scenario-1 kind="success">Primary success path returns the expected result.</scenario-1>
-             <scenario-2 kind="failure">Invalid input is rejected with a stable error.</scenario-2>
-           </scenarios>
-           <required-log-markers>
-             <marker-1>[ExampleDomain][run][BLOCK_VALIDATE_INPUT]</marker-1>
-           </required-log-markers>
-           <required-trace-assertions>
-             <assertion-1>Failure path must not emit BLOCK_PERSIST_RESULT.</assertion-1>
-           </required-trace-assertions>
-           <wave-follow-up>Integration check against dependent modules.</wave-follow-up>
-           <phase-follow-up>Full regression suite plus sampled log review.</phase-follow-up>
-         </V-M-EXAMPLE>
-    -->
+    <V-M-WEBSITE MODULE="M-WEBSITE" PRIORITY="high">
+      <test-files />
+      <module-checks>
+        <check-1>npm run build</check-1>
+        <check-2>npx astro check (при необходимости типизации)</check-2>
+      </module-checks>
+      <scenarios>
+        <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>
+      </scenarios>
+      <required-log-markers />
+    </V-M-WEBSITE>
   </ModuleVerification>
 
   <PhaseGates>

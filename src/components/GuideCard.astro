@@ -1,0 +1,45 @@
+---
+const categoryLabels: Record<string, string> = {
+  banner: 'Баннер',
+  patch: 'Обновление',
+  newbie: 'Новичкам',
+  codes: 'Промокоды',
+  tier: 'Тир-лист',
+  hardware: 'Железо / ПК',
+  general: 'Гайд',
+};
+
+interface Props {
+  title: string;
+  slug: string;
+  category: string;
+  date?: Date;
+  summary?: string;
+}
+
+const { title, slug, category, date, summary } = Astro.props;
+const catLabel = categoryLabels[category] ?? category;
+---
+
+<a
+  href={`/guides/${slug}`}
+  class="glass-panel group block p-4 shadow-card transition-all hover:border-teyvat-mint/30 hover:shadow-glow"
+  data-guide-card
+  data-category={category}
+  data-title={title.toLowerCase()}
+>
+  <div class="mb-2 flex flex-wrap items-center gap-2 text-xs">
+    <span class="rounded-full bg-teyvat-mint/15 px-2 py-0.5 text-teyvat-mint">{catLabel}</span>
+    {
+      date ? (
+        <time datetime={date.toISOString()} class="text-teyvat-muted">
+          {date.toLocaleDateString('ru-RU')}
+        </time>
+      ) : null
+    }
+  </div>
+  <h2 class="font-display text-lg font-semibold text-white group-hover:text-teyvat-gold">
+    {title}
+  </h2>
+  {summary ? <p class="mt-2 line-clamp-3 text-sm text-teyvat-muted">{summary}</p> : null}
+</a>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const site = 'https://genshintop.ru';
+const {
+  title,
+  description = 'Гайды, персонажи и обновления Genshin Impact на русском — GenshinTop.',
+  canonicalPath = '/',
+  ogType = 'website',
+  jsonLd,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath.replace(/^\//, ''), site).toString();
+const fullTitle = title.includes('GenshinTop') ? title : `${title} | GenshinTop`;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content="GenshinTop" />
+<meta property="og:locale" content="ru_RU" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}

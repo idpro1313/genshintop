@@ -1,0 +1,63 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { contentSlugFromId } from '../../lib/slug';
+
+export async function getStaticPaths() {
+  const list = await getCollection('guides');
+  return list.map((entry) => ({
+    params: { slug: contentSlugFromId(entry.id) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const slug = contentSlugFromId(entry.id);
+const canonicalPath = `/guides/${slug}`;
+const description = entry.data.summary ?? entry.data.title;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: entry.data.title,
+  inLanguage: 'ru-RU',
+  datePublished: entry.data.date?.toISOString(),
+  mainEntityOfPage: `https://genshintop.ru${canonicalPath}`,
+};
+
+const breadcrumbs = [
+  { label: 'Главная', href: '/' },
+  { label: 'Гайды', href: '/guides' },
+  { label: entry.data.title, href: canonicalPath },
+];
+---
+
+<ArticleLayout
+  title={entry.data.title}
+  description={description}
+  canonicalPath={canonicalPath}
+  ogType="article"
+  jsonLd={jsonLd}
+  breadcrumbs={breadcrumbs}
+>
+  <header class="mb-8 border-b border-white/10 pb-6">
+    <p class="text-sm capitalize text-teyvat-muted">
+      {entry.data.category}
+      {
+        entry.data.date ? (
+          <>
+            {' · '}
+            <time datetime={entry.data.date.toISOString()}>
+              {entry.data.date.toLocaleDateString('ru-RU')}
+            </time>
+          </>
+        ) : null
+      }
+    </p>
+    <h1 class="mt-2 font-display text-4xl font-bold text-white">{entry.data.title}</h1>
+  </header>
+
+  <Content />
+</ArticleLayout>

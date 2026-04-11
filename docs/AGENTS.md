@@ -7,15 +7,35 @@
 
 ## Назначение проекта
 
-Структурированная **база знаний по Genshin Impact**: тысячи Markdown-файлов в **`gi-database/`**, сводка в **`gi-database/INDEX.md`**, агрегированные метаданные в **`gi-database/database.json`**.
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, каталоги **персонажей** и **гайдов**. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
+
+### Команды
+
+| Команда | Назначение |
+|--------|------------|
+| `npm install` | Зависимости |
+| `npm run content:audit` | Аудит gi-database → `reports/content-audit.json` |
+| `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
+| `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
+| `npm run build` | Сборка статики в **`dist/`** |
+
+### Модули (GRACE)
+
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `astro.config.mjs`
+- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`
+- **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
+
+### Деплой
+
+Инструкция для Traefik + nginx: **`deploy/README.md`** (шаблон **static-site** из [webserver](https://github.com/idpro1313/webserver)).
 
 # GRACE Framework - Project Engineering Protocol
 
 ## Keywords
-genshin-impact, markdown, knowledge-base, gi-database, guides
+genshin-impact, astro, ssg, seo, gi-database, genshintop.ru, guides, characters
 
 ## Annotation
-Контентный репозиторий без обязательного приложения: правки касаются в основном Markdown и метаданных. При добавлении кода или генераторов — обновляйте `grace/technology/technology.xml`, граф знаний и план верификации.
+Репозиторий сайта на Astro + скрипты миграции контента. При изменении маршрутов, коллекций или деплоя — обновляйте `grace/**`, этот файл и `docs/HISTORY.md`.
 
 ## Core Principles
 
@@ -115,23 +135,34 @@ Testing rules:
 
 ## File Structure
 ```
-gi-database/
-  INDEX.md               - Описание структуры, источников, подкаталогов
-  database.json          - Метаданные: категории, счётчики файлов
-  01_characters/ … 08_misc/  - Тематические каталоги Markdown
+src/
+  pages/                 - Маршруты Astro (/ , /characters , /guides , /about)
+  layouts/               - BaseLayout, ArticleLayout
+  components/            - Header, Footer, Seo, карточки, хлебные крошки
+  content/               - Коллекции Markdown (после миграции)
+  content.config.ts      - Zod-схемы и glob-лоадеры коллекций
+  styles/global.css      - Tailwind + тема сайта
+scripts/
+  audit-database.ts      - Аудит gi-database
+  process-content.ts     - Миграция в src/content
+  verify-migration.ts    - Проверка полноты переноса
+public/                  - favicon.svg, robots.txt
+deploy/                  - README и пример docker-compose для VPS
+gi-database/             - Исходный корпус (до удаления после миграции)
+reports/                 - content-audit.json, migration-report.json (после скриптов)
 grace/
-  requirements/requirements.xml       - Требования и сценарии
-  technology/technology.xml           - Стек, инструменты (обновлять при появлении кода)
-  plan/development-plan.xml             - Фазы, модули, write scope
-  verification/verification-plan.xml   - Стратегия проверок
-  knowledge-graph/knowledge-graph.xml   - Граф модулей (в т.ч. M-GI-DATABASE)
+  requirements/requirements.xml
+  technology/technology.xml
+  plan/development-plan.xml
+  verification/verification-plan.xml
+  knowledge-graph/knowledge-graph.xml
 docs/
   AGENTS.md              - Этот документ
   HISTORY.md             - Журнал итераций для агентов
-.cursor/rules/          - Правила Cursor (GRACE, история, git)
-.kilo/                  - Навыки Kilo / GRACE
+.cursor/rules/           - Правила Cursor (GRACE, история, git)
+.kilo/                   - Навыки Kilo / GRACE
 ```
-При появлении `src/` и `tests/` — описать их здесь и в `grace/knowledge-graph/knowledge-graph.xml`.
+При появлении `tests/` — описать здесь и в `grace/knowledge-graph/knowledge-graph.xml`.
 
 ## Documentation Artifacts - Unique Tag Convention
 

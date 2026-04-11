@@ -1,0 +1,48 @@
+---
+import type { ElementKey } from '../lib/elements';
+import { elementBadgeClass, elementRu } from '../lib/elements';
+
+interface Props {
+  name: string;
+  slug: string;
+  element: ElementKey;
+  weapon: string;
+  rarity?: number;
+  rating?: string;
+}
+
+const { name, slug, element, weapon, rarity, rating } = Astro.props;
+---
+
+<a
+  href={`/characters/${slug}`}
+  class="glass-panel group block p-4 shadow-card transition-all hover:border-teyvat-accent/40 hover:shadow-glow"
+  data-character-card
+  data-element={element}
+  data-weapon={weapon}
+  data-rarity={rarity ?? ''}
+  data-name={name.toLowerCase()}
+>
+  <div class="mb-2 flex flex-wrap items-center gap-2">
+    <span
+      class:list={[
+        'inline-block rounded-full border px-2 py-0.5 text-xs font-medium',
+        elementBadgeClass(element),
+      ]}
+    >
+      {elementRu(element)}
+    </span>
+    {
+      rarity ? (
+        <span class="text-xs text-amber-200/90">
+          {'★'.repeat(rarity)}
+        </span>
+      ) : null
+    }
+    {rating ? <span class="text-xs text-teyvat-muted">Рейтинг: {rating}</span> : null}
+  </div>
+  <h2 class="font-display text-lg font-semibold text-white group-hover:text-teyvat-gold">
+    {name}
+  </h2>
+  <p class="mt-1 text-sm text-teyvat-muted">{weapon}</p>
+</a>

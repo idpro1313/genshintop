@@ -1,0 +1,31 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Хлебные крошки" class="mb-6 text-sm text-teyvat-muted">
+  <ol class="flex flex-wrap items-center gap-2">
+    {
+      items.map((item, i) => (
+        <li class="flex items-center gap-2">
+          {i > 0 && <span class="text-white/30">/</span>}
+          {i === items.length - 1 ? (
+            <span class="text-teyvat-gold">{item.label}</span>
+          ) : (
+            <a href={item.href} class="hover:text-teyvat-accent transition-colors">
+              {item.label}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

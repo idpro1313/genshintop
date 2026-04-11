@@ -1,10 +1,10 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.2.0">
-    <keywords>genshin-impact, markdown, knowledge-base, gi-database</keywords>
-    <annotation>Корпус документов по игре: gi-database/ (тысячи .md по категориям), сопутствующие INDEX.md и database.json.</annotation>
+  <Project NAME="genshintop" VERSION="0.1.0">
+    <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru</keywords>
+    <annotation>Статический сайт GenshinTop (Astro) и исходная база gi-database/; контент после миграции — src/content/.</annotation>
 
     <M-GI-DATABASE NAME="GiDatabase" TYPE="DATA_LAYER" STATUS="implemented">
-      <purpose>Единый каталог статей и справочных материалов Genshin Impact в Markdown; машиночитаемое оглавление и статистика.</purpose>
+      <purpose>Исходный каталог Markdown до переноса; после миграции может быть удалён.</purpose>
       <path>gi-database/</path>
       <depends>none</depends>
       <annotations>
@@ -12,6 +12,23 @@
         <fn-database-json PURPOSE="JSON-метаданные: категории, счётчики, описание" />
       </annotations>
     </M-GI-DATABASE>
+
+    <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" STATUS="implemented">
+      <purpose>Аудит gi-database, миграция в src/content/, отчёты в reports/.</purpose>
+      <path>scripts/audit-database.ts, scripts/process-content.ts, scripts/verify-migration.ts</path>
+      <depends>M-GI-DATABASE</depends>
+      <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
+    </M-CONTENT-PIPELINE>
+
+    <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
+      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статическая выдача.</purpose>
+      <path>src/, astro.config.mjs, public/</path>
+      <depends>M-CONTENT-PIPELINE</depends>
+      <verification-ref>V-M-WEBSITE</verification-ref>
+    </M-WEBSITE>
+
+    <CrossLink from="M-WEBSITE" to="M-CONTENT-PIPELINE" relation="consumes migrated Markdown collections" />
+    <CrossLink from="M-CONTENT-PIPELINE" to="M-GI-DATABASE" relation="reads source corpus" />
 
     <!-- Module declarations use unique ID-based tags.
          Each module gets a unique ID prefix (e.g., M-CONFIG, M-DB, M-AUTH).

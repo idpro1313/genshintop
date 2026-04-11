@@ -1,0 +1,23 @@
+# Пример ориентира: на сервере используйте templates/static-site из
+# https://github.com/idpro1313/webserver и заполните .env (SITE_ROOT, TRAEFIK_*).
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: genshintop_nginx
+    restart: unless-stopped
+    volumes:
+      - /absolute/path/to/dist-contents:/usr/share/nginx/html:ro
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.genshintop.rule=Host(`genshintop.ru`) || Host(`www.genshintop.ru`)
+      - traefik.http.routers.genshintop.entrypoints=websecure
+      - traefik.http.routers.genshintop.tls.certresolver=le
+      - traefik.http.services.genshintop.loadbalancer.server.port=80
+
+networks:
+  web:
+    external: true

@@ -1,4 +1,4 @@
-<DevelopmentPlan VERSION="0.2.0">
+<DevelopmentPlan VERSION="0.1.0">
   <!--
     GRACE development plan — methodology: https://github.com/osovv/grace-marketplace
     Upstream ships Agent Skills + optional CLI (@osovv/grace-cli): grace lint | module find | module show | file show.
@@ -17,6 +17,60 @@
   </ArchitectureNotes>
 
   <Modules>
+    <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" LAYER="0" ORDER="1" STATUS="implemented">
+      <contract>
+        <purpose>Аудит и перенос Markdown из gi-database в src/content с frontmatter и отчётами.</purpose>
+        <inputs>
+          <param name="gi-database" type="filesystem" />
+        </inputs>
+        <outputs>
+          <param name="src/content" type="markdown" />
+          <param name="reports" type="json" />
+        </outputs>
+        <errors>
+          <error code="MISSING_GI" />
+        </errors>
+      </contract>
+      <interface>
+        <export-audit PURPOSE="npm run content:audit" />
+        <export-migrate PURPOSE="npm run content:migrate" />
+        <export-verify PURPOSE="npm run content:verify" />
+      </interface>
+      <depends>none</depends>
+      <target>
+        <source>scripts/audit-database.ts</source>
+        <source>scripts/process-content.ts</source>
+        <source>scripts/verify-migration.ts</source>
+      </target>
+      <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
+    </M-CONTENT-PIPELINE>
+
+    <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
+      <contract>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, SEO, sitemap.</purpose>
+        <inputs>
+          <param name="collections" type="astro-content" />
+        </inputs>
+        <outputs>
+          <param name="dist" type="static-html" />
+        </outputs>
+        <errors>
+          <error code="BUILD_FAIL" />
+        </errors>
+      </contract>
+      <interface>
+        <export-build PURPOSE="npm run build" />
+      </interface>
+      <depends>M-CONTENT-PIPELINE</depends>
+      <target>
+        <source>src/pages</source>
+        <source>src/layouts</source>
+        <source>src/components</source>
+        <source>src/content.config.ts</source>
+      </target>
+      <verification-ref>V-M-WEBSITE</verification-ref>
+    </M-WEBSITE>
+
     <!-- Modules use unique ID-based tags:
          <M-xxx NAME="..." TYPE="..." LAYER="N" ORDER="N" STATUS="planned">
             <contract>
@@ -56,6 +110,13 @@
   </Modules>
 
   <DataFlow>
+    <DF-CONTENT-MIGRATE NAME="GiToSiteContent" TRIGGER="npm run content:migrate">
+      <step-1>Обход gi-database/01_characters и 06_guides</step-1>
+      <step-2>Очистка и извлечение метаданных, обогащение ссылками на оружие/артефакты</step-2>
+      <step-3>Запись src/content/** и reports/migration-report.json</step-3>
+      <evidence>reports/migration-report.json, успешный astro build</evidence>
+    </DF-CONTENT-MIGRATE>
+
     <!-- Data flows use unique ID-based tags:
          <DF-xxx NAME="..." TRIGGER="...">
             <step-1>Description of first step</step-1>
@@ -66,6 +127,12 @@
   </DataFlow>
 
   <ImplementationOrder>
+    <Phase-1 name="SiteMVP" status="done">
+      <goal>Рабочий Astro SSG + миграция MVP-контента (персонажи, гайды)</goal>
+      <step-1 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">Скрипты аудита и миграции</step-1>
+      <step-2 module="M-WEBSITE" status="done" verification="V-M-WEBSITE">Страницы, SEO, деплой-документация</step-2>
+    </Phase-1>
+
     <!-- Phases use unique tags:
          <Phase-1 name="Foundation" status="pending">
             <goal>What this phase proves or unlocks</goal>

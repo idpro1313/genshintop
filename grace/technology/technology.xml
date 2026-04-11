@@ -1,13 +1,15 @@
-<TechnologyStack VERSION="0.2.0">
-  <Runtime>репозиторий контента (без обязательного рантайма приложения)</Runtime>
-  <Language>Markdown, JSON (метаданные)</Language>
-  <Framework>нет единого приложения — при появлении кода зафиксировать здесь</Framework>
+<TechnologyStack VERSION="0.1.0">
+  <Runtime>Node.js (сборка); продакшен — статический HTML за nginx (Docker + Traefik)</Runtime>
+  <Language>TypeScript, Markdown (контент), JSON (отчёты)</Language>
+  <Framework>Astro 5 (SSG), Tailwind CSS 3, Zod (схемы коллекций)</Framework>
 
   <Dependencies>
-    <!-- List significant dependencies with exact versions.
-
-         <dep name="library-name" version="1.2.3" purpose="What it is used for" />
-    -->
+    <dep name="astro" version="^5.16.0" purpose="SSG и маршрутизация" />
+    <dep name="@astrojs/tailwind" version="^6.0.2" purpose="Стили" />
+    <dep name="@astrojs/sitemap" version="^3.6.0" purpose="sitemap.xml" />
+    <dep name="@tailwindcss/typography" version="^0.5.15" purpose="оформление статей" />
+    <dep name="zod" version="^3.24.1" purpose="валидация frontmatter коллекций" />
+    <dep name="tsx" version="^4.19.2" purpose="запуск скриптов миграции (dev)" />
   </Dependencies>
 
   <VersionConstraints>
@@ -58,9 +60,6 @@
   </Observability>
 
   <DeliveryShape>
-    <!-- Optional deployment or runtime shape notes.
-
-         <shape>Same-origin monolith with one database and one worker process.</shape>
-    -->
+    <shape>Статическая выдача dist/; на сервере шаблон static-site из репозитория webserver (Traefik, TLS Let&apos;s Encrypt).</shape>
   </DeliveryShape>
 </TechnologyStack>

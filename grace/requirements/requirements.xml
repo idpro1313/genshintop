@@ -1,8 +1,8 @@
-<RequirementsAnalysis VERSION="0.2.0">
+<RequirementsAnalysis VERSION="0.1.0">
   <Project>
     <name>genshintop</name>
-    <annotation>Репозиторий структурированной базы знаний по Genshin Impact: каталог Markdown в gi-database/, агрегированные метаданные в database.json и INDEX.md. Источники: открытые русскоязычные гайды и вики (см. gi-database).</annotation>
-    <keywords>genshin-impact, markdown, knowledge-base, gi-database, guides</keywords>
+    <annotation>Публичный сайт genshintop.ru (Astro SSG) и перенос знаний из gi-database в src/content/. Исходный корпус Markdown остаётся в gi-database до завершения миграции.</annotation>
+    <keywords>genshin-impact, astro, ssg, seo, gi-database, guides, characters</keywords>
   </Project>
 
   <Actors>
@@ -15,18 +15,25 @@
   </Actors>
 
   <UseCases>
-    <!-- Use cases use unique ID-based tags and AAG notation.
+    <UC-001>
+      <Actor>Игрок / читатель</Actor>
+      <Action>Открывает каталог персонажей и гайдов на genshintop.ru</Action>
+      <Goal>Найти структурированную информацию по Genshin Impact на русском</Goal>
+      <Preconditions>Сайт собран (npm run build) и задеплоена статика dist/</Preconditions>
+      <AcceptanceCriteria>Доступны маршруты /characters, /guides, корректные meta и sitemap</AcceptanceCriteria>
+      <Priority>high</Priority>
+      <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
+    </UC-001>
 
-         <UC-001>
-           <Actor>User</Actor>
-           <Action>Performs an action</Action>
-           <Goal>To achieve a specific outcome</Goal>
-           <Preconditions>What must already be true</Preconditions>
-           <AcceptanceCriteria>How we verify it works</AcceptanceCriteria>
-           <Priority>high</Priority>
-           <RelatedFlows>DF-001</RelatedFlows>
-         </UC-001>
-    -->
+    <UC-002>
+      <Actor>Редактор / агент</Actor>
+      <Action>Запускает миграцию контента из gi-database</Action>
+      <Goal>Получить канонический контент в src/content/ перед удалением gi-database</Goal>
+      <Preconditions>Наличие папки gi-database с 01_characters и 06_guides</Preconditions>
+      <AcceptanceCriteria>reports/migration-report.json, npm run content:verify при полном переносе</AcceptanceCriteria>
+      <Priority>high</Priority>
+      <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
+    </UC-002>
   </UseCases>
 
   <NonGoals>
