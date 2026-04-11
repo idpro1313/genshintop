@@ -18,6 +18,8 @@
 | `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
 | `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
 | `npm run build` | Сборка статики в **`dist/`** |
+| Docker | **`deploy/README.md`** — `Dockerfile`, `deploy/docker-compose.yml`, Traefik |
+| Обновление на сервере | `bash deploy/update-from-github.sh` или `deploy/update-from-github.ps1` |
 
 ### Модули (GRACE)
 
@@ -147,7 +149,8 @@ scripts/
   process-content.ts     - Миграция в src/content
   verify-migration.ts    - Проверка полноты переноса
 public/                  - favicon.svg, robots.txt
-deploy/                  - README и пример docker-compose для VPS
+Dockerfile               - multi-stage: Astro build + nginx
+deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.*
 gi-database/             - Исходный корпус (до удаления после миграции)
 reports/                 - content-audit.json, migration-report.json (после скриптов)
 grace/

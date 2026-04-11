@@ -1,0 +1,25 @@
+# Запуск сайта в Docker за Traefik (сеть web должна существовать — см. webserver).
+# Скопируйте env.example → .env и подставьте домены.
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: genshintop-web:latest
+    container_name: ${SITE_CONTAINER_NAME:-genshintop_web}
+    restart: unless-stopped
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=web
+      - traefik.http.routers.${TRAEFIK_ROUTER}.rule=${TRAEFIK_RULE}
+      - traefik.http.routers.${TRAEFIK_ROUTER}.entrypoints=websecure
+      - traefik.http.routers.${TRAEFIK_ROUTER}.tls.certresolver=le
+      - traefik.http.routers.${TRAEFIK_ROUTER}.service=${TRAEFIK_ROUTER}
+      - traefik.http.services.${TRAEFIK_ROUTER}.loadbalancer.server.port=80
+
+networks:
+  web:
+    external: true

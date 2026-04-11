@@ -1,4 +1,4 @@
-<TechnologyStack VERSION="0.1.0">
+<TechnologyStack VERSION="0.1.2">
   <Runtime>Node.js (сборка); продакшен — статический HTML за nginx (Docker + Traefik)</Runtime>
   <Language>TypeScript, Markdown (контент), JSON (отчёты)</Language>
   <Framework>Astro 5 (SSG), Tailwind CSS 3, Zod (схемы коллекций)</Framework>
@@ -60,6 +60,6 @@
   </Observability>
 
   <DeliveryShape>
-    <shape>Статическая выдача dist/; на сервере шаблон static-site из репозитория webserver (Traefik, TLS Let&apos;s Encrypt).</shape>
+    <shape>Статика: либо образ Docker (Dockerfile → nginx внутри контейнера, Traefik на хосте, deploy/docker-compose.yml), либо выдача готового dist/ через шаблон static-site из webserver (Traefik, TLS Let&apos;s Encrypt).</shape>
   </DeliveryShape>
 </TechnologyStack>

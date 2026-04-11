@@ -1,43 +1,82 @@
-# Деплой genshintop.ru (Traefik + static-site)
+# Деплой genshintop.ru
 
-Сервер настроен по схеме [idpro1313/webserver](https://github.com/idpro1313/webserver): общий **Traefik** на 80/443, отдельный контейнер **nginx** на сайт.
+Два варианта:
 
-## Сборка
+1. **Docker в этом репозитории** — образ сам собирает Astro (`npm run build`) и отдаёт статику через nginx. Удобно вместе со скриптом обновления с GitHub.
+2. **Только статика + шаблон webserver** — собираете `dist/` локально/в CI и монтируете в `templates/static-site` из [webserver](https://github.com/idpro1313/webserver).
 
-В корне репозитория (с установленным Node.js):
+Общее требование: на сервере уже поднят **Traefik** и внешняя сеть Docker **`web`** (как в webserver).
 
-```powershell
-npm install
-npm run content:migrate
-npm run build
-```
+---
 
-Артефакт: папка **`dist/`** — её содержимое нужно раздавать как статику.
+## Вариант 1: Docker (сборка внутри образа)
 
-## На сервере (шаблон `templates/static-site`)
-
-1. Склонировать [webserver](https://github.com/idpro1313/webserver) в `/opt/webserver` (или аналог).
-2. Скопировать шаблон и настроить `.env`:
+### Подготовка на сервере
 
 ```bash
-cd /opt/webserver
-cp -r templates/static-site sites/genshintop
-cd sites/genshintop
-cp env.example .env
+cd /opt   # или ваш каталог
+git clone https://github.com/ВАШ_АКК/genshintop.git
+cd genshintop
+cp deploy/env.example deploy/.env
+# отредактируйте deploy/.env — домены в TRAEFIK_RULE
 ```
 
-В `.env` задайте:
+### Первый запуск
 
-- `SITE_CONTAINER_NAME` — уникально, например `genshintop_nginx`
-- `SITE_ROOT` — абсолютный путь к каталогу со **содержимым** `dist/` (например `/opt/genshintop/html`)
-- `TRAEFIK_ROUTER` — уникально, например `genshintop`
-- `TRAEFIK_RULE` — например ``Host(`genshintop.ru`) || Host(`www.genshintop.ru`)``
+```bash
+cd /opt/genshintop
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d --build
+```
 
-3. Залейте файлы из локального `dist/` в `SITE_ROOT` (rsync/scp/GitHub Actions).
-4. `docker compose up -d` в каталоге сайта.
+### Обновление с GitHub
 
-DNS: **A**-запись `genshintop.ru` и при необходимости `www` на IP сервера.
+```bash
+cd /opt/genshintop
+chmod +x deploy/update-from-github.sh   # один раз
+./deploy/update-from-github.sh          # ветка main по умолчанию
+./deploy/update-from-github.sh develop  # другая ветка
+```
 
-## Локальный пример compose
+Переменная окружения **`REMOTE`** (по умолчанию `origin`) задаёт имя remote.
 
-Файл [`docker-compose.example.yml`](./docker-compose.example.yml) — ориентир по переменным; на проде используйте копию из репозитория **webserver** и свой `.env`.
+**Windows (Docker Desktop):**
+
+```powershell
+cd путь\к\genshintop
+Copy-Item deploy\env.example deploy\.env
+.\deploy\update-from-github.ps1
+```
+
+Скрипт делает `git fetch` + `git merge --ff-only` и затем `docker compose build` + `up -d`. Если на ветке есть локальные коммиты без push, fast-forward может не сработать — тогда обновите git вручную.
+
+### Локальный просмотр без Traefik
+
+```bash
+docker build -t genshintop-web .
+docker run --rm -p 8080:80 genshintop-web
+# открыть http://localhost:8080
+```
+
+---
+
+## Вариант 2: только `dist/` + static-site из webserver
+
+См. прежнюю схему в корне репозитория [`README.md`](../README.md): `npm run build`, копирование `dist/` в `SITE_ROOT`, `templates/static-site` из webserver.
+
+Файл [`docker-compose.example.yml`](./docker-compose.example.yml) остаётся ориентиром для монтирования готовой статики без сборки в Docker.
+
+---
+
+## Файлы
+
+| Файл | Назначение |
+|------|------------|
+| `Dockerfile` | Node → `npm run build` → nginx |
+| `deploy/docker-compose.yml` | Сервис `web`, labels Traefik |
+| `deploy/nginx-docker.conf` | gzip, кэш статики |
+| `deploy/env.example` | Шаблон `deploy/.env` |
+| `deploy/update-from-github.sh` | Обновление на Linux |
+| `deploy/update-from-github.ps1` | Обновление на Windows |
+| `.dockerignore` | Исключает `node_modules`, `gi-database` и т.д. из контекста сборки |
+
+`deploy/.env` в репозиторий не коммитится (см. `.gitignore`).
