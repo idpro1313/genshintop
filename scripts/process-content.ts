@@ -213,6 +213,15 @@ function guideSummary(raw: string): string | undefined {
   return para ? para.slice(0, 280) : undefined;
 }
 
+function isValidRelatedSlug(slug: string): boolean {
+  return Boolean(
+    slug &&
+      slug !== '-' &&
+      !slug.includes('\n') &&
+      !slug.includes('\r'),
+  );
+}
+
 function findRelatedInFolder(
   name: string,
   folder: string,
@@ -223,8 +232,10 @@ function findRelatedInFolder(
   for (const file of walkMd(folder)) {
     if (out.length >= limit) break;
     try {
+      const slug = path.basename(file, '.md');
+      if (!isValidRelatedSlug(slug)) continue;
       const body = fs.readFileSync(file, 'utf8').toLowerCase();
-      if (body.includes(n)) out.push(path.basename(file, '.md'));
+      if (body.includes(n)) out.push(slug);
     } catch {
       /* skip */
     }
@@ -238,8 +249,10 @@ function findRelatedGuides(charName: string, guideFiles: string[]): string[] {
   for (const f of guideFiles) {
     if (out.length >= 8) break;
     const base = path.basename(f, '.md');
+    const slug = slugifyFileBase(base);
+    if (!isValidRelatedSlug(slug)) continue;
     const raw = fs.readFileSync(f, 'utf8');
-    if (raw.toLowerCase().includes(n)) out.push(slugifyFileBase(base));
+    if (raw.toLowerCase().includes(n)) out.push(slug);
   }
   return [...new Set(out)];
 }
@@ -255,7 +268,10 @@ function frontmatterBlock(obj: Record<string, unknown>): string {
     if (v === undefined) continue;
     if (Array.isArray(v)) {
       lines.push(`${k}:`);
-      for (const item of v) lines.push(`  - ${yamlEscape(String(item))}`);
+      for (const item of v) {
+        // Всегда JSON-строка: иначе значения вроде "-" дают строку `  - -`, которую YAML читает как вложенный массив
+        lines.push(`  - ${JSON.stringify(String(item))}`);
+      }
     } else if (v instanceof Date) {
       lines.push(`${k}: ${v.toISOString().slice(0, 10)}`);
     } else if (typeof v === 'number' || typeof v === 'boolean') {

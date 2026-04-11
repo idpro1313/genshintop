@@ -30,6 +30,25 @@ const guideCategoryEnum = z.enum([
   'general',
 ]);
 
+/** Нормализация списков из frontmatter: плоские строки, без пустых и без ошибочных вложенных массивов из YAML `  - -`. */
+function stringListField() {
+  return z.preprocess((val: unknown) => {
+    if (val == null) return undefined;
+    if (!Array.isArray(val)) return undefined;
+    const out: string[] = [];
+    for (const item of val) {
+      if (typeof item === 'string' && item.length > 0 && item !== '-') {
+        out.push(item);
+      } else if (Array.isArray(item)) {
+        for (const x of item) {
+          if (typeof x === 'string' && x.length > 0 && x !== '-') out.push(x);
+        }
+      }
+    }
+    return out.length > 0 ? out : undefined;
+  }, z.array(z.string()).optional());
+}
+
 export const collections = {
   characters: defineCollection({
     loader: glob({ pattern: '**/*.md', base: './src/content/characters' }),
@@ -41,9 +60,9 @@ export const collections = {
       rarity: z.union([z.literal(4), z.literal(5)]).optional(),
       rating: z.string().optional(),
       sourceSlug: z.string(),
-      relatedWeapons: z.array(z.string()).optional(),
-      relatedArtifacts: z.array(z.string()).optional(),
-      relatedGuides: z.array(z.string()).optional(),
+      relatedWeapons: stringListField(),
+      relatedArtifacts: stringListField(),
+      relatedGuides: stringListField(),
     }),
   }),
   guides: defineCollection({

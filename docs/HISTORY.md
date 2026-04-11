@@ -17,6 +17,12 @@
 - **Файлы:** `package.json`, `astro.config.mjs`, `tailwind.config.mjs`, `tsconfig.json`, `src/**`, `public/**`, `scripts/*.ts`, `deploy/**`, `reports/.gitkeep`, `VERSION`, `README.md`, `docs/AGENTS.md`, `grace/**/*.xml`
 - **Решение:** Content Collections с `glob`-лоадером; фильтры каталогов на клиенте; место под партнёрский блок — текст на главной.
 
+### Исправление YAML frontmatter relatedWeapons (0.1.1)
+- **Что:** в `relatedWeapons` попадал slug `-` (файл `-.md` в `02_weapons`), из-за чего строка `  - -` в YAML читалась как вложенный массив и ломала Zod. Исправлены генератор frontmatter (элементы списков через `JSON.stringify`), фильтр slug’ов в `process-content.ts`, препроцессор в `content.config.ts`, удалена битая строка в `al-khaytam.md` и `varka.md`.
+- **Почему:** ошибка сборки `InvalidContentEntryDataError` при `astro build`.
+- **Файлы:** `scripts/process-content.ts`, `src/content.config.ts`, `src/content/characters/al-khaytam.md`, `src/content/characters/varka.md`, `VERSION`, `package.json`, `docs/HISTORY.md`
+- **Решение:** не допускать slug `-` в связанных списках; списки в YAML только как явные JSON-строки.
+
 ### Доработка вёрстки статей
 - **Что:** ограничена максимальная ширина текста статьи (`prose max-w-3xl`) для читаемости.
 - **Почему:** длинные строки на широких экранах ухудшают UX.
