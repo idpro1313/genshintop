@@ -23,7 +23,9 @@ const { title, description, canonicalPath, ogType, jsonLd, breadcrumbs } = Astro
   jsonLd={jsonLd}
 >
   <Breadcrumbs items={breadcrumbs} />
-  <article class="prose prose-invert prose-lg max-w-none prose-headings:font-display prose-a:text-teyvat-mint">
+  <article
+    class="prose prose-invert prose-lg max-w-3xl prose-headings:font-display prose-a:text-teyvat-mint"
+  >
     <slot />
   </article>
 </BaseLayout>
