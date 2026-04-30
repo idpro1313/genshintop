@@ -17,6 +17,7 @@
 | `npm run content:audit` | Аудит gi-database → `reports/content-audit.json` |
 | `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
 | `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
+| `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1` | Повторяемая чистка оформления `src/content/guides/*.md` после миграции |
 | `npm run build` | Сборка статики в **`dist/`** |
 | Docker | **`deploy/README.md`** — `Dockerfile`, `deploy/docker-compose.yml`, Traefik |
 | Обновление на сервере | `bash deploy/update-from-github.sh` или `deploy/update-from-github.ps1` |
@@ -147,6 +148,7 @@ src/
 scripts/
   audit-database.ts      - Аудит gi-database
   process-content.ts     - Миграция в src/content
+  cleanup-guides-formatting.ps1 - Чистка Markdown-артефактов миграции гайдов
   verify-migration.ts    - Проверка полноты переноса
 public/                  - favicon.svg, robots.txt
 Dockerfile               - multi-stage: Astro build + nginx

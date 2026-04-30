@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.1.2">
+  <Project NAME="genshintop" VERSION="0.1.3">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru</keywords>
     <annotation>Статический сайт GenshinTop (Astro) и исходная база gi-database/; контент после миграции — src/content/.</annotation>
 
@@ -15,9 +15,12 @@
 
     <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" STATUS="implemented">
       <purpose>Аудит gi-database, миграция в src/content/, отчёты в reports/.</purpose>
-      <path>scripts/audit-database.ts, scripts/process-content.ts, scripts/verify-migration.ts</path>
+      <path>scripts/audit-database.ts, scripts/process-content.ts, scripts/verify-migration.ts, scripts/cleanup-guides-formatting.ps1</path>
       <depends>M-GI-DATABASE</depends>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
+      <annotations>
+        <fn-cleanup-guides-formatting PURPOSE="Повторяемая чистка Markdown-артефактов миграции в src/content/guides" />
+      </annotations>
     </M-CONTENT-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">

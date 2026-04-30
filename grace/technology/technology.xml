@@ -1,6 +1,6 @@
-<TechnologyStack VERSION="0.1.2">
+<TechnologyStack VERSION="0.1.3">
   <Runtime>Node.js (сборка); продакшен — статический HTML за nginx (Docker + Traefik)</Runtime>
-  <Language>TypeScript, Markdown (контент), JSON (отчёты)</Language>
+  <Language>TypeScript, PowerShell (служебная чистка контента), Markdown (контент), JSON (отчёты)</Language>
   <Framework>Astro 5 (SSG), Tailwind CSS 3, Zod (схемы коллекций)</Framework>
 
   <Dependencies>
@@ -20,6 +20,7 @@
   </VersionConstraints>
 
   <Tooling>
+    <tool name="powershell" value="scripts/cleanup-guides-formatting.ps1" purpose="Повторяемая нормализация Markdown-гайдов после миграции" />
     <!-- Core workspace tooling.
 
          <tool name="workspace" value="pnpm workspaces" version="9.x" />

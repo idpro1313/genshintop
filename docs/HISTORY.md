@@ -40,3 +40,15 @@
 - **Почему:** длинные строки на широких экранах ухудшают UX.
 - **Файлы:** `src/layouts/ArticleLayout.astro`, `docs/HISTORY.md`
 - **Решение:** оставить `prose` + `max-w-3xl` без центрирования всей страницы.
+
+### Аудит оформления страниц гайдов
+- **Что:** статически проверены 424 Markdown-страницы `src/content/guides/*.md`, схема коллекции `src/content.config.ts`, список и страница гайда.
+- **Почему:** запрос пользователя проверить все страницы гайдов на правильное оформление и ошибки.
+- **Файлы:** `src/content/guides/*.md`, `src/content.config.ts`, `src/pages/guides/index.astro`, `src/pages/guides/[slug].astro`, `src/layouts/ArticleLayout.astro`, `src/components/GuideCard.astro`, `docs/HISTORY.md`
+- **Решение:** выявлены системные проблемы миграции: дублирующие H1, Markdown/навигация в `summary`, legacy-ссылки `../index.html`/`#`, пустые изображения, кириллические и технические slug; автоматические исправления не выполнялись без отдельного подтверждения.
+
+### Чистка оформления страниц гайдов
+- **Что:** добавлен и применён `scripts/cleanup-guides-formatting.ps1`; нормализованы 424 Markdown-гайда: убраны дублирующие H1, legacy-хлебные крошки, пустые рекламные изображения, одиночные артефакты `[`/`**`, слитые ссылки и Markdown в `summary`; улучшены классы `ArticleLayout`.
+- **Почему:** пользователь попросил сделать страницы гайдов красивыми без потери контента.
+- **Файлы:** `scripts/cleanup-guides-formatting.ps1`, `src/content/guides/*.md`, `src/layouts/ArticleLayout.astro`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** выбран консервативный форматтер, который удаляет только миграционный мусор и дубли, а смысловой текст сохраняет; скрипт оставлен ASCII-safe для Windows PowerShell и проверен повторным запуском без новых изменений; сборку приложения локально не запускали по правилу проекта.

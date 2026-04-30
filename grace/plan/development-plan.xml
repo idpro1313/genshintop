@@ -35,12 +35,14 @@
         <export-audit PURPOSE="npm run content:audit" />
         <export-migrate PURPOSE="npm run content:migrate" />
         <export-verify PURPOSE="npm run content:verify" />
+        <export-cleanup-guides-formatting PURPOSE="powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1" />
       </interface>
       <depends>none</depends>
       <target>
         <source>scripts/audit-database.ts</source>
         <source>scripts/process-content.ts</source>
         <source>scripts/verify-migration.ts</source>
+        <source>scripts/cleanup-guides-formatting.ps1</source>
       </target>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
     </M-CONTENT-PIPELINE>
@@ -114,6 +116,7 @@
       <step-1>Обход gi-database/01_characters и 06_guides</step-1>
       <step-2>Очистка и извлечение метаданных, обогащение ссылками на оружие/артефакты</step-2>
       <step-3>Запись src/content/** и reports/migration-report.json</step-3>
+      <step-4>Повторяемая чистка Markdown-артефактов в src/content/guides</step-4>
       <evidence>reports/migration-report.json, успешный astro build</evidence>
     </DF-CONTENT-MIGRATE>
 

@@ -1,12 +1,10 @@
 ---
 title: За что банят в Genshin Impact и Honkai Star Rail?
 category: general
-summary: "Бан в Genshin Impact и Honkai: Star Rail - тема, про которую ходят самые разные слухи. Из-за незнания того, как в разных ситуациях действует HoYoverse , можно случайно подвергнуть свой аккаунт риску. В этой статье я проанализировал правила этих игр, а также настоящие случаи бана,"
+summary: "Бан в Genshin Impact и Honkai: Star Rail - тема, про которую ходят самые разные слухи. Из-за незнания того, как в разных ситуациях действует HoYoverse , можно случайно подвергнуть свой аккаунт риску. В этой статье я проанализировал правила..."
 sourceSlug: ban-genshin-honkai
 sourcePath: ban-genshin-honkai.md
 ---
-
-# За что банят в Genshin Impact и Honkai Star Rail?
 
 Бан в
 

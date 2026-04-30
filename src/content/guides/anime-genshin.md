@@ -1,12 +1,10 @@
 ---
 title: "💫 Аниме по Genshin Impact: дата выхода, сюжет"
 category: general
-summary: Genshin Impact — игра в жанре экшен-RPG с открытым миром, которая вышла 28 сентября 2020 года. Игра доступна на PlayStation 4 и 5, ПК и мобильных устройствах. Ранее Genshin Impact стала самой обсуждаемой игрой 2022 года . Обожаемая тысячами поклонников по всему миру, анонс аниме-
+summary: "Genshin Impact — игра в жанре экшен-RPG с открытым миром, которая вышла 28 сентября 2020 года. Игра доступна на PlayStation 4 и 5, ПК и мобильных устройствах. Ранее Genshin Impact стала самой обсуждаемой игрой 2022 года . Обожаемая..."
 sourceSlug: anime-genshin
 sourcePath: anime-genshin.md
 ---
-
-# 💫 Аниме по Genshin Impact: дата выхода, сюжет
 
 Genshin Impact
 
