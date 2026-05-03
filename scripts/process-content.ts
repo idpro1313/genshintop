@@ -6,6 +6,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { cleanMetaDescription } from '../src/lib/seo';
+import type { GuideCategory } from '../src/lib/guide-taxonomy';
+import {
+  extractGameVersion,
+  inferAudience,
+  inferStatus,
+  inferTopic,
+} from '../src/lib/guide-taxonomy';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -159,25 +166,64 @@ function cleanGuideMarkdown(raw: string): string {
   return t.trim();
 }
 
+/** Транслитерация кириллицы в латиницу для стабильных URL после миграции. */
+const TRANSLIT_RU: Record<string, string> = {
+  а: 'a',
+  б: 'b',
+  в: 'v',
+  г: 'g',
+  д: 'd',
+  е: 'e',
+  ё: 'e',
+  ж: 'zh',
+  з: 'z',
+  и: 'i',
+  й: 'y',
+  к: 'k',
+  л: 'l',
+  м: 'm',
+  н: 'n',
+  о: 'o',
+  п: 'p',
+  р: 'r',
+  с: 's',
+  т: 't',
+  у: 'u',
+  ф: 'f',
+  х: 'h',
+  ц: 'ts',
+  ч: 'ch',
+  ш: 'sh',
+  щ: 'sch',
+  ъ: '',
+  ы: 'y',
+  ь: '',
+  э: 'e',
+  ю: 'yu',
+  я: 'ya',
+};
+
+function transliterateForSlug(s: string): string {
+  let out = '';
+  for (const ch of s) {
+    const lo = ch.toLowerCase();
+    const tr = TRANSLIT_RU[lo];
+    out += tr !== undefined ? tr : lo;
+  }
+  return out;
+}
+
 function slugifyFileBase(base: string): string {
-  return base
-    .replace(/\.md$/i, '')
-    .replace(/#/g, '')
+  let s = base.replace(/\.md$/i, '').replace(/#/g, '');
+  s = transliterateForSlug(s);
+  return s
     .replace(/\s+/g, '-')
     .replace(/[^\p{L}\p{N}_-]+/gu, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
+    .toLowerCase()
     .slice(0, 160);
 }
-
-type GuideCategory =
-  | 'banner'
-  | 'patch'
-  | 'newbie'
-  | 'codes'
-  | 'tier'
-  | 'hardware'
-  | 'general';
 
 function classifyGuide(relPath: string, base: string): GuideCategory {
   const lower = (relPath + base).toLowerCase();
@@ -186,7 +232,14 @@ function classifyGuide(relPath: string, base: string): GuideCategory {
   if (lower.includes('promo') || lower.includes('промокод')) return 'codes';
   if (lower.startsWith('update-') || lower.includes('обновлен')) return 'patch';
   if (lower.includes('тир') || lower.includes('tier')) return 'tier';
-  if (lower.includes('pk-') || lower.includes('пк ') || lower.includes('pc'))
+  if (
+    lower.includes('pk-') ||
+    lower.includes('пк ') ||
+    lower.includes('pc') ||
+    lower.includes('noutbuk') ||
+    lower.includes('ноутбук') ||
+    lower.includes('железо')
+  )
     return 'hardware';
   return 'general';
 }
@@ -196,6 +249,36 @@ function extractDateFromFilename(base: string): Date | undefined {
   if (!m) return undefined;
   const [, dd, mm, yyyy] = m;
   const d = new Date(Number(yyyy), Number(mm) - 1, Number(dd));
+  return Number.isNaN(d.getTime()) ? undefined : d;
+}
+
+const RU_MONTH_TO_INDEX: Record<string, number> = {
+  января: 0,
+  февраля: 1,
+  марта: 2,
+  апреля: 3,
+  мая: 4,
+  июня: 5,
+  июля: 6,
+  августа: 7,
+  сентября: 8,
+  октября: 9,
+  ноября: 10,
+  декабря: 11,
+};
+
+/** Первая дата вида «3 февраля 2026» в начале материала (анонсы баннеров и т.п.). */
+function extractDateFromBody(raw: string): Date | undefined {
+  const head = raw.slice(0, 8000);
+  const m = head.match(
+    /(\d{1,2})\s+(января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря)\s+(\d{4})/i,
+  );
+  if (!m) return undefined;
+  const day = Number(m[1]);
+  const mon = RU_MONTH_TO_INDEX[m[2].toLowerCase()];
+  const year = Number(m[3]);
+  if (mon === undefined || !day || !year) return undefined;
+  const d = new Date(year, mon, day);
   return Number.isNaN(d.getTime()) ? undefined : d;
 }
 
@@ -210,7 +293,13 @@ function guideSummary(raw: string): string | undefined {
   const para = body
     .split(/\n\n+/)
     .map((p) => p.replace(/\s+/g, ' ').trim())
-    .find((p) => p.length > 80);
+    .find((p) => {
+      if (p.length < 80) return false;
+      if (/^содержание\b/i.test(p)) return false;
+      if (/^молитва события\b/i.test(p)) return false;
+      if (/^список обновлений\b/i.test(p)) return false;
+      return true;
+    });
   if (!para) return undefined;
   const cleaned = cleanMetaDescription(para, para.slice(0, 260), 280);
   return cleaned.length >= 40 ? cleaned : undefined;
@@ -384,13 +473,23 @@ function main() {
       usedGuideSlugs.add(slug);
       const title = guideTitle(raw, base);
       const category = classifyGuide(rel, base);
-      const date =
+      const dateFromName =
         extractDateFromFilename(base) ?? extractDateFromFilename(slug);
+      const dateFromBody = extractDateFromBody(raw);
+      const date = dateFromName ?? dateFromBody;
       const summary = guideSummary(raw);
       const body = cleanGuideMarkdown(raw);
+      const gameVersion = extractGameVersion(slug, raw);
+      const topic = inferTopic(category, rel, base, raw);
+      const audience = inferAudience(category, raw);
+      const status = inferStatus(category, date, gameVersion);
       const fm = frontmatterBlock({
         title,
         category,
+        topic,
+        gameVersion,
+        status,
+        audience,
         ...(date ? { date } : {}),
         ...(summary ? { summary } : {}),
         sourceSlug,

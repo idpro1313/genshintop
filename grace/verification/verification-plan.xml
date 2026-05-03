@@ -29,6 +29,7 @@
         <check-2>npm run content:migrate — заполняет src/content и migration-report.json</check-2>
         <check-3>npm run content:verify — сверка счётчиков после полной миграции</check-3>
         <check-4>powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1 — нормализует Markdown гайдов без удаления смыслового текста</check-4>
+        <check-5>npm run content:audit-guides — создаёт reports/guides-audit.json со статическими метриками гайдов</check-5>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Отчёты созданы, число выходных файлов согласовано с отчётом</scenario-1>
@@ -45,6 +46,7 @@
         <check-1>npm run build</check-1>
         <check-2>npx astro check (при необходимости типизации)</check-2>
         <check-3>После сборки: в dist/*.html наличие og:image и JSON-LD @graph на главной и каталогах (выборочно)</check-3>
+        <check-4>Статически проверить в src/layouts/BaseLayout.astro наличие счётчика Яндекс.Метрики 109020836 и noscript fallback</check-4>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

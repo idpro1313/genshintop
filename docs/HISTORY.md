@@ -58,3 +58,15 @@
 - **Почему:** план усиления видимости в поиске (Яндекс/Google): корректные сниппеты, соц. превью, структурированные данные.
 - **Файлы:** `src/lib/seo.ts`, `public/og-default.svg`, `src/components/Seo.astro`, `src/layouts/BaseLayout.astro`, `src/layouts/ArticleLayout.astro`, `src/pages/index.astro`, `src/pages/about.astro`, `src/pages/characters/index.astro`, `src/pages/guides/index.astro`, `src/pages/characters/[slug].astro`, `src/pages/guides/[slug].astro`, `src/components/GuideCard.astro`, `scripts/process-content.ts`, `VERSION`, `package.json`, `docs/AGENTS.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/technology/technology.xml`
 - **Решение:** единый дефолт OG до появления изображений в контенте; даты гайдов дублируются в `modified` при отсутствии отдельного поля.
+
+### Нормализация гайдов: таксономия, аудит, UI (0.1.6)
+- **Что:** добавлены `src/lib/guide-taxonomy.ts` (темы `topic`, `status`, `audience`, эвристики `effective*`), расширена схема коллекции `guides` в `src/content.config.ts`; скрипт `scripts/audit-guides-content.ts` и `npm run content:audit-guides` → `reports/guides-audit.json`; миграция `scripts/process-content.ts` (транслитерация slug, дата из текста, поля topic/status/audience/gameVersion, улучшенный summary, классификация «железа»); доработан `scripts/cleanup-guides-formatting.ps1` (склейки `**…**####`, summary после «Содержание»); каталог и карточки гайдов с фильтрами по типу, теме и статусу; страница гайда с бейджами, `updatedAt` в schema.org, блок «Связанные материалы» по `relatedGuides`.
+- **Почему:** план нормализации набора гайдов для игроков и редакции.
+- **Файлы:** `src/lib/guide-taxonomy.ts`, `src/content.config.ts`, `scripts/process-content.ts`, `scripts/audit-guides-content.ts`, `scripts/cleanup-guides-formatting.ps1`, `package.json`, `VERSION`, `src/components/GuideCard.astro`, `src/pages/guides/index.astro`, `src/pages/guides/[slug].astro`, `src/pages/index.astro`, `docs/AGENTS.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`
+- **Решение:** необязательные поля frontmatter не ломают существующие 424 файла; UI и аудит опираются на эвристики до следующего `content:migrate`.
+
+### Яндекс.Метрика для всех страниц (0.1.5)
+- **Что:** встроен счётчик Яндекс.Метрики `109020836` в общий layout сайта: inline-скрипт в `<head>` и `noscript` fallback в `<body>`.
+- **Почему:** пользователь попросил добавить счётчик аналитики на сайт.
+- **Файлы:** `src/layouts/BaseLayout.astro`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** счётчик размещён в `BaseLayout`, чтобы он попадал на все Astro-страницы без дублирования в маршрутах.

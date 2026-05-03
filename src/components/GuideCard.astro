@@ -1,5 +1,11 @@
 ---
 import { cleanMetaDescription } from '../lib/seo';
+import type { GuideAudience, GuideStatus, GuideTopic } from '../lib/guide-taxonomy';
+import {
+  guideAudienceLabelsRu,
+  guideStatusLabelsRu,
+  guideTopicLabelsRu,
+} from '../lib/guide-taxonomy';
 
 const categoryLabels: Record<string, string> = {
   banner: 'Баннер',
@@ -15,13 +21,34 @@ interface Props {
   title: string;
   slug: string;
   category: string;
+  /** Тема для игрока (сценарий). */
+  topic?: string;
+  status?: string;
+  audience?: string;
+  gameVersion?: string;
   date?: Date;
+  updatedAt?: Date;
   summary?: string;
 }
 
-const { title, slug, category, date, summary } = Astro.props;
+const {
+  title,
+  slug,
+  category,
+  topic,
+  status,
+  audience,
+  gameVersion,
+  date,
+  updatedAt,
+  summary,
+} = Astro.props;
 const catLabel = categoryLabels[category] ?? category;
+const topicLabel = topic ? guideTopicLabelsRu[topic as GuideTopic] : null;
+const statusLabel = status ? guideStatusLabelsRu[status as GuideStatus] : null;
+const audienceLabel = audience ? guideAudienceLabelsRu[audience as GuideAudience] : null;
 const excerpt = summary ? cleanMetaDescription(summary, title, 220) : '';
+const displayDate = updatedAt ?? date;
 ---
 
 <a
@@ -29,14 +56,38 @@ const excerpt = summary ? cleanMetaDescription(summary, title, 220) : '';
   class="glass-panel group block p-4 shadow-card transition-all hover:border-teyvat-mint/30 hover:shadow-glow"
   data-guide-card
   data-category={category}
+  data-topic={topic ?? ''}
+  data-status={status ?? ''}
   data-title={title.toLowerCase()}
 >
   <div class="mb-2 flex flex-wrap items-center gap-2 text-xs">
     <span class="rounded-full bg-teyvat-mint/15 px-2 py-0.5 text-teyvat-mint">{catLabel}</span>
     {
-      date ? (
-        <time datetime={date.toISOString()} class="text-teyvat-muted">
-          {date.toLocaleDateString('ru-RU')}
+      topicLabel ? (
+        <span class="rounded-full border border-white/15 bg-white/5 px-2 py-0.5 text-slate-200">
+          {topicLabel}
+        </span>
+      ) : null
+    }
+    {
+      statusLabel ? (
+        <span class="rounded-full border border-white/10 px-2 py-0.5 text-teyvat-muted">{statusLabel}</span>
+      ) : null
+    }
+    {
+      audienceLabel && audience !== 'all' ? (
+        <span class="rounded-full border border-white/10 px-2 py-0.5 text-teyvat-muted">{audienceLabel}</span>
+      ) : null
+    }
+    {
+      gameVersion ? (
+        <span class="rounded-full border border-teyvat-accent/30 px-2 py-0.5 text-teyvat-gold">v{gameVersion}</span>
+      ) : null
+    }
+    {
+      displayDate ? (
+        <time datetime={displayDate.toISOString()} class="text-teyvat-muted">
+          {displayDate.toLocaleDateString('ru-RU')}
         </time>
       ) : null
     }

@@ -36,6 +36,7 @@
         <export-migrate PURPOSE="npm run content:migrate" />
         <export-verify PURPOSE="npm run content:verify" />
         <export-cleanup-guides-formatting PURPOSE="powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1" />
+        <export-audit-guides PURPOSE="npm run content:audit-guides" />
       </interface>
       <depends>none</depends>
       <target>
@@ -43,13 +44,14 @@
         <source>scripts/process-content.ts</source>
         <source>scripts/verify-migration.ts</source>
         <source>scripts/cleanup-guides-formatting.ps1</source>
+        <source>scripts/audit-guides-content.ts</source>
       </target>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
     </M-CONTENT-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, SEO (мета, OG, schema.org), sitemap.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, SEO (мета, OG, schema.org), sitemap, Яндекс.Метрика.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>

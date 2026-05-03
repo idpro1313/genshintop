@@ -7,7 +7,7 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, каталоги **персонажей** и **гайдов**. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
 
 ### Команды
 
@@ -17,6 +17,7 @@
 | `npm run content:audit` | Аудит gi-database → `reports/content-audit.json` |
 | `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
 | `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
+| `npm run content:audit-guides` | Статический аудит `src/content/guides/*.md` → `reports/guides-audit.json` |
 | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1` | Повторяемая чистка оформления `src/content/guides/*.md` после миграции |
 | `npm run build` | Сборка статики в **`dist/`** |
 | Docker | **`deploy/README.md`** — `Dockerfile`, `deploy/docker-compose.yml`, Traefik |
@@ -24,9 +25,13 @@
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `astro.config.mjs`
-- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `astro.config.mjs`
+- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`, `scripts/cleanup-guides-formatting.ps1`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
+
+### Гайды: таксономия и frontmatter
+
+Коллекция **`guides`** в [`src/content.config.ts`](src/content.config.ts): обязательные `title`, `category`, `sourceSlug`; опционально `date`, `summary`, `sourcePath`, а также **`topic`** (сценарий для игрока: `banner`, `patch`, `codes`, `newbie`, `party`, `economy`, `lore`, `tech`, `general`), **`gameVersion`**, **`status`** (`active` | `dated` | `historical`), **`audience`** (`all` | `beginner` | `returning` | `meta`), **`relatedCharacters`**, **`relatedGuides`**, **`updatedAt`**. Подписи и эвристики — [`src/lib/guide-taxonomy.ts`](src/lib/guide-taxonomy.ts). На страницах при отсутствии полей используются вычисляемые значения (`effective*` в том же модуле). После полной миграции из `gi-database` новые поля заполняет [`scripts/process-content.ts`](scripts/process-content.ts).
 
 ### Деплой
 
@@ -144,9 +149,11 @@ src/
   components/            - Header, Footer, Seo, карточки, хлебные крошки
   content/               - Коллекции Markdown (после миграции)
   content.config.ts      - Zod-схемы и glob-лоадеры коллекций
+  lib/guide-taxonomy.ts  - Темы/статусы гайдов и эвристики для UI и миграции
   styles/global.css      - Tailwind + тема сайта
 scripts/
   audit-database.ts      - Аудит gi-database
+  audit-guides-content.ts - Статический аудит src/content/guides → reports/guides-audit.json
   process-content.ts     - Миграция в src/content
   cleanup-guides-formatting.ps1 - Чистка Markdown-артефактов миграции гайдов
   verify-migration.ts    - Проверка полноты переноса
@@ -154,7 +161,7 @@ public/                  - favicon.svg, og-default.svg, robots.txt
 Dockerfile               - multi-stage: Astro build + nginx
 deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.*
 gi-database/             - Исходный корпус (до удаления после миграции)
-reports/                 - content-audit.json, migration-report.json (после скриптов)
+reports/                 - content-audit.json, migration-report.json, guides-audit.json (после скриптов)
 grace/
   requirements/requirements.xml
   technology/technology.xml

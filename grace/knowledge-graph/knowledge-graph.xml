@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.1.4">
+  <Project NAME="genshintop" VERSION="0.1.6">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru</keywords>
     <annotation>Статический сайт GenshinTop (Astro) и исходная база gi-database/; контент после миграции — src/content/.</annotation>
 
@@ -15,17 +15,18 @@
 
     <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" STATUS="implemented">
       <purpose>Аудит gi-database, миграция в src/content/, отчёты в reports/.</purpose>
-      <path>scripts/audit-database.ts, scripts/process-content.ts, scripts/verify-migration.ts, scripts/cleanup-guides-formatting.ps1</path>
+      <path>scripts/audit-database.ts, scripts/audit-guides-content.ts, scripts/process-content.ts, scripts/verify-migration.ts, scripts/cleanup-guides-formatting.ps1</path>
       <depends>M-GI-DATABASE</depends>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
       <annotations>
         <fn-cleanup-guides-formatting PURPOSE="Повторяемая чистка Markdown-артефактов миграции в src/content/guides" />
+        <fn-audit-guides-content PURPOSE="Статический аудит гайдов в src/content/guides → reports/guides-audit.json" />
       </annotations>
     </M-CONTENT-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статическая выдача; мета, OG/Twitter, schema.org.</purpose>
-      <path>src/, src/lib/seo.ts, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml</path>
+      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статическая выдача; мета, OG/Twitter, schema.org, Яндекс.Метрика.</purpose>
+      <path>src/, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/content.config.ts, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml</path>
       <depends>M-CONTENT-PIPELINE</depends>
       <verification-ref>V-M-WEBSITE</verification-ref>
     </M-WEBSITE>

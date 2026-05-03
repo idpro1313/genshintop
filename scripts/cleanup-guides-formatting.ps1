@@ -194,7 +194,18 @@ function Clean-GuideMarkdown([string] $Path) {
   $body = $body -replace "\n{3,}", "`n`n"
   $body = $body.Trim() + "`n"
 
+  # Склеенные **заголовок**#### подзаголовок — разнести переносами.
+  $body = [regex]::Replace($body, '(\*\*[^*\r\n]+\*\*)(#{2,6})', {
+      param($m) $m.Groups[1].Value + "`n`n" + $m.Groups[2].Value
+    })
+
   $summary = Strip-MarkdownForSummary $body
+  $tocWord = -join ([char[]](0x0421,0x043e,0x0434,0x0435,0x0440,0x0436,0x0430,0x043d,0x0438,0x0435))
+  if ($summary.Length -gt 0 -and $summary.StartsWith($tocWord)) {
+    $tail = $body -replace '(?s)^(?:#[^\n]+\n+)+', ''
+    $summary2 = Strip-MarkdownForSummary $tail
+    if ($summary2.Length -ge 40) { $summary = $summary2 }
+  }
   if ($summary.Length -gt 0) {
     if ($frontmatter -match '(?m)^summary:\s*.*$') {
       $frontmatter = $frontmatter -replace '(?m)^summary:\s*.*$', ('summary: ' + (Escape-YamlString $summary))

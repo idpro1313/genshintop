@@ -11,6 +11,16 @@ import {
   jsonLdGraph,
   publisherOrganization,
 } from '../../lib/seo';
+import type { GuideCategory } from '../../lib/guide-taxonomy';
+import {
+  effectiveGuideAudience,
+  effectiveGuideGameVersion,
+  effectiveGuideStatus,
+  effectiveGuideTopic,
+  guideAudienceLabelsRu,
+  guideStatusLabelsRu,
+  guideTopicLabelsRu,
+} from '../../lib/guide-taxonomy';
 
 export async function getStaticPaths() {
   const list = await getCollection('guides');
@@ -25,11 +35,31 @@ const { Content } = await render(entry);
 
 const slug = contentSlugFromId(entry.id);
 const canonicalPath = `/guides/${slug}`;
+const fileHint = `${slug}.md`;
+const cat = entry.data.category as GuideCategory;
+const topic = effectiveGuideTopic(entry.data.topic, cat, fileHint);
+const status = effectiveGuideStatus(entry.data.status, cat, entry.data.date, slug);
+const audience = effectiveGuideAudience(entry.data.audience, cat);
+const gameVersion = effectiveGuideGameVersion(entry.data.gameVersion, slug);
 
 const description = cleanMetaDescription(entry.data.summary, entry.data.title);
-const iso = entry.data.date?.toISOString();
+const publishedIso = entry.data.date?.toISOString();
+const modifiedIso = (entry.data.updatedAt ?? entry.data.date)?.toISOString();
 const articleTimes =
-  iso ? { publishedTime: iso, modifiedTime: iso } : undefined;
+  publishedIso || modifiedIso
+    ? {
+        ...(publishedIso ? { publishedTime: publishedIso } : {}),
+        ...(modifiedIso ? { modifiedTime: modifiedIso } : {}),
+      }
+    : undefined;
+
+const jsonLdDates =
+  publishedIso || modifiedIso
+    ? {
+        ...(publishedIso ? { datePublished: publishedIso } : {}),
+        ...(modifiedIso ? { dateModified: modifiedIso } : {}),
+      }
+    : {};
 
 const jsonLd = jsonLdGraph([
   publisherOrganization(),
@@ -50,7 +80,7 @@ const jsonLd = jsonLdGraph([
       '@id': absoluteUrl(canonicalPath),
     },
     image: [absoluteUrl(DEFAULT_OG_IMAGE_PATH)],
-    ...(iso ? { datePublished: iso, dateModified: iso } : {}),
+    ...jsonLdDates,
     author: { '@id': `${SITE_URL}/#organization` },
     publisher: { '@id': `${SITE_URL}/#organization` },
   },
@@ -61,6 +91,12 @@ const breadcrumbs = [
   { label: 'Гайды', href: '/guides' },
   { label: entry.data.title, href: canonicalPath },
 ];
+
+const allGuides = await getCollection('guides');
+const relatedSlugs = entry.data.relatedGuides ?? [];
+const relatedEntries = relatedSlugs
+  .map((s) => allGuides.find((e) => contentSlugFromId(e.id) === s))
+  .filter((e): e is (typeof allGuides)[number] => Boolean(e));
 ---
 
 <ArticleLayout
@@ -73,21 +109,65 @@ const breadcrumbs = [
   articleTimes={articleTimes}
 >
   <header class="mb-8 border-b border-white/10 pb-6">
-    <p class="text-sm capitalize text-teyvat-muted">
-      {entry.data.category}
+    <div class="flex flex-wrap items-center gap-2 text-xs">
+      <span class="rounded-full bg-teyvat-mint/15 px-2 py-0.5 text-teyvat-mint capitalize">{entry.data.category}</span>
+      <span class="rounded-full border border-white/15 bg-white/5 px-2 py-0.5 text-slate-200">
+        {guideTopicLabelsRu[topic]}
+      </span>
+      <span class="rounded-full border border-white/10 px-2 py-0.5 text-teyvat-muted">
+        {guideStatusLabelsRu[status]}
+      </span>
       {
-        entry.data.date ? (
-          <>
-            {' · '}
-            <time datetime={entry.data.date.toISOString()}>
-              {entry.data.date.toLocaleDateString('ru-RU')}
-            </time>
-          </>
+        audience !== 'all' ? (
+          <span class="rounded-full border border-white/10 px-2 py-0.5 text-teyvat-muted">
+            {guideAudienceLabelsRu[audience]}
+          </span>
         ) : null
       }
-    </p>
-    <h1 class="mt-2 font-display text-4xl font-bold text-white">{entry.data.title}</h1>
+      {
+        gameVersion ? (
+          <span class="rounded-full border border-teyvat-accent/30 px-2 py-0.5 text-teyvat-gold">v{gameVersion}</span>
+        ) : null
+      }
+      {
+        entry.data.date ? (
+          <time datetime={entry.data.date.toISOString()} class="text-teyvat-muted">
+            {entry.data.date.toLocaleDateString('ru-RU')}
+          </time>
+        ) : null
+      }
+      {
+        entry.data.updatedAt &&
+        (!entry.data.date ||
+          entry.data.updatedAt.getTime() !== entry.data.date.getTime()) ? (
+          <span class="text-teyvat-muted">
+            обновлено{' '}
+            <time datetime={entry.data.updatedAt.toISOString()}>
+              {entry.data.updatedAt.toLocaleDateString('ru-RU')}
+            </time>
+          </span>
+        ) : null
+      }
+    </div>
+    <h1 class="mt-4 font-display text-4xl font-bold text-white">{entry.data.title}</h1>
   </header>
 
   <Content />
+
+  {
+    relatedEntries.length > 0 ? (
+      <nav class="mt-12 border-t border-white/10 pt-8 not-prose" aria-label="Связанные гайды">
+        <h2 class="font-display text-lg font-semibold text-white">Связанные материалы</h2>
+        <ul class="mt-3 list-none space-y-2 p-0">
+          {relatedEntries.map((e) => (
+            <li>
+              <a href={`/guides/${contentSlugFromId(e.id)}`} class="text-teyvat-mint underline-offset-2 hover:underline">
+                {e.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    ) : null
+  }
 </ArticleLayout>

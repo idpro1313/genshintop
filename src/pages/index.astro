@@ -5,6 +5,13 @@ import GuideCard from '../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
 import { contentSlugFromId } from '../lib/slug';
 import { jsonLdGraph, publisherOrganization, webSiteNode } from '../lib/seo';
+import type { GuideCategory } from '../lib/guide-taxonomy';
+import {
+  effectiveGuideAudience,
+  effectiveGuideGameVersion,
+  effectiveGuideStatus,
+  effectiveGuideTopic,
+} from '../lib/guide-taxonomy';
 
 const characters = (await getCollection('characters'))
   .filter((e) => !e.data.sourceSlug.startsWith('_placeholder'))
@@ -13,8 +20,8 @@ const characters = (await getCollection('characters'))
 const guides = (await getCollection('guides'))
   .filter((e) => !e.data.sourceSlug.startsWith('_placeholder'))
   .sort((a, b) => {
-    const da = a.data.date?.getTime() ?? 0;
-    const db = b.data.date?.getTime() ?? 0;
+    const da = (a.data.updatedAt ?? a.data.date)?.getTime() ?? 0;
+    const db = (b.data.updatedAt ?? b.data.date)?.getTime() ?? 0;
     return db - da;
   });
 
@@ -99,15 +106,25 @@ const jsonLd = jsonLdGraph([
           </a>
         </div>
         <div class="grid gap-4 md:grid-cols-2">
-          {latestGuides.map((g) => (
-            <GuideCard
-              title={g.data.title}
-              slug={contentSlugFromId(g.id)}
-              category={g.data.category}
-              date={g.data.date}
-              summary={g.data.summary}
-            />
-          ))}
+          {latestGuides.map((g) => {
+            const slug = contentSlugFromId(g.id);
+            const fileHint = `${slug}.md`;
+            const cat = g.data.category as GuideCategory;
+            return (
+              <GuideCard
+                title={g.data.title}
+                slug={slug}
+                category={g.data.category}
+                topic={effectiveGuideTopic(g.data.topic, cat, fileHint)}
+                status={effectiveGuideStatus(g.data.status, cat, g.data.date, slug)}
+                audience={effectiveGuideAudience(g.data.audience, cat)}
+                gameVersion={effectiveGuideGameVersion(g.data.gameVersion, slug)}
+                date={g.data.date}
+                updatedAt={g.data.updatedAt}
+                summary={g.data.summary}
+              />
+            );
+          })}
         </div>
       </section>
     ) : null
