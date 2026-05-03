@@ -3,6 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import GuideCard from '../../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
 import { contentSlugFromId } from '../../lib/slug';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
 
 const all = (await getCollection('guides')).sort((a, b) => {
   const da = a.data.date?.getTime() ?? 0;
@@ -20,17 +27,55 @@ const categories = [
   { id: 'hardware', label: 'ПК / железо' },
   { id: 'general', label: 'Прочее' },
 ];
+
+const pageUrl = absoluteUrl('/guides');
+const itemListElement = all.map((g, i) => ({
+  '@type': 'ListItem',
+  position: i + 1,
+  name: g.data.title,
+  item: absoluteUrl(`/guides/${contentSlugFromId(g.id)}`),
+}));
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#webpage`,
+    name: 'Гайды Genshin Impact',
+    description:
+      'Гайды по Genshin Impact на русском: баннеры молитв, обновления патчей, тир-листы, промокоды и советы новичкам.',
+    url: pageUrl,
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: all.length,
+      itemListElement,
+    },
+  },
+]);
 ---
 
 <BaseLayout
   title="Гайды Genshin Impact"
-  description="Гайды по Genshin Impact: баннеры, обновления, советы новичкам, промокоды и тир-листы."
+  description="Гайды по Genshin Impact: баннеры персонажей и оружия, обновления патчей, советы новичкам, промокоды и тир-листы. Все статьи — отдельные URL для поиска."
   canonicalPath="/guides"
+  jsonLd={jsonLd}
 >
-  <h1 class="font-display text-3xl font-bold text-white">Гайды</h1>
+  <h1 class="font-display text-3xl font-bold text-white">Гайды Genshin Impact</h1>
   <p class="mt-2 max-w-2xl text-teyvat-muted">
-    Фильтр по категориям — на клиенте, без перезагрузки. Все страницы статические для поисковиков.
+    Материалы по игре: когда крутить баннеры, что изменилось в обновлении, как прокачать аккаунт. Фильтр по темам —
+    на клиенте; каждая статья доступна по своему постоянному адресу для Яндекса и Google.
   </p>
+
+  <section class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 text-slate-300">
+    <h2 class="font-display text-lg font-semibold text-white">Связанные разделы</h2>
+    <p class="mt-2 text-sm leading-relaxed">
+      <a href="/characters" class="text-teyvat-mint underline-offset-2 hover:underline">Каталог персонажей Genshin Impact</a>
+      {' '}— стихии, оружие и ссылки на билды. На{' '}
+      <a href="/" class="text-teyvat-mint underline-offset-2 hover:underline">главной GenshinTop</a> собраны свежие гайды и популярные герои.
+    </p>
+  </section>
 
   <div class="mt-8 flex flex-wrap gap-2" data-guide-cats>
     {

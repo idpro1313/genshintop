@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { cleanMetaDescription } from '../src/lib/seo';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
@@ -210,7 +211,9 @@ function guideSummary(raw: string): string | undefined {
     .split(/\n\n+/)
     .map((p) => p.replace(/\s+/g, ' ').trim())
     .find((p) => p.length > 80);
-  return para ? para.slice(0, 280) : undefined;
+  if (!para) return undefined;
+  const cleaned = cleanMetaDescription(para, para.slice(0, 260), 280);
+  return cleaned.length >= 40 ? cleaned : undefined;
 }
 
 function isValidRelatedSlug(slug: string): boolean {

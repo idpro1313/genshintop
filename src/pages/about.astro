@@ -1,12 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../lib/seo';
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'AboutPage',
-  name: 'О проекте GenshinTop',
-  url: 'https://genshintop.ru/about',
-};
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'AboutPage',
+    '@id': `${absoluteUrl('/about')}#webpage`,
+    name: 'О проекте GenshinTop',
+    url: absoluteUrl('/about'),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    description:
+      'GenshinTop — русскоязычный фан-сайт по Genshin Impact: гайды, персонажи, обновления.',
+  },
+]);
 ---
 
 <BaseLayout

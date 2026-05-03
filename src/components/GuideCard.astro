@@ -1,4 +1,6 @@
 ---
+import { cleanMetaDescription } from '../lib/seo';
+
 const categoryLabels: Record<string, string> = {
   banner: 'Баннер',
   patch: 'Обновление',
@@ -19,6 +21,7 @@ interface Props {
 
 const { title, slug, category, date, summary } = Astro.props;
 const catLabel = categoryLabels[category] ?? category;
+const excerpt = summary ? cleanMetaDescription(summary, title, 220) : '';
 ---
 
 <a
@@ -41,5 +44,5 @@ const catLabel = categoryLabels[category] ?? category;
   <h2 class="font-display text-lg font-semibold text-white group-hover:text-teyvat-gold">
     {title}
   </h2>
-  {summary ? <p class="mt-2 line-clamp-3 text-sm text-teyvat-muted">{summary}</p> : null}
+  {excerpt ? <p class="mt-2 line-clamp-3 text-sm text-teyvat-muted">{excerpt}</p> : null}
 </a>

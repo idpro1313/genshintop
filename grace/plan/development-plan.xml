@@ -49,7 +49,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, SEO, sitemap.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, SEO (мета, OG, schema.org), sitemap.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>

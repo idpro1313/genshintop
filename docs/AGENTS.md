@@ -24,7 +24,7 @@
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `astro.config.mjs`
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `astro.config.mjs`
 - **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
 
@@ -150,7 +150,7 @@ scripts/
   process-content.ts     - Миграция в src/content
   cleanup-guides-formatting.ps1 - Чистка Markdown-артефактов миграции гайдов
   verify-migration.ts    - Проверка полноты переноса
-public/                  - favicon.svg, robots.txt
+public/                  - favicon.svg, og-default.svg, robots.txt
 Dockerfile               - multi-stage: Astro build + nginx
 deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.*
 gi-database/             - Исходный корпус (до удаления после миграции)

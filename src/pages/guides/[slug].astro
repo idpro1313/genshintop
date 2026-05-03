@@ -2,6 +2,15 @@
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import { getCollection, render } from 'astro:content';
 import { contentSlugFromId } from '../../lib/slug';
+import {
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbListSchema,
+  cleanMetaDescription,
+  DEFAULT_OG_IMAGE_PATH,
+  jsonLdGraph,
+  publisherOrganization,
+} from '../../lib/seo';
 
 export async function getStaticPaths() {
   const list = await getCollection('guides');
@@ -16,16 +25,36 @@ const { Content } = await render(entry);
 
 const slug = contentSlugFromId(entry.id);
 const canonicalPath = `/guides/${slug}`;
-const description = entry.data.summary ?? entry.data.title;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: entry.data.title,
-  inLanguage: 'ru-RU',
-  datePublished: entry.data.date?.toISOString(),
-  mainEntityOfPage: `https://genshintop.ru${canonicalPath}`,
-};
+const description = cleanMetaDescription(entry.data.summary, entry.data.title);
+const iso = entry.data.date?.toISOString();
+const articleTimes =
+  iso ? { publishedTime: iso, modifiedTime: iso } : undefined;
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  breadcrumbListSchema([
+    { label: 'Главная', href: '/' },
+    { label: 'Гайды', href: '/guides' },
+    { label: entry.data.title, href: canonicalPath },
+  ]),
+  {
+    '@type': 'BlogPosting',
+    '@id': `${absoluteUrl(canonicalPath)}#article`,
+    headline: entry.data.title,
+    description,
+    inLanguage: 'ru-RU',
+    url: absoluteUrl(canonicalPath),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': absoluteUrl(canonicalPath),
+    },
+    image: [absoluteUrl(DEFAULT_OG_IMAGE_PATH)],
+    ...(iso ? { datePublished: iso, dateModified: iso } : {}),
+    author: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': `${SITE_URL}/#organization` },
+  },
+]);
 
 const breadcrumbs = [
   { label: 'Главная', href: '/' },
@@ -41,6 +70,7 @@ const breadcrumbs = [
   ogType="article"
   jsonLd={jsonLd}
   breadcrumbs={breadcrumbs}
+  articleTimes={articleTimes}
 >
   <header class="mb-8 border-b border-white/10 pb-6">
     <p class="text-sm capitalize text-teyvat-muted">

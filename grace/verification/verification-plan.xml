@@ -44,6 +44,7 @@
       <module-checks>
         <check-1>npm run build</check-1>
         <check-2>npx astro check (при необходимости типизации)</check-2>
+        <check-3>После сборки: в dist/*.html наличие og:image и JSON-LD @graph на главной и каталогах (выборочно)</check-3>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

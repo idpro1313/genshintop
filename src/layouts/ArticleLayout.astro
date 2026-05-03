@@ -3,6 +3,11 @@ import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import type { BreadcrumbItem } from '../components/Breadcrumbs.astro';
 
+interface ArticleTimes {
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
 interface Props {
   title: string;
   description?: string;
@@ -10,9 +15,26 @@ interface Props {
   ogType?: 'website' | 'article';
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   breadcrumbs: BreadcrumbItem[];
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  robots?: string;
+  articleTimes?: ArticleTimes;
 }
 
-const { title, description, canonicalPath, ogType, jsonLd, breadcrumbs } = Astro.props;
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType,
+  jsonLd,
+  breadcrumbs,
+  ogImage,
+  ogImageWidth,
+  ogImageHeight,
+  robots,
+  articleTimes,
+} = Astro.props;
 ---
 
 <BaseLayout
@@ -21,6 +43,11 @@ const { title, description, canonicalPath, ogType, jsonLd, breadcrumbs } = Astro
   canonicalPath={canonicalPath}
   ogType={ogType}
   jsonLd={jsonLd}
+  ogImage={ogImage}
+  ogImageWidth={ogImageWidth}
+  ogImageHeight={ogImageHeight}
+  robots={robots}
+  articleTimes={articleTimes}
 >
   <Breadcrumbs items={breadcrumbs} />
   <article

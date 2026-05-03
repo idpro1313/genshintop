@@ -3,15 +3,37 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Seo from '../components/Seo.astro';
+
+interface ArticleTimes {
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
 interface Props {
   title: string;
   description?: string;
   canonicalPath?: string;
   ogType?: 'website' | 'article';
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  robots?: string;
+  articleTimes?: ArticleTimes;
 }
 
-const { title, description, canonicalPath, ogType, jsonLd } = Astro.props;
+const {
+  title,
+  description,
+  canonicalPath,
+  ogType,
+  jsonLd,
+  ogImage,
+  ogImageWidth,
+  ogImageHeight,
+  robots,
+  articleTimes,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -26,6 +48,11 @@ const { title, description, canonicalPath, ogType, jsonLd } = Astro.props;
       canonicalPath={canonicalPath}
       ogType={ogType}
       jsonLd={jsonLd}
+      ogImage={ogImage}
+      ogImageWidth={ogImageWidth}
+      ogImageHeight={ogImageHeight}
+      robots={robots}
+      articleTimes={articleTimes}
     />
   </head>
   <body>

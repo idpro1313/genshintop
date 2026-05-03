@@ -4,6 +4,7 @@ import CharacterCard from '../components/CharacterCard.astro';
 import GuideCard from '../components/GuideCard.astro';
 import { getCollection } from 'astro:content';
 import { contentSlugFromId } from '../lib/slug';
+import { jsonLdGraph, publisherOrganization, webSiteNode } from '../lib/seo';
 
 const characters = (await getCollection('characters'))
   .filter((e) => !e.data.sourceSlug.startsWith('_placeholder'))
@@ -20,24 +21,14 @@ const guides = (await getCollection('guides'))
 const featuredChars = characters.slice(0, 8);
 const latestGuides = guides.slice(0, 6);
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'WebSite',
-      name: 'GenshinTop',
-      url: 'https://genshintop.ru',
-      inLanguage: 'ru-RU',
-      description:
-        'Гайды, персонажи и обновления Genshin Impact на русском — для игроков и поиска.',
-    },
-    {
-      '@type': 'Organization',
-      name: 'GenshinTop',
-      url: 'https://genshintop.ru',
-    },
-  ],
-};
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  {
+    ...webSiteNode(),
+    description:
+      'Гайды, персонажи и обновления Genshin Impact на русском — для игроков и поиска.',
+  },
+]);
 ---
 
 <BaseLayout

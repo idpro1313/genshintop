@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.1.3">
+  <Project NAME="genshintop" VERSION="0.1.4">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru</keywords>
     <annotation>Статический сайт GenshinTop (Astro) и исходная база gi-database/; контент после миграции — src/content/.</annotation>
 
@@ -24,8 +24,8 @@
     </M-CONTENT-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статическая выдача.</purpose>
-      <path>src/, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml</path>
+      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статическая выдача; мета, OG/Twitter, schema.org.</purpose>
+      <path>src/, src/lib/seo.ts, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml</path>
       <depends>M-CONTENT-PIPELINE</depends>
       <verification-ref>V-M-WEBSITE</verification-ref>
     </M-WEBSITE>

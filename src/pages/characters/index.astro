@@ -3,6 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CharacterCard from '../../components/CharacterCard.astro';
 import { getCollection } from 'astro:content';
 import { contentSlugFromId } from '../../lib/slug';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
 
 const all = (await getCollection('characters')).sort((a, b) =>
   a.data.name.localeCompare(b.data.name, 'ru'),
@@ -17,17 +24,58 @@ const weapons = [
   'Лук',
   'Прочее',
 ] as const;
+
+const pageUrl = absoluteUrl('/characters');
+const itemListElement = all.map((e, i) => ({
+  '@type': 'ListItem',
+  position: i + 1,
+  name: e.data.name,
+  item: absoluteUrl(`/characters/${contentSlugFromId(e.id)}`),
+}));
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#webpage`,
+    name: 'Персонажи Genshin Impact — каталог',
+    description:
+      'Каталог персонажей Genshin Impact на русском: стихия, оружие, редкость. Удобные фильтры и ссылки на гайды.',
+    url: pageUrl,
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: all.length,
+      itemListElement,
+    },
+  },
+]);
 ---
 
 <BaseLayout
   title="Персонажи Genshin Impact"
-  description="Каталог персонажей Genshin Impact: стихия, оружие, редкость, рейтинги и ссылки на гайды."
+  description="Каталог персонажей Genshin Impact: стихия, оружие, редкость, рейтинги и ссылки на гайды. Фильтры на странице — для быстрого поиска билда."
   canonicalPath="/characters"
+  jsonLd={jsonLd}
 >
-  <h1 class="font-display text-3xl font-bold text-white">Персонажи</h1>
+  <h1 class="font-display text-3xl font-bold text-white">Персонажи Genshin Impact</h1>
   <p class="mt-2 max-w-2xl text-teyvat-muted">
-    Фильтры и поиск работают на вашем устройстве — страница полностью статическая, удобна для SEO.
+    Полный список героев для подбора билда и состава отряда. Фильтры и поиск работают на вашем устройстве —
+    страница отдаётся поисковикам как статический HTML со всеми карточками и ссылками.
   </p>
+
+  <section class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 text-slate-300">
+    <h2 class="font-display text-lg font-semibold text-white">Ещё по теме</h2>
+    <p class="mt-2 text-sm leading-relaxed">
+      Свежие материалы по игре — в разделе{' '}
+      <a href="/guides" class="text-teyvat-mint underline-offset-2 hover:underline">гайды Genshin Impact</a>
+      : баннеры, патчи,{' '}
+      <a href="/guides" class="text-teyvat-mint underline-offset-2 hover:underline">тир-листы</a>, советы новичкам и{' '}
+      <a href="/guides" class="text-teyvat-mint underline-offset-2 hover:underline">промокоды</a>. На{' '}
+      <a href="/" class="text-teyvat-mint underline-offset-2 hover:underline">главной</a> — подборка персонажей и статей.
+    </p>
+  </section>
 
   <div class="mt-8 flex flex-col gap-4 lg:flex-row">
     <div class="lg:w-64 lg:shrink-0">
