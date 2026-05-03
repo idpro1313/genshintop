@@ -65,7 +65,7 @@
 - **Файлы:** `src/lib/guide-taxonomy.ts`, `src/content.config.ts`, `scripts/process-content.ts`, `scripts/audit-guides-content.ts`, `scripts/cleanup-guides-formatting.ps1`, `package.json`, `VERSION`, `src/components/GuideCard.astro`, `src/pages/guides/index.astro`, `src/pages/guides/[slug].astro`, `src/pages/index.astro`, `docs/AGENTS.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`
 - **Решение:** необязательные поля frontmatter не ломают существующие 424 файла; UI и аудит опираются на эвристики до следующего `content:migrate`.
 
-### Яндекс.Метрика для всех страниц (0.1.5)
+### Яндекс.Метрика для всех страниц (0.1.7)
 - **Что:** встроен счётчик Яндекс.Метрики `109020836` в общий layout сайта: inline-скрипт в `<head>` и `noscript` fallback в `<body>`.
 - **Почему:** пользователь попросил добавить счётчик аналитики на сайт.
 - **Файлы:** `src/layouts/BaseLayout.astro`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`

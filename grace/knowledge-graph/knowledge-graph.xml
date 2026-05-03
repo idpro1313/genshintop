@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.1.6">
+  <Project NAME="genshintop" VERSION="0.1.7">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru</keywords>
     <annotation>Статический сайт GenshinTop (Astro) и исходная база gi-database/; контент после миграции — src/content/.</annotation>
 
