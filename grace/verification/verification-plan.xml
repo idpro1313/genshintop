@@ -57,6 +57,7 @@
         <check-4>Статически проверить в src/layouts/BaseLayout.astro наличие счётчика Яндекс.Метрики 109020836 и noscript fallback</check-4>
         <check-5>Статически: маршрут `src/pages/lootbar/`, компоненты LootBarOutboundLink / LootBarDisclosure, поле reviewedAt/sources в guides</check-5>
         <check-6>Статически: deploy/nginx-docker.conf — error_page 404 /404.html; location для *.xml без SPA-fallback; deploy/SEO-CHECKLIST.md для пост-деплоя</check-6>
+        <check-7>Статически: .github/workflows/docker-image.yml — pull_request выполняет build без push, main пушит Docker image в GHCR, секреты не хардкодятся</check-7>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

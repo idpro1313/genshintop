@@ -21,6 +21,7 @@
 
   <Tooling>
     <tool name="powershell" value="scripts/cleanup-guides-formatting.ps1" purpose="Повторяемая нормализация Markdown-гайдов после миграции" />
+    <tool name="github-actions" value=".github/workflows/docker-image.yml" purpose="CI-сборка Docker-образа; push в GitHub Container Registry на main, pull_request только build" />
     <!-- Core workspace tooling.
 
          <tool name="workspace" value="pnpm workspaces" version="9.x" />
@@ -61,6 +62,6 @@
   </Observability>
 
   <DeliveryShape>
-    <shape>Статика: либо образ Docker (Dockerfile → nginx внутри контейнера, Traefik на хосте, deploy/docker-compose.yml), либо выдача готового dist/ через шаблон static-site из webserver (Traefik, TLS Let&apos;s Encrypt).</shape>
+    <shape>Статика: либо образ Docker (Dockerfile → nginx внутри контейнера, Traefik на хосте, deploy/docker-compose.yml), либо выдача готового dist/ через шаблон static-site из webserver (Traefik, TLS Let&apos;s Encrypt). GitHub Actions может публиковать образ в GHCR как ghcr.io/${{ github.repository }}:latest.</shape>
   </DeliveryShape>
 </TechnologyStack>

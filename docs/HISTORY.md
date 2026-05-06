@@ -94,3 +94,9 @@
 - **Почему:** пользователь попросил добавить правило для GitHub Actions; проект планирует ускорять Docker-деплой через CI вместо долгой сборки на сервере.
 - **Файлы:** `.cursor/rules/github-actions.mdc`, `VERSION`, `package.json`, `package-lock.json`, `docs/HISTORY.md`
 - **Решение:** правило сделано file-specific, чтобы включаться при работе с GitHub Actions; версия поднята PATCH до `0.2.1`.
+
+### GitHub Actions Docker image workflow (0.2.2)
+- **Что:** добавлен `.github/workflows/docker-image.yml`: build Docker-образа через Buildx, cache GitHub Actions, push в `ghcr.io/${{ github.repository }}` на `main`, pull request только собирает без публикации.
+- **Почему:** пользователь уточнил, что нужен именно файл workflow `genshintop/.github/workflows/docker-image.yml in main`, а не Cursor-правило.
+- **Файлы:** `.github/workflows/docker-image.yml`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** автодеплой на production не добавлялся без согласования секретов/окружения; используется штатный `GITHUB_TOKEN` для GHCR.

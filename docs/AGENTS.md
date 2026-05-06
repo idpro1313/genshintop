@@ -21,6 +21,7 @@
 | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1` | Повторяемая чистка оформления `src/content/guides/*.md` после миграции |
 | `npm run build` | Сборка статики в **`dist/`** |
 | Docker | **`deploy/README.md`** — `Dockerfile`, `deploy/docker-compose.yml`, Traefik |
+| GitHub Actions | `.github/workflows/docker-image.yml` — сборка Docker-образа; push в GHCR на `main` |
 | Обновление на сервере | `bash deploy/update-from-github.sh` или `deploy/update-from-github.ps1` |
 
 ### Модули (GRACE)
