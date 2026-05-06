@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Обновление репозитория с GitHub и пересборка Docker-образа сайта.
+# Обновление репозитория с GitHub и запуск готового Docker-образа из registry.
 # Запуск с сервера (Linux), из любой директории:
 #   bash deploy/update-from-github.sh [ветка]
 # По умолчанию ветка: main. Переменная REMOTE (по умолчанию origin).
@@ -30,12 +30,12 @@ if ! git merge --ff-only "$REMOTE/$BRANCH"; then
   exit 1
 fi
 
-echo ">>> docker compose build"
-docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" build --pull
+echo ">>> docker compose pull"
+docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" pull
 
 echo ">>> docker compose up -d"
 docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" up -d
 
 docker image prune -f >/dev/null 2>&1 || true
 
-echo "Готово: образ пересобран, контейнер обновлён ($REMOTE/$BRANCH)."
+echo "Готово: образ скачан из registry, контейнер обновлён ($REMOTE/$BRANCH)."

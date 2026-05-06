@@ -2,14 +2,14 @@
 
 Два варианта:
 
-1. **Docker в этом репозитории** — образ сам собирает Astro (`npm run build`) и отдаёт статику через nginx. Удобно вместе со скриптом обновления с GitHub.
+1. **Docker из GHCR** — GitHub Actions собирает Astro в образ и публикует `ghcr.io/idpro1313/genshintop:latest`; сервер только скачивает готовый образ и перезапускает контейнер.
 2. **Только статика + шаблон webserver** — собираете `dist/` локально/в CI и монтируете в `templates/static-site` из [webserver](https://github.com/idpro1313/webserver).
 
 Общее требование: на сервере уже поднят **Traefik** и внешняя сеть Docker **`web`** (как в webserver).
 
 ---
 
-## Вариант 1: Docker (сборка внутри образа)
+## Вариант 1: Docker из GHCR
 
 ### Подготовка на сервере
 
@@ -21,11 +21,14 @@ cp deploy/env.example deploy/.env
 # отредактируйте deploy/.env — домены в TRAEFIK_RULE
 ```
 
+Если образ в GHCR приватный, один раз выполните `docker login ghcr.io` с GitHub token, у которого есть право `read:packages`.
+
 ### Первый запуск
 
 ```bash
 cd /opt/genshintop
-docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d --build
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml pull
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d
 ```
 
 ### Обновление с GitHub
@@ -47,7 +50,7 @@ Copy-Item deploy\env.example deploy\.env
 .\deploy\update-from-github.ps1
 ```
 
-Скрипт делает `git fetch` + `git merge --ff-only` и затем `docker compose build` + `up -d`. Если на ветке есть локальные коммиты без push, fast-forward может не сработать — тогда обновите git вручную.
+Скрипт делает `git fetch` + `git merge --ff-only` и затем `docker compose pull` + `up -d`. Локальная сборка на сервере больше не выполняется: образ должен быть опубликован workflow `.github/workflows/docker-image.yml`.
 
 ### Локальный просмотр без Traefik
 
@@ -72,12 +75,12 @@ docker run --rm -p 8080:80 genshintop-web
 | Файл | Назначение |
 |------|------------|
 | `Dockerfile` | Node → `npm run build` → nginx |
-| `deploy/docker-compose.yml` | Сервис `web`, labels Traefik |
+| `deploy/docker-compose.yml` | Сервис `web`, готовый образ GHCR, labels Traefik |
 | `deploy/nginx-docker.conf` | gzip, кэш статики, 404 → `404.html`, XML/robots без SPA-fallback |
 | `deploy/SEO-CHECKLIST.md` | Чек-лист после выката: sitemap, `/lootbar`, кабинеты поиска |
-| `deploy/env.example` | Шаблон `deploy/.env` |
-| `deploy/update-from-github.sh` | Обновление на Linux |
-| `deploy/update-from-github.ps1` | Обновление на Windows |
+| `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` для GHCR |
+| `deploy/update-from-github.sh` | Обновление на Linux: git fast-forward, pull образа, up -d |
+| `deploy/update-from-github.ps1` | Обновление на Windows: git fast-forward, pull образа, up -d |
 | `.dockerignore` | Исключает `node_modules`, `gi-database` и т.д. из контекста сборки |
 
 `deploy/.env` в репозиторий не коммитится (см. `.gitignore`).

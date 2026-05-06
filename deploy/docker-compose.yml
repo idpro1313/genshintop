@@ -3,10 +3,7 @@
 
 services:
   web:
-    build:
-      context: ..
-      dockerfile: Dockerfile
-    image: genshintop-web:latest
+    image: ${SITE_IMAGE:-ghcr.io/idpro1313/genshintop:latest}
     container_name: ${SITE_CONTAINER_NAME:-genshintop_web}
     restart: unless-stopped
     networks:

@@ -62,6 +62,6 @@
   </Observability>
 
   <DeliveryShape>
-    <shape>Статика: либо образ Docker (Dockerfile → nginx внутри контейнера, Traefik на хосте, deploy/docker-compose.yml), либо выдача готового dist/ через шаблон static-site из webserver (Traefik, TLS Let&apos;s Encrypt). GitHub Actions может публиковать образ в GHCR как ghcr.io/${{ github.repository }}:latest.</shape>
+    <shape>Статика: GitHub Actions публикует Docker-образ в GHCR, а серверный deploy/docker-compose.yml запускает готовый image через docker compose pull + up -d без локальной сборки. Альтернатива: выдача готового dist/ через шаблон static-site из webserver (Traefik, TLS Let&apos;s Encrypt).</shape>
   </DeliveryShape>
 </TechnologyStack>

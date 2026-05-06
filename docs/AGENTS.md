@@ -20,9 +20,9 @@
 | `npm run content:audit-guides` | Статический аудит `src/content/guides/*.md` → `reports/guides-audit.json` |
 | `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1` | Повторяемая чистка оформления `src/content/guides/*.md` после миграции |
 | `npm run build` | Сборка статики в **`dist/`** |
-| Docker | **`deploy/README.md`** — `Dockerfile`, `deploy/docker-compose.yml`, Traefik |
+| Docker | **`deploy/README.md`** — GHCR image `ghcr.io/idpro1313/genshintop:latest`, `deploy/docker-compose.yml`, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — сборка Docker-образа; push в GHCR на `main` |
-| Обновление на сервере | `bash deploy/update-from-github.sh` или `deploy/update-from-github.ps1` |
+| Обновление на сервере | `bash deploy/update-from-github.sh` или `deploy/update-from-github.ps1` — `git ff-only`, `docker compose pull`, `up -d` |
 
 ### Модули (GRACE)
 

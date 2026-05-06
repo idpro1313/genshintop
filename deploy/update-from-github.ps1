@@ -1,4 +1,4 @@
-# Обновление с GitHub и пересборка Docker (Windows + Docker Desktop).
+# Обновление с GitHub и запуск готового Docker-образа из registry (Windows + Docker Desktop).
 # Запуск из корня репозитория:
 #   .\deploy\update-from-github.ps1
 #   .\deploy\update-from-github.ps1 develop
@@ -24,12 +24,12 @@ git fetch $Remote $Branch
 Write-Host ">>> git merge --ff-only ${Remote}/${Branch}"
 git merge --ff-only "${Remote}/${Branch}"
 
-Write-Host ">>> docker compose build"
-docker compose --env-file $EnvFile -f $ComposeFile build --pull
+Write-Host ">>> docker compose pull"
+docker compose --env-file $EnvFile -f $ComposeFile pull
 
 Write-Host ">>> docker compose up -d"
 docker compose --env-file $EnvFile -f $ComposeFile up -d
 
 docker image prune -f 2>$null | Out-Null
 
-Write-Host "Готово: образ пересобран, контейнер обновлён ($Remote/$Branch)."
+Write-Host "Готово: образ скачан из registry, контейнер обновлён ($Remote/$Branch)."

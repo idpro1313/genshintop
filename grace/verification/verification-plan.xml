@@ -58,6 +58,7 @@
         <check-5>Статически: маршрут `src/pages/lootbar/`, компоненты LootBarOutboundLink / LootBarDisclosure, поле reviewedAt/sources в guides</check-5>
         <check-6>Статически: deploy/nginx-docker.conf — error_page 404 /404.html; location для *.xml без SPA-fallback; deploy/SEO-CHECKLIST.md для пост-деплоя</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — pull_request выполняет build без push, main пушит Docker image в GHCR, секреты не хардкодятся</check-7>
+        <check-8>Статически: deploy/docker-compose.yml использует готовый SITE_IMAGE/GHCR image без build; update-from-github.* выполняют docker compose pull перед up -d</check-8>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

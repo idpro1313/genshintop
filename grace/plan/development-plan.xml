@@ -51,7 +51,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/*, страницы доверия, SEO (мета, OG, FAQ/HowTo schema.org), sitemap, Яндекс.Метрика reachGoal, nginx 404 и XML.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/*, страницы доверия, SEO (мета, OG, FAQ/HowTo schema.org), sitemap, Яндекс.Метрика reachGoal, nginx 404/XML и деплой готового GHCR-образа без сборки на сервере.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>
@@ -78,6 +78,9 @@
         <source>src/lib/seo.ts</source>
         <source>src/content.config.ts</source>
         <source>deploy/nginx-docker.conf</source>
+        <source>deploy/docker-compose.yml</source>
+        <source>deploy/update-from-github.sh</source>
+        <source>deploy/update-from-github.ps1</source>
         <source>deploy/SEO-CHECKLIST.md</source>
       </target>
       <verification-ref>V-M-WEBSITE</verification-ref>

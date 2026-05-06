@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.2.2">
+  <Project NAME="genshintop" VERSION="0.2.3">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar</keywords>
     <annotation>Статический сайт GenshinTop (Astro): контент src/content/, хабы гайдов и персонажей, кластер /lootbar/*, nginx без SPA-fallback на XML.</annotation>
 
@@ -25,8 +25,8 @@
     </M-CONTENT-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статические хабы, кластер /lootbar/*; мета, OG, schema.org, FAQ/HowTo, Яндекс.Метрика reachGoal; nginx: 404.html, корректная отдача sitemap.xml.</purpose>
-      <path>src/, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts, src/lib/partners.ts, src/lib/character-hub.ts, src/content.config.ts, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml, deploy/nginx-docker.conf, deploy/SEO-CHECKLIST.md</path>
+      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статические хабы, кластер /lootbar/*; мета, OG, schema.org, FAQ/HowTo, Яндекс.Метрика reachGoal; nginx: 404.html, корректная отдача sitemap.xml; деплой готового GHCR-образа без сборки на сервере.</purpose>
+      <path>src/, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts, src/lib/partners.ts, src/lib/character-hub.ts, src/content.config.ts, astro.config.mjs, public/, Dockerfile, .github/workflows/docker-image.yml, deploy/docker-compose.yml, deploy/update-from-github.sh, deploy/update-from-github.ps1, deploy/nginx-docker.conf, deploy/SEO-CHECKLIST.md</path>
       <depends>M-CONTENT-PIPELINE</depends>
       <verification-ref>V-M-WEBSITE</verification-ref>
       <annotations>

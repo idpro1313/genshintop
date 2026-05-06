@@ -100,3 +100,9 @@
 - **Почему:** пользователь уточнил, что нужен именно файл workflow `genshintop/.github/workflows/docker-image.yml in main`, а не Cursor-правило.
 - **Файлы:** `.github/workflows/docker-image.yml`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** автодеплой на production не добавлялся без согласования секретов/окружения; используется штатный `GITHUB_TOKEN` для GHCR.
+
+### Серверный запуск через GHCR image (0.2.3)
+- **Что:** `deploy/docker-compose.yml` переведён с локального `build` на `SITE_IMAGE`/`ghcr.io/idpro1313/genshintop:latest`; `update-from-github.sh` и `.ps1` теперь делают `docker compose pull` + `up -d`; обновлены `deploy/env.example` и `deploy/README.md`.
+- **Почему:** пользователь попросил изменить скрипт запуска после добавления GitHub Actions, чтобы не ждать долгую сборку на сервере.
+- **Файлы:** `deploy/docker-compose.yml`, `deploy/update-from-github.sh`, `deploy/update-from-github.ps1`, `deploy/env.example`, `deploy/README.md`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** локальная сборка на сервере удалена из основного сценария; если GHCR package приватный, сервер должен быть залогинен в `ghcr.io`.
