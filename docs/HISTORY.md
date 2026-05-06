@@ -82,3 +82,9 @@
 - **Почему:** реализация плана SEO-аудита: индексация, семантические кластеры, доверие к affiliate-контенту, отсутствие подмены sitemap/lootbar главной при ошибочном nginx.
 - **Файлы:** `deploy/nginx-docker.conf`, `deploy/README.md`, `deploy/SEO-CHECKLIST.md`, `src/pages/404.astro`, `src/pages/lootbar/**`, `src/pages/guides/banners.astro` (и др. хабы), `src/pages/characters/pyro.astro` (и др.), `src/components/GuideHubPage.astro`, `src/components/CharacterElementHub.astro`, `src/components/CharacterFilterHub.astro`, `src/components/LootBarOutboundLink.astro`, `src/components/LootBarDisclosure.astro`, `src/layouts/BaseLayout.astro`, `src/components/Footer.astro`, `src/components/LootBarPromoBanner.astro`, `src/pages/index.astro`, `src/pages/about.astro`, `src/pages/guides/index.astro`, `src/pages/characters/index.astro`, `src/pages/guides/[slug].astro`, `src/lib/guide-hub.ts`, `src/lib/character-hub.ts`, `src/lib/partners.ts`, `src/lib/seo.ts`, `src/content.config.ts`, `src/content/guides/promocodes.md`, `src/content/guides/skam-izbejat.md`, `docs/AGENTS.md`, `grace/**`, `VERSION`, `package.json`
 - **Решение:** удалён монолитный `lootbar.astro` в пользу `lootbar/index.astro`; локальную сборку для проверки не запускали (правило проекта).
+
+### Уточнение локального типа GuideHubPage (0.2.0)
+- **Что:** `GuideHubId` в `src/components/GuideHubPage.astro` оставлен локальным типом без экспорта.
+- **Почему:** тип используется внутри компонента и не должен расширять внешний контракт модуля.
+- **Файлы:** `src/components/GuideHubPage.astro`, `docs/HISTORY.md`
+- **Решение:** версия не менялась, так как это точечная синтаксическая правка в рамках `0.2.0`.
