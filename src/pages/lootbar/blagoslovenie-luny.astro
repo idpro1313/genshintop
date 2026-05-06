@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarMiniHero from '../../components/LootBarMiniHero.astro';
 import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import LootBarPriceTable from '../../components/LootBarPriceTable.astro';
 import {
   SITE_URL,
   absoluteUrl,
@@ -12,9 +14,12 @@ import {
   webSiteNode,
 } from '../../lib/seo';
 import { lootbarGenshinTopupUrl } from '../../lib/partners';
+import { lootbarPrices, lootbarPricesUpdatedAt } from '../../data/lootbar';
 
 const canonicalPath = '/lootbar/blagoslovenie-luny';
 const topupUrl = lootbarGenshinTopupUrl('lootbar_welkin');
+
+const moonRows = lootbarPrices.filter((r) => /луна|welkin|благослов|месяц|30\s*д/i.test(r.product));
 
 const faq = faqPageSchema([
   {
@@ -43,6 +48,7 @@ const jsonLd = jsonLdGraph([
     name: 'Благословение полой луны — Genshin Impact на LootBar',
     url: absoluteUrl(canonicalPath),
     isPartOf: { '@id': `${SITE_URL}/#website` },
+    ...(lootbarPricesUpdatedAt ? { dateModified: lootbarPricesUpdatedAt } : {}),
   },
   faq,
 ]);
@@ -50,25 +56,37 @@ const jsonLd = jsonLdGraph([
 
 <BaseLayout
   title="Благословение полой луны Genshin Impact — LootBar | GenshinTop"
-  description="Покупка «лунной» подписки Genshin Impact через LootBar.gg: на что смотреть перед оплатой. Информационная партнёрская страница GenshinTop."
+  description="Покупка «лунной» подписки Genshin Impact через LootBar.gg: сравнение с ориентиром цены в игре (по данным партнёра), на что смотреть перед оплатой."
   canonicalPath={canonicalPath}
   jsonLd={jsonLd}
   hideLootBarPromo={true}
 >
-  <article class="prose prose-invert prose-lg max-w-3xl">
+  <article class="prose prose-invert prose-lg max-w-5xl">
     <nav class="not-prose mb-6 text-sm text-teyvat-muted">
       <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
     </nav>
-    <h1 class="not-prose font-display text-3xl font-bold text-white">Благословение полой луны</h1>
+    <LootBarMiniHero
+      title="Благословение полой луны"
+      subtitle="Подписка и лимиты аккаунта — проверяйте в клиенте и в карточке заказа LootBar."
+    />
+    <LootBarDisclosure class="not-prose my-6" compact />
+    <div class="not-prose w-full">
+      <LootBarPriceTable rows={moonRows} updatedAt={lootbarPricesUpdatedAt} />
+    </div>
+    {
+      moonRows.length === 0 ? (
+        <p class="not-prose mt-4 text-sm text-slate-400">
+          Отдельная строка прайса для «благословения луны» появится после согласования с партнёром. Пока ориентируйтесь на витрину LootBar и цену в клиенте.
+        </p>
+      ) : null
+    }
     <p class="text-slate-300">
-      Подписка выгодна, если вы играете каждый день в период действия — сравните с разовыми паками кристаллов в
-      официальном магазине и на LootBar.
+      Подписка имеет смысл при регулярных входах в период действия — сравните с разовыми паками в официальном магазине и на LootBar.
     </p>
-    <LootBarDisclosure class="not-prose my-6" />
     <h2>Перед оформлением</h2>
     <ul>
-      <li>Убедитесь, что активная луна/лимиты позволяют купить следующую (см. подсказки в игре).</li>
-      <li>Проверьте, что регион аккаунта совпадает с условиями LootBar.</li>
+      <li>Убедитесь, что активная луна и лимиты позволяют купить следующую (подсказки в игре).</li>
+      <li>Проверьте совпадение региона аккаунта с условиями LootBar.</li>
     </ul>
     <LootBarOutboundLink
       href={topupUrl}

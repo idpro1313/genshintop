@@ -13,7 +13,14 @@ export type LootBarUtmCampaign =
   | 'lootbar_crystals'
   | 'lootbar_welkin'
   | 'lootbar_safety'
-  | 'lootbar_banner';
+  | 'lootbar_banner'
+  | 'lootbar_hero'
+  | 'lootbar_coupon'
+  | 'lootbar_coupon_empty'
+  | 'lootbar_table'
+  | 'lootbar_calc'
+  | 'lootbar_bottom_crystals'
+  | 'lootbar_bottom_welkin';
 
 /**
  * Партнёрская ссылка на топ-ап Genshin Impact на LootBar.gg.

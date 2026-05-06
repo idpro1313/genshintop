@@ -38,7 +38,7 @@
     <UC-003>
       <Actor>Игрок / читатель</Actor>
       <Action>Открывает партнёрский раздел /lootbar и дочерние страницы кластера</Action>
-      <Goal>Найти страницы пополнения Genshin Impact (LootBar) с прозрачным раскрытием и тематическими инструкциями</Goal>
+      <Goal>Найти продающий хаб и тематические страницы пополнения Genshin Impact (LootBar) с data-driven блоками купонов/прайса (честные fallback до данных партнёра), HowTo/FAQ и прозрачным раскрытием</Goal>
       <Preconditions>Хаб /lootbar и подстраницы сгенерированы; nginx не подменяет XML/HTML для несуществующих URL</Preconditions>
       <AcceptanceCriteria>Внешние CTA используют aff_short=dandnagers, UTM для аналитики и rel="noopener noreferrer sponsored"; есть /partnership-disclosure</AcceptanceCriteria>
       <Priority>medium</Priority>

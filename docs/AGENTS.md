@@ -25,7 +25,7 @@
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts`, `src/lib/character-hub.ts`, `src/lib/partners.ts`, `astro.config.mjs`
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/data/lootbar.ts` (купоны/прайс LootBar, fallback до данных партнёра), `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts`, `src/lib/character-hub.ts`, `src/lib/partners.ts`, `astro.config.mjs`
 - **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
 

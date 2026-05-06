@@ -1,34 +1,60 @@
 ---
 /**
- * Узкая плашка под шапкой: ведёт на внутренний раздел `/lootbar` (как на dandangers — баннер → страница с офферами).
+ * Узкая плашка под шапкой: бренд, оффер из данных, CTA на LootBar.gg (Метрика: lootbar_banner_click).
+ * GRACE[M-WEBSITE][LootBarPromoBanner][BLOCK_LOOTBAR_BANNER]
  */
+import { lootbarMaxDiscountPercent } from '../data/lootbar';
+import LootBarOutboundLink from './LootBarOutboundLink.astro';
+import { lootbarGenshinTopupUrl } from '../lib/partners';
+
 interface Props {
   /** Скрыть на самой странице раздела, чтобы не дублировать призыв. */
   compact?: boolean;
 }
 
 const { compact = false } = Astro.props;
+const topupUrl = lootbarGenshinTopupUrl('lootbar_banner');
+const offerText =
+  lootbarMaxDiscountPercent != null
+    ? `До ${lootbarMaxDiscountPercent}% на топ-ап и купоны — Genshin Impact`
+    : 'Скидки на топ-ап и купоны — Genshin Impact';
 ---
 
-<a
-  href="/lootbar"
+<div
   class:list={[
-    'group flex w-full items-center justify-center gap-2 border-b border-teyvat-accent/30 bg-gradient-to-r from-teyvat-accent/15 via-teyvat-night to-teyvat-mint/10 px-4 text-center transition hover:from-teyvat-accent/25 hover:to-teyvat-mint/15',
-    compact ? 'py-1.5 text-xs sm:text-sm' : 'py-2.5 text-sm sm:text-base',
+    'flex w-full flex-wrap items-center justify-center gap-3 border-b border-teyvat-accent/30 bg-gradient-to-r from-teyvat-accent/15 via-teyvat-night to-teyvat-mint/10 px-4 transition hover:from-teyvat-accent/25 hover:to-teyvat-mint/15',
+    compact ? 'py-1.5 px-3 text-xs sm:text-sm' : 'py-2.5 px-4 text-sm sm:text-base',
   ]}
   data-affiliate-banner="lootbar"
-  data-reach-goal="lootbar_banner_click"
 >
-  <span class="font-medium text-teyvat-gold group-hover:text-white">LootBar.gg</span>
-  <span class="hidden text-teyvat-muted sm:inline">—</span>
-  <span class="text-slate-200 group-hover:text-white">
-    {compact
-      ? 'Пополнение Genshin Impact'
-      : 'Выгодное пополнение Genshin Impact — скидки и кристаллы'}
-  </span>
-  <span
-    class="rounded-full bg-white/10 px-2 py-0.5 text-xs font-semibold uppercase tracking-wide text-teyvat-mint group-hover:bg-teyvat-accent/40 group-hover:text-teyvat-night"
+  <a
+    href="/lootbar"
+    class="shrink-0 font-semibold text-teyvat-gold transition hover:text-white"
+    >LootBar.gg</a
   >
-    Подробнее · реклама
+  <span class="hidden h-4 w-px bg-white/20 sm:block" aria-hidden="true"></span>
+  <span class="max-w-xl text-center text-slate-200 sm:text-left">
+    {
+      compact
+        ? lootbarMaxDiscountPercent != null
+          ? `До ${lootbarMaxDiscountPercent}% · LootBar`
+          : 'Пополнение Genshin Impact — скидки на LootBar'
+        : offerText
+    }
   </span>
-</a>
+  <LootBarOutboundLink
+    href={topupUrl}
+    class:list={[
+      'shrink-0 rounded-full bg-teyvat-accent px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-teyvat-night shadow-md transition hover:bg-teyvat-gold animate-pulse sm:text-[0.7rem]',
+      compact ? 'py-1 px-3 text-[0.65rem]' : '',
+    ]}
+    reachGoal="lootbar_banner_click"
+  >
+    Получить скидку
+  </LootBarOutboundLink>
+  <span
+    class="shrink-0 rounded-full border border-white/15 bg-white/5 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-teyvat-muted"
+  >
+    реклама
+  </span>
+</div>

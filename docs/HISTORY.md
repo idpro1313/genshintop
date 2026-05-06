@@ -130,3 +130,9 @@
 - **Почему:** пользователь попросил футер на сайте с версией сайта.
 - **Файлы:** `src/components/Footer.astro`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/requirements/requirements.xml`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** версия берётся из единого источника `VERSION`, без ручного дублирования в компоненте.
+
+### Редизайн хаба и баннера LootBar (0.4.0)
+- **Что:** добавлен data-слой `src/data/lootbar.ts` (типы купонов и прайса, пустые константы до ответа партнёра); компоненты `LootBarCouponCard`, `LootBarBenefitsGrid`, `LootBarStepsList`, `LootBarPriceTable`, `LootBarPrimogemCalc`, `LootBarMiniHero`; пересобраны `src/pages/lootbar/index.astro` (hero, купоны, шаги, таблица, калькулятор молитв, FAQ, финальный CTA) и `LootBarPromoBanner.astro` (оффер из `lootbarMaxDiscountPercent`, CTA с pulse, пометка «реклама»); подстраницы promokod / kristally / blagoslovenie / kak-popolnit подключены к блокам; безопасность без агрессивного мини-hero; расширены UTM в `src/lib/partners.ts`; чек-лист `deploy/SEO-CHECKLIST.md` с новыми `reachGoal`.
+- **Почему:** запрос пользователя — реализовать план продающего формата /lootbar без выдуманных цифр.
+- **Файлы:** `src/data/lootbar.ts`, `src/components/LootBar*.astro` (перечисленные), `src/pages/lootbar/*.astro`, `src/lib/partners.ts`, `VERSION`, `package.json`, `package-lock.json`, `deploy/SEO-CHECKLIST.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/requirements/requirements.xml`, `docs/HISTORY.md`
+- **Решение:** версия `0.3.0` уже была занята футером; для фичи поднят **MINOR** до `0.4.0`. Калькулятор показывается только при непустом прайсе и распарсенных номиналах.

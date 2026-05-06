@@ -1,0 +1,116 @@
+---
+import type { LootBarPriceRow } from '../data/lootbar';
+import { lootbarProductQuantity } from '../data/lootbar';
+import LootBarOutboundLink from './LootBarOutboundLink.astro';
+import { lootbarGenshinTopupUrl } from '../lib/partners';
+
+/** GRACE[M-WEBSITE][LootBarPrimogemCalc][BLOCK_LOOTBAR_CALC] — оценка молитв по бюджету (клиентский скрипт). */
+interface Props {
+  prices: LootBarPriceRow[];
+  updatedAt: string | null;
+}
+
+const PRIMOS_PER_WISH = 160;
+const { prices, updatedAt } = Astro.props;
+
+const options = prices
+  .map((p) => ({
+    label: p.product,
+    lootbarRub: p.lootbarRub,
+    qty: lootbarProductQuantity(p.product),
+  }))
+  .filter((o): o is { label: string; lootbarRub: number; qty: number } => o.qty != null && o.qty > 0);
+
+const canShow = prices.length > 0 && options.length > 0;
+const topupUrl = lootbarGenshinTopupUrl('lootbar_calc');
+const optionsJson = JSON.stringify(options);
+---
+
+{
+  canShow ? (
+    <section class="not-prose mt-12" aria-labelledby="lootbar-calc-heading">
+      <h2 id="lootbar-calc-heading" class="font-display text-2xl font-bold text-white md:text-3xl">
+        Калькулятор: сколько примерно молитв за сумму
+      </h2>
+      <p class="mt-3 max-w-3xl text-sm text-slate-400">
+        160 камней истока ≈ 1 молитва. Обмен кристалла сотворения даёт 1 примогем за 1 кристалл — расчёт
+        ориентировочный, без гарантий курса на все будущие пополнения.
+        {updatedAt ? (
+          <>
+            {' '}
+            Базовая стоимость молитвы выводится из выбранного пакета по данным на{' '}
+            <time datetime={updatedAt}>{updatedAt}</time>.
+          </>
+        ) : null}
+      </p>
+      <div class="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:grid md:grid-cols-2 md:gap-8">
+        <div class="space-y-4">
+          <label class="block text-sm font-medium text-slate-300">
+            Пакет для оценки руб/примогем
+            <select
+              id="lootbar-calc-pack"
+              class="mt-2 w-full rounded-xl border border-white/15 bg-teyvat-night px-4 py-3 text-white focus:border-teyvat-mint focus:outline-none"
+            >
+              {options.map((o, i) => (
+                <option value={String(i)}>
+                  {o.label} — {o.lootbarRub.toLocaleString('ru-RU')} ₽
+                </option>
+              ))}
+            </select>
+          </label>
+          <label class="block text-sm font-medium text-slate-300">
+            Бюджет, ₽
+            <input
+              id="lootbar-calc-budget"
+              type="number"
+              min="1"
+              step="1"
+              value="1000"
+              class="mt-2 w-full rounded-xl border border-white/15 bg-teyvat-night px-4 py-3 text-white focus:border-teyvat-mint focus:outline-none"
+            />
+          </label>
+        </div>
+        <div class="mt-6 md:mt-0 flex flex-col justify-center rounded-xl border border-teyvat-accent/25 bg-teyvat-accent/10 p-5">
+          <p class="text-sm text-teyvat-muted">Оценка</p>
+          <p id="lootbar-calc-wishes" class="mt-2 font-display text-3xl font-bold text-white">
+            —
+          </p>
+          <p id="lootbar-calc-primos" class="mt-1 text-slate-300">
+            —
+          </p>
+          <LootBarOutboundLink
+            href={topupUrl}
+            class="mt-5 inline-flex justify-center rounded-xl bg-teyvat-accent px-5 py-3 text-center text-sm font-semibold text-teyvat-night transition hover:bg-teyvat-gold"
+            reachGoal="lootbar_calc_cta"
+          >
+            Открыть на LootBar
+          </LootBarOutboundLink>
+        </div>
+      </div>
+      <script define:vars={{ optionsJson, PRIMOS_PER_WISH }}>
+        const opts = JSON.parse(optionsJson);
+        const sel = document.getElementById('lootbar-calc-pack');
+        const budgetEl = document.getElementById('lootbar-calc-budget');
+        const outW = document.getElementById('lootbar-calc-wishes');
+        const outP = document.getElementById('lootbar-calc-primos');
+        function row() {
+          const i = Number(sel?.value ?? 0);
+          return opts[i] ?? opts[0];
+        }
+        function render() {
+          const b = Number(budgetEl?.value);
+          const r = row();
+          if (!r || !Number.isFinite(b) || b <= 0 || !outW || !outP) return;
+          const rubPerPrimo = r.lootbarRub / r.qty;
+          const primos = b / rubPerPrimo;
+          const wishes = primos / PRIMOS_PER_WISH;
+          outW.textContent = `≈ ${wishes.toFixed(2)} молитв`;
+          outP.textContent = `≈ ${Math.round(primos).toLocaleString('ru-RU')} камней истока (оценка)`;
+        }
+        sel?.addEventListener('change', render);
+        budgetEl?.addEventListener('input', render);
+        render();
+      </script>
+    </section>
+  ) : null
+}

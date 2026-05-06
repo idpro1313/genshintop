@@ -49,7 +49,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/*, страницы доверия, SEO (мета, OG, FAQ/HowTo schema.org), sitemap, Яндекс.Метрика reachGoal, глобальный футер с версией сайта из VERSION, nginx 404/XML и деплой готового GHCR-образа без сборки на сервере.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/* (купоны/прайс из src/data/lootbar.ts с fallback), страницы доверия, SEO (мета, OG, FAQ и HowTo schema.org), sitemap, Яндекс.Метрика reachGoal (в т.ч. lootbar_hero_cta, lootbar_coupon_*, lootbar_table_cta, lootbar_calc_cta, lootbar_bottom_*), глобальный футер с версией сайта из VERSION, nginx 404/XML и деплой готового GHCR-образа без сборки на сервере.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>
@@ -71,6 +71,7 @@
         <source>src/pages</source>
         <source>src/layouts</source>
         <source>src/components</source>
+        <source>src/data/lootbar.ts</source>
         <source>src/lib/partners.ts</source>
         <source>src/lib/guide-hub.ts</source>
         <source>src/lib/character-hub.ts</source>
@@ -135,7 +136,7 @@
       <step-1>Пользователь видит пункт навигации, плашку под шапкой или ссылку на главной</step-1>
       <step-2>Переходит на внутренний маршрут /lootbar с SEO и JSON-LD</step-2>
       <step-3>Нажимает внешний CTA на LootBar.gg с параметром aff_short=dandnagers</step-3>
-      <evidence>src/pages/lootbar.astro, src/components/LootBarPromoBanner.astro, src/lib/partners.ts</evidence>
+      <evidence>src/pages/lootbar/index.astro, src/data/lootbar.ts, src/components/LootBarPromoBanner.astro, src/lib/partners.ts</evidence>
     </DF-LOOTBAR-AFFILIATE>
 
     <!-- Data flows use unique ID-based tags:

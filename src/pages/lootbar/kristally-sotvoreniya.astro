@@ -1,7 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarMiniHero from '../../components/LootBarMiniHero.astro';
 import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import LootBarPriceTable from '../../components/LootBarPriceTable.astro';
+import LootBarPrimogemCalc from '../../components/LootBarPrimogemCalc.astro';
 import {
   SITE_URL,
   absoluteUrl,
@@ -12,9 +15,12 @@ import {
   webSiteNode,
 } from '../../lib/seo';
 import { lootbarGenshinTopupUrl } from '../../lib/partners';
+import { lootbarPrices, lootbarPricesUpdatedAt } from '../../data/lootbar';
 
 const canonicalPath = '/lootbar/kristally-sotvoreniya';
 const topupUrl = lootbarGenshinTopupUrl('lootbar_crystals');
+
+const crystalRows = lootbarPrices.filter((r) => /кристалл/i.test(r.product));
 
 const faq = faqPageSchema([
   {
@@ -43,6 +49,7 @@ const jsonLd = jsonLdGraph([
     name: 'Кристаллы сотворения Genshin Impact — LootBar',
     url: absoluteUrl(canonicalPath),
     isPartOf: { '@id': `${SITE_URL}/#website` },
+    ...(lootbarPricesUpdatedAt ? { dateModified: lootbarPricesUpdatedAt } : {}),
   },
   faq,
 ]);
@@ -50,21 +57,28 @@ const jsonLd = jsonLdGraph([
 
 <BaseLayout
   title="Кристаллы сотворения Genshin Impact — купить через LootBar | GenshinTop"
-  description="Информация о покупке кристаллов сотворения для Genshin Impact на LootBar.gg: что проверить перед оплатой и как убедиться в начислении."
+  description="Информация о покупке кристаллов сотворения для Genshin Impact на LootBar.gg: сравнение цен по данным партнёра, оценка молитв, что проверить перед оплатой."
   canonicalPath={canonicalPath}
   jsonLd={jsonLd}
   hideLootBarPromo={true}
 >
-  <article class="prose prose-invert prose-lg max-w-3xl">
+  <article class="prose prose-invert prose-lg max-w-5xl">
     <nav class="not-prose mb-6 text-sm text-teyvat-muted">
       <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
     </nav>
-    <h1 class="not-prose font-display text-3xl font-bold text-white">Кристаллы сотворения</h1>
+    <LootBarMiniHero
+      title="Кристаллы сотворения"
+      subtitle="Номиналы и доставка валюты — по правилам LootBar для вашего региона."
+    />
+    <LootBarDisclosure class="not-prose my-6" compact />
+    <div class="not-prose w-full">
+      <LootBarPriceTable rows={crystalRows.length > 0 ? crystalRows : []} updatedAt={lootbarPricesUpdatedAt} />
+      <LootBarPrimogemCalc prices={crystalRows.length > 0 ? crystalRows : lootbarPrices} updatedAt={lootbarPricesUpdatedAt} />
+    </div>
     <p class="text-slate-300">
       Кристаллы — основная премиальная валюта для покупок внутри клиента. Сторонние магазины продают номиналы с
       доставкой на ваш аккаунт согласно их правилам.
     </p>
-    <LootBarDisclosure class="not-prose my-6" />
     <h2>Чек-лист перед заказом</h2>
     <ul>
       <li>Верный регион аккаунта и способ пополнения, который показывает LootBar.</li>
