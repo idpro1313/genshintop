@@ -1,5 +1,8 @@
 ---
+import siteVersionRaw from '../../VERSION?raw';
+
 const year = new Date().getFullYear();
+const siteVersion = siteVersionRaw.trim();
 ---
 
 <footer class="mt-20 border-t border-white/10 bg-black/20">
@@ -20,6 +23,6 @@ const year = new Date().getFullYear();
       Неофициальный фан-сайт. Genshin Impact © miHoYo / HoYoverse. Товарные знаки принадлежат их
       владельцам.
     </p>
-    <p class="text-center">© {year} genshintop.ru</p>
+    <p class="text-center">© {year} genshintop.ru · версия {siteVersion}</p>
   </div>
 </footer>

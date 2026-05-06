@@ -20,7 +20,7 @@
       <Action>Открывает каталог персонажей и гайдов на genshintop.ru</Action>
       <Goal>Найти структурированную информацию по Genshin Impact на русском</Goal>
       <Preconditions>Сайт собран (npm run build) и задеплоена статика dist/</Preconditions>
-      <AcceptanceCriteria>Доступны маршруты /characters, /guides, корректные meta и sitemap</AcceptanceCriteria>
+      <AcceptanceCriteria>Доступны маршруты /characters, /guides, корректные meta и sitemap; глобальный футер показывает версию сайта из VERSION</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-001>

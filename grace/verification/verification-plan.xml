@@ -58,6 +58,7 @@
         <check-6>Статически: deploy/nginx-docker.conf — error_page 404 /404.html; location для *.xml без SPA-fallback; deploy/SEO-CHECKLIST.md для пост-деплоя</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — pull_request выполняет build без push, main пушит Docker image в GHCR, секреты не хардкодятся</check-7>
         <check-8>Статически: deploy/docker-compose.yml использует готовый SITE_IMAGE/GHCR image без build; update-from-github.sh выполняет docker compose pull перед up -d и объясняет GHCR unauthorized</check-8>
+        <check-9>Статически: src/components/Footer.astro импортирует корневой VERSION и выводит версию в глобальном футере</check-9>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

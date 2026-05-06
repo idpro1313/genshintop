@@ -124,3 +124,9 @@
 - **Почему:** на сервере `docker compose pull` получил `unauthorized` для `ghcr.io/idpro1313/genshintop:latest`.
 - **Файлы:** `deploy/update-from-github.sh`, `deploy/README.md`, `VERSION`, `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** код не хранит токены; доступ решается настройкой публичности package или одноразовым `docker login` на сервере.
+
+### Футер с версией сайта (0.3.0)
+- **Что:** `Footer.astro` импортирует корневой `VERSION` и показывает версию сайта в нижней строке футера; версия проекта синхронизирована до `0.3.0`.
+- **Почему:** пользователь попросил футер на сайте с версией сайта.
+- **Файлы:** `src/components/Footer.astro`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/requirements/requirements.xml`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** версия берётся из единого источника `VERSION`, без ручного дублирования в компоненте.
