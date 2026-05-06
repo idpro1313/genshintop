@@ -34,6 +34,16 @@
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-002>
+
+    <UC-003>
+      <Actor>Игрок / читатель</Actor>
+      <Action>Открывает партнёрский раздел /lootbar и переходит на LootBar.gg</Action>
+      <Goal>Найти страницу пополнения Genshin Impact с промокупонами и партнёрской ссылкой сайта</Goal>
+      <Preconditions>Маршрут /lootbar доступен из навигации, плашки под шапкой и главной страницы</Preconditions>
+      <AcceptanceCriteria>Внешние CTA ведут на https://lootbar.gg/ru/top-up/genshin-impact?aff_short=dandnagers с rel="noopener noreferrer sponsored"</AcceptanceCriteria>
+      <Priority>medium</Priority>
+      <RelatedFlows>DF-LOOTBAR-AFFILIATE</RelatedFlows>
+    </UC-003>
   </UseCases>
 
   <NonGoals>

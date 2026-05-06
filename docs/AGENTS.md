@@ -7,7 +7,7 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
 
 ### Команды
 
@@ -25,7 +25,7 @@
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `astro.config.mjs`
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/partners.ts`, `astro.config.mjs`
 - **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`, `scripts/cleanup-guides-formatting.ps1`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
 
@@ -144,12 +144,13 @@ Testing rules:
 ## File Structure
 ```
 src/
-  pages/                 - Маршруты Astro (/ , /characters , /guides , /about)
+  pages/                 - Маршруты Astro (/ , /characters , /guides , /lootbar , /about)
   layouts/               - BaseLayout, ArticleLayout
   components/            - Header, Footer, Seo, карточки, хлебные крошки
   content/               - Коллекции Markdown (после миграции)
   content.config.ts      - Zod-схемы и glob-лоадеры коллекций
   lib/guide-taxonomy.ts  - Темы/статусы гайдов и эвристики для UI и миграции
+  lib/partners.ts        - Партнёрские ссылки и внешние affiliate URL
   styles/global.css      - Tailwind + тема сайта
 scripts/
   audit-database.ts      - Аудит gi-database

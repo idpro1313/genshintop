@@ -70,3 +70,9 @@
 - **Почему:** пользователь попросил добавить счётчик аналитики на сайт.
 - **Файлы:** `src/layouts/BaseLayout.astro`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** счётчик размещён в `BaseLayout`, чтобы он попадал на все Astro-страницы без дублирования в маршрутах.
+
+### Партнёрский раздел LootBar (0.1.8)
+- **Что:** добавлен маршрут `/lootbar` с SEO/JSON-LD, внешними CTA на LootBar.gg и дисклеймерами; добавлена глобальная плашка под шапкой, пункт «Пополнение» в навигации, ссылка на главной и централизованная партнёрская ссылка `LOOTBAR_GENSHIN_TOPUP_URL`.
+- **Почему:** пользователь попросил сделать баннер/раздел LootBar по аналогии с `lootbar-discounts` на dandangers.ru, но с переходом на партнёрскую ссылку `https://lootbar.gg/ru/top-up/genshin-impact?aff_short=dandnagers`.
+- **Файлы:** `src/pages/lootbar.astro`, `src/components/LootBarPromoBanner.astro`, `src/components/Header.astro`, `src/layouts/BaseLayout.astro`, `src/pages/index.astro`, `src/lib/partners.ts`, `VERSION`, `package.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/requirements/requirements.xml`, `docs/HISTORY.md`
+- **Решение:** плашка ведёт на внутренний SEO-раздел `/lootbar`, а внешняя партнёрская ссылка с `aff_short=dandnagers` используется только на странице раздела и помечена `rel="noopener noreferrer sponsored"`.

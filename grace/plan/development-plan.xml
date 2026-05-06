@@ -51,7 +51,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, SEO (мета, OG, schema.org), sitemap, Яндекс.Метрика.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, /lootbar, SEO (мета, OG, schema.org), sitemap, Яндекс.Метрика.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>
@@ -64,12 +64,14 @@
       </contract>
       <interface>
         <export-build PURPOSE="npm run build" />
+        <export-LOOTBAR_GENSHIN_TOPUP_URL PURPOSE="Партнёрская ссылка LootBar.gg для маршрута /lootbar и CTA" />
       </interface>
       <depends>M-CONTENT-PIPELINE</depends>
       <target>
         <source>src/pages</source>
         <source>src/layouts</source>
         <source>src/components</source>
+        <source>src/lib/partners.ts</source>
         <source>src/content.config.ts</source>
       </target>
       <verification-ref>V-M-WEBSITE</verification-ref>
@@ -121,6 +123,13 @@
       <step-4>Повторяемая чистка Markdown-артефактов в src/content/guides</step-4>
       <evidence>reports/migration-report.json, успешный astro build</evidence>
     </DF-CONTENT-MIGRATE>
+
+    <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click">
+      <step-1>Пользователь видит пункт навигации, плашку под шапкой или ссылку на главной</step-1>
+      <step-2>Переходит на внутренний маршрут /lootbar с SEO и JSON-LD</step-2>
+      <step-3>Нажимает внешний CTA на LootBar.gg с параметром aff_short=dandnagers</step-3>
+      <evidence>src/pages/lootbar.astro, src/components/LootBarPromoBanner.astro, src/lib/partners.ts</evidence>
+    </DF-LOOTBAR-AFFILIATE>
 
     <!-- Data flows use unique ID-based tags:
          <DF-xxx NAME="..." TRIGGER="...">

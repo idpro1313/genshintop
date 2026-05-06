@@ -19,6 +19,14 @@
         <log-marker>[Build] astro build SUCCESS</log-marker>
       </required-signals>
     </VF-001>
+
+    <VF-002 NAME="LootBarAffiliateRoute" USE_CASES="UC-003" DATA_FLOW="DF-LOOTBAR-AFFILIATE" PRIORITY="medium">
+      <scenario>Пользователь переходит из сайта в партнёрский топ-ап LootBar</scenario>
+      <expected-outcome>/lootbar доступен из навигации и плашки, внешние CTA используют aff_short=dandnagers и sponsored rel</expected-outcome>
+      <required-signals>
+        <log-marker>[StaticCheck] lootbar affiliate links present</log-marker>
+      </required-signals>
+    </VF-002>
   </CriticalFlows>
 
   <ModuleVerification>
@@ -47,6 +55,7 @@
         <check-2>npx astro check (при необходимости типизации)</check-2>
         <check-3>После сборки: в dist/*.html наличие og:image и JSON-LD @graph на главной и каталогах (выборочно)</check-3>
         <check-4>Статически проверить в src/layouts/BaseLayout.astro наличие счётчика Яндекс.Метрики 109020836 и noscript fallback</check-4>
+        <check-5>Статически проверить маршрут /lootbar, плашку LootBar и внешний URL aff_short=dandnagers с rel="noopener noreferrer sponsored"</check-5>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>
