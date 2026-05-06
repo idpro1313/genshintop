@@ -31,7 +31,16 @@ if ! git merge --ff-only "$REMOTE/$BRANCH"; then
 fi
 
 echo ">>> docker compose pull"
-docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" pull
+if ! docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" pull; then
+  echo
+  echo "Ошибка: Docker не смог скачать образ из GHCR."
+  echo "Проверьте, что GitHub package ghcr.io/idpro1313/genshintop публичный"
+  echo "или выполните на сервере docker login ghcr.io с GitHub token, у которого есть read:packages."
+  echo
+  echo "Пример:"
+  echo "  echo \"GITHUB_TOKEN\" | docker login ghcr.io -u idpro1313 --password-stdin"
+  exit 1
+fi
 
 echo ">>> docker compose up -d"
 docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" up -d

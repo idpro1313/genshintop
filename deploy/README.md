@@ -21,7 +21,15 @@ cp deploy/env.example deploy/.env
 # отредактируйте deploy/.env — домены в TRAEFIK_RULE
 ```
 
-Если образ в GHCR приватный, один раз выполните `docker login ghcr.io` с GitHub token, у которого есть право `read:packages`.
+Если при `docker compose pull` появляется `unauthorized`, значит GHCR package приватный или сервер не залогинен.
+
+Вариант A: сделайте package публичным в GitHub: **Packages → genshintop → Package settings → Change visibility → Public**.
+
+Вариант B: один раз выполните на сервере login с GitHub token, у которого есть право `read:packages`:
+
+```bash
+echo "GITHUB_TOKEN" | docker login ghcr.io -u idpro1313 --password-stdin
+```
 
 ### Первый запуск
 

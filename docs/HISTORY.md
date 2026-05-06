@@ -118,3 +118,9 @@
 - **Почему:** пользователь попросил передать бит исполняемости для `.sh` в GitHub, чтобы скрипт запускался на сервере без ручного `chmod`.
 - **Файлы:** `deploy/update-from-github.sh`, `VERSION`, `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`
 - **Решение:** использован `git update-index --chmod=+x`; версия поднята PATCH до `0.2.5`.
+
+### Диагностика GHCR unauthorized (0.2.6)
+- **Что:** `deploy/update-from-github.sh` теперь при ошибке `docker compose pull` выводит подсказку про публичность GHCR package или `docker login ghcr.io`; `deploy/README.md` дополнен вариантами решения.
+- **Почему:** на сервере `docker compose pull` получил `unauthorized` для `ghcr.io/idpro1313/genshintop:latest`.
+- **Файлы:** `deploy/update-from-github.sh`, `deploy/README.md`, `VERSION`, `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** код не хранит токены; доступ решается настройкой публичности package или одноразовым `docker login` на сервере.
