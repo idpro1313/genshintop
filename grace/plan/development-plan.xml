@@ -51,7 +51,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, /lootbar, SEO (мета, OG, schema.org), sitemap, Яндекс.Метрика.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/*, страницы доверия, SEO (мета, OG, FAQ/HowTo schema.org), sitemap, Яндекс.Метрика reachGoal, nginx 404 и XML.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>
@@ -64,7 +64,8 @@
       </contract>
       <interface>
         <export-build PURPOSE="npm run build" />
-        <export-LOOTBAR_GENSHIN_TOPUP_URL PURPOSE="Партнёрская ссылка LootBar.gg для маршрута /lootbar и CTA" />
+        <export-LOOTBAR_GENSHIN_TOPUP_URL PURPOSE="Партнёрский URL LootBar.gg по умолчанию" />
+        <export-lootbarGenshinTopupUrl PURPOSE="Партнёрский URL с параметром UTM-кампании" />
       </interface>
       <depends>M-CONTENT-PIPELINE</depends>
       <target>
@@ -72,7 +73,12 @@
         <source>src/layouts</source>
         <source>src/components</source>
         <source>src/lib/partners.ts</source>
+        <source>src/lib/guide-hub.ts</source>
+        <source>src/lib/character-hub.ts</source>
+        <source>src/lib/seo.ts</source>
         <source>src/content.config.ts</source>
+        <source>deploy/nginx-docker.conf</source>
+        <source>deploy/SEO-CHECKLIST.md</source>
       </target>
       <verification-ref>V-M-WEBSITE</verification-ref>
     </M-WEBSITE>

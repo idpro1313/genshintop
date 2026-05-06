@@ -25,13 +25,13 @@
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/partners.ts`, `astro.config.mjs`
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts`, `src/lib/character-hub.ts`, `src/lib/partners.ts`, `astro.config.mjs`
 - **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`, `scripts/cleanup-guides-formatting.ps1`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
 
 ### Гайды: таксономия и frontmatter
 
-Коллекция **`guides`** в [`src/content.config.ts`](src/content.config.ts): обязательные `title`, `category`, `sourceSlug`; опционально `date`, `summary`, `sourcePath`, а также **`topic`** (сценарий для игрока: `banner`, `patch`, `codes`, `newbie`, `party`, `economy`, `lore`, `tech`, `general`), **`gameVersion`**, **`status`** (`active` | `dated` | `historical`), **`audience`** (`all` | `beginner` | `returning` | `meta`), **`relatedCharacters`**, **`relatedGuides`**, **`updatedAt`**. Подписи и эвристики — [`src/lib/guide-taxonomy.ts`](src/lib/guide-taxonomy.ts). На страницах при отсутствии полей используются вычисляемые значения (`effective*` в том же модуле). После полной миграции из `gi-database` новые поля заполняет [`scripts/process-content.ts`](scripts/process-content.ts).
+Коллекция **`guides`** в [`src/content.config.ts`](src/content.config.ts): обязательные `title`, `category`, `sourceSlug`; опционально `date`, `summary`, `sourcePath`, а также **`topic`** (сценарий: `banner`, `patch`, `codes`, `newbie`, `party`, `economy`, `lore`, `tech`, `general`), **`gameVersion`**, **`status`** (`active` | `dated` | `historical`), **`audience`** (`all` | `beginner` | `returning` | `meta`), **`relatedCharacters`**, **`relatedGuides`**, **`updatedAt`**, **`reviewedAt`**, **`sources`**. Подписи и эвристики — [`src/lib/guide-taxonomy.ts`](src/lib/guide-taxonomy.ts). Фильтры хабов `/guides/*` — [`src/lib/guide-hub.ts`](src/lib/guide-hub.ts). Партнёрские URL — [`src/lib/partners.ts`](src/lib/partners.ts) (`lootbarGenshinTopupUrl`, `LOOTBAR_GENSHIN_TOPUP_URL`). На страницах при отсутствии полей `topic`/`status`/… используются вычисляемые значения (`effective*` в guide-taxonomy). После полной миграции из `gi-database` часть полей может заполнять [`scripts/process-content.ts`](scripts/process-content.ts).
 
 ### Деплой
 
@@ -40,7 +40,7 @@
 # GRACE Framework - Project Engineering Protocol
 
 ## Keywords
-genshin-impact, astro, ssg, seo, gi-database, genshintop.ru, guides, characters
+genshin-impact, astro, ssg, seo, gi-database, genshintop.ru, guides, characters, lootbar, hubs
 
 ## Annotation
 Репозиторий сайта на Astro + скрипты миграции контента. При изменении маршрутов, коллекций или деплоя — обновляйте `grace/**`, этот файл и `docs/HISTORY.md`.
