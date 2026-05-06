@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbListSchema,
+  faqPageSchema,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
+import { lootbarGenshinTopupUrl } from '../../lib/partners';
+
+const canonicalPath = '/lootbar/blagoslovenie-luny';
+const topupUrl = lootbarGenshinTopupUrl('lootbar_welkin');
+
+const faq = faqPageSchema([
+  {
+    question: 'Что даёт благословение полой луны?',
+    answer:
+      'Ежемесячная подписка в Genshin Impact: моментальная порция кристаллов и ежедневные камни истока в течение периода, описанного в игре. Точные цифры смотрите в клиенте на момент покупки.',
+  },
+  {
+    question: 'Можно ли купить несколько подряд через сторонний магазин?',
+    answer:
+      'Зависит от ограничений вашего аккаунта и правил LootBar. Ограничения miHoYo на активные подписки и сроки всё равно действуют.',
+  },
+]);
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  breadcrumbListSchema([
+    { label: 'Главная', href: '/' },
+    { label: 'LootBar', href: '/lootbar' },
+    { label: 'Благословение луны', href: canonicalPath },
+  ]),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(canonicalPath)}#webpage`,
+    name: 'Благословение полой луны — Genshin Impact на LootBar',
+    url: absoluteUrl(canonicalPath),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+  faq,
+]);
+---
+
+<BaseLayout
+  title="Благословение полой луны Genshin Impact — LootBar | GenshinTop"
+  description="Покупка «лунной» подписки Genshin Impact через LootBar.gg: на что смотреть перед оплатой. Информационная партнёрская страница GenshinTop."
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+  hideLootBarPromo={true}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <nav class="not-prose mb-6 text-sm text-teyvat-muted">
+      <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
+    </nav>
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Благословение полой луны</h1>
+    <p class="text-slate-300">
+      Подписка выгодна, если вы играете каждый день в период действия — сравните с разовыми паками кристаллов в
+      официальном магазине и на LootBar.
+    </p>
+    <LootBarDisclosure class="not-prose my-6" />
+    <h2>Перед оформлением</h2>
+    <ul>
+      <li>Убедитесь, что активная луна/лимиты позволяют купить следующую (см. подсказки в игре).</li>
+      <li>Проверьте, что регион аккаунта совпадает с условиями LootBar.</li>
+    </ul>
+    <LootBarOutboundLink
+      href={topupUrl}
+      class="not-prose inline-flex rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night hover:bg-teyvat-gold"
+      reachGoal="lootbar_welkin_cta"
+    >
+      К покупке на LootBar.gg →
+    </LootBarOutboundLink>
+  </article>
+</BaseLayout>

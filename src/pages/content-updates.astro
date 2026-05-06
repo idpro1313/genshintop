@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../lib/seo';
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl('/content-updates')}#webpage`,
+    name: 'Политика обновления контента GenshinTop',
+    url: absoluteUrl('/content-updates'),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+]);
+---
+
+<BaseLayout
+  title="Обновление контента и свежесть гайдов — GenshinTop"
+  description="Как GenshinTop помечает устаревшие материалы, обновляет промокоды и ведёт архив баннеров Genshin Impact."
+  canonicalPath="/content-updates"
+  jsonLd={jsonLd}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Обновление контента</h1>
+    <p>
+      Игра обновляется каждые несколько недель. Часть материалов на сайте — <strong>архив</strong> (старые баннеры,
+      патчи), часть — <strong>обновляемая</strong> (промокоды, экономика, раздел партнёра).
+    </p>
+    <h2>Метки</h2>
+    <ul>
+      <li>В карточках гайдов используются статусы актуальности (см. фильтры на <a href="/guides">/guides</a>).</li>
+      <li>Для отдельных статей поле «проверено» отражает дату вычитки редакцией.</li>
+    </ul>
+    <h2>Коммерческие страницы</h2>
+    <p>
+      Раздел <a href="/lootbar">/lootbar</a> и связанные URL описывают партнёрский сервис; условия акций смотрите на
+      стороне LootBar.gg.
+    </p>
+  </article>
+</BaseLayout>

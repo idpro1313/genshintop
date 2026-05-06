@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbListSchema,
+  faqPageSchema,
+  howToSchema,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
+import { lootbarGenshinTopupUrl } from '../../lib/partners';
+
+const canonicalPath = '/lootbar/kak-popolnit-genshin-impact';
+const topupUrl = lootbarGenshinTopupUrl('lootbar_howto');
+
+const howTo = howToSchema({
+  name: 'Как пополнить Genshin Impact через LootBar.gg',
+  description:
+    'Общая последовательность действий для оформления топ-апа сторонним сервисом. Точные поля на стороне LootBar могут меняться.',
+  steps: [
+    'Откройте страницу Genshin Impact на LootBar по партнёрской ссылке с GenshinTop.',
+    'Выберите продукт (например, кристаллы сотворения или благословение луны) и номинал.',
+    'Следуйте указаниям LootBar: способ входа/UID или аккаунт, регион, оплата.',
+    'После успешной оплаты проверьте почту/историю заказа на LootBar и начисление в клиенте игры.',
+  ],
+});
+
+const faq = faqPageSchema([
+  {
+    question: 'Это обязательно делать через LootBar?',
+    answer:
+      'Нет. Это один из сторонних сервисов. Официальные покупки доступны в клиенте и на сайтах HoYoverse; условия и цены отличаются.',
+  },
+  {
+    question: 'Что такое пополнение по UID?',
+    answer:
+      'Часто сторонние сторы просят идентификатор сервера/UID из профиля. Не передавайте пароль и не делитесь кодами двухфакторной защиты.',
+  },
+]);
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  breadcrumbListSchema([
+    { label: 'Главная', href: '/' },
+    { label: 'LootBar', href: '/lootbar' },
+    { label: 'Как пополнить', href: canonicalPath },
+  ]),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(canonicalPath)}#webpage`,
+    name: 'Как пополнить Genshin Impact через LootBar',
+    url: absoluteUrl(canonicalPath),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+  howTo,
+  faq,
+]);
+---
+
+<BaseLayout
+  title="Как пополнить Genshin Impact через LootBar — пошагово | GenshinTop"
+  description="Пошагово: как оформить топ-ап Genshin Impact на LootBar.gg через партнёрскую ссылку GenshinTop. Неофициальный гайд, без обещаний от имени HoYoverse."
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+  hideLootBarPromo={true}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <nav class="not-prose mb-6 text-sm text-teyvat-muted">
+      <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
+    </nav>
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Как пополнить Genshin Impact</h1>
+    <p class="text-slate-300">
+      Инструкция для тех, кто уже решил использовать сторонний топ-ап. Если вы не уверены в сервисе — лучше
+      ограничьтесь официальными каналами HoYoverse.
+    </p>
+    <LootBarDisclosure class="not-prose my-6" />
+    <h2>Шаги</h2>
+    <ol>
+      <li>Перейдите на витрину Genshin Impact на LootBar.gg по кнопке ниже.</li>
+      <li>Выберите товар и номинал; сверьте регион и способ доставки валюты в игру.</li>
+      <li>Оплатите заказ способом, доступным на LootBar в вашем регионе.</li>
+      <li>Проверьте начисление в игровом клиенте; при задержке используйте поддержку LootBar.</li>
+    </ol>
+    <div class="not-prose my-8 flex flex-wrap gap-3">
+      <LootBarOutboundLink
+        href={topupUrl}
+        class="inline-flex rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night hover:bg-teyvat-gold"
+        reachGoal="lootbar_howto_cta"
+      >
+        Открыть Genshin на LootBar.gg →
+      </LootBarOutboundLink>
+      <a href="/lootbar/bezopasnost-i-oplata" class="rounded-xl border border-white/20 px-6 py-3 font-medium text-white hover:bg-white/5">
+        Риски и безопасность
+      </a>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbListSchema,
+  faqPageSchema,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
+import { lootbarGenshinTopupUrl } from '../../lib/partners';
+
+const canonicalPath = '/lootbar/bezopasnost-i-oplata';
+const topupUrl = lootbarGenshinTopupUrl('lootbar_safety');
+
+const faq = faqPageSchema([
+  {
+    question: 'Безопасно ли пополнение через сторонний сервис?',
+    answer:
+      'Любой сторонний топ-ап несёт правовые и технические риски: политика аккаунта, региональные ограничения, возможные спорные транзакции. Снижаете риск, если проверяете домен, не передаёте пароль и сохраняете чек заказа.',
+  },
+  {
+    question: 'Что делать при проблемах с заказом?',
+    answer:
+      'Сначала поддержка LootBar и банк/платёжная система. GenshinTop не обрабатывает платежи и не может вернуть средства.',
+  },
+  {
+    question: 'Почему GenshinTop вообще ссылается на LootBar?',
+    answer:
+      'Это партнёрский канал: при оплате мы можем получать комиссию. Подробности — на странице раскрытия партнёрства.',
+  },
+]);
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  breadcrumbListSchema([
+    { label: 'Главная', href: '/' },
+    { label: 'LootBar', href: '/lootbar' },
+    { label: 'Безопасность и оплата', href: canonicalPath },
+  ]),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(canonicalPath)}#webpage`,
+    name: 'Безопасность пополнения Genshin Impact и оплата',
+    url: absoluteUrl(canonicalPath),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+  faq,
+]);
+---
+
+<BaseLayout
+  title="Безопасность пополнения Genshin Impact и оплата через сторонние сервисы | GenshinTop"
+  description="Риски топ-апа Genshin Impact не в официальном клиенте: чек-лист перед оплатой, UID, споры и партнёрское раскрытие GenshinTop."
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+  hideLootBarPromo={true}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <nav class="not-prose mb-6 text-sm text-teyvat-muted">
+      <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
+    </nav>
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Безопасность и оплата</h1>
+    <p class="text-slate-300">
+      Материал редакции GenshinTop не является финансовой или юридической консультацией. Если сомневаетесь —
+      используйте официальный магазин в клиенте игры.
+    </p>
+    <LootBarDisclosure class="not-prose my-6" />
+    <h2>Чек-лист</h2>
+    <ul>
+      <li>Домен lootbar.gg и HTTPS; не переходите по сокращателям неизвестного происхождения.</li>
+      <li>Не сообщайте посторонним пароль, 2FA и коды восстановления.</li>
+      <li>Храните скриншот/письмо подтверждения заказа до факта начисления в игре.</li>
+      <li>Читайте{' '}
+        <a href="/guides/skam-izbejat" class="text-teyvat-mint hover:underline">гайд о мошенниках</a>.
+      </li>
+    </ul>
+    <p>
+      Официальная активация подарочных кодов miHoYo:{' '}
+      <a href="https://genshin.hoyoverse.com/ru/gift" rel="noopener noreferrer" class="break-words text-teyvat-mint"
+        >genshin.hoyoverse.com/ru/gift</a
+      >.
+    </p>
+    <LootBarOutboundLink
+      href={topupUrl}
+      class="not-prose inline-flex rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night hover:bg-teyvat-gold"
+      reachGoal="lootbar_safety_cta"
+    >
+      Всё равно к LootBar (осознанно) →
+    </LootBarOutboundLink>
+  </article>
+</BaseLayout>

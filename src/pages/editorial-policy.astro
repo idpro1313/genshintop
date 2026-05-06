@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../lib/seo';
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl('/editorial-policy')}#webpage`,
+    name: 'Редакционная политика GenshinTop',
+    url: absoluteUrl('/editorial-policy'),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+]);
+---
+
+<BaseLayout
+  title="Редакционная политика — GenshinTop"
+  description="Как GenshinTop публикует и обновляет материалы по Genshin Impact: источники, актуальность, независимость от разработчиков."
+  canonicalPath="/editorial-policy"
+  jsonLd={jsonLd}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Редакционная политика</h1>
+    <p>
+      <strong>GenshinTop</strong> — неофициальный информационный ресурс. Мы не представляем miHoYo / HoYoverse и не
+      гарантируем совпадение текстов с официальной терминологией на 100%.
+    </p>
+    <h2>Принципы</h2>
+    <ul>
+      <li><strong>Актуальность:</strong> где возможно, указываем даты и версию игры; исторические материалы остаются в архиве с пометками статуса.</li>
+      <li><strong>Источники:</strong> для чувствительных тем (промокоды, официальные правила) даём ссылки на сайты HoYoverse.</li>
+      <li><strong>Партнёрский контент</strong> отделён раскрытием и ведёт на отдельные страницы (<a href="/partnership-disclosure">раскрытие партнёрства</a>).</li>
+    </ul>
+    <h2>Ошибки и правки</h2>
+    <p>
+      Нашли неточность — напишите на контакт из раздела <a href="/contacts">«Контакты»</a>. Существенные правки
+      фиксируем в тексте и при необходимости в поле «проверено» у статей.
+    </p>
+  </article>
+</BaseLayout>

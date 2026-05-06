@@ -100,6 +100,10 @@ export const collections = {
       date: z.coerce.date().optional(),
       /** Дата последней редакции (если отличается от `date`). */
       updatedAt: z.coerce.date().optional(),
+      /** Фактическая дата вычитки/проверки редакцией (для E-E-A-T и schema.org). */
+      reviewedAt: z.coerce.date().optional(),
+      /** Источники и официальные ссылки (URI или короткие подписи). */
+      sources: z.array(z.string()).max(24).optional(),
       summary: z.string().optional(),
       sourceSlug: z.string(),
       sourcePath: z.string().optional(),

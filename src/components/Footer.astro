@@ -3,12 +3,23 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="mt-20 border-t border-white/10 bg-black/20">
-  <div class="mx-auto max-w-6xl px-4 py-10 text-center text-sm text-teyvat-muted">
-    <p class="mb-2 font-display text-teyvat-gold/90">GenshinTop</p>
-    <p class="mb-4">
+  <div class="mx-auto max-w-6xl px-4 py-10 text-sm text-teyvat-muted">
+    <p class="mb-4 text-center font-display text-teyvat-gold/90">GenshinTop</p>
+    <nav
+      class="mb-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm"
+      aria-label="Нижнее меню"
+    >
+      <a href="/about" class="hover:text-teyvat-mint hover:underline">О проекте</a>
+      <a href="/editorial-policy" class="hover:text-teyvat-mint hover:underline">Редакция</a>
+      <a href="/partnership-disclosure" class="hover:text-teyvat-mint hover:underline">Партнёрство</a>
+      <a href="/content-updates" class="hover:text-teyvat-mint hover:underline">Свежесть контента</a>
+      <a href="/contacts" class="hover:text-teyvat-mint hover:underline">Контакты</a>
+      <a href="/lootbar" class="hover:text-teyvat-mint hover:underline">LootBar</a>
+    </nav>
+    <p class="mb-4 text-center">
       Неофициальный фан-сайт. Genshin Impact © miHoYo / HoYoverse. Товарные знаки принадлежат их
       владельцам.
     </p>
-    <p>© {year} genshintop.ru</p>
+    <p class="text-center">© {year} genshintop.ru</p>
   </div>
 </footer>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../lib/seo';
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'ContactPage',
+    '@id': `${absoluteUrl('/contacts')}#webpage`,
+    name: 'Контакты GenshinTop',
+    url: absoluteUrl('/contacts'),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+]);
+---
+
+<BaseLayout
+  title="Контакты — GenshinTop"
+  description="Как связаться с редакцией GenshinTop по вопросам контента, партнёрства и ошибок на сайте."
+  canonicalPath="/contacts"
+  jsonLd={jsonLd}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Контакты</h1>
+    <p>
+      GenshinTop — небольшой редакционный проект. Для сообщений о неточностях в гайдах, сломанных ссылках и
+      предложениях по контенту используйте контакты владельца домена <strong>genshintop.ru</strong> (e-mail или форма
+      хостинга — уточните у администрации сайта).
+    </p>
+    <p>
+      Вопросы по заказам на LootBar.gg решаются <strong>только</strong> в поддержке LootBar; GenshinTop не видит ваши
+      транзакции.
+    </p>
+    <p>
+      <a href="/partnership-disclosure">Раскрытие партнёрства</a>
+      {' · '}
+      <a href="/editorial-policy">Редакционная политика</a>
+    </p>
+  </article>
+</BaseLayout>

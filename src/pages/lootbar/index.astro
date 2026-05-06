@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbListSchema,
+  faqPageSchema,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
+import { lootbarGenshinTopupUrl } from '../../lib/partners';
+
+const topupUrl = lootbarGenshinTopupUrl('lootbar_hub');
+
+const faqs = [
+  {
+    question: 'LootBar.gg — официальный магазин HoYoverse?',
+    answer:
+      'Нет. LootBar.gg — сторонний сервис пополнения. GenshinTop — неофициальный фан-сайт и не представляет miHoYo / HoYoverse.',
+  },
+  {
+    question: 'Как работает переход по партнёрской ссылке?',
+    answer:
+      'Параметр aff_short помечает источник перехода для партнёрской программы. Условия заказа и начисления валюты задаются на стороне LootBar.gg.',
+  },
+  {
+    question: 'Где читать про промокоды и кристаллы?',
+    answer:
+      'Мы ведём тематические страницы в разделе /lootbar: промокоды, кристаллы сотворения, лунное благословение и безопасность оплаты.',
+  },
+];
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  breadcrumbListSchema([
+    { label: 'Главная', href: '/' },
+    { label: 'Пополнение через LootBar', href: '/lootbar' },
+  ]),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl('/lootbar')}#webpage`,
+    name: 'Пополнение Genshin Impact через LootBar.gg',
+    url: absoluteUrl('/lootbar'),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    description:
+      'Хаб партнёрского пополнения Genshin Impact на LootBar.gg: ссылки, тематические гайды и прозрачное раскрытие.',
+  },
+  faqPageSchema(faqs),
+]);
+
+const outboundRel = 'noopener noreferrer sponsored';
+---
+
+<BaseLayout
+  title="Пополнение Genshin Impact — LootBar.gg | GenshinTop"
+  description="Хаб партнёрского пополнения Genshin Impact на LootBar.gg: топ-ап, промокоды, кристаллы, луна и безопасность. GenshinTop — неофициальный сайт."
+  canonicalPath="/lootbar"
+  jsonLd={jsonLd}
+  hideLootBarPromo={true}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <header class="not-prose mb-8 border-b border-white/10 pb-8">
+      <p class="text-sm text-teyvat-muted">Партнёрский раздел · реклама</p>
+      <h1 class="mt-2 font-display text-3xl font-bold text-white md:text-4xl">
+        Пополнение Genshin Impact на LootBar.gg
+      </h1>
+      <p class="mt-4 max-w-2xl text-slate-300">
+        Центральная страница по топ-апу для русскоязычных игроков. Акции и цены зависят от LootBar на момент
+        заказа — проверяйте витрину перед оплатой.
+      </p>
+      <LootBarDisclosure class="not-prose mt-6" />
+      <div class="not-prose mt-6 flex flex-wrap gap-3">
+        <LootBarOutboundLink
+          href={topupUrl}
+          class="inline-flex items-center rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night shadow-glow transition hover:bg-teyvat-gold"
+          reachGoal="lootbar_hub_cta_top"
+        >
+          Перейти на LootBar.gg →
+        </LootBarOutboundLink>
+        <a
+          href="/guides/economy"
+          class="rounded-xl border border-white/15 px-6 py-3 font-medium text-white transition hover:border-teyvat-mint/40 hover:bg-white/5"
+        >
+          Экономика и молитвы
+        </a>
+      </div>
+    </header>
+
+    <h2>Темы раздела</h2>
+    <ul class="not-prose list-none space-y-3 pl-0">
+      <li>
+        <a href="/lootbar/kak-popolnit-genshin-impact" class="font-medium text-teyvat-mint hover:underline"
+          >Как пополнить Genshin Impact</a
+        >
+        — пошагово и без обещаний «официальности».
+      </li>
+      <li>
+        <a href="/lootbar/promokod" class="font-medium text-teyvat-mint hover:underline">Промокод LootBar</a>
+        — где смотреть скидки и что не путать с игровыми кодами miHoYo.
+      </li>
+      <li>
+        <a href="/lootbar/kristally-sotvoreniya" class="font-medium text-teyvat-mint hover:underline"
+          >Кристаллы сотворения</a
+        >
+        — номиналы и проверка начисления.
+      </li>
+      <li>
+        <a href="/lootbar/blagoslovenie-luny" class="font-medium text-teyvat-mint hover:underline"
+          >Благословение полой луны</a
+        >
+        — подписка и отличие от разовых паков.
+      </li>
+      <li>
+        <a href="/lootbar/bezopasnost-i-oplata" class="font-medium text-teyvat-mint hover:underline"
+          >Безопасность и оплата</a
+        >
+        — риски сторонних топ-апов и чек-лист перед заказом.
+      </li>
+    </ul>
+
+    <h2>Почему LootBar.gg</h2>
+    <ul>
+      <li>Отдельная витрина топ-апа по игре; условия публикует сам сервис.</li>
+      <li>Способы оплаты зависят от региона и правил LootBar.</li>
+      <li>Скидки и купоны смотрите на сайте LootBar перед оформлением.</li>
+    </ul>
+
+    <h2>Частые вопросы</h2>
+    {
+      faqs.map((f) => (
+        <p>
+          <strong>{f.question}</strong> {f.answer}
+        </p>
+      ))
+    }
+
+    <div class="not-prose mt-10 rounded-2xl border border-teyvat-accent/30 bg-teyvat-accent/10 p-6 text-center">
+      <p class="text-slate-200">Перейти к оформлению на LootBar.gg</p>
+      <LootBarOutboundLink
+        href={topupUrl}
+        class="mt-4 inline-flex rounded-xl bg-teyvat-accent px-8 py-3 font-semibold text-teyvat-night hover:bg-teyvat-gold"
+        reachGoal="lootbar_hub_cta_bottom"
+      >
+        Открыть страницу Genshin Impact на LootBar
+      </LootBarOutboundLink>
+      <p class="mt-3 text-xs text-teyvat-muted">
+        Партнёрская программа LootBar.gg · aff_short=dandnagers ·{' '}
+        <a href="/partnership-disclosure" class="text-teyvat-mint hover:underline">раскрытие</a>
+      </p>
+    </div>
+  </article>
+</BaseLayout>

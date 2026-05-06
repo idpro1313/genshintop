@@ -37,14 +37,19 @@ const slug = contentSlugFromId(entry.id);
 const canonicalPath = `/guides/${slug}`;
 const fileHint = `${slug}.md`;
 const cat = entry.data.category as GuideCategory;
-const topic = effectiveGuideTopic(entry.data.topic, cat, fileHint);
-const status = effectiveGuideStatus(entry.data.status, cat, entry.data.date, slug);
-const audience = effectiveGuideAudience(entry.data.audience, cat);
-const gameVersion = effectiveGuideGameVersion(entry.data.gameVersion, slug);
+const hint = entry.data.summary ?? '';
+const topic = effectiveGuideTopic(entry.data.topic, cat, fileHint, hint);
+const status = effectiveGuideStatus(entry.data.status, cat, entry.data.date, slug, hint);
+const audience = effectiveGuideAudience(entry.data.audience, cat, hint);
+const gameVersion = effectiveGuideGameVersion(entry.data.gameVersion, slug, hint);
 
 const description = cleanMetaDescription(entry.data.summary, entry.data.title);
 const publishedIso = entry.data.date?.toISOString();
-const modifiedIso = (entry.data.updatedAt ?? entry.data.date)?.toISOString();
+const modifiedIso = (
+  entry.data.reviewedAt ??
+  entry.data.updatedAt ??
+  entry.data.date
+)?.toISOString();
 const articleTimes =
   publishedIso || modifiedIso
     ? {
@@ -137,6 +142,16 @@ const relatedEntries = relatedSlugs
         ) : null
       }
       {
+        entry.data.reviewedAt ? (
+          <span class="text-teyvat-muted">
+            проверено{' '}
+            <time datetime={entry.data.reviewedAt.toISOString()}>
+              {entry.data.reviewedAt.toLocaleDateString('ru-RU')}
+            </time>
+          </span>
+        ) : null
+      }
+      {
         entry.data.updatedAt &&
         (!entry.data.date ||
           entry.data.updatedAt.getTime() !== entry.data.date.getTime()) ? (
@@ -153,6 +168,27 @@ const relatedEntries = relatedSlugs
   </header>
 
   <Content />
+
+  {
+    entry.data.sources?.length ? (
+      <aside class="not-prose mt-10 rounded-2xl border border-white/10 bg-white/5 p-6">
+        <h2 class="font-display text-lg font-semibold text-white">Источники и официальные материалы</h2>
+        <ul class="mt-3 list-inside list-disc text-sm text-slate-300">
+          {entry.data.sources.map((s) => (
+            <li>
+              {/^https?:\/\//i.test(s) ? (
+                <a href={s} rel="noopener noreferrer" class="break-words text-teyvat-mint hover:underline">
+                  {s}
+                </a>
+              ) : (
+                s
+              )}
+            </li>
+          ))}
+        </ul>
+      </aside>
+    ) : null
+  }
 
   {
     relatedEntries.length > 0 ? (

@@ -104,5 +104,18 @@ const {
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-reach-goal]').forEach((el) => {
+          el.addEventListener('click', () => {
+            var g = el.getAttribute('data-reach-goal');
+            if (!g) return;
+            try {
+              if (typeof ym !== 'undefined') ym(109020836, 'reachGoal', g);
+            } catch (_) {}
+          });
+        });
+      });
+    </script>
   </body>
 </html>

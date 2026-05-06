@@ -1,7 +1,10 @@
 ---
 title: Промокоды и промоакции Genshin Impact Март-Апрель 2026
 category: codes
-summary: "Список промокодов и промоакций Март-Апрель 2026 Актуальные промокоды и промоакции для игры Genshin Impact Март-Апрель 2026 В настоящий момент доступо 16 кодов для активации внутриигровых наград в игре Genshin Impact и получения бесплатных..."
+reviewedAt: 2026-05-06
+sources:
+  - "https://genshin.hoyoverse.com/ru/gift"
+summary: "Промокоды Genshin Impact: как активировать на официальном сайте HoYoverse, советы по срокам кодов и ссылка на актуальные материалы. Информационный гайд GenshinTop."
 sourceSlug: promocodes
 sourcePath: promocodes.md
 ---

@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CharacterCard from './CharacterCard.astro';
+import { getCollection } from 'astro:content';
+import { contentSlugFromId } from '../lib/slug';
+import {
+  SITE_URL,
+  absoluteUrl,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../lib/seo';
+
+interface Props {
+  /** Значение enum из контента: Pyro, Hydro, ... */
+  element: string;
+  /** Сегмент URL: pyro, hydro, ... */
+  urlKey: string;
+  title: string;
+  description: string;
+  intro: string;
+}
+
+const { element, urlKey, title, description, intro } = Astro.props;
+
+const canonicalPath = `/characters/${urlKey}`;
+
+const all = (await getCollection('characters'))
+  .filter((e) => !e.data.sourceSlug.startsWith('_placeholder'))
+  .filter((e) => e.data.element === element)
+  .sort((a, b) => a.data.name.localeCompare(b.data.name, 'ru'));
+
+const pageUrl = absoluteUrl(canonicalPath);
+const itemListElement = all.map((e, i) => ({
+  '@type': 'ListItem',
+  position: i + 1,
+  name: e.data.name,
+  item: absoluteUrl(`/characters/${contentSlugFromId(e.id)}`),
+}));
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  {
+    '@type': 'CollectionPage',
+    '@id': `${pageUrl}#webpage`,
+    name: title,
+    description,
+    url: pageUrl,
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: all.length,
+      itemListElement,
+    },
+  },
+]);
+---
+
+<BaseLayout {title} {description} {canonicalPath} {jsonLd}>
+  <h1 class="font-display text-3xl font-bold text-white">{title}</h1>
+  <p class="mt-2 max-w-2xl text-teyvat-muted">{intro}</p>
+  <p class="mt-6 text-sm text-teyvat-muted">
+    <a href="/characters" class="text-teyvat-mint hover:underline">Все персонажи</a>
+    {' · '}
+    <a href="/guides/economy" class="text-teyvat-mint hover:underline">Экономика и молитвы</a>
+  </p>
+  <p class="mb-4 mt-8 text-sm text-teyvat-muted">Найдено: {all.length}</p>
+  <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {
+      all.map((e) => (
+        <CharacterCard
+          name={e.data.name}
+          slug={contentSlugFromId(e.id)}
+          element={e.data.element}
+          weapon={e.data.weapon}
+          rarity={e.data.rarity}
+          rating={e.data.rating}
+        />
+      ))
+    }
+  </div>
+</BaseLayout>

@@ -97,3 +97,39 @@ export function jsonLdGraph(nodes: Record<string, unknown>[]): Record<string, un
     '@graph': nodes,
   };
 }
+
+/** Schema.org FAQ для страниц с блоком вопрос–ответ. */
+export function faqPageSchema(
+  faqs: Array<{ question: string; answer: string }>,
+): Record<string, unknown> {
+  return {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      },
+    })),
+  };
+}
+
+/** Schema.org HowTo (без Offer — продажа на стороннем сайте). */
+export function howToSchema(params: {
+  name: string;
+  description: string;
+  steps: string[];
+}): Record<string, unknown> {
+  return {
+    '@type': 'HowTo',
+    name: params.name,
+    description: params.description,
+    step: params.steps.map((text, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: `Шаг ${i + 1}`,
+      text,
+    })),
+  };
+}

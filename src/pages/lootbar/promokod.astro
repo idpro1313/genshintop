@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LootBarDisclosure from '../../components/LootBarDisclosure.astro';
+import LootBarOutboundLink from '../../components/LootBarOutboundLink.astro';
+import {
+  SITE_URL,
+  absoluteUrl,
+  breadcrumbListSchema,
+  faqPageSchema,
+  jsonLdGraph,
+  publisherOrganization,
+  webSiteNode,
+} from '../../lib/seo';
+import { lootbarGenshinTopupUrl } from '../../lib/partners';
+
+const canonicalPath = '/lootbar/promokod';
+const topupUrl = lootbarGenshinTopupUrl('lootbar_promo');
+
+const faq = faqPageSchema([
+  {
+    question: 'Где взять рабочий промокод LootBar?',
+    answer:
+      'Обычно — в баннере акций на сайте LootBar, в личном кабинете или в рассылке сервиса. Мы не гарантируем наличие кода: он может истечь или не действовать для вашего региона.',
+  },
+  {
+    question: 'Промокод LootBar и промокод Genshin Impact — это одно и то же?',
+    answer:
+      'Нет. Коды из стримов и промо miHoYo активируются на официальном сайте подарков HoYoverse. Промокод магазина LootBar применяется в процессе оплаты на lootbar.gg.',
+  },
+]);
+
+const jsonLd = jsonLdGraph([
+  publisherOrganization(),
+  webSiteNode(),
+  breadcrumbListSchema([
+    { label: 'Главная', href: '/' },
+    { label: 'LootBar', href: '/lootbar' },
+    { label: 'Промокод', href: canonicalPath },
+  ]),
+  {
+    '@type': 'WebPage',
+    '@id': `${absoluteUrl(canonicalPath)}#webpage`,
+    name: 'Промокод LootBar для Genshin Impact',
+    url: absoluteUrl(canonicalPath),
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  },
+  faq,
+]);
+---
+
+<BaseLayout
+  title="Промокод LootBar для Genshin Impact — где искать скидку | GenshinTop"
+  description="Промокоды и купоны LootBar.gg для топ-апа Genshin Impact: где смотреть и чем они отличаются от кодов HoYoverse. Партнёрский информационный материал."
+  canonicalPath={canonicalPath}
+  jsonLd={jsonLd}
+  hideLootBarPromo={true}
+>
+  <article class="prose prose-invert prose-lg max-w-3xl">
+    <nav class="not-prose mb-6 text-sm text-teyvat-muted">
+      <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
+    </nav>
+    <h1 class="not-prose font-display text-3xl font-bold text-white">Промокод LootBar и скидки</h1>
+    <p class="text-slate-300">
+      На этой странице — о промокодах и купонах именно магазина LootBar, а не игровых кодах miHoYo. Перед оплатой
+      откройте блок акций на lootbar.gg и проверьте правила применения.
+    </p>
+    <LootBarDisclosure class="not-prose my-6" />
+    <h2>Практические советы</h2>
+    <ul>
+      <li>Сверяйте срок действия и минимальную сумму заказа — условия пишет LootBar.</li>
+      <li>Не вводите промокод на подозрительных зеркалах; используйте ссылку с проверенного домена.</li>
+      <li>Игровые коды (типа трансляций) ищите в разделе{' '}
+        <a href="/guides/codes" class="text-teyvat-mint hover:underline">промокодов Genshin</a>.
+      </li>
+    </ul>
+    <LootBarOutboundLink
+      href={topupUrl}
+      class="not-prose inline-flex rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night hover:bg-teyvat-gold"
+      reachGoal="lootbar_promo_cta"
+    >
+      Перейти к витрине Genshin на LootBar →
+    </LootBarOutboundLink>
+  </article>
+</BaseLayout>
