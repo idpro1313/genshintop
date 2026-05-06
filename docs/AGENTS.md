@@ -144,7 +144,7 @@ Testing rules:
 ## File Structure
 ```
 src/
-  pages/                 - Маршруты Astro (/ , /characters , /guides , /lootbar , /about)
+  pages/                 - Маршруты Astro: /, /characters, /guides, хабы /guides/*, /characters/*, /lootbar/*, /about, /404, доверие (/editorial-policy, /partnership-disclosure, /contacts, /content-updates)
   layouts/               - BaseLayout, ArticleLayout
   components/            - Header, Footer, Seo, карточки, хлебные крошки
   content/               - Коллекции Markdown (после миграции)

@@ -1,7 +1,7 @@
 <KnowledgeGraph>
-  <Project NAME="genshintop" VERSION="0.1.8">
-    <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru</keywords>
-    <annotation>Статический сайт GenshinTop (Astro) и исходная база gi-database/; контент после миграции — src/content/.</annotation>
+  <Project NAME="genshintop" VERSION="0.1.9">
+    <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar</keywords>
+    <annotation>Статический сайт GenshinTop (Astro): контент src/content/, хабы гайдов и персонажей, кластер /lootbar/*, nginx без SPA-fallback на XML.</annotation>
 
     <M-GI-DATABASE NAME="GiDatabase" TYPE="DATA_LAYER" STATUS="implemented">
       <purpose>Исходный каталог Markdown до переноса; после миграции может быть удалён.</purpose>
@@ -25,14 +25,16 @@
     </M-CONTENT-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статическая выдача, партнёрский раздел /lootbar; мета, OG/Twitter, schema.org, Яндекс.Метрика.</purpose>
-      <path>src/, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/partners.ts, src/content.config.ts, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml</path>
+      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, статические хабы, кластер /lootbar/*; мета, OG, schema.org, FAQ/HowTo, Яндекс.Метрика reachGoal; nginx: 404.html, корректная отдача sitemap.xml.</purpose>
+      <path>src/, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts, src/lib/partners.ts, src/lib/character-hub.ts, src/content.config.ts, astro.config.mjs, public/, Dockerfile, deploy/docker-compose.yml, deploy/nginx-docker.conf, deploy/SEO-CHECKLIST.md</path>
       <depends>M-CONTENT-PIPELINE</depends>
       <verification-ref>V-M-WEBSITE</verification-ref>
       <annotations>
-        <route-lootbar PURPOSE="Партнёрская страница пополнения Genshin Impact через LootBar.gg" />
-        <component-LootBarPromoBanner PURPOSE="Глобальная плашка под шапкой с переходом на /lootbar" />
-        <export-LOOTBAR_GENSHIN_TOPUP_URL PURPOSE="Партнёрский внешний URL LootBar.gg с aff_short" />
+        <route-lootbar-cluster PURPOSE="Хаб /lootbar и дочерние SEO-страницы партнёрского топ-апа" />
+        <route-guide-hubs PURPOSE="Статические хабы /guides/banners, codes, patches, newbie, economy, tier-list" />
+        <route-character-hubs PURPOSE="Хабы /characters по стихии, редкости и типу оружия" />
+        <route-trust PURPOSE="E-E-A-T: editorial-policy, partnership-disclosure, contacts, content-updates" />
+        <export-lootbarGenshinTopupUrl PURPOSE="Партнёрский URL с aff_short и UTM-кампанией" />
       </annotations>
     </M-WEBSITE>
 

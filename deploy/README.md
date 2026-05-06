@@ -73,7 +73,8 @@ docker run --rm -p 8080:80 genshintop-web
 |------|------------|
 | `Dockerfile` | Node → `npm run build` → nginx |
 | `deploy/docker-compose.yml` | Сервис `web`, labels Traefik |
-| `deploy/nginx-docker.conf` | gzip, кэш статики |
+| `deploy/nginx-docker.conf` | gzip, кэш статики, 404 → `404.html`, XML/robots без SPA-fallback |
+| `deploy/SEO-CHECKLIST.md` | Чек-лист после выката: sitemap, `/lootbar`, кабинеты поиска |
 | `deploy/env.example` | Шаблон `deploy/.env` |
 | `deploy/update-from-github.sh` | Обновление на Linux |
 | `deploy/update-from-github.ps1` | Обновление на Windows |

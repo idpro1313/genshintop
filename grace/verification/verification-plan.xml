@@ -22,7 +22,7 @@
 
     <VF-002 NAME="LootBarAffiliateRoute" USE_CASES="UC-003" DATA_FLOW="DF-LOOTBAR-AFFILIATE" PRIORITY="medium">
       <scenario>Пользователь переходит из сайта в партнёрский топ-ап LootBar</scenario>
-      <expected-outcome>/lootbar доступен из навигации и плашки, внешние CTA используют aff_short=dandnagers и sponsored rel</expected-outcome>
+      <expected-outcome>/lootbar и дочерние URL доступны; внешние CTA используют aff_short=dandnagers и sponsored rel; reachGoal на кликах в BaseLayout</expected-outcome>
       <required-signals>
         <log-marker>[StaticCheck] lootbar affiliate links present</log-marker>
       </required-signals>
@@ -55,7 +55,8 @@
         <check-2>npx astro check (при необходимости типизации)</check-2>
         <check-3>После сборки: в dist/*.html наличие og:image и JSON-LD @graph на главной и каталогах (выборочно)</check-3>
         <check-4>Статически проверить в src/layouts/BaseLayout.astro наличие счётчика Яндекс.Метрики 109020836 и noscript fallback</check-4>
-        <check-5>Статически проверить маршрут /lootbar, плашку LootBar и внешний URL aff_short=dandnagers с rel="noopener noreferrer sponsored"</check-5>
+        <check-5>Статически: маршрут `src/pages/lootbar/`, компоненты LootBarOutboundLink / LootBarDisclosure, поле reviewedAt/sources в guides</check-5>
+        <check-6>Статически: deploy/nginx-docker.conf — error_page 404 /404.html; location для *.xml без SPA-fallback; deploy/SEO-CHECKLIST.md для пост-деплоя</check-6>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>
