@@ -1,6 +1,6 @@
 <TechnologyStack VERSION="0.1.4">
   <Runtime>Node.js (сборка); продакшен — статический HTML за nginx (Docker + Traefik)</Runtime>
-  <Language>TypeScript, PowerShell (служебная чистка контента), Markdown (контент), JSON (отчёты)</Language>
+  <Language>TypeScript, Markdown (контент), JSON (отчёты)</Language>
   <Framework>Astro 5 (SSG), Tailwind CSS 3, Zod (схемы коллекций)</Framework>
 
   <Dependencies>
@@ -20,7 +20,6 @@
   </VersionConstraints>
 
   <Tooling>
-    <tool name="powershell" value="scripts/cleanup-guides-formatting.ps1" purpose="Повторяемая нормализация Markdown-гайдов после миграции" />
     <tool name="github-actions" value=".github/workflows/docker-image.yml" purpose="CI-сборка Docker-образа; push в GitHub Container Registry на main, pull_request только build" />
     <!-- Core workspace tooling.
 

@@ -42,14 +42,6 @@ chmod +x deploy/update-from-github.sh   # один раз
 
 Переменная окружения **`REMOTE`** (по умолчанию `origin`) задаёт имя remote.
 
-**Windows (Docker Desktop):**
-
-```powershell
-cd путь\к\genshintop
-Copy-Item deploy\env.example deploy\.env
-.\deploy\update-from-github.ps1
-```
-
 Скрипт делает `git fetch` + `git merge --ff-only` и затем `docker compose pull` + `up -d`. Локальная сборка на сервере больше не выполняется: образ должен быть опубликован workflow `.github/workflows/docker-image.yml`.
 
 ### Локальный просмотр без Traefik
@@ -80,7 +72,6 @@ docker run --rm -p 8080:80 genshintop-web
 | `deploy/SEO-CHECKLIST.md` | Чек-лист после выката: sitemap, `/lootbar`, кабинеты поиска |
 | `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` для GHCR |
 | `deploy/update-from-github.sh` | Обновление на Linux: git fast-forward, pull образа, up -d |
-| `deploy/update-from-github.ps1` | Обновление на Windows: git fast-forward, pull образа, up -d |
 | `.dockerignore` | Исключает `node_modules`, `gi-database` и т.д. из контекста сборки |
 
 `deploy/.env` в репозиторий не коммитится (см. `.gitignore`).

@@ -35,7 +35,6 @@
         <export-audit PURPOSE="npm run content:audit" />
         <export-migrate PURPOSE="npm run content:migrate" />
         <export-verify PURPOSE="npm run content:verify" />
-        <export-cleanup-guides-formatting PURPOSE="powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1" />
         <export-audit-guides PURPOSE="npm run content:audit-guides" />
       </interface>
       <depends>none</depends>
@@ -43,7 +42,6 @@
         <source>scripts/audit-database.ts</source>
         <source>scripts/process-content.ts</source>
         <source>scripts/verify-migration.ts</source>
-        <source>scripts/cleanup-guides-formatting.ps1</source>
         <source>scripts/audit-guides-content.ts</source>
       </target>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
@@ -80,7 +78,6 @@
         <source>deploy/nginx-docker.conf</source>
         <source>deploy/docker-compose.yml</source>
         <source>deploy/update-from-github.sh</source>
-        <source>deploy/update-from-github.ps1</source>
         <source>deploy/SEO-CHECKLIST.md</source>
       </target>
       <verification-ref>V-M-WEBSITE</verification-ref>

@@ -106,3 +106,9 @@
 - **Почему:** пользователь попросил изменить скрипт запуска после добавления GitHub Actions, чтобы не ждать долгую сборку на сервере.
 - **Файлы:** `deploy/docker-compose.yml`, `deploy/update-from-github.sh`, `deploy/update-from-github.ps1`, `deploy/env.example`, `deploy/README.md`, `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** локальная сборка на сервере удалена из основного сценария; если GHCR package приватный, сервер должен быть залогинен в `ghcr.io`.
+
+### Удаление PowerShell-скриптов (0.2.4)
+- **Что:** удалены все `.ps1` скрипты из проекта: `deploy/update-from-github.ps1` и `scripts/cleanup-guides-formatting.ps1`; активная документация и GRACE больше не ссылаются на PowerShell-сценарии.
+- **Почему:** пользователь уточнил, что `.ps1` скрипты в проекте вообще не нужны.
+- **Файлы:** `deploy/update-from-github.ps1`, `scripts/cleanup-guides-formatting.ps1`, `deploy/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `VERSION`, `package.json`, `package-lock.json`, `docs/HISTORY.md`
+- **Решение:** оставлен только Linux-сценарий `deploy/update-from-github.sh`; версия поднята до `0.2.4`.

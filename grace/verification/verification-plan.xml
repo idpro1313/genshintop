@@ -36,8 +36,7 @@
         <check-1>npm run content:audit — создаёт reports/content-audit.json</check-1>
         <check-2>npm run content:migrate — заполняет src/content и migration-report.json</check-2>
         <check-3>npm run content:verify — сверка счётчиков после полной миграции</check-3>
-        <check-4>powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1 — нормализует Markdown гайдов без удаления смыслового текста</check-4>
-        <check-5>npm run content:audit-guides — создаёт reports/guides-audit.json со статическими метриками гайдов</check-5>
+        <check-4>npm run content:audit-guides — создаёт reports/guides-audit.json со статическими метриками гайдов</check-4>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Отчёты созданы, число выходных файлов согласовано с отчётом</scenario-1>
@@ -58,7 +57,7 @@
         <check-5>Статически: маршрут `src/pages/lootbar/`, компоненты LootBarOutboundLink / LootBarDisclosure, поле reviewedAt/sources в guides</check-5>
         <check-6>Статически: deploy/nginx-docker.conf — error_page 404 /404.html; location для *.xml без SPA-fallback; deploy/SEO-CHECKLIST.md для пост-деплоя</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — pull_request выполняет build без push, main пушит Docker image в GHCR, секреты не хардкодятся</check-7>
-        <check-8>Статически: deploy/docker-compose.yml использует готовый SITE_IMAGE/GHCR image без build; update-from-github.* выполняют docker compose pull перед up -d</check-8>
+        <check-8>Статически: deploy/docker-compose.yml использует готовый SITE_IMAGE/GHCR image без build; update-from-github.sh выполняет docker compose pull перед up -d</check-8>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

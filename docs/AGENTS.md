@@ -18,16 +18,15 @@
 | `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
 | `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
 | `npm run content:audit-guides` | Статический аудит `src/content/guides/*.md` → `reports/guides-audit.json` |
-| `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/cleanup-guides-formatting.ps1` | Повторяемая чистка оформления `src/content/guides/*.md` после миграции |
 | `npm run build` | Сборка статики в **`dist/`** |
 | Docker | **`deploy/README.md`** — GHCR image `ghcr.io/idpro1313/genshintop:latest`, `deploy/docker-compose.yml`, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — сборка Docker-образа; push в GHCR на `main` |
-| Обновление на сервере | `bash deploy/update-from-github.sh` или `deploy/update-from-github.ps1` — `git ff-only`, `docker compose pull`, `up -d` |
+| Обновление на сервере | `bash deploy/update-from-github.sh` — `git ff-only`, `docker compose pull`, `up -d` |
 
 ### Модули (GRACE)
 
 - **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts`, `src/lib/character-hub.ts`, `src/lib/partners.ts`, `astro.config.mjs`
-- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`, `scripts/cleanup-guides-formatting.ps1`
+- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
 
 ### Гайды: таксономия и frontmatter
@@ -157,11 +156,10 @@ scripts/
   audit-database.ts      - Аудит gi-database
   audit-guides-content.ts - Статический аудит src/content/guides → reports/guides-audit.json
   process-content.ts     - Миграция в src/content
-  cleanup-guides-formatting.ps1 - Чистка Markdown-артефактов миграции гайдов
   verify-migration.ts    - Проверка полноты переноса
 public/                  - favicon.svg, og-default.svg, robots.txt
 Dockerfile               - multi-stage: Astro build + nginx
-deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.*
+deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.sh
 gi-database/             - Исходный корпус (до удаления после миграции)
 reports/                 - content-audit.json, migration-report.json, guides-audit.json (после скриптов)
 grace/
