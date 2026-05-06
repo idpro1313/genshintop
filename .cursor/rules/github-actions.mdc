@@ -1,0 +1,14 @@
+---
+description: Правила изменения GitHub Actions workflow-файлов
+globs: .github/workflows/**/*.yml,.github/workflows/**/*.yaml
+alwaysApply: false
+---
+
+# GitHub Actions
+
+- Workflow-файлы держи в `.github/workflows/` и называй по назначению: `build.yml`, `deploy.yml`, `docker-publish.yml`.
+- Для Node/Astro используй `npm ci`, а не `npm install`; версии Node согласуй с `Dockerfile`.
+- Не храни секреты в YAML: используй `secrets.*` и `vars.*`; не выводи секреты в логах.
+- Для Docker prefer registry build/push в CI, чтобы сервер после `git pull` мог делать `docker compose pull` + `up -d` без долгой локальной сборки.
+- Не добавляй автоматический деплой на production без явного согласования ветки, окружения и секретов.
+- Если workflow меняет проверочные команды, сборку, Docker image или deployment flow, обнови `docs/HISTORY.md` и релевантные GRACE-артефакты (`grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, при необходимости `grace/plan/development-plan.xml`).

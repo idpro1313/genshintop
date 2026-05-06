@@ -88,3 +88,9 @@
 - **Почему:** тип используется внутри компонента и не должен расширять внешний контракт модуля.
 - **Файлы:** `src/components/GuideHubPage.astro`, `docs/HISTORY.md`
 - **Решение:** версия не менялась, так как это точечная синтаксическая правка в рамках `0.2.0`.
+
+### Правило для GitHub Actions (0.2.1)
+- **Что:** добавлено Cursor-правило `.cursor/rules/github-actions.mdc` для workflow-файлов `.github/workflows/**/*.yml|yaml`: `npm ci`, секреты через `secrets.*`, Docker build/push в CI и осторожность с production deploy.
+- **Почему:** пользователь попросил добавить правило для GitHub Actions; проект планирует ускорять Docker-деплой через CI вместо долгой сборки на сервере.
+- **Файлы:** `.cursor/rules/github-actions.mdc`, `VERSION`, `package.json`, `package-lock.json`, `docs/HISTORY.md`
+- **Решение:** правило сделано file-specific, чтобы включаться при работе с GitHub Actions; версия поднята PATCH до `0.2.1`.
