@@ -112,3 +112,9 @@
 - **Почему:** пользователь уточнил, что `.ps1` скрипты в проекте вообще не нужны.
 - **Файлы:** `deploy/update-from-github.ps1`, `scripts/cleanup-guides-formatting.ps1`, `deploy/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `VERSION`, `package.json`, `package-lock.json`, `docs/HISTORY.md`
 - **Решение:** оставлен только Linux-сценарий `deploy/update-from-github.sh`; версия поднята до `0.2.4`.
+
+### Исполняемый бит для update-from-github.sh (0.2.5)
+- **Что:** для `deploy/update-from-github.sh` выставлен git executable bit `100755`.
+- **Почему:** пользователь попросил передать бит исполняемости для `.sh` в GitHub, чтобы скрипт запускался на сервере без ручного `chmod`.
+- **Файлы:** `deploy/update-from-github.sh`, `VERSION`, `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`
+- **Решение:** использован `git update-index --chmod=+x`; версия поднята PATCH до `0.2.5`.
