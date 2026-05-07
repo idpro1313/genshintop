@@ -200,3 +200,9 @@
 - **Что:** `VERSION` поднят `0.4.1 → 0.5.0`, `package.json` синхронизирован, `docs/HISTORY.md` дополнен этой записью, `docs/AGENTS.md` отражает новые скрипты (`og:generate`, `content:enrich`), модули (`M-OG-PIPELINE`, расширения `M-WEBSITE` / `M-CONTENT-PIPELINE`) и маршруты (`/regions/*`, `/guides/{events,tcg,domains,bosses,quests}`). GRACE-артефакты обновлены под новую фазу.
 - **Файлы:** `VERSION`, `package.json`, `docs/HISTORY.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/verification/verification-plan.xml`.
 - **Решение:** MINOR-апдейт (новые большие SEO-системы и маршруты, без ломающих изменений API). Локальная сборка / запуск приложения не выполнялись (правило `no-local-app-verification`); изменения проверены статически через ReadLints. Для рендера OG-картинок и применения slug-редиректов нужен один пользовательский прогон `npm install && npm run content:enrich && npm run og:generate` после деплоя.
+
+### Синхронизация `package-lock.json` для Docker `npm ci` (0.5.1)
+- **Что:** пересобран `package-lock.json` под актуальный `package.json`: в lock осталась фаза `0.4.1` без прямого `sharp` в корневых `devDependencies`, тогда как в коммите 0.5.0 в `package.json` добавлен `sharp` и версия `0.5.0` — из‑за этого `npm ci` в Docker завершался с кодом 1. Обновлён lock (включая дерево для `sharp`), поднят PATCH `0.5.0 → 0.5.1` в `VERSION`, `package.json`, корневых полях lock и `grace/knowledge-graph/knowledge-graph.xml`.
+- **Почему:** сбой CI/Docker на шаге `RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi`.
+- **Файлы:** `package-lock.json`, `package.json`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`
+- **Решение:** единственный надёжный источник зависимостей для образа — lock, синхронный с манифестом; при добавлении devDependency всегда коммитить обновлённый `package-lock.json`.

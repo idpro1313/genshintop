@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="0.5.0">
+    <Project NAME="genshintop" VERSION="0.5.1">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat</keywords>
     <annotation>Статический сайт GenshinTop (Astro 5): контент src/content/, хабы гайдов (включая events/tcg/domains/bosses/quests) и персонажей, раздел /regions/*, кластер /lootbar/*, nginx без SPA-fallback на XML, sitemap с приоритезацией, OG-картинки на запись через sharp, перелинковка character ↔ guides.</annotation>
 
