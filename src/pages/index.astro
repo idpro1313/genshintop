@@ -33,45 +33,52 @@ const jsonLd = jsonLdGraph([
   {
     ...webSiteNode(),
     description:
-      'Гайды, персонажи и обновления Genshin Impact на русском — для игроков и поиска.',
+      'Гайды, персонажи и свежие обновления Genshin Impact по-русски — для тех, кто качает аккаунт и следит за метой.',
   },
 ]);
 ---
 
 <BaseLayout
   title="GenshinTop — гайды и база по Genshin Impact"
-  description="Персонажи, билды, баннеры и обновления Genshin Impact на русском. Удобный каталог для новичков и опытных игроков."
+  description="Билды, баннеры, коды и патчи Genshin Impact на русском. Быстро найти персонажа, разобраться в обновлении и не пропустить выгодное пополнение."
   canonicalPath="/"
   jsonLd={jsonLd}
 >
-  <section class="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-teyvat-deep/80 to-teyvat-night px-6 py-16 text-center shadow-card">
+  <section
+    class="relative overflow-hidden rounded-3xl border border-teyvat-accent/25 bg-gradient-to-br from-teyvat-deep/90 to-teyvat-night px-6 py-14 text-center shadow-card sm:py-16"
+  >
+    <div class="pointer-events-none absolute inset-0 -z-0 opacity-90 hero-glow"></div>
     <div
-      class="pointer-events-none absolute inset-0 opacity-40"
-      style="background: radial-gradient(circle at 30% 20%, rgba(232,180,69,0.25), transparent 45%), radial-gradient(circle at 80% 60%, rgba(78,205,196,0.12), transparent 40%);"
+      class="pointer-events-none absolute inset-0 -z-0 opacity-30"
+      style="background-image: radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.35) 50%, transparent 51%), radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.25) 50%, transparent 51%), radial-gradient(1.5px 1.5px at 50% 70%, rgba(78,205,196,0.4) 50%, transparent 51%); background-size: 120px 120px, 180px 180px, 140px 140px;"
+      aria-hidden="true"
     >
     </div>
+    <p class="relative mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-teyvat-mint/90 sm:text-sm">
+      Гайды · билды · баннеры
+    </p>
     <h1 class="relative font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
-      Добро пожаловать в <span class="text-gradient-gold">Teyvat</span>
+      Твой <span class="text-gradient-gold">Teyvat</span> без лишней суеты
     </h1>
-    <p class="relative mx-auto mt-4 max-w-2xl text-lg text-slate-300">
-      Каталог персонажей, гайды по обновлениям и баннерам — всё для комфортной игры в Genshin Impact.
-      {' '}
-      <a href="/lootbar" class="text-teyvat-mint underline-offset-2 hover:underline" data-reach-goal="lootbar_home_hero_link"
-        >Пополнение через LootBar.gg</a
+    <p class="relative mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg">
+      Собрали персонажей, свежие гайды по патчам и коды — чтобы меньше гуглить и больше играть. Нужен топ-ап?
+      <a
+        href="/lootbar"
+        class="font-semibold text-teyvat-mint underline decoration-teyvat-mint/40 underline-offset-2 hover:text-teyvat-gold hover:decoration-teyvat-gold/50"
+        data-reach-goal="lootbar_home_hero_link">LootBar.gg</a
       >
-      {' '}
-      — выгода и промокупоны партнёрского стора у вас в одном переходе.
+      — скидки и промо на кристаллы и луну в пару кликов (партнёрский раздел).
     </p>
     <div class="relative mt-8 flex flex-wrap justify-center gap-3">
       <a
         href="/characters"
-        class="rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night shadow-glow transition hover:bg-teyvat-gold"
-        >Персонажи</a
+        class="min-h-[48px] rounded-full bg-gradient-to-r from-teyvat-accent to-amber-500 px-8 py-3 font-bold text-teyvat-night shadow-glow transition hover:brightness-110"
+        >К персонажам</a
       >
       <a
         href="/guides"
-        class="rounded-xl border border-white/20 bg-white/5 px-6 py-3 font-semibold text-white transition hover:border-teyvat-mint/50 hover:bg-white/10"
-        >Гайды</a
+        class="min-h-[48px] rounded-full border border-white/25 bg-white/10 px-8 py-3 font-bold text-white backdrop-blur-sm transition hover:border-teyvat-mint/60 hover:bg-white/15"
+        >К гайдам</a
       >
     </div>
   </section>
@@ -101,17 +108,18 @@ const jsonLd = jsonLdGraph([
     ) : null
   }
 
-  <section class="mt-16 rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8">
-    <h2 class="font-display text-2xl text-white">Где купить геншин выгодно</h2>
-    <p class="mt-2 max-w-3xl text-sm text-slate-300">
-      Партнёрский раздел GenshinTop — материалы про сторонний топ-ап Genshin Impact на LootBar.gg.
-      Подходит, если ищете, как купить{' '}
-      <a href="/lootbar/kristally-sotvoreniya" class="text-teyvat-mint hover:underline">Кристаллы Сотворения</a>{' '}
-      или оформить{' '}
-      <a href="/lootbar/blagoslovenie-luny" class="text-teyvat-mint hover:underline">
-        Благословение Полой Луны (Welkin Moon)
+  <section class="mt-16 rounded-2xl border border-teyvat-accent/20 bg-white/[0.05] p-6 shadow-[0_0_40px_rgba(232,180,69,0.08)] md:p-8">
+    <h2 class="font-display text-2xl text-white">Пополнить аккаунт без переплаты</h2>
+    <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-200">
+      Честный партнёрский гайд: как купить{' '}
+      <a href="/lootbar/kristally-sotvoreniya" class="font-medium text-teyvat-mint hover:underline">
+        Кристаллы Сотворения
       </a>{' '}
-      дешевле, чем в клиенте, и сравнить цены.
+      или{' '}
+      <a href="/lootbar/blagoslovenie-luny" class="font-medium text-teyvat-mint hover:underline">
+        Благословение Полой Луны
+      </a>{' '}
+      через LootBar.gg дешевле, чем в клиенте, плюс промокоды и безопасность — всё в одном месте.
     </p>
     <ul class="mt-4 grid gap-2 text-sm md:grid-cols-2">
       <li>

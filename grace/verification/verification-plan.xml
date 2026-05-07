@@ -85,6 +85,7 @@
         <check-16>Статически: src/pages/guides/[slug].astro рендерит блок Связанные персонажи из relatedCharacters; src/pages/characters/[slug].astro рендерит блок Гайды по персонажу из relatedGuides</check-16>
         <check-17>Статически: src/lib/seo.ts экспортирует editorialTeamPerson и lootbarServiceSchema; /lootbar/index.astro подключает Service-schema и LootBarGlossary; editorial-policy.astro перечисляет процесс публикации и обновления</check-17>
         <check-18>Статически: src/styles/global.css не содержит @import url(...fonts.googleapis...); BaseLayout.astro использует preconnect и асинхронный link rel=stylesheet с media=print onload; счётчик Яндекс.Метрики обёрнут в requestIdleCallback / load с очередью команд ym</check-18>
+        <check-19>Статически: BaseLayout подключает семейство Onest вместе с Cinzel; tailwind.config задаёт font-sans Onest; stripDescriptionNoise в src/lib/seo.ts удаляет U+3164; в разметке head BaseLayout нет HTML-комментариев; global.css содержит hero-glow и prefers-reduced-motion для .lootbar-cta-shine; elementCardAccentClass в src/lib/elements.ts</check-19>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

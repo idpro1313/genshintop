@@ -19,7 +19,7 @@ export function absoluteUrl(pathOrUrl: string): string {
 /** Убирает типичный мусор миграции: markdown, крошки, обрезает по длине. */
 export function stripDescriptionNoise(raw: string): string {
   let t = raw;
-  t = t.replace(/\u200b|\ufeff/g, '');
+  t = t.replace(/\u200b|\ufeff|\u3164/g, '');
   t = t.replace(/^#{1,6}\s+/gm, '');
   t = t.replace(/!\[[^\]]*]\([^)]*\)/g, '');
   t = t.replace(/\[([^\]]+)]\([^)]*\)/g, '$1');

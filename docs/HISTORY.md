@@ -206,3 +206,23 @@
 - **Почему:** сбой CI/Docker на шаге `RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi`.
 - **Файлы:** `package-lock.json`, `package.json`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`
 - **Решение:** единственный надёжный источник зависимостей для образа — lock, синхронный с манифестом; при добавлении devDependency всегда коммитить обновлённый `package-lock.json`.
+
+## Фаза: визуал Teyvat, копирайт и чистка U+3164 (0.6.0)
+
+### Молодёжный UI и шрифты
+- **Что:** шрифт **Onest** (кириллица) как основной гротеск + **Cinzel** для заголовков; усилен фон («звёзды», градиенты), утилита `hero-glow`, pill-навигация и крупные CTA в `Header`; карточки персонажей с `border-l` цвета стихии (`elementCardAccentClass`), гайды с акцентной полосой mint; обновлены `glass-panel`, футер, главная hero и блок LootBar; `prefers-reduced-motion` для shine CTA LootBar.
+- **Почему:** запрос — дизайн в духе игры и для молодёжной аудитории; улучшить first impression и воронку LootBar.
+- **Файлы:** `tailwind.config.mjs`, `src/styles/global.css`, `src/layouts/BaseLayout.astro`, `src/lib/elements.ts`, `src/components/Header.astro`, `src/components/CharacterCard.astro`, `src/components/GuideCard.astro`, `src/components/Footer.astro`, `src/pages/index.astro`, `src/pages/about.astro`, `src/lib/seo.ts`
+- **Решение:** без использования чужого брендинга HoYoverse; только собственная палитра `teyvat.*` / `element.*`.
+
+### SEO и шаблоны
+- **Что:** в `stripDescriptionNoise` добавлено удаление **U+3164** (ㅤ) для сниппетов; из `BaseLayout.astro` убраны HTML-комментарии в выдаваемом `<head>`.
+- **Файлы:** `src/lib/seo.ts`, `src/layouts/BaseLayout.astro`
+
+### Контент Markdown
+- **Что:** символ **ㅤ** (U+3164) удалён из тел и summary затронутых файлов в `src/content/guides/*.md` и `src/content/characters/*.md` (81 файл) — миграционный артефакт без смысловой нагрузки.
+- **Почему:** читаемость и единообразие; полная ручная вычитка всех статей остаётся на последующие итерации.
+
+### GRACE и версия
+- **Что:** `VERSION` **0.5.1 → 0.6.0** (MINOR: системный UI), синхронизированы `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, дополнен `docs/AGENTS.md`.
+- **Файлы:** `VERSION`, `package.json`, `package-lock.json`, `grace/**`, `docs/AGENTS.md`, `docs/HISTORY.md`

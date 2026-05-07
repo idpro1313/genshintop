@@ -79,7 +79,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/* (купоны/прайс из src/data/lootbar.ts с fallback), страницы доверия, SEO (мета, OG, FAQ и HowTo schema.org), sitemap, Яндекс.Метрика reachGoal (в т.ч. lootbar_hero_cta, lootbar_coupon_*, lootbar_table_cta, lootbar_calc_cta, lootbar_bottom_*), глобальный футер с версией сайта из VERSION, nginx 404/XML и деплой готового GHCR-образа без сборки на сервере.</purpose>
+        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/* (купоны/прайс из src/data/lootbar.ts с fallback), страницы доверия, SEO (мета, OG, FAQ и HowTo schema.org), sitemap, Яндекс.Метрика reachGoal (в т.ч. lootbar_hero_cta, lootbar_coupon_*, lootbar_table_cta, lootbar_calc_cta, lootbar_bottom_*), визуал для молодёжной аудитории в духе Teyvat (Onest+Cinzel, стихийные акценты на карточках, pill-навигация, «звёздный» фон), глобальный футер с версией сайта из VERSION, nginx 404/XML и деплой готового GHCR-образа без сборки на сервере.</purpose>
         <inputs>
           <param name="collections" type="astro-content" />
         </inputs>
@@ -119,8 +119,9 @@
         <source>src/lib/partners.ts</source>
         <source>src/lib/guide-hub.ts</source>
         <source>src/lib/character-hub.ts</source>
-        <source>src/lib/seo.ts</source>
-        <source>src/content.config.ts</source>
+        <source>src/lib/elements.ts</source>
+        <source>tailwind.config.mjs</source>
+        <source>src/styles/global.css</source>
         <source>public/robots.txt</source>
         <source>astro.config.mjs</source>
         <source>deploy/nginx-docker.conf</source>

@@ -18,14 +18,14 @@ const jsonLd = jsonLdGraph([
     url: absoluteUrl('/about'),
     isPartOf: { '@id': `${SITE_URL}/#website` },
     description:
-      'GenshinTop — русскоязычный фан-сайт по Genshin Impact: гайды, персонажи, обновления.',
+      'GenshinTop — комьюнити-ресурс по Genshin Impact: гайды, персонажи, обновления и партнёрский топ-ап LootBar.',
   },
 ]);
 ---
 
 <BaseLayout
   title="О проекте GenshinTop"
-  description="GenshinTop — русскоязычный фан-сайт по Genshin Impact: гайды, персонажи, обновления."
+  description="GenshinTop — гайды, персонажи и обновления Genshin Impact для русскоязычных игроков. Партнёрский раздел с топ-апом через LootBar.gg."
   canonicalPath="/about"
   jsonLd={jsonLd}
 >
@@ -39,27 +39,27 @@ const jsonLd = jsonLdGraph([
     <span aria-hidden="true">·</span>
     <a href="/contacts" class="text-teyvat-mint hover:underline">Контакты</a>
   </nav>
-  <div class="mt-6 space-y-4 text-slate-300">
+  <div class="mt-6 space-y-4 text-slate-200">
     <p>
-      <strong class="text-teyvat-gold">GenshinTop</strong> — неофициальный информационный ресурс для игроков
-      Genshin Impact. Мы собираем и структурируем гайды, описания персонажей и материалы по обновлениям,
-      чтобы было проще ориентироваться в мире Teyvat.
+      <strong class="text-teyvat-gold">GenshinTop</strong> — неофициальный сайт для тех, кто реально играет в
+      <strong>Genshin Impact</strong>: собираем гайды, справку по персонажам и разборы патчей так, чтобы можно было
+      быстро найти ответ и вернуться в игру.
     </p>
     <p>
-      Контент подготовлен на основе открытых игровых данных и редакционных материалов. Игра
-      <strong>Genshin Impact</strong> принадлежит miHoYo / HoYoverse.
+      Мы не связаны с miHoYo / HoYoverse; материалы основаны на открытых данных игры и редакции сайта. Товарные знаки принадлежат правообладателям.
     </p>
     <p>
-      План развития: расширение разделов (оружие, артефакты, предметы), тематические хабы гайдов и персонажей,
-      прозрачное раскрытие партнёрских ссылок на топ-ап (<a href="/lootbar" class="text-teyvat-mint hover:underline">/lootbar</a>), улучшение SEO и мобильного чтения.
+      Отдельно есть <a href="/lootbar" class="font-medium text-teyvat-mint hover:underline">раздел про пополнение через LootBar.gg</a>
+      — партнёрский топ-ап с прозрачными условиями. Как мы относимся к редакции и партнёрству —
+      <a href="/editorial-policy" class="text-teyvat-mint hover:underline">политика</a> и{' '}
+      <a href="/partnership-disclosure" class="text-teyvat-mint hover:underline">раскрытие партнёрства</a>.
     </p>
   </div>
 
-  <section class="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-    <h2 class="font-display text-xl text-white">Где купить Genshin Impact выгодно</h2>
-    <p class="mt-2 text-sm text-slate-300">
-      Если вам нужно пополнить аккаунт Genshin Impact дешевле, чем в клиенте, у нас есть
-      разбор партнёрского сервиса LootBar.gg: как работает топ-ап, как купить{' '}
+  <section class="mt-10 rounded-2xl border border-teyvat-accent/20 bg-white/[0.05] p-6">
+    <h2 class="font-display text-xl text-white">Топ-ап: кристаллы и луна</h2>
+    <p class="mt-2 text-sm text-slate-200">
+      Если хочешь пополнить аккаунт дешевле, чем в клиенте — коротко разобрали партнёрский LootBar.gg: как работает топ-ап, как купить{' '}
       <a href="/lootbar/kristally-sotvoreniya" class="text-teyvat-mint hover:underline">
         Кристаллы Сотворения
       </a>{' '}

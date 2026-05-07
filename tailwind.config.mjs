@@ -27,6 +27,7 @@ export default {
       fontFamily: {
         display: ['Cinzel', 'Georgia', 'serif'],
         sans: [
+          'Onest',
           'system-ui',
           '-apple-system',
           'Segoe UI',

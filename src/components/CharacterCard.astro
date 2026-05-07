@@ -1,6 +1,6 @@
 ---
 import type { ElementKey } from '../lib/elements';
-import { elementBadgeClass, elementRu } from '../lib/elements';
+import { elementBadgeClass, elementCardAccentClass, elementRu } from '../lib/elements';
 
 interface Props {
   name: string;
@@ -16,7 +16,10 @@ const { name, slug, element, weapon, rarity, rating } = Astro.props;
 
 <a
   href={`/characters/${slug}`}
-  class="glass-panel group block p-4 shadow-card transition-all hover:border-teyvat-accent/40 hover:shadow-glow"
+  class:list={[
+    'glass-panel group block border-l-4 p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-teyvat-accent/50 hover:shadow-glow',
+    elementCardAccentClass(element),
+  ]}
   data-character-card
   data-element={element}
   data-weapon={weapon}

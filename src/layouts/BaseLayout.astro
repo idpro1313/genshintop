@@ -49,24 +49,23 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Шрифт Cinzel: preconnect + асинхронная загрузка stylesheet, чтобы не блокировать LCP. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Onest:wght@400;500;600;700&display=swap"
       />
     </noscript>
 
@@ -83,7 +82,6 @@ const {
       robots={robots}
       articleTimes={articleTimes}
     />
-    <!-- Yandex.Metrika counter (deferred to idle / load to keep LCP fast) -->
     <script is:inline type="text/javascript">
       (function () {
         var ymId = 109020836;
@@ -129,7 +127,6 @@ const {
         }
       })();
     </script>
-    <!-- /Yandex.Metrika counter -->
   </head>
   <body>
     <noscript>
@@ -139,7 +136,7 @@ const {
     </noscript>
     <Header />
     {hideLootBarPromo ? null : <LootBarPromoBanner />}
-    <main class="mx-auto min-h-[60vh] max-w-6xl px-4 py-8">
+    <main class="mx-auto min-h-[60vh] max-w-6xl px-4 py-10">
       <slot />
     </main>
     <Footer />

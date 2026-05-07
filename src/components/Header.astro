@@ -14,25 +14,28 @@ const nav = [
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/10 bg-teyvat-night/90 backdrop-blur-md">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-    <a href="/" class="group flex items-center gap-2">
-      <span
-        class="font-display text-lg font-semibold tracking-wide text-gradient-gold"
+<header
+  class="sticky top-0 z-50 border-b border-teyvat-accent/20 bg-teyvat-night/85 shadow-[0_4px_24px_rgba(0,0,0,0.35)] backdrop-blur-lg"
+>
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5">
+    <a href="/" class="group flex min-h-[44px] min-w-[44px] items-center gap-2 py-1">
+      <span class="font-display text-lg font-semibold tracking-wide text-gradient-gold group-hover:brightness-110"
         >GenshinTop</span
       >
-      <span class="hidden text-xs text-teyvat-muted sm:inline">genshintop.ru</span>
+      <span class="hidden rounded-full bg-white/5 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-teyvat-muted sm:inline"
+        >genshintop.ru</span
+      >
     </a>
-    <nav class="flex flex-wrap items-center gap-1 sm:gap-3" aria-label="Основное меню">
+    <nav class="flex flex-wrap items-center justify-end gap-1 sm:gap-2" aria-label="Основное меню">
       {
         nav.map(({ href, label, active }) => (
           <a
             href={href}
             class:list={[
-              'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+              'rounded-full px-3.5 py-2.5 text-sm font-semibold transition-all duration-150 sm:px-4',
               active
-                ? 'bg-white/10 text-teyvat-gold'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white',
+                ? 'bg-gradient-to-r from-teyvat-accent/35 to-teyvat-mint/25 text-teyvat-gold shadow-[inset_0_0_0_1px_rgba(245,214,138,0.35)]'
+                : 'text-slate-300 hover:bg-white/10 hover:text-white',
             ]}
           >
             {label}

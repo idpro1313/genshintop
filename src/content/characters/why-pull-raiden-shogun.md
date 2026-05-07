@@ -8,7 +8,7 @@ sourceSlug: why-pull-raiden-shogun
 
 # 10 причин крутить Сёгуна Райдэн
 
-ㅤ
+
 
 17 сентября
 
@@ -46,7 +46,7 @@ sourceSlug: why-pull-raiden-shogun
 
 , стоит ли персонаж их внимания.
 
-ㅤМы собрали для вас
+Мы собрали для вас
 
 десять фактов
 
@@ -80,7 +80,7 @@ sourceSlug: why-pull-raiden-shogun
 
 Роль персонажа в отряде и его сборка
 
-ㅤ
+
 
 Райдэн
 
@@ -166,7 +166,7 @@ sourceSlug: why-pull-raiden-shogun
 
 множителем урона.
 
-ㅤС выходом
+С выходом
 
 Дендро
 
@@ -242,7 +242,7 @@ sourceSlug: why-pull-raiden-shogun
 
 Уникальный геймплей
 
-ㅤВ состоянии
+В состоянии
 
 взрыва стихии
 
@@ -282,7 +282,7 @@ sourceSlug: why-pull-raiden-shogun
 
 Особенности дизайна
 
-ㅤДизайнеры наделяют визуальный образ
+Дизайнеры наделяют визуальный образ
 
 каждого персонажа
 
@@ -304,7 +304,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤНапример,
+Например,
 
 украшение
 
@@ -322,7 +322,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤОткрытая грудь является не просто
+Открытая грудь является не просто
 
 способом привлечения внимания
 
@@ -344,7 +344,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤ
+
 
 Рукав
 
@@ -366,7 +366,7 @@ sourceSlug: why-pull-raiden-shogun
 
 от возможных ударов.
 
-ㅤВ образе
+В образе
 
 Райдэн
 
@@ -414,7 +414,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤ
+
 
 Сёгун
 
@@ -466,7 +466,7 @@ sourceSlug: why-pull-raiden-shogun
 
 Интересные факты
 
-ㅤПерсонаж может создавать впечатление
+Персонаж может создавать впечатление
 
 строгого
 
@@ -510,7 +510,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤВо время
+Во время
 
 Задания Архонтов Инадзумы
 
@@ -544,7 +544,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤВ
+В
 
 Заданиях Легенд
 
@@ -606,7 +606,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤОднако
+Однако
 
 Путешественнику
 
@@ -642,7 +642,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤ
+
 
 Баал
 
@@ -688,7 +688,7 @@ sourceSlug: why-pull-raiden-shogun
 
 .
 
-ㅤПрообразом
+Прообразом
 
 Райдэн Эи
 
@@ -750,7 +750,7 @@ Honkai Impact 3rd
 
 .
 
-ㅤМногим позже, в
+Многим позже, в
 
 марте этого года
 

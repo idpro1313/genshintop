@@ -20,6 +20,20 @@ export function elementBadgeClass(el: ElementKey): string {
   return map[el] ?? map.Anemo;
 }
 
+/** Левая акцентная полоса на карточке — цвет стихии. */
+export function elementCardAccentClass(el: ElementKey): string {
+  const map: Record<ElementKey, string> = {
+    Pyro: 'border-l-element-pyro shadow-[0_0_20px_rgba(255,107,74,0.2)]',
+    Hydro: 'border-l-element-hydro shadow-[0_0_20px_rgba(79,195,247,0.2)]',
+    Electro: 'border-l-element-electro shadow-[0_0_20px_rgba(179,136,255,0.2)]',
+    Cryo: 'border-l-element-cryo shadow-[0_0_20px_rgba(129,212,250,0.2)]',
+    Anemo: 'border-l-element-anemo shadow-[0_0_20px_rgba(105,240,174,0.2)]',
+    Geo: 'border-l-element-geo shadow-[0_0_20px_rgba(255,213,79,0.2)]',
+    Dendro: 'border-l-element-dendro shadow-[0_0_20px_rgba(165,214,167,0.2)]',
+  };
+  return map[el] ?? map.Anemo;
+}
+
 export function elementRu(el: ElementKey): string {
   const map: Record<ElementKey, string> = {
     Pyro: 'Пиро',
