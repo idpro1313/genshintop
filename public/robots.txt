@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
+Disallow: /404
+Disallow: /404.html
 
+User-agent: Yandex
+Allow: /
+Disallow: /404
+Disallow: /404.html
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_id /
+Clean-param: aff_short&from&ref&fbclid&gclid&yclid /
+
+Host: genshintop.ru
 Sitemap: https://genshintop.ru/sitemap-index.xml

@@ -142,3 +142,61 @@
 - **Почему:** запрос пользователя — реализовать план продающего формата /lootbar без выдуманных цифр.
 - **Файлы:** `src/data/lootbar.ts`, `src/components/LootBar*.astro` (перечисленные), `src/pages/lootbar/*.astro`, `src/lib/partners.ts`, `VERSION`, `package.json`, `package-lock.json`, `deploy/SEO-CHECKLIST.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/requirements/requirements.xml`, `docs/HISTORY.md`
 - **Решение:** версия `0.3.0` уже была занята футером; для фичи поднят **MINOR** до `0.4.0`. Калькулятор показывается только при непустом прайсе и распарсенных номиналах.
+
+## Фаза 5 — SEO-усиление и закрытие семантических пробелов (0.5.0)
+
+### Тех.SEO-инфраструктура (0.5.0)
+- **Что:**
+  - `astro.config.mjs`: `sitemap()` теперь с `filter` (исключает `/404`, `/_placeholder`) и `serialize` (priority/changefreq по типу страницы: главная 1.0, хабы 0.9, lootbar/* 0.85, статьи 0.7, regions 0.7, trust 0.4).
+  - `public/robots.txt`: добавлен блок `User-agent: Yandex` с `Clean-param` для UTM/affiliate-параметров и `Host: genshintop.ru`.
+  - `src/components/Seo.astro`: новые мета-теги `og:image:type`, `og:image:secure_url`, `og:image:alt`, `twitter:image:alt`, и опциональные `yandex-verification` / `google-site-verification` / `mailru-domain` через переменные окружения (`PUBLIC_*` / без префикса).
+  - `src/layouts/BaseLayout.astro`: проброс `ogImageAlt`.
+  - `deploy/nginx-docker.conf` переписан: расширенный `gzip_types` (включая `application/ld+json`, `font/woff2`, `image/svg+xml`), security headers (`X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options`), агрессивный `Cache-Control: max-age=31536000 immutable` для `/_astro/*`, `/og/*`, `/fonts/*`, `include /etc/nginx/conf.d/genshintop-redirects.conf*` для slug-редиректов; `Dockerfile` копирует `deploy/genshintop-redirects.conf` (заглушку или сгенерированный) в финальный образ.
+- **Файлы:** `astro.config.mjs`, `public/robots.txt`, `src/components/Seo.astro`, `src/layouts/BaseLayout.astro`, `deploy/nginx-docker.conf`, `deploy/genshintop-redirects.conf`, `Dockerfile`.
+
+### OG-картинки и `getOgImageForEntry` (0.5.0)
+- **Что:** новый скрипт `scripts/generate-og-images.ts` (devDeps `sharp`): сканирует MD коллекций `characters` и `guides`, рендерит SVG-шаблон с заголовком и категорией/стихией, конвертирует в PNG 1200×630 в `public/og/{collection}/{slug}.png`; пишет манифест `src/data/og-manifest.json`. Также пересобирает `public/og-default.png` из `public/og-default.svg`. В `src/lib/seo.ts` добавлен `getOgImageForEntry(collection, slug)`, отдающий `/og/<col>/<slug>.png` при наличии в манифесте, иначе `DEFAULT_OG_IMAGE_PATH`. Подключён в `src/pages/guides/[slug].astro` и `src/pages/characters/[slug].astro` (в JSON-LD `image` и в OG-метатеги). Заодно исправлена битая UTF-8 строка в `public/og-default.svg`.
+- **Файлы:** `scripts/generate-og-images.ts`, `src/lib/seo.ts`, `src/pages/guides/[slug].astro`, `src/pages/characters/[slug].astro`, `src/layouts/ArticleLayout.astro`, `src/data/og-manifest.json`, `public/og-default.svg`, `package.json`.
+
+### Авто-нормализация 424 гайдов (0.5.0)
+- **Что:** `scripts/enrich-guides.ts` идемпотентно проходит по `src/content/guides/*.md` и:
+  - транслитерирует кириллические slug-имена через свой таблично-русский транслит (минимально совместим с `process-content.ts`), переименовывает файлы и пишет карту `from → to` в `reports/slug-redirects.json` и `deploy/genshintop-redirects.conf` (`rewrite ^/guides/<old>/?$ /guides/<new> permanent;`);
+  - заполняет недостающие FM: `topic` (`inferTopic`), `gameVersion` (`extractGameVersion`), `audience` (`inferAudience`), `status` (`inferStatus`), `updatedAt = date`, `reviewedAt = today` (для `active`/`dated`); пересобирает «битый» `summary` (начинается с «Содержание», `ㅤ`, «Молитва события», «Глава …»);
+  - добавляет `sources` (HoYoverse + HoYoLAB) для `category: codes|patch`;
+  - вычисляет `relatedCharacters` top-5 по упоминаниям имён в title+теле и `relatedGuides` top-5 по совпадению `topic` + ближайшая `gameVersion` (с лёгким бустом активных против архивных);
+  - чистит `[label](#)` и `[label]()` → `label`;
+  - обновляет `relatedGuides` в guides и characters по карте переименований.
+- **Файлы:** `scripts/enrich-guides.ts`, `package.json` (скрипт `content:enrich`).
+
+### Slug-редиректы (0.5.0)
+- **Что:** `deploy/genshintop-redirects.conf` (заглушка/генерируемый файл) подключается в `nginx-docker.conf` через `include /etc/nginx/conf.d/genshintop-redirects.conf*`. После запуска `npm run content:enrich` файл наполняется `301`-редиректами для переименованных URL.
+- **Файлы:** `deploy/genshintop-redirects.conf`, `deploy/nginx-docker.conf`, `Dockerfile`.
+
+### Внутренняя перелинковка (0.5.0)
+- **Что:** `src/pages/guides/[slug].astro` теперь рендерит блок «Связанные персонажи» из `relatedCharacters` (карточки с element/weapon). `src/pages/characters/[slug].astro` рендерит блок «Гайды по персонажу» из `relatedGuides`. Оба блока используют `getCollection` и `contentSlugFromId`. `src/components/Footer.astro` переписан в 4-колоночный layout со ссылками на персонажей по стихии, на хабы гайдов (включая новые `events`/`tcg`/`domains`/`bosses`/`quests`), регионы и LootBar-подстраницы.
+- **Файлы:** `src/pages/guides/[slug].astro`, `src/pages/characters/[slug].astro`, `src/components/Footer.astro`.
+
+### Новые хабы и регионы (0.5.0)
+- **Что:** в `src/lib/guide-hub.ts` добавлены матчеры `matchHubEvents`, `matchHubTcg`, `matchHubDomains`, `matchHubBosses`, `matchHubQuests`. `src/components/GuideHubPage.astro` поддерживает новые `GuideHubId` и расширен список табов навигации. Новые маршруты: `src/pages/guides/{events,tcg,domains,bosses,quests}.astro`. Новый раздел `/regions`: `src/pages/regions/index.astro` (хаб-карта 7 регионов Тейвата с JSON-LD `CollectionPage` + `ItemList`), `/regions/{sumeru,fontaine,natlan}` (через общий `src/components/RegionPage.astro` с JSON-LD `Place` + `Article`, фильтрацией персонажей по white-list имён, ссылками на связанные хабы). В `Header.astro` добавлен пункт «Регионы».
+- **Файлы:** `src/lib/guide-hub.ts`, `src/components/GuideHubPage.astro`, `src/components/RegionPage.astro`, `src/components/Header.astro`, `src/pages/guides/events.astro`, `src/pages/guides/tcg.astro`, `src/pages/guides/domains.astro`, `src/pages/guides/bosses.astro`, `src/pages/guides/quests.astro`, `src/pages/regions/index.astro`, `src/pages/regions/sumeru.astro`, `src/pages/regions/fontaine.astro`, `src/pages/regions/natlan.astro`.
+
+### Стартовые статьи (0.5.0)
+- **Что:** опубликованы cornerstone-материалы: `tier-list-aktualniy-6-x.md` (актуальный тир-лист 6.x с командами и ссылкой на архив), `events-aktualnye-6-x.md` (хаб ивентов), `tcg-svyaschennyy-prizyv-semi.md` (правила и тиры карт TCG), `domain-podzemelya-rasspisanie.md` (фарм по дням недели), `bossy-genshin-impact.md` (мировые/еженедельные боссы), `quest-arhontov-roadmap.md` (карта прохождения архонт-квестов). У старого `tier-list-4-8.md` поднят `status: historical`, добавлен `gameVersion: '4.8'`, чистая шапка summary без `ㅤ` и редакционная плашка-ссылка на актуальный тир-лист.
+- **Файлы:** `src/content/guides/tier-list-aktualniy-6-x.md`, `src/content/guides/events-aktualnye-6-x.md`, `src/content/guides/tcg-svyaschennyy-prizyv-semi.md`, `src/content/guides/domain-podzemelya-rasspisanie.md`, `src/content/guides/bossy-genshin-impact.md`, `src/content/guides/quest-arhontov-roadmap.md`, `src/content/guides/tier-list-4-8.md`.
+
+### E-E-A-T и расширение schema.org (0.5.0)
+- **Что:** в `src/lib/seo.ts` добавлены `editorialTeamPerson()` и `lootbarServiceSchema()`. На страницах статей `author` теперь ссылается на `#editorial-team`, рядом в графе появляется отдельный узел редакции. Бейдж «проверено YYYY-MM-DD» и status уже выводятся на guide-странице из `reviewedAt`/`status`. На `/lootbar/index.astro` добавлен JSON-LD `Service` с вложенным `Offer` (priceCurrency RUB, availability InStock, areaServed RU/BY/KZ/UA, провайдер LootBar.gg). `src/pages/editorial-policy.astro` переписана с разделами «Кто пишет», «Принципы публикации», «Процесс обновления», «Партнёрский контент», «Что мы не делаем» и `AboutPage` JSON-LD с `author=#editorial-team`.
+- **Файлы:** `src/lib/seo.ts`, `src/pages/guides/[slug].astro`, `src/pages/characters/[slug].astro`, `src/pages/lootbar/index.astro`, `src/pages/editorial-policy.astro`.
+
+### Производительность для CWV (0.5.0)
+- **Что:** удалён блокирующий `@import` Google Fonts из `src/styles/global.css`. В `BaseLayout.astro` добавлены `<link rel="preconnect">` к `fonts.googleapis.com` / `fonts.gstatic.com` и асинхронная загрузка stylesheet через `media="print" onload="this.media='all'"` + `<noscript>` fallback. Скрипт Yandex.Metrika обёрнут в shim-очередь команд `ym(...)` и реальная загрузка `tag.js` отложена до `requestIdleCallback` или `load + 1500ms`. Это снимает критическую нагрузку с LCP, а Метрика всё ещё трекает события (благодаря очереди команд до загрузки тага).
+- **Файлы:** `src/styles/global.css`, `src/layouts/BaseLayout.astro`.
+
+### Усиление /lootbar по коммерческим запросам (0.5.0)
+- **Что:** новый компонент `src/components/LootBarGlossary.astro` с глоссарием (Кристаллы Сотворения / Genesis Crystals, Благословение Полой Луны / Welkin Moon, Примогемы, Молитвы, Топ-ап, Промокод LootBar) — видимый блок без скрытого текста, со ссылками на подстраницы. На `/lootbar/index.astro` добавлены: глоссарий, расширенный FAQ (12 вопросов, в `<details>` с видимым раскрытием, всё попадает в JSON-LD `FAQPage`), Service+Offer schema, блок «Связанные темы и анкоры» с видимыми внутренними ссылками. На подстраницах `kristally-sotvoreniya`, `blagoslovenie-luny`, `promokod`, `kak-popolnit-genshin-impact` обновлены `title`/`description` (естественные ключи «купить геншин дешевле», «Кристаллы Сотворения», «Благословение Полой Луны», «Welkin Moon», «топ-ап», «UID») и H1, добавлены вводные параграфы с терминами и `<details>`-FAQ блоки. На главной (`src/pages/index.astro`) и на `/about` появился короткий блок «Где купить геншин выгодно» с естественными анкорами.
+- **Файлы:** `src/components/LootBarGlossary.astro`, `src/pages/lootbar/index.astro`, `src/pages/lootbar/kristally-sotvoreniya.astro`, `src/pages/lootbar/blagoslovenie-luny.astro`, `src/pages/lootbar/promokod.astro`, `src/pages/lootbar/kak-popolnit-genshin-impact.astro`, `src/pages/index.astro`, `src/pages/about.astro`, `src/lib/seo.ts`.
+
+### VERSION/GRACE/HISTORY (0.5.0)
+- **Что:** `VERSION` поднят `0.4.1 → 0.5.0`, `package.json` синхронизирован, `docs/HISTORY.md` дополнен этой записью, `docs/AGENTS.md` отражает новые скрипты (`og:generate`, `content:enrich`), модули (`M-OG-PIPELINE`, расширения `M-WEBSITE` / `M-CONTENT-PIPELINE`) и маршруты (`/regions/*`, `/guides/{events,tcg,domains,bosses,quests}`). GRACE-артефакты обновлены под новую фазу.
+- **Файлы:** `VERSION`, `package.json`, `docs/HISTORY.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/verification/verification-plan.xml`.
+- **Решение:** MINOR-апдейт (новые большие SEO-системы и маршруты, без ломающих изменений API). Локальная сборка / запуск приложения не выполнялись (правило `no-local-app-verification`); изменения проверены статически через ReadLints. Для рендера OG-картинок и применения slug-редиректов нужен один пользовательский прогон `npm install && npm run content:enrich && npm run og:generate` после деплоя.

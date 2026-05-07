@@ -8,6 +8,8 @@ import {
   breadcrumbListSchema,
   cleanMetaDescription,
   DEFAULT_OG_IMAGE_PATH,
+  editorialTeamPerson,
+  getOgImageForEntry,
   jsonLdGraph,
   publisherOrganization,
 } from '../../lib/seo';
@@ -44,6 +46,8 @@ const audience = effectiveGuideAudience(entry.data.audience, cat, hint);
 const gameVersion = effectiveGuideGameVersion(entry.data.gameVersion, slug, hint);
 
 const description = cleanMetaDescription(entry.data.summary, entry.data.title);
+const ogImage = getOgImageForEntry('guides', slug);
+const ogImageAlt = `${entry.data.title} — гайд GenshinTop`;
 const publishedIso = entry.data.date?.toISOString();
 const modifiedIso = (
   entry.data.reviewedAt ??
@@ -84,11 +88,12 @@ const jsonLd = jsonLdGraph([
       '@type': 'WebPage',
       '@id': absoluteUrl(canonicalPath),
     },
-    image: [absoluteUrl(DEFAULT_OG_IMAGE_PATH)],
+    image: [absoluteUrl(ogImage)],
     ...jsonLdDates,
-    author: { '@id': `${SITE_URL}/#organization` },
+    author: { '@id': `${SITE_URL}/#editorial-team` },
     publisher: { '@id': `${SITE_URL}/#organization` },
   },
+  editorialTeamPerson(),
 ]);
 
 const breadcrumbs = [
@@ -102,6 +107,13 @@ const relatedSlugs = entry.data.relatedGuides ?? [];
 const relatedEntries = relatedSlugs
   .map((s) => allGuides.find((e) => contentSlugFromId(e.id) === s))
   .filter((e): e is (typeof allGuides)[number] => Boolean(e));
+
+const allCharacters = await getCollection('characters');
+const relatedCharSlugs = entry.data.relatedCharacters ?? [];
+const relatedCharEntries = relatedCharSlugs
+  .map((s) => allCharacters.find((c) => contentSlugFromId(c.id) === s))
+  .filter((c): c is (typeof allCharacters)[number] => Boolean(c))
+  .slice(0, 8);
 ---
 
 <ArticleLayout
@@ -112,6 +124,8 @@ const relatedEntries = relatedSlugs
   jsonLd={jsonLd}
   breadcrumbs={breadcrumbs}
   articleTimes={articleTimes}
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
 >
   <header class="mb-8 border-b border-white/10 pb-6">
     <div class="flex flex-wrap items-center gap-2 text-xs">
@@ -187,6 +201,29 @@ const relatedEntries = relatedSlugs
           ))}
         </ul>
       </aside>
+    ) : null
+  }
+
+  {
+    relatedCharEntries.length > 0 ? (
+      <nav class="mt-12 border-t border-white/10 pt-8 not-prose" aria-label="Связанные персонажи">
+        <h2 class="font-display text-lg font-semibold text-white">Связанные персонажи</h2>
+        <ul class="mt-4 grid list-none grid-cols-2 gap-2 p-0 sm:grid-cols-3 lg:grid-cols-4">
+          {relatedCharEntries.map((c) => (
+            <li>
+              <a
+                href={`/characters/${contentSlugFromId(c.id)}`}
+                class="block rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm transition hover:border-teyvat-mint/40 hover:bg-white/10"
+              >
+                <span class="block font-medium text-white">{c.data.name}</span>
+                <span class="block text-xs text-teyvat-muted">
+                  {c.data.element} · {c.data.weapon}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     ) : null
   }
 

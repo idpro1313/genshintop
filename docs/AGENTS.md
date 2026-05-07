@@ -18,6 +18,8 @@
 | `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
 | `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
 | `npm run content:audit-guides` | Статический аудит `src/content/guides/*.md` → `reports/guides-audit.json` |
+| `npm run content:enrich` | Авто-нормализация гайдов: транслит slug, заполнение `topic`/`status`/`audience`/`gameVersion`/`updatedAt`/`reviewedAt`/`sources`/`relatedCharacters`/`relatedGuides`, чистка `](#)`. Пишет `deploy/genshintop-redirects.conf` и `reports/slug-redirects.json`. |
+| `npm run og:generate` | Генерация OG-картинок 1200×630 PNG для `/guides/<slug>` и `/characters/<slug>` через `sharp`. Пишет `public/og/**` и `src/data/og-manifest.json`. |
 | `npm run build` | Сборка статики в **`dist/`** |
 | Docker | **`deploy/README.md`** — GHCR image `ghcr.io/idpro1313/genshintop:latest`, `deploy/docker-compose.yml`, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — сборка Docker-образа; push в GHCR на `main` |
@@ -25,8 +27,9 @@
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/data/lootbar.ts` (купоны/прайс LootBar, fallback до данных партнёра), `src/lib/seo.ts`, `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts`, `src/lib/character-hub.ts`, `src/lib/partners.ts`, `astro.config.mjs`
-- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`
+- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/data/lootbar.ts` (купоны/прайс LootBar, fallback до данных партнёра), `src/data/og-manifest.json`, `src/lib/seo.ts` (включая `getOgImageForEntry`, `editorialTeamPerson`, `lootbarServiceSchema`), `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts` (расширен хабами `events`, `tcg`, `domains`, `bosses`, `quests`), `src/lib/character-hub.ts`, `src/lib/partners.ts`, `astro.config.mjs` (sitemap `priority`/`changefreq` через `serialize`, фильтр `_placeholder`/`404`)
+- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`, `scripts/enrich-guides.ts` (авто-нормализация фронтматтера + slug-редиректы)
+- **M-OG-PIPELINE** — `scripts/generate-og-images.ts` (`sharp`-рендер SVG → PNG в `public/og/{collection}/{slug}.png`, манифест `src/data/og-manifest.json`); `getOgImageForEntry` в `src/lib/seo.ts`
 - **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
 
 ### Гайды: таксономия и frontmatter
@@ -144,7 +147,7 @@ Testing rules:
 ## File Structure
 ```
 src/
-  pages/                 - Маршруты Astro: /, /characters, /guides, хабы /guides/*, /characters/*, /lootbar/*, /about, /404, доверие (/editorial-policy, /partnership-disclosure, /contacts, /content-updates)
+  pages/                 - Маршруты Astro: /, /characters, /guides, хабы /guides/{banners,patches,codes,newbie,economy,tier-list,events,tcg,domains,bosses,quests}, /characters/{pyro,hydro,...}, /lootbar/*, /regions, /regions/{sumeru,fontaine,natlan}, /about, /404, доверие (/editorial-policy, /partnership-disclosure, /contacts, /content-updates)
   layouts/               - BaseLayout, ArticleLayout
   components/            - Header, Footer, Seo, карточки, хлебные крошки
   content/               - Коллекции Markdown (после миграции)
@@ -155,9 +158,11 @@ src/
 scripts/
   audit-database.ts      - Аудит gi-database
   audit-guides-content.ts - Статический аудит src/content/guides → reports/guides-audit.json
+  enrich-guides.ts       - Авто-нормализация фронтматтера гайдов + транслит slug + redirects map
+  generate-og-images.ts  - Рендер OG-картинок 1200×630 (sharp) → public/og/**, манифест src/data/og-manifest.json
   process-content.ts     - Миграция в src/content
   verify-migration.ts    - Проверка полноты переноса
-public/                  - favicon.svg, og-default.svg, robots.txt
+public/                  - favicon.svg, og-default.svg, robots.txt, og/<collection>/<slug>.png (после `npm run og:generate`)
 Dockerfile               - multi-stage: Astro build + nginx
 deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.sh
 gi-database/             - Исходный корпус (до удаления после миграции)

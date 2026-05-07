@@ -19,6 +19,7 @@ interface Props {
   ogImage?: string;
   ogImageWidth?: number;
   ogImageHeight?: number;
+  ogImageAlt?: string;
   robots?: string;
   articleTimes?: ArticleTimes;
   /** Не показывать плашку LootBar под шапкой (напр. страница `/lootbar`). */
@@ -34,6 +35,7 @@ const {
   ogImage,
   ogImageWidth,
   ogImageHeight,
+  ogImageAlt,
   robots,
   articleTimes,
   hideLootBarPromo,
@@ -46,6 +48,28 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Шрифт Cinzel: preconnect + асинхронная загрузка stylesheet, чтобы не блокировать LCP. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap"
+      />
+    </noscript>
+
     <Seo
       title={title}
       description={description}
@@ -55,40 +79,55 @@ const {
       ogImage={ogImage}
       ogImageWidth={ogImageWidth}
       ogImageHeight={ogImageHeight}
+      ogImageAlt={ogImageAlt}
       robots={robots}
       articleTimes={articleTimes}
     />
-    <!-- Yandex.Metrika counter -->
+    <!-- Yandex.Metrika counter (deferred to idle / load to keep LCP fast) -->
     <script is:inline type="text/javascript">
-      (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
+      (function () {
+        var ymId = 109020836;
+        window.ym =
+          window.ym ||
           function () {
-            (m[i].a = m[i].a || []).push(arguments);
+            (window.ym.a = window.ym.a || []).push(arguments);
           };
-        m[i].l = 1 * new Date();
-        for (var j = 0; j < document.scripts.length; j++) {
-          if (document.scripts[j].src === r) {
-            return;
-          }
-        }
-        (k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
-          (k.async = 1),
-          (k.src = r),
-          a.parentNode.insertBefore(k, a);
-      })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=109020836', 'ym');
+        window.ym.l = 1 * new Date();
 
-      ym(109020836, 'init', {
-        ssr: true,
-        webvisor: true,
-        clickmap: true,
-        ecommerce: 'dataLayer',
-        referrer: document.referrer,
-        url: location.href,
-        accurateTrackBounce: true,
-        trackLinks: true,
-      });
+        function loadMetrika() {
+          if (window.__ymLoaded) return;
+          window.__ymLoaded = true;
+          var src = 'https://mc.yandex.ru/metrika/tag.js?id=' + ymId;
+          for (var j = 0; j < document.scripts.length; j++) {
+            if (document.scripts[j].src === src) return;
+          }
+          var k = document.createElement('script');
+          k.async = 1;
+          k.src = src;
+          var a = document.getElementsByTagName('script')[0];
+          a.parentNode.insertBefore(k, a);
+          ym(ymId, 'init', {
+            ssr: true,
+            webvisor: true,
+            clickmap: true,
+            ecommerce: 'dataLayer',
+            referrer: document.referrer,
+            url: location.href,
+            accurateTrackBounce: true,
+            trackLinks: true,
+          });
+        }
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadMetrika, { timeout: 4000 });
+        } else if (document.readyState === 'complete') {
+          setTimeout(loadMetrika, 1500);
+        } else {
+          window.addEventListener('load', function () {
+            setTimeout(loadMetrika, 1500);
+          });
+        }
+      })();
     </script>
     <!-- /Yandex.Metrika counter -->
   </head>

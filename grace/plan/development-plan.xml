@@ -36,6 +36,7 @@
         <export-migrate PURPOSE="npm run content:migrate" />
         <export-verify PURPOSE="npm run content:verify" />
         <export-audit-guides PURPOSE="npm run content:audit-guides" />
+        <export-enrich PURPOSE="npm run content:enrich" />
       </interface>
       <depends>none</depends>
       <target>
@@ -43,9 +44,38 @@
         <source>scripts/process-content.ts</source>
         <source>scripts/verify-migration.ts</source>
         <source>scripts/audit-guides-content.ts</source>
+        <source>scripts/enrich-guides.ts</source>
       </target>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
     </M-CONTENT-PIPELINE>
+
+    <M-OG-PIPELINE NAME="OgImagesPipeline" TYPE="UTILITY" LAYER="0" ORDER="1" STATUS="implemented">
+      <contract>
+        <purpose>Рендер Open Graph картинок 1200×630 PNG на каждую запись коллекций characters и guides; манифест для getOgImageForEntry.</purpose>
+        <inputs>
+          <param name="src/content/characters/*.md" type="markdown" />
+          <param name="src/content/guides/*.md" type="markdown" />
+        </inputs>
+        <outputs>
+          <param name="public/og/{collection}/{slug}.png" type="png" />
+          <param name="src/data/og-manifest.json" type="json" />
+        </outputs>
+        <errors>
+          <error code="SHARP_MISSING" />
+        </errors>
+      </contract>
+      <interface>
+        <export-og-generate PURPOSE="npm run og:generate" />
+        <export-getOgImageForEntry PURPOSE="src/lib/seo.ts: возвращает путь к PNG или fallback SVG" />
+      </interface>
+      <depends>M-CONTENT-PIPELINE</depends>
+      <target>
+        <source>scripts/generate-og-images.ts</source>
+        <source>src/lib/seo.ts</source>
+        <source>src/data/og-manifest.json</source>
+      </target>
+      <verification-ref>V-M-OG-PIPELINE</verification-ref>
+    </M-OG-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
@@ -65,19 +95,36 @@
         <export-Footer PURPOSE="Глобальный футер сайта с версией из корневого VERSION" />
         <export-LOOTBAR_GENSHIN_TOPUP_URL PURPOSE="Партнёрский URL LootBar.gg по умолчанию" />
         <export-lootbarGenshinTopupUrl PURPOSE="Партнёрский URL с параметром UTM-кампании" />
+        <export-editorialTeamPerson PURPOSE="JSON-LD автор Редакция GenshinTop для Article/BlogPosting" />
+        <export-lootbarServiceSchema PURPOSE="JSON-LD Service+Offer для коммерческого кластера /lootbar" />
+        <export-getOgImageForEntry PURPOSE="Динамический выбор OG-картинки по slug" />
+        <export-RegionPage PURPOSE="Шаблон региональных хабов /regions/*" />
+        <export-LootBarGlossary PURPOSE="Видимый глоссарий ключевых терминов на /lootbar" />
       </interface>
-      <depends>M-CONTENT-PIPELINE</depends>
+      <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
       <target>
         <source>src/pages</source>
+        <source>src/pages/regions</source>
+        <source>src/pages/guides/events.astro</source>
+        <source>src/pages/guides/tcg.astro</source>
+        <source>src/pages/guides/domains.astro</source>
+        <source>src/pages/guides/bosses.astro</source>
+        <source>src/pages/guides/quests.astro</source>
         <source>src/layouts</source>
         <source>src/components</source>
+        <source>src/components/LootBarGlossary.astro</source>
+        <source>src/components/RegionPage.astro</source>
         <source>src/data/lootbar.ts</source>
+        <source>src/data/og-manifest.json</source>
         <source>src/lib/partners.ts</source>
         <source>src/lib/guide-hub.ts</source>
         <source>src/lib/character-hub.ts</source>
         <source>src/lib/seo.ts</source>
         <source>src/content.config.ts</source>
+        <source>public/robots.txt</source>
+        <source>astro.config.mjs</source>
         <source>deploy/nginx-docker.conf</source>
+        <source>deploy/genshintop-redirects.conf</source>
         <source>deploy/docker-compose.yml</source>
         <source>deploy/update-from-github.sh</source>
         <source>deploy/SEO-CHECKLIST.md</source>
@@ -154,6 +201,13 @@
       <step-1 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">Скрипты аудита и миграции</step-1>
       <step-2 module="M-WEBSITE" status="done" verification="V-M-WEBSITE">Страницы, SEO, деплой-документация</step-2>
     </Phase-1>
+
+    <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
+      <goal>SEO-усиление 0.5.0: OG-картинки, обогащение фронтматтера 424 гайдов, новые хабы (events/tcg/domains/bosses/quests), регионы (sumeru/fontaine/natlan), коммерческое усиление /lootbar без скрытого текста, перелинковка, performance (асинхронный Cinzel, отложенная Метрика).</goal>
+      <step-1 module="M-OG-PIPELINE" status="done" verification="V-M-OG-PIPELINE">scripts/generate-og-images.ts + og-manifest.json + getOgImageForEntry</step-1>
+      <step-2 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">scripts/enrich-guides.ts: транслит slug, фронтматтер, чистка ](#)</step-2>
+      <step-3 module="M-WEBSITE" status="done" verification="V-M-WEBSITE">Sitemap-приоритеты, robots Yandex Clean-param, og:image:alt, verification meta, security headers, новые хабы и регионы, перелинковка, glossary и Service-schema на /lootbar</step-3>
+    </Phase-5>
 
     <!-- Phases use unique tags:
          <Phase-1 name="Foundation" status="pending">

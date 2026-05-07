@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap');
+/* Cinzel подключается через <link rel="preconnect"> + асинхронный <link rel="stylesheet">
+   в src/layouts/BaseLayout.astro (см. блок шрифтов). Это убирает блокирующий @import
+   из критического CSS и улучшает LCP. */
 
 @layer base {
   html {

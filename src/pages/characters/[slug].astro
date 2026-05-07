@@ -9,6 +9,8 @@ import {
   breadcrumbListSchema,
   cleanMetaDescription,
   DEFAULT_OG_IMAGE_PATH,
+  editorialTeamPerson,
+  getOgImageForEntry,
   jsonLdGraph,
   publisherOrganization,
 } from '../../lib/seo';
@@ -29,6 +31,8 @@ const canonicalPath = `/characters/${slug}`;
 
 const fallbackDescription = `${entry.data.name} — ${elementRu(entry.data.element)}, ${entry.data.weapon}. Гайд и описание в GenshinTop.`;
 const description = cleanMetaDescription(entry.data.title, fallbackDescription);
+const ogImage = getOgImageForEntry('characters', slug);
+const ogImageAlt = `${entry.data.name} — ${elementRu(entry.data.element)}, ${entry.data.weapon} | GenshinTop`;
 
 const articleId = `${absoluteUrl(canonicalPath)}#article`;
 
@@ -50,8 +54,8 @@ const jsonLd = jsonLdGraph([
       '@type': 'WebPage',
       '@id': absoluteUrl(canonicalPath),
     },
-    image: [absoluteUrl(DEFAULT_OG_IMAGE_PATH)],
-    author: { '@id': `${SITE_URL}/#organization` },
+    image: [absoluteUrl(ogImage)],
+    author: { '@id': `${SITE_URL}/#editorial-team` },
     publisher: { '@id': `${SITE_URL}/#organization` },
     about: {
       '@type': 'Thing',
@@ -59,6 +63,7 @@ const jsonLd = jsonLdGraph([
       description: `${elementRu(entry.data.element)}, ${entry.data.weapon}. Персонаж Genshin Impact.`,
     },
   },
+  editorialTeamPerson(),
 ]);
 
 const breadcrumbs = [
@@ -66,6 +71,13 @@ const breadcrumbs = [
   { label: 'Персонажи', href: '/characters' },
   { label: entry.data.name, href: canonicalPath },
 ];
+
+const allGuides = await getCollection('guides');
+const relatedGuideSlugs = entry.data.relatedGuides ?? [];
+const relatedGuides = relatedGuideSlugs
+  .map((s) => allGuides.find((g) => contentSlugFromId(g.id) === s))
+  .filter((g): g is (typeof allGuides)[number] => Boolean(g))
+  .slice(0, 12);
 ---
 
 <ArticleLayout
@@ -75,6 +87,8 @@ const breadcrumbs = [
   ogType="article"
   jsonLd={jsonLd}
   breadcrumbs={breadcrumbs}
+  ogImage={ogImage}
+  ogImageAlt={ogImageAlt}
 >
   <header class="mb-8 border-b border-white/10 pb-6">
     <p class="text-sm text-teyvat-muted">
@@ -104,9 +118,34 @@ const breadcrumbs = [
   <Content />
 
   {
+    relatedGuides.length > 0 ? (
+      <nav class="mt-12 border-t border-white/10 pt-8" aria-label="Гайды по персонажу">
+        <h2 class="font-display text-xl text-teyvat-gold">Гайды и материалы по персонажу</h2>
+        <ul class="mt-4 grid list-none grid-cols-1 gap-2 p-0 sm:grid-cols-2">
+          {relatedGuides.map((g) => (
+            <li>
+              <a
+                href={`/guides/${contentSlugFromId(g.id)}`}
+                class="block rounded-lg border border-white/10 bg-white/5 px-3 py-2 transition hover:border-teyvat-mint/40 hover:bg-white/10"
+              >
+                <span class="block font-medium text-white">{g.data.title}</span>
+                {g.data.summary ? (
+                  <span class="mt-0.5 line-clamp-2 block text-xs text-teyvat-muted">
+                    {g.data.summary}
+                  </span>
+                ) : null}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    ) : null
+  }
+
+  {
     entry.data.relatedWeapons?.length || entry.data.relatedArtifacts?.length ? (
       <aside class="mt-12 rounded-2xl border border-white/10 bg-white/5 p-6">
-        <h2 class="font-display text-xl text-teyvat-gold">Связанные материалы (из базы)</h2>
+        <h2 class="font-display text-xl text-teyvat-gold">Связанное снаряжение из базы</h2>
         {entry.data.relatedWeapons?.length ? (
           <div class="mt-4">
             <h3 class="text-sm font-medium text-slate-300">Упоминания в оружии</h3>

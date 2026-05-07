@@ -54,7 +54,52 @@
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-004>
+
+    <UC-005>
+      <Actor>Игрок / читатель, поисковая система</Actor>
+      <Action>Открывает новые хабы /guides/events, /guides/tcg, /guides/domains, /guides/bosses, /guides/quests</Action>
+      <Goal>Закрыть семантические пробелы по ивентам, TCG, доменам, боссам и квестам архонтов</Goal>
+      <Preconditions>guide-hub.ts содержит matcher-функции; стартовые статьи добавлены в src/content/guides</Preconditions>
+      <AcceptanceCriteria>Каждый хаб собирается в статический HTML, попадает в sitemap, имеет breadcrumbs и CollectionPage JSON-LD</AcceptanceCriteria>
+      <Priority>high</Priority>
+      <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
+    </UC-005>
+
+    <UC-006>
+      <Actor>Игрок / читатель, поисковая система</Actor>
+      <Action>Открывает раздел /regions и страницы /regions/{sumeru,fontaine,natlan}</Action>
+      <Goal>Получить обзор регионов Тейвата с ключевыми механиками и нативными персонажами</Goal>
+      <Preconditions>RegionPage.astro и страницы регионов созданы; Header содержит ссылку</Preconditions>
+      <AcceptanceCriteria>Каждая страница имеет JSON-LD Place+Article, breadcrumbs, список нативных персонажей</AcceptanceCriteria>
+      <Priority>medium</Priority>
+      <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
+    </UC-006>
+
+    <UC-007>
+      <Actor>Игрок / поисковая система</Actor>
+      <Action>Открывает /lootbar и подстраницы кластера по коммерческим запросам (кристаллы, благословение, промокод, как пополнить)</Action>
+      <Goal>Захватить коммерческие запросы видимым контентом без скрытого текста и переспама</Goal>
+      <Preconditions>Глоссарий, расширенный FAQ details, Service+Offer JSON-LD, видимые анкорные ссылки</Preconditions>
+      <AcceptanceCriteria>Каждая подстраница имеет уникальные title/description, FAQPage JSON-LD; нет hidden text / display:none с ключевиками; партнёрские ссылки rel="sponsored"</AcceptanceCriteria>
+      <Priority>high</Priority>
+      <RelatedFlows>DF-LOOTBAR-AFFILIATE</RelatedFlows>
+    </UC-007>
+
+    <UC-008>
+      <Actor>Редактор / агент</Actor>
+      <Action>Запускает npm run content:enrich и npm run og:generate</Action>
+      <Goal>Нормализовать фронтматтер 424 гайдов, сгенерировать OG-картинки и 301-редиректы для кириллических slug</Goal>
+      <Preconditions>src/content/guides и src/content/characters заполнены; sharp установлен</Preconditions>
+      <AcceptanceCriteria>deploy/genshintop-redirects.conf и reports/slug-redirects.json актуальны; public/og/{collection}/{slug}.png существуют; src/data/og-manifest.json согласован</AcceptanceCriteria>
+      <Priority>high</Priority>
+      <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
+    </UC-008>
   </UseCases>
+
+  <Constraints>
+    <constraint-no-hidden-text>Запрещён скрытый текст и cloaking: display:none/visibility:hidden/font-size:0/aria-hidden со словесными облаками, набитые alt/title, meta keywords. Это нарушает Google «hidden text and links» и подпадает под Яндекс «Баден-Баден» / «Минусинск».</constraint-no-hidden-text>
+    <constraint-no-runtime-verification>Локально не запускать приложение для проверки кода (правило no-local-app-verification): только статический анализ, линтеры и чтение исходников.</constraint-no-runtime-verification>
+  </Constraints>
 
   <NonGoals>
     <!-- Capture explicit exclusions so agents do not overbuild.
@@ -63,14 +108,6 @@
          <item-2>No background sync outside the bounded worker scope.</item-2>
     -->
   </NonGoals>
-
-  <Constraints>
-    <!-- Product, regulatory, runtime, or deployment constraints.
-
-         <constraint-1>Must run in one regional deployment with one primary database.</constraint-1>
-         <constraint-2>Secrets must never appear in logs.</constraint-2>
-    -->
-  </Constraints>
 
   <Risks>
     <!-- Known ambiguity or failure-prone areas.

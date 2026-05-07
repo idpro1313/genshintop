@@ -1,0 +1,97 @@
+---
+/**
+ * Глоссарий терминов: Кристаллы Сотворения, Благословение Полой Луны, Примогемы и т.д.
+ * Видимый блок: помогает пользователю и закрывает коммерческие запросы для поисковиков
+ * без скрытого текста.
+ */
+interface Term {
+  ru: string;
+  en: string;
+  href?: string;
+  body: string;
+}
+
+const terms: Term[] = [
+  {
+    ru: 'Кристаллы Сотворения',
+    en: 'Genesis Crystals',
+    href: '/lootbar/kristally-sotvoreniya',
+    body:
+      'Премиальная валюта Genshin Impact, которую покупают за реальные деньги. Один Кристалл Сотворения превращается в один Камень Истока (Primogem) внутри игры. Через LootBar чаще всего покупают именно их.',
+  },
+  {
+    ru: 'Благословение Полой Луны',
+    en: 'Welkin Moon',
+    href: '/lootbar/blagoslovenie-luny',
+    body:
+      'Месячная подписка Genshin Impact: 300 Кристаллов сразу + 90 Камней Истока ежедневно в течение 30 дней. Самый выгодный способ регулярно копить молитвы.',
+  },
+  {
+    ru: 'Примогемы / Камни Истока',
+    en: 'Primogems',
+    body:
+      'Внутриигровая валюта для молитв (wishes) на персонажей и оружие. Не продаются напрямую: получаются через ивенты, обмен Кристаллов или Благословение.',
+  },
+  {
+    ru: 'Молитвы (Wishes)',
+    en: 'Wishes',
+    body:
+      'Аналог гача-вращений в Genshin Impact. Одна молитва стоит 160 Камней Истока или 1 «Переплетённую судьбу». 5★ персонаж выпадает в среднем за 60–80 молитв.',
+  },
+  {
+    ru: 'Топ-ап (top-up)',
+    en: 'Top-up',
+    href: '/lootbar/kak-popolnit-genshin-impact',
+    body:
+      'Пополнение игрового счёта Genshin Impact реальной валютой. На LootBar пакеты Кристаллов и Благословение оформляются как топ-ап через UID — без передачи пароля от аккаунта.',
+  },
+  {
+    ru: 'Промокод LootBar',
+    en: 'LootBar coupon',
+    href: '/lootbar/promokod',
+    body:
+      'Купон магазина LootBar.gg, который применяется в момент оформления заказа. Это не игровые коды HoYoverse — те ищите в нашем гайде по промокодам Genshin.',
+  },
+];
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props as Props;
+---
+
+<section
+  class={`not-prose rounded-2xl border border-white/10 bg-white/[0.03] p-6 md:p-8 ${className ?? ''}`}
+  aria-labelledby="lootbar-glossary-heading"
+>
+  <h2
+    id="lootbar-glossary-heading"
+    class="font-display text-2xl font-bold text-white md:text-3xl"
+  >
+    Что это: глоссарий валют и терминов Genshin Impact
+  </h2>
+  <p class="mt-2 max-w-3xl text-sm text-slate-300">
+    Короткие определения под коммерческие запросы: чем отличается Кристалл Сотворения от Камня
+    Истока, что даёт Благословение Полой Луны (Welkin Moon) и при чём тут топ-ап Genshin Impact.
+  </p>
+  <dl class="mt-6 grid gap-4 md:grid-cols-2">
+    {
+      terms.map((t) => (
+        <div class="rounded-xl border border-white/10 bg-white/[0.04] p-4">
+          <dt class="font-display text-lg text-teyvat-gold">
+            {t.href ? (
+              <a href={t.href} class="hover:text-teyvat-mint hover:underline">
+                {t.ru}
+              </a>
+            ) : (
+              t.ru
+            )}{' '}
+            <span class="text-sm font-normal text-teyvat-muted">({t.en})</span>
+          </dt>
+          <dd class="mt-2 text-sm leading-relaxed text-slate-300">{t.body}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

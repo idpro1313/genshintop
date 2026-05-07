@@ -23,14 +23,29 @@ const moonRows = lootbarPrices.filter((r) => /луна|welkin|благослов
 
 const faq = faqPageSchema([
   {
-    question: 'Что даёт благословение полой луны?',
+    question: 'Что даёт Благословение Полой Луны (Welkin Moon)?',
     answer:
-      'Ежемесячная подписка в Genshin Impact: моментальная порция кристаллов и ежедневные камни истока в течение периода, описанного в игре. Точные цифры смотрите в клиенте на момент покупки.',
+      'Месячная подписка в Genshin Impact: 300 Кристаллов Сотворения сразу при активации и 90 Камней Истока (Primogems) ежедневно в течение 30 дней — суммарно около 3000 камней истока, или ~18 молитв.',
   },
   {
-    question: 'Можно ли купить несколько подряд через сторонний магазин?',
+    question: 'Сколько примогемов даёт Благословение Полой Луны за 30 дней?',
+    answer:
+      'За полный срок действия подписки игрок получает 300 Кристаллов Сотворения сразу + 90 Камней Истока × 30 дней = 2700 камней. Итого ~3000 примогемов.',
+  },
+  {
+    question: 'Что выгоднее — Благословение или пакет Кристаллов Сотворения?',
+    answer:
+      'При ежедневной игре Благословение Полой Луны выгоднее по соотношению «деньги на молитву». Если играете эпизодически — берите пакеты Кристаллов Сотворения под конкретный баннер.',
+  },
+  {
+    question: 'Можно ли купить несколько Welkin Moon подряд через сторонний магазин?',
     answer:
       'Зависит от ограничений вашего аккаунта и правил LootBar. Ограничения miHoYo на активные подписки и сроки всё равно действуют.',
+  },
+  {
+    question: 'Безопасно ли покупать Welkin Moon через LootBar.gg?',
+    answer:
+      'Топ-ап работает по UID, без передачи пароля от аккаунта Genshin Impact. Перед покупкой проверьте домен lootbar.gg, регион аккаунта и сохраните чек заказа.',
   },
 ]);
 
@@ -55,8 +70,8 @@ const jsonLd = jsonLdGraph([
 ---
 
 <BaseLayout
-  title="Благословение полой луны Genshin Impact — LootBar | GenshinTop"
-  description="Покупка «лунной» подписки Genshin Impact через LootBar.gg: сравнение с ориентиром цены в игре (по данным партнёра), на что смотреть перед оплатой."
+  title="Купить Благословение Полой Луны Genshin Impact — LootBar.gg"
+  description="Welkin Moon (Благословение Полой Луны) Genshin Impact на LootBar.gg: 300 кристаллов + 90 примогемов в день 30 дней. Сколько примогемов даёт, цена, как купить через топ-ап."
   canonicalPath={canonicalPath}
   jsonLd={jsonLd}
   hideLootBarPromo={true}
@@ -66,9 +81,22 @@ const jsonLd = jsonLdGraph([
       <a href="/lootbar" class="text-teyvat-mint hover:underline">← Хаб LootBar</a>
     </nav>
     <LootBarMiniHero
-      title="Благословение полой луны"
-      subtitle="Подписка и лимиты аккаунта — проверяйте в клиенте и в карточке заказа LootBar."
+      title="Купить Благословение Полой Луны Genshin Impact"
+      subtitle="Welkin Moon — месячная подписка с 300 Кристаллами Сотворения и ежедневными примогемами. Покупка через LootBar.gg по UID без пароля от аккаунта."
     />
+    <h2 class="font-display text-2xl text-white">Что такое Благословение Полой Луны</h2>
+    <p class="text-slate-300">
+      <strong>Благословение Полой Луны</strong> (англ. <em>Welkin Moon</em>) — самая популярная подписка
+      в Genshin Impact. При активации игрок получает 300 Кристаллов Сотворения сразу и по 90 Камней
+      Истока (Primogems) каждый день в течение 30 дней. Итого ~3000 примогемов за месяц — это около
+      18 молитв на любом баннере.
+    </p>
+    <p class="text-slate-300">
+      На <strong>LootBar.gg</strong> Благословение можно купить дешевле, чем через клиент игры,
+      и оплатить из России и СНГ способами, которые показаны на странице заказа. Пополнение идёт
+      по <strong>UID</strong> аккаунта Genshin Impact — пароль и коды двухфакторной защиты передавать не нужно.
+    </p>
+    <h2 class="font-display text-2xl text-white">Цена и сравнение</h2>
     <LootBarDisclosure class="not-prose my-6" compact />
     <div class="not-prose w-full">
       <LootBarPriceTable rows={moonRows} updatedAt={lootbarPricesUpdatedAt} />
@@ -87,7 +115,45 @@ const jsonLd = jsonLdGraph([
     <ul>
       <li>Убедитесь, что активная луна и лимиты позволяют купить следующую (подсказки в игре).</li>
       <li>Проверьте совпадение региона аккаунта с условиями LootBar.</li>
+      <li>Сохраните чек заказа на случай задержки начисления.</li>
     </ul>
+
+    <h2>Часто задаваемые вопросы про Welkin Moon</h2>
+    <details class="not-prose group rounded-xl border border-white/10 bg-white/[0.03] p-4 open:border-teyvat-accent/40">
+      <summary class="cursor-pointer list-none text-base font-semibold text-white">
+        <span class="mr-2 inline-block transition group-open:rotate-90">›</span>
+        Сколько примогемов даёт Благословение Полой Луны за 30 дней?
+      </summary>
+      <p class="mt-3 text-sm text-slate-300">
+        300 Кристаллов Сотворения при активации + 90 Камней Истока × 30 дней = 2700 камней.
+        Суммарно около 3000 примогемов, или ~18 молитв.
+      </p>
+    </details>
+    <details class="not-prose group mt-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 open:border-teyvat-accent/40">
+      <summary class="cursor-pointer list-none text-base font-semibold text-white">
+        <span class="mr-2 inline-block transition group-open:rotate-90">›</span>
+        Что выгоднее — Welkin Moon или пакет Кристаллов Сотворения?
+      </summary>
+      <p class="mt-3 text-sm text-slate-300">
+        При ежедневной игре подписка выгоднее по примогемам за рубль. Если играете эпизодически —
+        берите{' '}
+        <a href="/lootbar/kristally-sotvoreniya" class="text-teyvat-mint hover:underline">
+          пакеты Кристаллов Сотворения
+        </a>
+        под конкретный баннер.
+      </p>
+    </details>
+    <details class="not-prose group mt-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 open:border-teyvat-accent/40">
+      <summary class="cursor-pointer list-none text-base font-semibold text-white">
+        <span class="mr-2 inline-block transition group-open:rotate-90">›</span>
+        Безопасно ли покупать Welkin Moon через LootBar.gg?
+      </summary>
+      <p class="mt-3 text-sm text-slate-300">
+        Топ-ап работает по UID — пароль и 2FA передавать не нужно. Перед оплатой проверьте домен
+        lootbar.gg, регион аккаунта и сохраните чек. Подробности в разделе
+        <a href="/lootbar/bezopasnost-i-oplata" class="text-teyvat-mint hover:underline">безопасность и оплата</a>.
+      </p>
+    </details>
     <LootBarOutboundLink
       href={topupUrl}
       class="not-prose inline-flex rounded-xl bg-teyvat-accent px-6 py-3 font-semibold text-teyvat-night hover:bg-teyvat-gold"

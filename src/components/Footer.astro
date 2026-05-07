@@ -6,23 +6,74 @@ const siteVersion = siteVersionRaw.trim();
 ---
 
 <footer class="mt-20 border-t border-white/10 bg-black/20">
-  <div class="mx-auto max-w-6xl px-4 py-10 text-sm text-teyvat-muted">
-    <p class="mb-4 text-center font-display text-teyvat-gold/90">GenshinTop</p>
-    <nav
-      class="mb-4 flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs sm:text-sm"
-      aria-label="Нижнее меню"
-    >
-      <a href="/about" class="hover:text-teyvat-mint hover:underline">О проекте</a>
-      <a href="/editorial-policy" class="hover:text-teyvat-mint hover:underline">Редакция</a>
-      <a href="/partnership-disclosure" class="hover:text-teyvat-mint hover:underline">Партнёрство</a>
-      <a href="/content-updates" class="hover:text-teyvat-mint hover:underline">Свежесть контента</a>
-      <a href="/contacts" class="hover:text-teyvat-mint hover:underline">Контакты</a>
-      <a href="/lootbar" class="hover:text-teyvat-mint hover:underline">LootBar</a>
-    </nav>
-    <p class="mb-4 text-center">
-      Неофициальный фан-сайт. Genshin Impact © miHoYo / HoYoverse. Товарные знаки принадлежат их
-      владельцам.
+  <div class="mx-auto max-w-6xl px-4 py-12 text-sm text-teyvat-muted">
+    <div class="grid gap-8 md:grid-cols-4">
+      <div>
+        <p class="mb-3 font-display text-teyvat-gold">GenshinTop</p>
+        <p class="text-xs leading-relaxed">
+          Неофициальный фан-сайт. Гайды, билды и обновления Genshin Impact на русском.
+        </p>
+        <ul class="mt-4 space-y-1 text-xs">
+          <li><a href="/about" class="hover:text-teyvat-mint hover:underline">О проекте</a></li>
+          <li><a href="/editorial-policy" class="hover:text-teyvat-mint hover:underline">Редакционная политика</a></li>
+          <li><a href="/content-updates" class="hover:text-teyvat-mint hover:underline">Свежесть контента</a></li>
+          <li><a href="/contacts" class="hover:text-teyvat-mint hover:underline">Контакты</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mb-3 font-display text-teyvat-gold">Персонажи</p>
+        <ul class="space-y-1 text-xs">
+          <li><a href="/characters" class="hover:text-teyvat-mint hover:underline">Все персонажи</a></li>
+          <li><a href="/characters/pyro" class="hover:text-teyvat-mint hover:underline">Пиро</a></li>
+          <li><a href="/characters/hydro" class="hover:text-teyvat-mint hover:underline">Гидро</a></li>
+          <li><a href="/characters/electro" class="hover:text-teyvat-mint hover:underline">Электро</a></li>
+          <li><a href="/characters/cryo" class="hover:text-teyvat-mint hover:underline">Крио</a></li>
+          <li><a href="/characters/anemo" class="hover:text-teyvat-mint hover:underline">Анемо</a></li>
+          <li><a href="/characters/geo" class="hover:text-teyvat-mint hover:underline">Гео</a></li>
+          <li><a href="/characters/dendro" class="hover:text-teyvat-mint hover:underline">Дендро</a></li>
+          <li><a href="/characters/5-star" class="hover:text-teyvat-mint hover:underline">5★ персонажи</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mb-3 font-display text-teyvat-gold">Гайды</p>
+        <ul class="space-y-1 text-xs">
+          <li><a href="/guides" class="hover:text-teyvat-mint hover:underline">Все гайды</a></li>
+          <li><a href="/guides/banners" class="hover:text-teyvat-mint hover:underline">Баннеры и молитвы</a></li>
+          <li><a href="/guides/patches" class="hover:text-teyvat-mint hover:underline">Обновления патчей</a></li>
+          <li><a href="/guides/codes" class="hover:text-teyvat-mint hover:underline">Промокоды</a></li>
+          <li><a href="/guides/newbie" class="hover:text-teyvat-mint hover:underline">Новичкам</a></li>
+          <li><a href="/guides/tier-list" class="hover:text-teyvat-mint hover:underline">Тир-листы</a></li>
+          <li><a href="/guides/events" class="hover:text-teyvat-mint hover:underline">Ивенты</a></li>
+          <li><a href="/guides/tcg" class="hover:text-teyvat-mint hover:underline">Священный призыв семи (TCG)</a></li>
+          <li><a href="/guides/domains" class="hover:text-teyvat-mint hover:underline">Подземелья и фарм</a></li>
+          <li><a href="/guides/bosses" class="hover:text-teyvat-mint hover:underline">Боссы</a></li>
+          <li><a href="/guides/quests" class="hover:text-teyvat-mint hover:underline">Квесты архонтов</a></li>
+          <li><a href="/guides/economy" class="hover:text-teyvat-mint hover:underline">Экономика и фарм</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="mb-3 font-display text-teyvat-gold">Регионы и LootBar</p>
+        <ul class="space-y-1 text-xs">
+          <li><a href="/regions" class="hover:text-teyvat-mint hover:underline">Все регионы Тейвата</a></li>
+          <li><a href="/regions/sumeru" class="hover:text-teyvat-mint hover:underline">Сумеру</a></li>
+          <li><a href="/regions/fontaine" class="hover:text-teyvat-mint hover:underline">Фонтейн</a></li>
+          <li><a href="/regions/natlan" class="hover:text-teyvat-mint hover:underline">Натлан</a></li>
+        </ul>
+        <p class="mb-2 mt-5 font-display text-teyvat-gold">Купить кристаллы</p>
+        <ul class="space-y-1 text-xs">
+          <li><a href="/lootbar" class="hover:text-teyvat-mint hover:underline">LootBar для Genshin Impact</a></li>
+          <li><a href="/lootbar/kristally-sotvoreniya" class="hover:text-teyvat-mint hover:underline">Кристаллы Сотворения</a></li>
+          <li><a href="/lootbar/blagoslovenie-luny" class="hover:text-teyvat-mint hover:underline">Благословение Полой Луны</a></li>
+          <li><a href="/lootbar/promokod" class="hover:text-teyvat-mint hover:underline">Промокод LootBar</a></li>
+          <li><a href="/lootbar/kak-popolnit-genshin-impact" class="hover:text-teyvat-mint hover:underline">Как пополнить Genshin Impact</a></li>
+          <li><a href="/partnership-disclosure" class="hover:text-teyvat-mint hover:underline">Раскрытие партнёрства</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-10 border-t border-white/10 pt-6 text-center text-xs">
+      Неофициальный фан-сайт. Genshin Impact © miHoYo / HoYoverse. Товарные знаки принадлежат их владельцам.
     </p>
-    <p class="text-center">© {year} genshintop.ru · версия {siteVersion}</p>
+    <p class="mt-2 text-center text-xs">© {year} genshintop.ru · версия {siteVersion}</p>
   </div>
 </footer>

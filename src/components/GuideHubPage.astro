@@ -12,10 +12,15 @@ import {
 } from '../lib/guide-taxonomy';
 import {
   matchHubBanners,
+  matchHubBosses,
   matchHubCodes,
+  matchHubDomains,
   matchHubEconomy,
+  matchHubEvents,
   matchHubNewbie,
   matchHubPatches,
+  matchHubQuests,
+  matchHubTcg,
   matchHubTierList,
   type GuideEntry,
 } from '../lib/guide-hub';
@@ -33,7 +38,12 @@ type GuideHubId =
   | 'patches'
   | 'newbie'
   | 'economy'
-  | 'tier-list';
+  | 'tier-list'
+  | 'events'
+  | 'tcg'
+  | 'domains'
+  | 'bosses'
+  | 'quests';
 
 interface Props {
   hub: GuideHubId;
@@ -60,6 +70,16 @@ function matcher(entry: GuideEntry): boolean {
       return matchHubEconomy(entry);
     case 'tier-list':
       return matchHubTierList(entry);
+    case 'events':
+      return matchHubEvents(entry);
+    case 'tcg':
+      return matchHubTcg(entry);
+    case 'domains':
+      return matchHubDomains(entry);
+    case 'bosses':
+      return matchHubBosses(entry);
+    case 'quests':
+      return matchHubQuests(entry);
     default:
       return false;
   }
@@ -103,11 +123,16 @@ const jsonLd = jsonLdGraph([
 const hubLinks: Array<{ href: string; label: string }> = [
   { href: '/guides', label: 'Все гайды' },
   { href: '/guides/banners', label: 'Баннеры' },
+  { href: '/guides/events', label: 'Ивенты' },
   { href: '/guides/codes', label: 'Промокоды' },
   { href: '/guides/patches', label: 'Обновления' },
   { href: '/guides/newbie', label: 'Новичкам' },
   { href: '/guides/economy', label: 'Экономика' },
   { href: '/guides/tier-list', label: 'Тир-листы' },
+  { href: '/guides/tcg', label: 'Карточная игра' },
+  { href: '/guides/domains', label: 'Подземелья' },
+  { href: '/guides/bosses', label: 'Боссы' },
+  { href: '/guides/quests', label: 'Квесты' },
 ];
 ---
 

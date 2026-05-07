@@ -1,4 +1,5 @@
 /** SEO helpers: canonical URLs, meta descriptions, schema.org fragments. */
+import ogManifest from '../data/og-manifest.json';
 
 export const SITE_URL = 'https://genshintop.ru';
 
@@ -62,6 +63,17 @@ export function publisherOrganization(): Record<string, unknown> {
       width: OG_IMAGE_WIDTH,
       height: OG_IMAGE_HEIGHT,
     },
+  };
+}
+
+/** «Редакция GenshinTop» для использования как author в Article/BlogPosting. */
+export function editorialTeamPerson(): Record<string, unknown> {
+  return {
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#editorial-team`,
+    name: 'Редакция GenshinTop',
+    url: `${SITE_URL}/editorial-policy`,
+    parentOrganization: { '@id': `${SITE_URL}/#organization` },
   };
 }
 
@@ -132,4 +144,71 @@ export function howToSchema(params: {
       text,
     })),
   };
+}
+
+/**
+ * Schema.org Service для коммерческого партнёрского кластера /lootbar.
+ * Provider — внешний сервис (LootBar.gg), мы публикуем обзор и партнёрскую ссылку.
+ */
+export function lootbarServiceSchema(params: {
+  name: string;
+  description: string;
+  url: string;
+  affiliateUrl: string;
+}): Record<string, unknown> {
+  return {
+    '@type': 'Service',
+    '@id': `${absoluteUrl(params.url)}#service`,
+    name: params.name,
+    description: params.description,
+    serviceType: 'Genshin Impact top-up',
+    areaServed: ['RU', 'BY', 'KZ', 'UA'],
+    inLanguage: 'ru-RU',
+    provider: {
+      '@type': 'Organization',
+      name: 'LootBar.gg',
+      url: 'https://lootbar.gg/',
+    },
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Игроки Genshin Impact',
+    },
+    isRelatedTo: {
+      '@type': 'VideoGame',
+      name: 'Genshin Impact',
+      publisher: 'HoYoverse',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: params.affiliateUrl,
+      priceCurrency: 'RUB',
+      availability: 'https://schema.org/InStock',
+      category: 'in-game-currency',
+    },
+    review: undefined,
+    mainEntityOfPage: absoluteUrl(params.url),
+  };
+}
+
+interface OgManifest {
+  generatedAt: string | null;
+  entries: string[];
+}
+
+const manifest = ogManifest as OgManifest;
+const manifestSet = new Set(manifest.entries ?? []);
+
+/**
+ * Возвращает путь к сгенерированной OG-картинке для записи коллекции.
+ * Если PNG ещё не создан скриптом `npm run og:generate`, отдаёт дефолтную SVG.
+ */
+export function getOgImageForEntry(
+  collection: 'guides' | 'characters' | 'lootbar' | 'hubs',
+  slug: string,
+): string {
+  const key = `${collection}/${slug}`;
+  if (manifestSet.has(key)) {
+    return `/og/${key}.png`;
+  }
+  return DEFAULT_OG_IMAGE_PATH;
 }
