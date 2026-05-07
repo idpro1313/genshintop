@@ -86,6 +86,7 @@
         <check-17>Статически: src/lib/seo.ts экспортирует editorialTeamPerson и lootbarServiceSchema; /lootbar/index.astro подключает Service-schema и LootBarGlossary; editorial-policy.astro перечисляет процесс публикации и обновления</check-17>
         <check-18>Статически: src/styles/global.css не содержит @import url(...fonts.googleapis...); BaseLayout.astro использует preconnect и асинхронный link rel=stylesheet с media=print onload; счётчик Яндекс.Метрики обёрнут в requestIdleCallback / load с очередью команд ym</check-18>
         <check-19>Статически: BaseLayout подключает семейство Onest вместе с Cinzel; tailwind.config задаёт font-sans Onest; stripDescriptionNoise в src/lib/seo.ts удаляет U+3164; в разметке head BaseLayout нет HTML-комментариев; global.css содержит hero-glow и prefers-reduced-motion для .lootbar-cta-shine; elementCardAccentClass в src/lib/elements.ts</check-19>
+        <check-20>Статически: scripts/sitemap-lastmod.mjs импортируется из astro.config.mjs; serialize добавляет lastmod для динамических URL; src/pages/rss.xml.ts существует; BaseLayout — link alternate на RSS и meta theme-color; webSiteNode в src/lib/seo.ts содержит potentialAction SearchAction на /guides?q=; publisherOrganization поддерживает optional sameAs из PUBLIC_ORGANIZATION_SAME_AS; guides/index — форма поиска q, data-атрибут на карточках, ItemList в JSON-LD ограничен недавними записями</check-20>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>

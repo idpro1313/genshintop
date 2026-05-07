@@ -2,8 +2,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import { buildSitemapLastmodByUrl, lastmodForSitemapItem } from './scripts/sitemap-lastmod.mjs';
 
 const SITE_HOST = 'https://genshintop.ru';
+const sitemapLastmodByUrl = buildSitemapLastmodByUrl(SITE_HOST);
 
 export default defineConfig({
   site: SITE_HOST,
@@ -24,6 +26,9 @@ export default defineConfig({
 
         if (url === `${SITE_HOST}/`) {
           priority = 1.0;
+          changefreq = 'daily';
+        } else if (/\/rss\.xml\/?$/.test(url)) {
+          priority = 0.55;
           changefreq = 'daily';
         } else if (/\/(guides|characters|lootbar)\/?$/.test(url)) {
           priority = 0.9;
@@ -48,10 +53,13 @@ export default defineConfig({
           changefreq = 'monthly';
         }
 
+        const lastmod = lastmodForSitemapItem(url, sitemapLastmodByUrl);
+
         return {
           ...item,
           priority,
           changefreq,
+          ...(lastmod ? { lastmod } : {}),
         };
       },
     }),

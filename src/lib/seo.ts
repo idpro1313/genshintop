@@ -51,7 +51,18 @@ export function cleanMetaDescription(
   return `${safe}…`;
 }
 
+function organizationSameAsFromEnv(): string[] | undefined {
+  const raw =
+    (import.meta.env.PUBLIC_ORGANIZATION_SAME_AS as string | undefined) ?? '';
+  const urls = raw
+    .split(/[\s,]+/)
+    .map((s) => s.trim())
+    .filter((s) => /^https?:\/\//i.test(s));
+  return urls.length > 0 ? urls : undefined;
+}
+
 export function publisherOrganization(): Record<string, unknown> {
+  const sameAs = organizationSameAsFromEnv();
   return {
     '@type': 'Organization',
     '@id': `${SITE_URL}/#organization`,
@@ -63,6 +74,7 @@ export function publisherOrganization(): Record<string, unknown> {
       width: OG_IMAGE_WIDTH,
       height: OG_IMAGE_HEIGHT,
     },
+    ...(sameAs ? { sameAs } : {}),
   };
 }
 
@@ -85,6 +97,14 @@ export function webSiteNode(): Record<string, unknown> {
     url: SITE_URL,
     inLanguage: 'ru-RU',
     publisher: { '@id': `${SITE_URL}/#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_URL}/guides?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 }
 

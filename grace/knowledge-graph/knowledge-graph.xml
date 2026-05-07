@@ -1,7 +1,7 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="0.6.0">
-    <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat, youthful-ui</keywords>
-    <annotation>Статический сайт GenshinTop (Astro 5): контент src/content/, хабы гайдов и персонажей, /regions/*, /lootbar/*; визуал в духе Teyvat для молодёжной аудитории (Onest+Cinzel, стихийные акценты на карточках, «звёздный» фон); nginx/sitemap/OG без изменения контракта деплоя.</annotation>
+    <Project NAME="genshintop" VERSION="0.7.0">
+    <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat, youthful-ui, rss, sitemap-lastmod</keywords>
+    <annotation>Статический сайт GenshinTop (Astro 5): контент src/content/, хабы, /regions/*, /lootbar/*; SEO: sitemap с lastmod из frontmatter/fs, RSS /rss.xml, SearchAction на /guides?q=, optional sameAs; визуал Teyvat для молодёжи; nginx без SPA-fallback на XML.</annotation>
 
     <M-GI-DATABASE NAME="GiDatabase" TYPE="DATA_LAYER" STATUS="implemented">
       <purpose>Исходный каталог Markdown до переноса; после миграции может быть удалён.</purpose>
@@ -36,8 +36,8 @@
     </M-OG-PIPELINE>
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, хабы и /regions/*, кластер /lootbar/*; UI в духе игры (тёмное небо, золото/mint, цвет стихий на карточках, шрифты Onest+Cinzel), ориентирован на молодёжную аудиторию; мета/OG/schema.org, отложенная Метрика; футер 4 колонки; sitemap; nginx hardened.</purpose>
-      <path>src/, src/lib/elements.ts (elementCardAccentClass), src/data/lootbar.ts, src/data/og-manifest.json, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts (matchHubEvents/Tcg/Domains/Bosses/Quests), src/lib/partners.ts, src/lib/character-hub.ts, src/components/RegionPage.astro, src/components/LootBarGlossary.astro, src/content.config.ts, astro.config.mjs (sitemap serialize), public/og-default.svg, Dockerfile, deploy/genshintop-redirects.conf, deploy/nginx-docker.conf, deploy/docker-compose.yml, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
+      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, хабы и /regions/*, кластер /lootbar/*; sitemap с **lastmod** (scripts/sitemap-lastmod.mjs), RSS **/rss.xml**, JSON-LD **SearchAction** на поиск по /guides?q=; UI Teyvat; мета/OG/schema.org; футер; nginx.</purpose>
+      <path>src/, src/lib/elements.ts (elementCardAccentClass), src/pages/rss.xml.ts, scripts/sitemap-lastmod.mjs, src/data/lootbar.ts, src/data/og-manifest.json, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts (matchHubEvents/Tcg/Domains/Bosses/Quests), src/lib/partners.ts, src/lib/character-hub.ts, src/components/RegionPage.astro, src/components/LootBarGlossary.astro, src/content.config.ts, astro.config.mjs (sitemap serialize + lastmod), public/og-default.svg, Dockerfile, deploy/genshintop-redirects.conf, deploy/nginx-docker.conf, deploy/docker-compose.yml, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
       <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
       <verification-ref>V-M-WEBSITE</verification-ref>
       <annotations>
@@ -54,6 +54,9 @@
         <component-RegionPage PURPOSE="Шаблон страницы региона: hero, ключевые механики, секции, фильтрация нативных персонажей" />
         <component-Footer PURPOSE="4-колоночный футер: персонажи по стихии, хабы гайдов, регионы, LootBar-подстраницы" />
         <ui-youth-teyvat PURPOSE="Тёмный фон со «звёздами», градиенты, pill-навигация, карточки с border-accent стихии, гротеск Onest + Cinzel" />
+        <fn-webSiteSearchAction PURPOSE="webSiteNode: potentialAction SearchAction на /guides?q={search_term_string}" />
+        <fn-rss-guides PURPOSE="src/pages/rss.xml.ts — RSS последних гайдов через @astrojs/rss" />
+        <fn-sitemapLastmod PURPOSE="scripts/sitemap-lastmod.mjs — даты для serialize sitemap" />
         <fn-getOgImageForEntry PURPOSE="Возвращает per-entry PNG из манифеста, иначе fallback /og-default.svg" />
         <fn-editorialTeamPerson PURPOSE="JSON-LD узел Редакции GenshinTop как author для Article/BlogPosting" />
         <fn-lootbarServiceSchema PURPOSE="JSON-LD Service+Offer для коммерческого кластера /lootbar" />

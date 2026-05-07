@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Seo from '../components/Seo.astro';
 import LootBarPromoBanner from '../components/LootBarPromoBanner.astro';
+import { SITE_URL } from '../lib/seo';
 
 interface ArticleTimes {
   publishedTime?: string;
@@ -47,6 +48,7 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1a1a2e" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,6 +83,12 @@ const {
       ogImageAlt={ogImageAlt}
       robots={robots}
       articleTimes={articleTimes}
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="GenshinTop — гайды Genshin Impact"
+      href={`${SITE_URL}/rss.xml`}
     />
     <script is:inline type="text/javascript">
       (function () {

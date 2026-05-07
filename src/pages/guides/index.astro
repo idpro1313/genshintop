@@ -49,8 +49,11 @@ const statusFilters = [
   ...guideStatuses.map((id) => ({ id, label: guideStatusLabelsRu[id] })),
 ];
 
+const initialSearchQ = Astro.url.searchParams.get('q') ?? '';
+
 const pageUrl = absoluteUrl('/guides');
-const itemListElement = all.map((g, i) => ({
+const recentForSchema = all.slice(0, 24);
+const itemListElement = recentForSchema.map((g, i) => ({
   '@type': 'ListItem',
   position: i + 1,
   name: g.data.title,
@@ -70,7 +73,9 @@ const jsonLd = jsonLdGraph([
     isPartOf: { '@id': `${SITE_URL}/#website` },
     mainEntity: {
       '@type': 'ItemList',
-      numberOfItems: all.length,
+      name: 'Недавно обновлённые гайды',
+      description: `Фрагмент каталога (${recentForSchema.length} из ${all.length} материалов). Полный перечень URL — в sitemap-index.xml.`,
+      numberOfItems: recentForSchema.length,
       itemListElement,
     },
   },
@@ -88,6 +93,32 @@ const jsonLd = jsonLdGraph([
     Материалы по игре: когда крутить баннеры, что изменилось в обновлении, как прокачать аккаунт. Фильтры по типу статьи,
     теме и статусу актуальности — на клиенте; каждая статья доступна по своему постоянному адресу для Яндекса и Google.
   </p>
+
+  <form
+    class="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3"
+    method="get"
+    action="/guides"
+    role="search"
+  >
+    <label for="guide-search" class="sr-only">Поиск по гайдам</label>
+    <input
+      id="guide-search"
+      type="search"
+      name="q"
+      data-guide-search
+      value={initialSearchQ}
+      maxlength="200"
+      placeholder="Поиск по названию и описанию…"
+      autocomplete="off"
+      class="w-full rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-slate-100 placeholder:text-teyvat-muted focus:border-teyvat-mint/50 focus:outline-none focus:ring-1 focus:ring-teyvat-mint/30 sm:max-w-md"
+    />
+    <button
+      type="submit"
+      class="shrink-0 rounded-full bg-gradient-to-r from-teyvat-accent/40 to-teyvat-mint/25 px-6 py-2.5 text-sm font-bold text-teyvat-gold ring-1 ring-teyvat-accent/40 transition hover:brightness-110"
+    >
+      Найти
+    </button>
+  </form>
 
   <section class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 text-slate-300">
     <h2 class="font-display text-lg font-semibold text-white">Связанные разделы</h2>
@@ -231,15 +262,19 @@ const jsonLd = jsonLdGraph([
     let activeStatus = '';
 
     function apply() {
+      const input = document.querySelector('[data-guide-search]') as HTMLInputElement | null;
+      const q = input?.value?.trim().toLowerCase() ?? '';
       let visible = 0;
       for (const el of cards()) {
         const cat = el.dataset.category ?? '';
         const topic = el.dataset.topic ?? '';
         const status = el.dataset.status ?? '';
+        const hay = el.dataset.searchHaystack ?? '';
         const show =
           (!activeCat || cat === activeCat) &&
           (!activeTopic || topic === activeTopic) &&
-          (!activeStatus || status === activeStatus);
+          (!activeStatus || status === activeStatus) &&
+          (!q || hay.includes(q));
         el.style.display = show ? '' : 'none';
         if (show) visible++;
       }
@@ -275,6 +310,10 @@ const jsonLd = jsonLdGraph([
       if (!btn) return;
       activeStatus = btn.getAttribute('data-status') ?? '';
       repaintAll();
+    });
+
+    document.querySelector('[data-guide-search]')?.addEventListener('input', () => {
+      apply();
     });
 
     repaintAll();

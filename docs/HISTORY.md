@@ -226,3 +226,15 @@
 ### GRACE и версия
 - **Что:** `VERSION` **0.5.1 → 0.6.0** (MINOR: системный UI), синхронизированы `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, дополнен `docs/AGENTS.md`.
 - **Файлы:** `VERSION`, `package.json`, `package-lock.json`, `grace/**`, `docs/AGENTS.md`, `docs/HISTORY.md`
+
+## Фаза: максимизация SEO (0.7.0)
+
+### Sitemap lastmod, RSS, SearchAction, поиск по каталогу, schema, чек-лист
+- **Что:** в sitemap через `serialize` добавлен реалистичный `<lastmod>` для гайдов и персонажей (`scripts/sitemap-lastmod.mjs`: приоритет дат frontmatter + mtime файла); подключён `@astrojs/rss`, эндпоинт `/rss.xml` (последние записи гайдов); в `webSiteNode` — `potentialAction` `SearchAction` на `https://genshintop.ru/guides?q={search_term_string}`; на `/guides` — форма/параметр `?q=`, клиентский фильтр по `data-search-haystack` на карточках; JSON-LD `ItemList` на хабе гайдов усечён до 24 свежих элементов при сохранении `numberOfItems`; опциональный `sameAs` у издателя из `PUBLIC_ORGANIZATION_SAME_AS`; в шапке — `theme-color` и `link rel="alternate"` на RSS; обновлены `deploy/SEO-CHECKLIST.md`, `deploy/env.example`, план верификации GRACE.
+- **Почему:** план пользователя на усиление SEO без ломки деплоя: свежесть URL в карте сайта, канал подписки, валидный поисковый шаблон, меньший объём разметки на каталоге.
+- **Файлы:** `scripts/sitemap-lastmod.mjs`, `astro.config.mjs`, `src/pages/rss.xml.ts`, `src/lib/seo.ts`, `src/layouts/BaseLayout.astro`, `src/components/GuideCard.astro`, `src/pages/guides/index.astro`, `package.json`, `package-lock.json`, `deploy/SEO-CHECKLIST.md`, `deploy/env.example`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/AGENTS.md`, `docs/HISTORY.md`
+- **Решение:** MINOR `0.6.0 → 0.7.0` (новые поверхности RSS, lastmod, SearchAction и поведение поиска). Локальный запуск сборки для проверки не выполнялся (правило `no-local-app-verification`).
+
+### VERSION и синхронизация манифестов (0.7.0)
+- **Что:** `VERSION` **0.6.0 → 0.7.0**; синхронизированы `package.json` и корневые поля `package-lock.json`; граф знаний уже на `0.7.0`, дополнен `docs/AGENTS.md` и этот журнал.
+- **Файлы:** `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `docs/HISTORY.md`
