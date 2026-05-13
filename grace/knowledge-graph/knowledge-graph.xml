@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.12.2">
+    <Project NAME="genshintop" VERSION="1.13.0">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живые гайды info/guides/, живые карточки info/characters/; папка content/ (архивы) только локально, не в git; каталоги scripts/ и reports/ отсутствуют; зеркал нет; роутинг public/index.php; lib/; без Node/npm; sitemap lib/build-sitemap.php; GHCR + Traefik.</annotation>
 
@@ -26,6 +26,19 @@
       <depends>M-PHP-SITE</depends>
       <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
     </M-CONTENT-GUIDE-REFACTOR>
+
+    <M-CONTENT-V2 NAME="ContentV2Catalog" TYPE="UTILITY" STATUS="partial">
+      <purpose>Параллельный каталог content/ — новая редакция корпуса сайта по docs/PLAN.md. Жёсткое зеркало всех разделов PLAN: characters/, weapons/, artifacts/, materials/, enemies/, guides/{basics,advanced,walkthroughs}/, tools/, world/{regions,lore,factions,npc}/, news/{events,announcements,banners,patches}/, community/. Стандарты — content/STYLE.md, шаблоны frontmatter — content/_templates/*.md. lib/ContentRepository.php сейчас на content/ не переключён; переключение — отдельная задача после волны 2.</purpose>
+      <path>content/README.md, content/STYLE.md, content/_templates/, content/characters/, content/weapons/, content/artifacts/, content/materials/, content/enemies/, content/guides/, content/tools/, content/world/, content/news/, content/community/</path>
+      <depends>M-CONTENT-GUIDE-REFACTOR</depends>
+      <verification-ref>V-M-CONTENT-V2</verification-ref>
+      <annotations>
+        <ax-mirror PURPOSE="Каждый раздел docs/PLAN.md имеет свой каталог в content/ с _index.md" />
+        <ax-templates PURPOSE="content/_templates/*.md — единые YAML-шаблоны frontmatter по 11 типам (article, character, weapon, artifact, region, faction, npc, banner, patch, enemy, material)" />
+        <ax-style PURPOSE="content/STYLE.md заменяет удалённые docs/GUIDE_EDITORIAL.md и docs/CHARACTER_EDITORIAL.md: длина по типам, тон, атрибуция, slug-конвенция, запреты" />
+        <ax-status PURPOSE="frontmatter status: live | draft | stub. На 1.13.0 в основном live для опорных материалов и draft для расширения" />
+      </annotations>
+    </M-CONTENT-V2>
 
     <!-- Module declarations use unique ID-based tags.
          STATUS should usually be one of: planned, partial, implemented

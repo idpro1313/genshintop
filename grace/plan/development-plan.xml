@@ -159,6 +159,14 @@
       <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md; merge/split и обновление ссылок вручную; 301 в docker/genshintop-redirects.conf; без скриптов inventory/wave в репозитории</step-1>
     </Phase-6>
 
+    <Phase-7 name="ContentV2CatalogScaffold" status="in-progress">
+      <goal>Параллельный каталог content/ — новая редакция корпуса сайта строго по docs/PLAN.md. info/ остаётся живым каталогом сайта. После завершения волн контента — отдельная миграционная задача переключит lib/ContentRepository.php на content/.</goal>
+      <step-1 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Каркас content/: README, STYLE, _templates/ (11 шаблонов frontmatter), _index.md для всех разделов PLAN, индексы по стихии/оружию/региону для characters, по типу/звёздности для weapons, по источнику для artifacts, по семейству для enemies (B0)</step-1>
+      <step-2 module="M-CONTENT-V2" status="in-progress" verification="V-M-CONTENT-V2">Опорные материалы: 5 walkthroughs + 4 PLAN-anchored basics + 9 поддерживающих basics drafts (B1); 7 advanced (B2); 7 регионов + 6 лор + 12 фракций + 2 NPC (B3); банн́ерный гайд + 6 ключевых патчей + 2 sample баннера (B4); 4 tools + 4 community + sample materials/enemies (B5); 5★ образцы оружия по типам + 4 ключевых 4★ (B6); 11 ключевых сетов артефактов (B7); 14 marquee-карточек персонажей (B8 wave 1)</step-2>
+      <step-3 module="M-CONTENT-V2" status="planned" verification="V-M-CONTENT-V2">Wave 2: ~180 оставшихся карточек персонажей (полный wiki-формат), карточки на каждое 4★/3★ оружие (~150), оставшиеся ~50 сетов артефактов, ~80 баннеров и ~60 патчей в полной форме, оставшиеся ~70 basics-гайдов, расширение бестиария до полного, материалы по всем регионам и категориям</step-3>
+      <step-4 module="M-CONTENT-V2" status="planned" verification="V-M-CONTENT-V2">Миграция lib/ContentRepository.php на content/ + редиректы для изменившихся slug. Архивирование info/ как guide-archive/</step-4>
+    </Phase-7>
+
     <!-- Phases use unique tags:
          <Phase-1 name="Foundation" status="pending">
             <goal>What this phase proves or unlocks</goal>
