@@ -446,3 +446,9 @@
 - **Почему:** продолжение выкатки новой базы гайдов после волны 2.
 - **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.6.2** — контент, редиректы, версия в GRACE; без изменений PHP.
+
+### Редакционное зеркало персонажей info/characters (1.6.3)
+- **Что:** добавлен каталог **`info/characters/`** с **197** файлами `*.md` — начальное зеркало **`content/characters/`** для того же workflow, что у гайдов (правки в `info/`, копирование в `content/` для публикации). Обновлены **`info/README.md`** (структура «гайды + персонажи»), **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`** (путь **`info/characters/`**, аннотация, **VERSION 1.6.3**), **`grace/technology/technology.xml`**, **`VERSION` → 1.6.3**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя сделать с персонажами **«так же»**, как с опорным корпусом гайдов — единый редакционный контур.
+- **Файлы:** `info/characters/*.md`, `info/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.6.3** — дублирование контента намеренное для редакции; **`content/characters/`** в этом коммите не менялся (уже совпадает с копией).

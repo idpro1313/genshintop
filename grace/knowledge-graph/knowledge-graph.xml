@@ -1,7 +1,7 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.6.2">
+    <Project NAME="genshintop" VERSION="1.6.3">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
-    <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живые гайды в content/guides/, архив прежнего корпуса в content/guides-archive/, черновик опорного корпуса в info/guides/; персонажи content/characters; роутинг public/index.php; lib/; без Node/npm; sitemap lib/build-sitemap.php; GHCR + Traefik.</annotation>
+    <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живые гайды в content/guides/, архив прежнего корпуса в content/guides-archive/, черновик опорных гайдов в info/guides/, зеркало карточек персонажей в info/characters/, канон персонажей content/characters/; роутинг public/index.php; lib/; без Node/npm; sitemap lib/build-sitemap.php; GHCR + Traefik.</annotation>
 
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" STATUS="implemented">
       <purpose>Публичный SEO-сайт genshintop.ru: PHP front-controller (public/index.php → lib/web_dispatch.php); персонажи/гайды из content/; кластер /lootbar/*; регионы; JSON-LD через lib/Seo.php; sitemap через lib/build-sitemap.php при docker build; без RSS; OgManifest + lib/og-manifest.json + public/og/*.png в репозитории.</purpose>
@@ -22,7 +22,7 @@
 
     <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" STATUS="implemented">
       <purpose>Стандарты и инструменты редакционного рефакторинга гайдов; инвентаризация корпуса; playbook merge/split и nginx-редиректы.</purpose>
-      <path>info/README.md, info/guides/, content/guides-archive/, scripts/guides-refactor-inventory.php, scripts/guides-refactor-inventory.ps1, docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md, reports/guides-refactor-inventory.json, docker/genshintop-redirects.conf</path>
+      <path>info/README.md, info/guides/, info/characters/, content/guides-archive/, scripts/guides-refactor-inventory.php, scripts/guides-refactor-inventory.ps1, docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md, reports/guides-refactor-inventory.json, docker/genshintop-redirects.conf</path>
       <depends>M-PHP-SITE</depends>
       <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
     </M-CONTENT-GUIDE-REFACTOR>

@@ -1,6 +1,10 @@
-# Опорный корпус гайдов (редакционная стадия)
+# Опорный корпус контента (редакция GenshinTop)
 
-Каталог `info/guides/` — черновик статей для GenshinTop: новые тексты с нуля, без копирования из [`content/guides/`](../content/guides). После выкатки текущие гайды переносятся в [`content/guides-archive/`](../content/guides-archive), а файлы из `info/guides/` копируются в `content/guides/`.
+Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт страницы только из **`content/guides/`** и **`content/characters/`** (см. [`ContentRepository`](../lib/ContentRepository.php)). Каталоги под `info/` — редакционное зеркало: правки и новые материалы ведите в `info/…`, затем **копируйте** в `content/…` для публикации.
+
+## Гайды
+
+Каталог `info/guides/` — черновик статей: новые опорные тексты с нуля по плану матрицы (без смыслового копирования из устаревшего архива). После смены корпуса старые URL уходят в [`content/guides-archive/`](../content/guides-archive); актуальные файлы из `info/guides/` копируются в [`content/guides/`](../content/guides).
 
 ## Инвентаризация исходного корпуса (на момент работ)
 
@@ -24,7 +28,7 @@
 
 ## Матрица: хаб → статья (финальные slug)
 
-Все статьи плоским списком в `info/guides/*.md` — так же их заберёт [`ContentRepository`](../lib/ContentRepository.php).
+Все статьи плоским списком в `info/guides/*.md`; после выкатки в **`content/guides/`** их подхватывает [`ContentRepository`](../lib/ContentRepository.php).
 
 | Хаб сайта | Файл / slug | Назначение |
 |-----------|------------|------------|
@@ -79,6 +83,15 @@
 | newbie / мир | `gadzhety-i-komfort-issledovaniya` | Гаджеты и удобство исследования |
 
 **Итого:** 37 статей в `info/guides/` и `content/guides/`.
+
+## Персонажи
+
+Каталог `info/characters/` — зеркало всех карточек из [`content/characters/`](../content/characters). Редактируйте здесь (или добавляйте новые `*.md`), затем копируйте в `content/characters/` тем же способом, что гайды из `info/guides/` → `content/guides/`.
+
+- **Frontmatter:** `name`, `title`, `element`, `weapon`, `rating`, `sourceSlug`, списки `relatedWeapons`, `relatedArtifacts`, `relatedGuides` — как в продакшене; slug файла = slug URL (`sourceSlug`).
+- **`relatedGuides`:** только slug из актуального опорного набора гайдов (таблицы выше).
+
+**Счётчик:** **197** файлов `.md` в `info/characters/` и в `content/characters/` (включая подборки `why-pull-*` и сравнения `*-vs-*` — они тоже лежат в общем каталоге персонажей).
 
 ## Редкие стандарты
 
