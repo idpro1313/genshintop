@@ -5,3 +5,6 @@ dist/
 .DS_Store
 docker/.env
 grace/
+docs/
+.kilo/
+.cursor/
