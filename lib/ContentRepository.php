@@ -4,41 +4,88 @@ declare(strict_types=1);
 
 final class ContentRepository
 {
-    private static ?array $guidesCache = null;
-    private static ?array $charactersCache = null;
+    private static ?array $allCache = null;
 
     /** @return list<array<string,mixed>> */
-    public static function guides(): array
+    public static function allLive(): array
     {
-        if (self::$guidesCache !== null) {
-            return self::$guidesCache;
+        if (self::$allCache !== null) {
+            return self::$allCache;
         }
-        $dir = SITE_ROOT . '/info/guides';
+
+        $dir = SITE_ROOT . '/content';
         $out = [];
-        foreach (glob($dir . '/*.md') ?: [] as $path) {
-            $slug = basename($path, '.md');
+
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir));
+        $mdFiles = new RegexIterator($iterator, '/^.+\.md$/i', RecursiveRegexIterator::GET_MATCH);
+
+        foreach ($mdFiles as $file) {
+            $path = $file[0];
+            $relPath = str_replace('\\', '/', substr($path, strlen($dir)));
+            
+            if (str_starts_with($relPath, '/_templates/')) {
+                continue;
+            }
+            if (str_ends_with($relPath, 'README.md') || str_ends_with($relPath, 'STYLE.md')) {
+                continue;
+            }
+
             $raw = (string) file_get_contents($path);
             $split = Frontmatter::split($raw);
             $meta = $split['meta'];
-            $srcSlug = isset($meta['sourceSlug']) ? (string) $meta['sourceSlug'] : $slug;
-            if (str_starts_with($srcSlug, '_placeholder')) {
+
+            $status = $meta['status'] ?? 'live';
+            if ($status !== 'live') {
                 continue;
             }
+
+            $isIndex = basename($path) === '_index.md';
+            
+            $slug = $meta['slug'] ?? basename($path, '.md');
+            $section = $meta['section'] ?? trim(dirname($relPath), '/');
+
+            // Fallbacks
             $title = isset($meta['title']) && is_string($meta['title']) ? $meta['title'] : $slug;
+            $name = isset($meta['name']) && is_string($meta['name']) ? $meta['name'] : $title;
             $category = isset($meta['category']) && is_string($meta['category']) ? $meta['category'] : 'general';
             $summary = isset($meta['summary']) && is_string($meta['summary']) ? $meta['summary'] : null;
+
+            $element = isset($meta['element']) && is_string($meta['element']) ? $meta['element'] : 'Anemo';
+            $weapon = isset($meta['weapon']) && is_string($meta['weapon']) ? $meta['weapon'] : 'Прочее';
+            $rarity = isset($meta['rarity']) && is_numeric($meta['rarity']) ? (int)$meta['rarity'] : null;
+
             $out[] = [
-                'slug' => $slug,
                 'path' => $path,
+                'slug' => $slug,
+                'section' => $section,
+                'isIndex' => $isIndex,
                 'title' => $title,
+                'name' => $name,
                 'category' => $category,
                 'summary' => $summary,
+                'element' => $element,
+                'weapon' => $weapon,
+                'rarity' => $rarity,
                 'meta' => $meta,
                 'body_md' => $split['body'],
             ];
         }
+
+        self::$allCache = $out;
+        return $out;
+    }
+
+    /** @return list<array<string,mixed>> */
+    public static function guides(): array
+    {
+        $all = self::allLive();
+        $out = [];
+        foreach ($all as $item) {
+            if (!$item['isIndex'] && str_starts_with($item['section'], 'guides')) {
+                $out[] = $item;
+            }
+        }
         usort($out, fn ($a, $b) => strcmp((string) $a['slug'], (string) $b['slug']));
-        self::$guidesCache = $out;
         return $out;
     }
 
@@ -82,37 +129,14 @@ final class ContentRepository
     /** @return list<array<string,mixed>> */
     public static function characters(): array
     {
-        if (self::$charactersCache !== null) {
-            return self::$charactersCache;
-        }
-        $dir = SITE_ROOT . '/info/characters';
+        $all = self::allLive();
         $out = [];
-        foreach (glob($dir . '/*.md') ?: [] as $path) {
-            $slug = basename($path, '.md');
-            $raw = (string) file_get_contents($path);
-            $split = Frontmatter::split($raw);
-            $meta = $split['meta'];
-            $srcSlug = isset($meta['sourceSlug']) ? (string) $meta['sourceSlug'] : $slug;
-            if (str_starts_with($srcSlug, '_placeholder')) {
-                continue;
+        foreach ($all as $item) {
+            if (!$item['isIndex'] && str_starts_with($item['section'], 'characters') && !str_starts_with($item['slug'], '_by-')) {
+                $out[] = $item;
             }
-            $name = isset($meta['name']) && is_string($meta['name']) ? $meta['name'] : $slug;
-            $element = isset($meta['element']) && is_string($meta['element']) ? $meta['element'] : 'Anemo';
-            $weapon = isset($meta['weapon']) && is_string($meta['weapon']) ? $meta['weapon'] : 'Прочее';
-            $rarity = $meta['rarity'] ?? null;
-            $out[] = [
-                'slug' => $slug,
-                'path' => $path,
-                'name' => $name,
-                'element' => $element,
-                'weapon' => $weapon,
-                'rarity' => is_numeric($rarity) ? (int) $rarity : null,
-                'meta' => $meta,
-                'body_md' => $split['body'],
-            ];
         }
         usort($out, fn ($a, $b) => strcmp((string) $a['name'], (string) $b['name']));
-        self::$charactersCache = $out;
         return $out;
     }
 
@@ -186,5 +210,23 @@ final class ContentRepository
     public static function filterCharacters(callable $fn): array
     {
         return array_values(array_filter(self::characters(), $fn));
+    }
+
+    /** @return array<string,mixed>|null */
+    public static function findItemByUrl(string $urlPath): ?array
+    {
+        $path = trim($urlPath, '/');
+        foreach (self::allLive() as $item) {
+            // For root index files, the url is just the section. e.g. /news
+            // For items, it is /section/slug
+            $itemUrl = $item['isIndex'] ? $item['section'] : ltrim($item['section'] . '/' . $item['slug'], '/');
+            if ($itemUrl === $path || $itemUrl === $path . '/_index') {
+                return $item;
+            }
+            if (!$item['isIndex'] && $item['slug'] === $path) { // top level items?
+                return $item;
+            }
+        }
+        return null;
     }
 }

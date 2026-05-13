@@ -84,6 +84,7 @@
         <check-7>Статически (Wave 2 / 1.14.0): characters >= 110 live, weapons >= 55 live, artifacts >= 35 live, news/patches >= 40 live, news/banners >= 18 live, world/factions >= 15 live, enemies >= 18 live, materials >= 18 live</check-7>
         <check-8>Статически (Wave 3 / 1.15.0): world/factions = 24 live (0 draft, все доведены), guides/basics >= 18 live (0 draft по приоритетным), guides/advanced >= 11 live (0 draft по приоритетным), news/events >= 6 live, news/announcements >= 5 live, world/npc >= 13 live, materials >= 27 live, characters extension >= 4 full-wiki cards (Albedo, Kuki, Alhaitham, Ayaka)</check-8>
         <check-9>Статически (Wave 4 / 1.16.0): вне content/_templates/ нет frontmatter status:draft или status:stub; characters = 115 live, guides = 37 live, materials = 28 live, news/patches = 43 live, world/npc = 20 live, community = 4 live; character indexes не содержат явных пометок «нет, не сюда» и мусорных имён из черновиков</check-9>
+        <check-10>Статически (1.17.0): lib/ContentRepository.php вызывает RecursiveDirectoryIterator по content/; Router.php использует findItemByUrl; sitemap генерируется из content/; нет упоминаний info/ в lib и docker, каталог info/ перемещён в archive/info/</check-10>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Редактор открывает content/&lt;section&gt;/_index.md и видит структуру раздела со списком слугов и шаблоном</scenario-1>
@@ -92,6 +93,7 @@
         <scenario-4 kind="success">Wave 2 снимок: content/README.md содержит таблицу прогресса с колонками live/draft/stub/total и совпадает с фактическим Get-ChildItem подсчётом (зафиксировано 2026-05-13)</scenario-4>
         <scenario-5 kind="success">Wave 3 снимок: world/factions полностью live (0 draft); guides/basics + guides/advanced все приоритетные draft закрыты; news/events + news/announcements заполнены минимум 5 файлами каждый; характерные расширения compact→full wiki содержат разделы Лор, Таланты с полным описанием, Созвездия с tier-list, Билд (артефакты + статы + цели), Оружие (R, tier, заметки), Энергия и ротация, минимум 3 командные комбо, Spiral Abyss/Theatre заметки</scenario-5>
         <scenario-6 kind="success">Wave 4 снимок: rg "^status:\s*(draft|stub)" content/ возвращает только content/_templates/* и пример draft внутри code block user-guides; рабочие карточки publish-ready. Character index pages используют representative lists с корректными ссылками, а Skirk и patch 6.0 оформлены как safe live/TBA pages без неподтверждённых механик</scenario-6>
+        <scenario-7 kind="success">Сайт рендерится из content/ через contentArticle и contentSectionIndex. Старые URL перенаправляются 301-редиректом через nginx.</scenario-7>
       </scenarios>
       <required-log-markers />
     </V-M-CONTENT-V2>

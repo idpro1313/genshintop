@@ -1449,4 +1449,101 @@ HTML;
             'jsonLd' => $jsonLd,
         ];
     }
+
+    public static function contentSectionIndex(array $cfg, array $item): array
+    {
+        $title = $item['title'];
+        $desc = $item['summary'] ?? $title;
+        $canonicalPath = '/' . $item['section'];
+        if (str_ends_with($canonicalPath, '/_index')) {
+            $canonicalPath = substr($canonicalPath, 0, -7);
+        }
+
+        $htmlBody = ContentRepository::markdownToHtml($item['body_md']);
+
+        $children = [];
+        foreach (ContentRepository::allLive() as $child) {
+            if (!$child['isIndex'] && $child['section'] === $item['section']) {
+                $children[] = $child;
+            }
+        }
+        usort($children, fn ($a, $b) => strcmp((string) $a['title'], (string) $b['title']));
+
+        $cardsHtml = '<div class="guides-grid">';
+        foreach ($children as $c) {
+            $childUrl = '/' . ltrim($c['section'] . '/' . $c['slug'], '/');
+            $childTitle = $c['title'];
+            $childDesc = $c['summary'] ?? '';
+            $cardsHtml .= HtmlComponents::guideCard($childUrl, $childTitle, $childDesc);
+        }
+        $cardsHtml .= '</div>';
+
+        $bc = HtmlComponents::breadcrumbs($cfg, [
+            ['label' => 'Главная', 'href' => '/'],
+            ['label' => $title, 'href' => $canonicalPath],
+        ]);
+
+        $slot = $bc . '<article class="article prose-flow"><header class="article-head"><h1>' . Html::e($title) . '</h1></header><div class="prose">' . $htmlBody . '</div></article>' . $cardsHtml;
+
+        $jsonLd = Seo::jsonLdGraph([
+            Seo::publisherOrganization($cfg),
+            Seo::breadcrumbListSchema($cfg, [
+                ['label' => 'Главная', 'href' => '/'],
+                ['label' => $title, 'href' => $canonicalPath],
+            ])
+        ]);
+
+        return [
+            'pageTitle' => $title . ' — GenshinTop',
+            'pageDescription' => $desc,
+            'canonicalPath' => $canonicalPath,
+            'slot' => $slot,
+            'jsonLd' => $jsonLd,
+        ];
+    }
+
+    public static function contentArticle(array $cfg, array $item): array
+    {
+        $title = $item['title'];
+        $desc = Seo::cleanMetaDescription($item['summary'] ?? '', $title);
+        $canonicalPath = '/' . ltrim($item['section'] . '/' . $item['slug'], '/');
+        
+        $meta = $item['meta'];
+
+        $publishedIso = self::metaIso($meta['date'] ?? null);
+        $modifiedIso = self::metaIso($meta['updatedAt'] ?? null) ?? $publishedIso;
+
+        $htmlBody = ContentRepository::markdownToHtml($item['body_md']);
+        
+        $bcList = [
+            ['label' => 'Главная', 'href' => '/'],
+        ];
+        if ($item['section']) {
+            $sectionParts = explode('/', $item['section']);
+            $currentSectionPath = '';
+            foreach ($sectionParts as $part) {
+                if ($part === '') continue;
+                $currentSectionPath .= '/' . $part;
+                $bcList[] = ['label' => ucfirst($part), 'href' => $currentSectionPath];
+            }
+        }
+        $bcList[] = ['label' => $title, 'href' => $canonicalPath];
+
+        $bc = HtmlComponents::breadcrumbs($cfg, $bcList);
+
+        $slot = $bc . '<article class="article prose-flow"><header class="article-head"><h1>' . Html::e($title) . '</h1></header><div class="prose">' . $htmlBody . '</div></article>';
+
+        $jsonLd = Seo::jsonLdGraph([
+            Seo::publisherOrganization($cfg),
+            Seo::breadcrumbListSchema($cfg, $bcList)
+        ]);
+
+        return [
+            'pageTitle' => $title . ' — GenshinTop',
+            'pageDescription' => $desc,
+            'canonicalPath' => $canonicalPath,
+            'slot' => $slot,
+            'jsonLd' => $jsonLd,
+        ];
+    }
 }

@@ -9,9 +9,11 @@ $nav = [
     ['href' => '/', 'label' => 'Главная'],
     ['href' => '/characters', 'label' => 'Персонажи'],
     ['href' => '/guides', 'label' => 'Гайды'],
-    ['href' => '/regions', 'label' => 'Регионы'],
+    ['href' => '/weapons', 'label' => 'Оружие'],
+    ['href' => '/artifacts', 'label' => 'Артефакты'],
+    ['href' => '/world', 'label' => 'Мир'],
+    ['href' => '/news', 'label' => 'Новости'],
     ['href' => '/lootbar', 'label' => 'Пополнение'],
-    ['href' => '/about', 'label' => 'О проекте'],
 ];
 ?>
 <header class="site-header">

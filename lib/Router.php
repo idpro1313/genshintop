@@ -34,6 +34,17 @@ final class Router
             return;
         }
 
+        // --- Content Generic Routing ---
+        $item = ContentRepository::findItemByUrl($path);
+        if ($item) {
+            if ($item['isIndex']) {
+                self::send($cfg, PageRenderer::contentSectionIndex($cfg, $item));
+            } else {
+                self::send($cfg, PageRenderer::contentArticle($cfg, $item));
+            }
+            return;
+        }
+
         // --- Guides ---
         if ($path === '/guides') {
             self::send($cfg, PageRenderer::guidesIndex($cfg));
