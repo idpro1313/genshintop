@@ -496,3 +496,9 @@
 - **Почему:** запрос пользователя **«закончи с оставшимися всеми гайдами»** в контексте опорного корпуса (не W3 архива).
 - **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.10.0** — закрывающий блок волн 11–14; архив **`content/guides-archive/`** по-прежнему вне этого этапа.
+
+### Вычитка гайда Seelie (1.10.1)
+- **Что:** в **`info/guides/seelie-i-mir-golovolomok.md`** и **`content/guides/seelie-i-mir-golovolomok.md`** уточнены заголовок и формулировки про фей Seelie. **`VERSION` → 1.10.1**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** редакционная правка после выкатки волн 11–14.
+- **Файлы:** `info/guides/seelie-i-mir-golovolomok.md`, `content/guides/seelie-i-mir-golovolomok.md`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.10.1**.

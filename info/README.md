@@ -186,7 +186,7 @@
 | Хаб / тема | Файл / slug | Назначение |
 |------------|-------------|------------|
 | general | `derevya-podnosheniya-i-kollektsii` | Деревья подношений и коллекции |
-| newbie | `seelie-i-mir-golovolomok` | Сили и мирные головоломки |
+| newbie | `seelie-i-mir-golovolomok` | Феи Seelie и мирные головоломки |
 | economy | `ruda-usileniya-oruzhiya` | Руда и кристаллы опыта оружия |
 | newbie | `vezerver-i-vodnye-marshruty` | Везервёр и водные маршруты |
 | tech | `zvuk-ozvuchka-yazykovye-pakety` | Звук и языковые пакеты |
