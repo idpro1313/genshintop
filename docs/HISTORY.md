@@ -300,3 +300,9 @@
 - **Почему:** в браузере отображалась «простыня» исходного кода (на скриншоте — класс Parsedown); признак того, что **`index.php`** отдавался как статика без PHP-FPM.
 - **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.0.8**. После выката проверить **`docker compose logs`** на **`php-fpm`** и nginx 502; если симптом сохраняется — убедиться, что Traefik ведёт на контейнер образа GHCR, а не на статический хост без PHP.
+
+### nginx: /favicon.ico → favicon.svg (1.0.9)
+- **Что:** в **`docker/nginx-default.conf`** добавлено **`location = /favicon.ico`** с **`rewrite … /favicon.svg last`** (в **`public/`** только **`favicon.svg`**, в **`layout.php`** уже указан **`rel=icon`** на SVG).
+- **Почему:** консоль браузера — **404** на **`/favicon.ico`** при автоматическом запросе вкладки.
+- **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.0.9**.
