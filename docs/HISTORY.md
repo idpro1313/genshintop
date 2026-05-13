@@ -540,3 +540,9 @@
 - **Почему:** проверка кода: сайт не читает **`content/`** (**`lib/ContentRepository.php`** — только **`info/guides`**, **`info/characters`**); запрос — не версионировать папку и не копировать её в образ.
 - **Файлы:** `.gitignore`, `docker/Dockerfile`, `README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/requirements/requirements.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`, снятие с индекса `content/**`
 - **Решение:** PATCH **1.11.3** — архивы и снимки при необходимости только локально; **`git clone`** без **`content/`** достаточен для сборки образа и работы сайта.
+
+### Восстановление scripts/ после 1.11.3 (1.11.4)
+- **Что:** из коммита **1.11.3** случайно удалились отслеживаемые файлы **`scripts/*.php`**, **`scripts/*.ps1`** (редакторские утилиты). Содержимое восстановлено из родителя **`cdd601d`**; **`VERSION` → 1.11.4**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** в рабочей копии каталог **`scripts/`** оказался пуст к моменту коммита, **`git commit`** зафиксировал удаление пяти файлов.
+- **Файлы:** `scripts/guides-refactor-inventory.php`, `scripts/guides-refactor-inventory.ps1`, `scripts/normalize-short-line-runons.ps1`, `scripts/rebuild-character-pages.ps1`, `scripts/wave-w1-merge-banner-dated.ps1`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.11.4** — без изменения смысла **1.11.3** по **`content/`** и Docker.
