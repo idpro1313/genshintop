@@ -476,3 +476,11 @@
 - **Почему:** синхронизация GRACE с выкатом **1.7.0** (правило **grace-artifact-sync**).
 - **Файлы:** `grace/plan/development-plan.xml`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.7.1** — только артефакты плана и метаданные версии.
+
+## Фаза: опорный корпус гайдов — волны 5–7 (1.8.0)
+
+### Волны расширения: +24 гайда (уровень мира, QoL, экономика, безопасность)
+- **Что:** в **`info/guides/`** и **`content/guides/`** добавлены **24** опорные статьи (волны **5–7** по **8** slug): уровень мира, региональная валюта и магазины, рыбалка, почта и раздачи, аккаунт HoYoverse и кросс-сейв, бесплатные герои с ивентов, одноразовость сундуков, метки карты, сундук артефактов и обмен, экспедиции, локальные специалитеты, недельный рутин, фоторежим, безопасность и 2FA, сторонние инструменты, стол алхимии, настройки клиента, смена времени суток, персональные телепорты, лимитные торговцы, инвентарь, повторный проход подземелий, скрытые ачивки и карточки профиля, книги рецептов. В **`docker/genshintop-redirects.conf`** расширен negative lookahead на новые canonical slug (исправлена опечатка **`magazinel-bleska`** → **`magazin-bleska`** в whitelist). Обновлены **`info/README.md`** (итого **69** статей), **`VERSION` → 1.8.0**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя **«продолжи все волны с гайдами»** — довести опорный корпус тремя волнами по плану редактуры.
+- **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.8.0** — существенное расширение тематики гайдов без смены контракта сайта.

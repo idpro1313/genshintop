@@ -99,6 +99,47 @@
 
 **Итого:** 45 статей в `info/guides/` и `content/guides/`.
 
+### Волна 5 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| general | `uroven-mira-i-nagrady-teyvata` | Уровень мира: награды, сложность, понижение |
+| economy | `regionalnaya-valyuta-magaziny` | Региональная валюта и городские магазины |
+| newbie | `rybolovstvo-v-teyvate` | Рыбалка: старт, наживка, обмен |
+| economy | `pochtovye-nagrady-i-rozygryshi` | Почта, веб-награды, официальные раздачи |
+| general | `akkaunt-hoyoverse-i-kross-save` | Аккаунт HoYoverse и кросс-платформа |
+| economy | `besplatnye-geroi-sobytiya` | Бесплатные герои: ивенты и магазины |
+| newbie | `sunduki-respawn-i-fakty` | Сундуки и мифы про респавн |
+| newbie | `karta-metki-i-navigatsiya` | Карта: метки, фильтры, навигация |
+
+### Волна 6 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| economy / прокачка | `sunduk-artefaktov-i-obmen` | Сундук артефактов и обмен осколков |
+| economy | `ekspeditsii-i-zabory-resursov` | Экспедиции и пассивная добыча |
+| newbie | `lokalnye-spetsialtety-sbor` | Локальные специалитеты регионов |
+| general | `nedelnij-rutin-smola-bossy` | Недельный рутин: смола и боссы |
+| newbie | `fotorezhim-teyvata` | Фоторежим и снимки |
+| general | `bezopasnost-akkaunta-2fa` | Безопасность аккаунта и фишинг |
+| general | `storonnie-instrumenty-i-meta` | Сторонние сайты и калькуляторы |
+| economy | `stol-alhimii-i-konvertatsiya` | Стол алхимии и конверсия дропа |
+
+### Волна 7 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| general | `nastrojki-klienta-i-dostupnost` | Настройки клиента и комфорт |
+| newbie | `smena-vremeni-sutok-v-igre` | Смена времени суток в меню |
+| newbie | `mobilnye-teleporty-i-ankory` | Персональные телепорты и якоря |
+| economy | `strannye-torgovtsy-i-limity` | Лимитные витрины NPC |
+| general | `inventar-i-sortirovka` | Инвентарь и работа с артефактами |
+| newbie | `povtornyj-prohod-podzemelij` | Одноразовые подземелья vs фарм |
+| general | `skrytye-dostizheniya-i-namekarty` | Скрытые ачивки и карточки профиля |
+| newbie | `knigi-receptov-i-kraft-list` | Рецепты, крафт и учёт чертежей |
+
+**Итого после волн 5–7:** 69 статей в `info/guides/` и `content/guides/`.
+
 ## Персонажи
 
 Каталог `info/characters/` — зеркало [`content/characters/`](../content/characters): правки ведите в `info/characters/`, затем копируйте в `content/characters/` для публикации.
