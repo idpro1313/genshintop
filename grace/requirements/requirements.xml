@@ -1,7 +1,7 @@
 <RequirementsAnalysis VERSION="0.1.0">
   <Project>
     <name>genshintop</name>
-    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; гайды в info/guides/, персонажи в content/, архивы в content/guides-archive/ и content/characters-archive/.</annotation>
+    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; гайды и карточки персонажей в info/guides/ и info/characters/; архивы в content/guides-archive/ и content/characters-archive/.</annotation>
     <keywords>genshin-impact, php, seo, guides, characters, docker</keywords>
   </Project>
 
@@ -27,8 +27,8 @@
 
     <UC-002>
       <Actor>Редактор / агент</Actor>
-      <Action>Ведёт и обновляет Markdown в info/guides и content/characters</Action>
-      <Goal>Актуальные гайды в info/guides и персонажи в content/ для сборки Docker и sitemap</Goal>
+      <Action>Ведёт и обновляет Markdown в info/guides и info/characters</Action>
+      <Goal>Актуальные гайды в info/guides и карточки в info/characters для сборки Docker и sitemap</Goal>
       <Preconditions>Корректный frontmatter и согласованность slug с URL маршрутизации</Preconditions>
       <AcceptanceCriteria>Новые и изменённые статьи попадают в сборку Docker и в sitemap</AcceptanceCriteria>
       <Priority>high</Priority>
@@ -89,7 +89,7 @@
       <Actor>Редактор / агент</Actor>
       <Action>Обновляет OG-изображения и карту редиректов вручную или внешним инструментом (в репозитории нет npm)</Action>
       <Goal>Актуальные public/og/*.png, lib/og-manifest.json и при необходимости deploy/genshintop-redirects.conf</Goal>
-      <Preconditions>Гайды в info/guides, карточки в content/characters; редактор имеет средство генерации PNG при необходимости</Preconditions>
+      <Preconditions>Контент гайдов в info/guides, карточек в info/characters; редактор имеет средство генерации PNG при необходимости</Preconditions>
       <AcceptanceCriteria>Манифест согласован с файлами в public/og/; редиректы валидны для nginx</AcceptanceCriteria>
       <Priority>medium</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>

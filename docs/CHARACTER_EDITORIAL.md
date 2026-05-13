@@ -1,6 +1,6 @@
 # Редакционный стандарт карточек персонажей GenshinTop
 
-Материалы в [`content/characters/`](../content/characters/) — **справочные профили**, а не копипаст игрового кодекса. Цель: связная структура, ссылки на опорные [гайды](/content/guides/) и отсутствие «лесенки» из одной фразы на строку.
+Материалы в [`info/characters/`](../info/characters/) — **справочные профили**, а не копипаст игрового кодекса. Цель: связная структура, ссылки на опорные гайды в **`info/guides/`** и отсутствие «лесенки» из одной фразы на строку.
 
 ## Тон и границы
 
@@ -16,7 +16,7 @@
 - **`element`** — одна из: `Pyro`, `Hydro`, `Electro`, `Cryo`, `Anemo`, `Geo`, `Dendro` (для статей-обзоров допустимо нейтральное значение как в шаблоне).
 - **`weapon`** — тип оружия по игре (русские подписи как в текущем корпусе: «Одноручное», «Двуручное», «Лук», …).
 - **`sourceSlug`** — slug URL (`имя файла` без `.md`).
-- **`relatedWeapons`**, **`relatedArtifacts`**, **`relatedGuides`** — YAML-списки slug’ов; в **`relatedGuides`** только существующие опорные статьи из `content/guides/`.
+- **`relatedWeapons`**, **`relatedArtifacts`**, **`relatedGuides`** — YAML-списки slug’ов; в **`relatedGuides`** только существующие опорные статьи из **`info/guides/`**.
 
 Рекомендуется также:
 
@@ -44,7 +44,7 @@
 
 ## Техническая пересборка
 
-Скрипт **`scripts/rebuild-character-pages.ps1`** копирует текущие файлы в **`content/characters-archive/`** и генерирует новое тело из существующего frontmatter. После ручной доработки **синхронизируйте** копию в [`info/characters/`](../info/characters/) при использовании зеркала.
+Скрипт **`scripts/rebuild-character-pages.ps1`** копирует текущие файлы из **`info/characters/`** в **`content/characters-archive/`** и генерирует новое тело из существующего frontmatter **на месте** в **`info/characters/*.md`**.
 
 ## Связанные документы
 

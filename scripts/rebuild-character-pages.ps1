@@ -1,5 +1,6 @@
 # Пересборка тел страниц персонажей из существующего frontmatter.
 # Перед записью копирует *.md в content/characters-archive/ (резервная копия «как было»).
+# Читает и пишет info/characters/*.md (канон для сайта).
 # Запуск из корня репозитория: pwsh scripts/rebuild-character-pages.ps1
 
 [CmdletBinding()]
@@ -7,7 +8,7 @@ param()
 
 $ErrorActionPreference = 'Stop'
 $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$CharDir = Join-Path $RepoRoot 'content/characters'
+$CharDir = Join-Path $RepoRoot 'info/characters'
 $ArchiveDir = Join-Path $RepoRoot 'content/characters-archive'
 
 if (-not (Test-Path -LiteralPath $CharDir)) {

@@ -85,7 +85,7 @@ final class ContentRepository
         if (self::$charactersCache !== null) {
             return self::$charactersCache;
         }
-        $dir = SITE_ROOT . '/content/characters';
+        $dir = SITE_ROOT . '/info/characters';
         $out = [];
         foreach (glob($dir . '/*.md') ?: [] as $path) {
             $slug = basename($path, '.md');

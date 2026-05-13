@@ -508,3 +508,9 @@
 - **Почему:** единый каталог правок гайдов — **`info/guides/`**, без зеркала в **`content/guides/`**.
 - **Файлы:** `content/guides/README.md`, `scripts/guides-refactor-inventory.php`, `scripts/guides-refactor-inventory.ps1`, `reports/guides-refactor-inventory.json`, `info/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.10.2** — документация и отчёты согласованы с архитектурой контента; архив — **`content/guides-archive/`**.
+
+### Единый канон карточек: info/characters (1.10.3)
+- **Что:** **`lib/ContentRepository.php`** читает персонажей из **`info/characters/`**; дубли **`content/characters/*.md`** удалены, добавлен **`content/characters/README.md`**. **`scripts/rebuild-character-pages.ps1`** работает с **`info/characters`**. Обновлены **`info/README.md`**, **`docs/AGENTS.md`**, **`docs/CHARACTER_EDITORIAL.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/plan/development-plan.xml`**, **`grace/requirements/requirements.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.10.3**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя — **убрать зеркало** `info/characters` ↔ `content/characters`; один каталог правок, как у гайдов.
+- **Файлы:** `lib/ContentRepository.php`, `content/characters/README.md`, удалены `content/characters/*.md` (кроме README), `scripts/rebuild-character-pages.ps1`, `info/README.md`, `docs/AGENTS.md`, `docs/CHARACTER_EDITORIAL.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.10.3** — архив **`content/characters-archive/`** без изменений по смыслу.

@@ -1,6 +1,6 @@
 # Опорный корпус контента (редакция GenshinTop)
 
-Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт **гайды** из **`info/guides/*.md`** и **карточки персонажей** из **`content/characters/*.md`** (см. [`ContentRepository`](../lib/ContentRepository.php)). Для персонажей каталог **`info/characters/`** — редакционное зеркало: новые правки ведите в `info/characters`, затем **копируйте** в `content/characters` для публикации. **Новые и правки гайдов** — только в **`info/guides/`** (без дублирования в `content/guides/`).
+Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт **гайды** из **`info/guides/*.md`** и **карточки персонажей** из **`info/characters/*.md`** (см. [`ContentRepository`](../lib/ContentRepository.php)). **Новые и правки гайдов** — только в **`info/guides/`**; **карточки персонажей** — только в **`info/characters/`** (без дублирования в `content/characters/` — там пояснение в **`content/characters/README.md`**).
 
 ## Гайды
 
@@ -237,11 +237,11 @@
 
 ## Персонажи
 
-Каталог `info/characters/` — зеркало [`content/characters/`](../content/characters): правки ведите в `info/characters/`, затем копируйте в `content/characters/` для публикации.
+Каталог **`info/characters/`** — канон карточек для сайта (см. **`content/characters/README.md`** про пустой слой `content/characters/`).
 
 - **Стандарт текста:** [`docs/CHARACTER_EDITORIAL.md`](../docs/CHARACTER_EDITORIAL.md) — короткий профиль без копипасты талантов из клиента, ссылками на опорные гайды.
 - **Снимок до пересборки:** при массовом переходе на новый формат прежние тексты копируются скриптом в **`content/characters-archive/`** (резерв, не в индексе сайта).
-- **Пересборка тел из YAML:** `pwsh scripts/rebuild-character-pages.ps1` из корня — копирует `*.md` в `characters-archive/`, генерирует новое **тело** из существующего frontmatter (~**114** профильных slug + компактный формат для **~83** вспомогательных страниц).
+- **Пересборка тел из YAML:** `pwsh scripts/rebuild-character-pages.ps1` из корня — копирует `*.md` из **`info/characters/`** в `characters-archive/`, генерирует новое **тело** из существующего frontmatter (~**114** профильных slug + компактный формат для **~83** вспомогательных страниц).
 - **Frontmatter:** `name`, `title`, `element`, `weapon`, `rating` (опц.), `sourceSlug`, `relatedWeapons`, `relatedArtifacts`, `relatedGuides`; при пересборке добавляются `summary`, `gameVersion`, `reviewedAt`, если их не было.
 
 **Счётчик:** **197** файлов `.md` (включая `why-pull-*`, `*-vs-*` и прочие вспомогательные URL в том же каталоге).
