@@ -470,3 +470,9 @@
 - **Почему:** запрос пользователя — не переносить миграционный мусор, а **переписать** карточки как редакционные материалы.
 - **Файлы:** `docs/CHARACTER_EDITORIAL.md`, `scripts/rebuild-character-pages.ps1`, `content/characters/*.md`, `content/characters-archive/*.md`, `info/characters/*.md`, `info/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.7.0** — новая редакционная модель тел страниц персонажей; детальные тексты талантов убраны в пользу структуры и внешних гайдов; **`relatedWeapons`/`relatedArtifacts`** в YAML сохранены для дальнейшей ручной чистки.
+
+### GRACE: контракт M-CONTENT и персонажи (1.7.1)
+- **Что:** в **`grace/plan/development-plan.xml`** расширен контракт **M-CONTENT-GUIDE-REFACTOR**: карточки персонажей, **`docs/CHARACTER_EDITORIAL.md`**, **`scripts/rebuild-character-pages.ps1`**. **`VERSION` → 1.7.1**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** синхронизация GRACE с выкатом **1.7.0** (правило **grace-artifact-sync**).
+- **Файлы:** `grace/plan/development-plan.xml`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.7.1** — только артефакты плана и метаданные версии.

@@ -54,9 +54,10 @@
 
     <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" LAYER="1" ORDER="3" STATUS="implemented">
       <contract>
-        <purpose>Редакционная нормализация корпуса content/guides: стандарты текста, инвентаризация (метаданные, «лесенка», кандидаты merge/split), волны W0–W3, редиректы slug в docker/genshintop-redirects.conf.</purpose>
+        <purpose>Редакционная нормализация корпуса content/guides и карточек content/characters: стандарты текста (GUIDE_EDITORIAL, CHARACTER_EDITORIAL), инвентаризация гайдов, волны W0–W3, редиректы slug в docker/genshintop-redirects.conf; пересборка тел карточек scripts/rebuild-character-pages.ps1 → архив миграции в content/characters-archive/.</purpose>
         <inputs>
           <param name="guides_md" type="markdown-glob" />
+          <param name="characters_md" type="markdown-glob" />
           <param name="redirects_conf" type="nginx-snippet" />
         </inputs>
         <outputs>
@@ -70,14 +71,17 @@
       <interface>
         <export-inventory-php PURPOSE="php scripts/guides-refactor-inventory.php → reports/guides-refactor-inventory.json" />
         <export-inventory-ps PURPOSE="pwsh scripts/guides-refactor-inventory.ps1 — альтернатива без PHP в PATH" />
+        <export-character-pages PURPOSE="pwsh scripts/rebuild-character-pages.ps1 → content/characters из YAML + архив в content/characters-archive/" />
       </interface>
       <depends>M-PHP-SITE</depends>
       <target>
         <source>scripts/guides-refactor-inventory.php</source>
         <source>scripts/guides-refactor-inventory.ps1</source>
         <source>docs/GUIDE_EDITORIAL.md</source>
+        <source>docs/CHARACTER_EDITORIAL.md</source>
         <source>docs/guides-refactor-waves.md</source>
         <source>docs/GUIDES_MERGE_SPLIT.md</source>
+        <source>scripts/rebuild-character-pages.ps1</source>
         <source>reports/guides-refactor-inventory.json</source>
         <source>docker/genshintop-redirects.conf</source>
       </target>
