@@ -1,6 +1,6 @@
 # genshintop
 
-Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, Markdown в **`content/`**, ванильный CSS в **`public/css/`**. В репозитории **нет Node.js, npm и `package.json`**.
+Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, живой Markdown в **`info/guides/`** и **`info/characters/`**, ванильный CSS в **`public/css/`**. В репозитории **нет Node.js, npm и `package.json`**.
 
 ## Карта сайта (локально / при сборке образа)
 
@@ -30,6 +30,6 @@ docker compose --env-file docker/.env -f docker/docker-compose.yml up -d
 - **`docker/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
-Канонический контент — только **`content/{guides,characters}`**. Массовая генерация OG, карты редиректов и прочие тяжёлые пайплайны — вне этого репо при необходимости.
+Канонический контент на сайте — **`info/{guides,characters}`**. Папка **`content/`** (архивы `guides-archive`, `characters-archive`, снимки) **не в git** — держите локально при работе со скриптами рефакторинга. Массовая генерация OG и тяжёлые пайплайны — вне этого репо при необходимости.
 
 Версия проекта: **`VERSION`** (SemVer).

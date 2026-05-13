@@ -7,7 +7,7 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живые гайды** — только **`info/guides/*.md`** (читает **`lib/ContentRepository.php`**); прежний массовый корпус — **`content/guides-archive/`**. **Живые карточки персонажей** — только **`info/characters/*.md`**; **архив длинного мигрированного текста** карточек — **`content/characters-archive/`** (в т.ч. **`snapshot-YYYY-MM-DD/`** перед пересборкой). Редакция: **`docs/GUIDE_EDITORIAL.md`**, **`docs/CHARACTER_EDITORIAL.md`**, матрица гайдов — **`info/README.md`**.
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живые гайды и карточки** — только **`info/guides/*.md`** и **`info/characters/*.md`** (см. **`lib/ContentRepository.php`**). **Папка `content/`** (**`guides-archive`**, **`characters-archive`**, снимки) для редакции и скриптов — **только локально**, в репозиторий не коммитится (см. **`.gitignore`**). Редакция: **`docs/GUIDE_EDITORIAL.md`**, **`docs/CHARACTER_EDITORIAL.md`**, матрица гайдов — **`info/README.md`**.
 
 Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. Сборка прод-образа выполняет **`php lib/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
 
@@ -16,12 +16,12 @@
 | Команда / действие | Назначение |
 |-------------------|------------|
 | `php lib/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
-| `php scripts/guides-refactor-inventory.php` | Инвентаризация **`content/guides-archive`** (рефакторинг архива) → **`reports/guides-refactor-inventory.json`** |
+| `php scripts/guides-refactor-inventory.php` | Инвентаризация **`content/guides-archive`** локально (папка **`content/`** не в git) → **`reports/guides-refactor-inventory.json`** |
 | `pwsh scripts/guides-refactor-inventory.ps1` | То же через обёртку PowerShell (если **`php`** не в PATH) |
 | `pwsh scripts/wave-w1-merge-banner-dated.ps1` | Волна **W1**: датированные дубли **`banner-*`** → канонический slug, nginx **301**, правки ссылок в **`content/**/*.md`** и **`info/**/*.md`** |
 | Волна **W2** (остаточные дубли без undated в группе) | Вручную по **`mergeCandidatesByTitle`**: один канонический slug (часто **`info/guides/<slug>.md`** или архив), **301** в **`docker/genshintop-redirects.conf`**, **`relatedGuides`** в **`info/characters`**, перегенерация **`reports/guides-refactor-inventory.json`** |
 | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath info/guides/<slug>.md` | Склейка коротких строк («лесенка») в теле одного гайда |
-| `pwsh scripts/rebuild-character-pages.ps1` | Перед пересборкой — копия **`info/characters/*.md`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`**; новое тело из frontmatter по **`docs/CHARACTER_EDITORIAL.md`** (корень **`content/characters-archive/`** не перезаписывается) |
+| `pwsh scripts/rebuild-character-pages.ps1` | Перед пересборкой — копия **`info/characters/*.md`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`** (каталог **`content/`** локально); новое тело из frontmatter по **`docs/CHARACTER_EDITORIAL.md`** |
 | Docker | **`docker/README.md`** — образ GHCR, **`docker/docker-compose.yml`**, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` из корня репозитория |
 | Обновление на сервере | **`bash ./update-from-github.sh`** из корня репозитория — pull образа, `up -d` |
@@ -31,7 +31,7 @@
 ### Модули (GRACE)
 
 - **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`** (тёмная тема и компоненты в духе [idpro1313/dandangers](https://github.com/idpro1313/dandangers) `modern-styles.css`: teal/violet, карточный prose; опционально light через `prefers-color-scheme`), **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе **`/etc/nginx/snippets/genshintop-redirects.conf`**, не `conf.d` — иначе `rewrite` попадает в контекст `http`). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
-- **M-CONTENT-GUIDE-REFACTOR** — контент **`info/guides`**, **`info/characters`** (карточки на сайте), архивы **`content/guides-archive`**, **`content/characters-archive`**, документы **`docs/GUIDE_EDITORIAL.md`**, **`docs/CHARACTER_EDITORIAL.md`**, **`docs/guides-refactor-waves.md`**, **`docs/GUIDES_MERGE_SPLIT.md`**, скрипты **`scripts/guides-refactor-inventory.php`**, **`scripts/rebuild-character-pages.ps1`**, отчёт **`reports/guides-refactor-inventory.json`**.
+- **M-CONTENT-GUIDE-REFACTOR** — контент **`info/guides`**, **`info/characters`** (карточки на сайте); архивы и снимки при локальной работе в **`content/**`** (не в git); документы **`docs/GUIDE_EDITORIAL.md`**, **`docs/CHARACTER_EDITORIAL.md`**, **`docs/guides-refactor-waves.md`**, **`docs/GUIDES_MERGE_SPLIT.md`**, скрипты **`scripts/guides-refactor-inventory.php`**, **`scripts/rebuild-character-pages.ps1`**, отчёт **`reports/guides-refactor-inventory.json`**.
 
 ### Гайды: таксономия и frontmatter
 
@@ -155,8 +155,7 @@ lib/
   og-manifest.json      - список ключей OG-PNG для OgManifest (ручная правка / внешний генератор)
 info/
   guides/, characters/  - Канон Markdown для сайта (читает ContentRepository)
-content/
-  guides/README.md, characters/README.md — пояснения; guides-archive/, characters-archive/
+content/                - Не в git: при необходимости локально guides-archive/, characters-archive/, snapshot-*
 public/
   css/site.css          - Ванильный CSS (dandangers-like dark + optional light)
   robots.txt, favicon, og/** (PNG при необходимости)
@@ -165,7 +164,7 @@ docker/
   genshintop-redirects.conf, env.example (шаблон docker/.env), README.md — деплой Traefik/GHCR
 update-from-github.sh   - С сервера: git ff + compose pull/up (исполнять из корня репо)
 scripts/
-  guides-refactor-inventory.php — CLI: JSON-отчёт по content/guides-archive (требуется PHP)
+  guides-refactor-inventory.php — CLI: JSON-отчёт по локальному content/guides-archive (требуется PHP)
   guides-refactor-inventory.ps1 — то же на PowerShell, если PHP недоступен
 reports/
   guides-refactor-inventory.json — артефакт инвентаризации (перегенерировать скриптом)

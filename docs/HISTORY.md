@@ -534,3 +534,9 @@
 - **Почему:** запрос пользователя — убрать **`content/guides`** и **`content/characters`** как ненужные; канон остаётся **`info/guides`** и **`info/characters`**, архивы — **`content/guides-archive`** и **`content/characters-archive`**.
 - **Файлы:** удалены `content/guides/README.md`, `content/characters/README.md`; правки в перечисленных выше файлах, `docs/HISTORY.md`, `VERSION`
 - **Решение:** PATCH **1.11.2** — устранение устаревшей схемы «пустой слой + README».
+
+### content/ вне репозитория (1.11.3)
+- **Что:** в **`.gitignore`** добавлена **`content/`**; с индекса сняты все отслеживаемые файлы под **`content/**`**. Из **`docker/Dockerfile`** убран **`COPY content`**. Обновлены **`README.md`**, **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/requirements/requirements.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.11.3**, **`docs/HISTORY.md`**.
+- **Почему:** проверка кода: сайт не читает **`content/`** (**`lib/ContentRepository.php`** — только **`info/guides`**, **`info/characters`**); запрос — не версионировать папку и не копировать её в образ.
+- **Файлы:** `.gitignore`, `docker/Dockerfile`, `README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/requirements/requirements.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`, снятие с индекса `content/**`
+- **Решение:** PATCH **1.11.3** — архивы и снимки при необходимости только локально; **`git clone`** без **`content/`** достаточен для сборки образа и работы сайта.

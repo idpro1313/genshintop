@@ -1,7 +1,7 @@
 <RequirementsAnalysis VERSION="0.1.0">
   <Project>
     <name>genshintop</name>
-    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; гайды и карточки персонажей в info/guides/ и info/characters/; архивы в content/guides-archive/ и content/characters-archive/.</annotation>
+    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; гайды и карточки персонажей в info/guides/ и info/characters/; архивы для редакции при необходимости только локально в content/ (не версионируются).</annotation>
     <keywords>genshin-impact, php, seo, guides, characters, docker</keywords>
   </Project>
 
