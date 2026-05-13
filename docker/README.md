@@ -93,7 +93,7 @@ docker run --rm -p 8080:80 genshintop-web
 - **`https://genshintop.ru/sitemap.xml`** — единый `urlset`, без индекса из нескольких файлов.
 - **`robots.txt`** содержит одну строку **`Sitemap:`** на этот файл.
 - **`/rss.xml`** возвращает **404** (RSS отключён).
-- Редиректы slug работают (**`docker/genshintop-redirects.conf`** подключается из **`docker/nginx-default.conf`** в образе).
+- Редиректы slug работают (**`docker/genshintop-redirects.conf`** в образе как **`/etc/nginx/snippets/genshintop-redirects.conf`**, `include` только из **`server`** в **`docker/nginx-default.conf`** — не в `conf.d`, там контекст `http` и `rewrite` недопустим).
 
 ---
 
@@ -146,7 +146,7 @@ certificatesResolvers:
 | `docker/Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php lib/build-sitemap.php`; сборка: **`docker build -f docker/Dockerfile .`** из корня репо |
 | `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
 | `docker/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
-| `docker/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор), копируется в образ |
+| `docker/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор); в образе **`/etc/nginx/snippets/genshintop-redirects.conf`** |
 | `docker/env.example` | Шаблон `docker/.env`, включая `SITE_IMAGE` |
 | `docs/SEO-CHECKLIST.md` | Чек-лист после выката |
 | **`update-from-github.sh`** | В корне репозитория: git ff + compose pull/up |

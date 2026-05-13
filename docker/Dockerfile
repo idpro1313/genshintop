@@ -5,7 +5,7 @@
 FROM php:8.2-fpm-alpine
 
 RUN apk add --no-cache nginx supervisor \
-  && mkdir -p /var/log/supervisor /run/nginx \
+  && mkdir -p /var/log/supervisor /run/nginx /etc/nginx/snippets \
   && sed -i 's|listen = 9000|listen = 127.0.0.1:9000|' /usr/local/etc/php-fpm.d/www.conf
 
 COPY docker/supervisord.conf /etc/supervisord.conf
@@ -19,7 +19,8 @@ WORKDIR /var/www
 COPY lib ./lib/
 COPY content ./content/
 COPY public ./public/
-COPY docker/genshintop-redirects.conf /etc/nginx/conf.d/genshintop-redirects.conf
+# Не класть в conf.d: в Alpine nginx туда подключается http{}, а rewrite допустим только в server/location.
+COPY docker/genshintop-redirects.conf /etc/nginx/snippets/genshintop-redirects.conf
 
 RUN php lib/build-sitemap.php
 
