@@ -274,5 +274,5 @@
 ### Исправление parse error в HtmlComponents heredoc (1.0.4)
 - **Что:** в **`lib/HtmlComponents.php`** (`guideCatalogCard`) условный блок excerpt вынесен в переменную **`$excerptBlock`** — внутри heredoc недопустимо **`{$excerpt !== '' ? …}`** (парсер ожидает простую интерполяцию после `{`).
 - **Почему:** падение **`docker build`** на шаге **`RUN php scripts/build-sitemap.php`** (PHP parse error на строке 84).
-- **Файлы:** `lib/HtmlComponents.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Файлы:** `lib/HtmlComponents.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.0.4**.
