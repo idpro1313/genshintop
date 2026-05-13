@@ -546,3 +546,9 @@
 - **Почему:** в рабочей копии каталог **`scripts/`** оказался пуст к моменту коммита, **`git commit`** зафиксировал удаление пяти файлов.
 - **Файлы:** `scripts/guides-refactor-inventory.php`, `scripts/guides-refactor-inventory.ps1`, `scripts/normalize-short-line-runons.ps1`, `scripts/rebuild-character-pages.ps1`, `scripts/wave-w1-merge-banner-dated.ps1`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.11.4** — без изменения смысла **1.11.3** по **`content/`** и Docker.
+
+### Каталог reports/ вне репозитория (1.11.5)
+- **Что:** удалён из git **`reports/guides-refactor-inventory.json`**; каталог **`reports/`** добавлен в **`.gitignore`** (скрипты инвентаризации по-прежнему создают его и JSON локально). Обновлены **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/requirements/requirements.xml`**, **`grace/plan/development-plan.xml`**, **`grace/verification/verification-plan.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.11.5**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя — убрать папку **`reports/`** из репозитория; отчёт не нужен рантайму сайта.
+- **Файлы:** `.gitignore`, `docs/AGENTS.md`, `docs/GUIDE_EDITORIAL.md`, `docs/GUIDES_MERGE_SPLIT.md`, `docs/guides-refactor-waves.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/requirements/requirements.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`, снятие с индекса `reports/*`
+- **Решение:** PATCH **1.11.5** — для **`wave-w1-merge-banner-dated.ps1`** сначала сгенерировать JSON локально (`php` / `pwsh` guides-refactor-inventory).

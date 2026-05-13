@@ -43,7 +43,7 @@ php scripts/guides-refactor-inventory.php
 pwsh scripts/guides-refactor-inventory.ps1
 ```
 
-Отчёт: [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json) — блок `mergeCandidatesByTitle` и совпадения `sourceSlug`.
+Отчёт после запуска инвентаризации: **`reports/guides-refactor-inventory.json`** (локально, не в git) — блок `mergeCandidatesByTitle` и совпадения `sourceSlug`.
 
 ## Пример (реализовано в репозитории)
 

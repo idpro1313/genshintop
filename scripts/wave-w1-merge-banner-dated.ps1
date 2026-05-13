@@ -1,5 +1,5 @@
 # W1: датированные дубли баннеров → один канонический slug (без суффикса даты).
-# Читает reports/guides-refactor-inventory.json, дописывает docker/genshintop-redirects.conf,
+# Читает локальный reports/guides-refactor-inventory.json (сгенерировать guides-refactor-inventory.*), дописывает docker/genshintop-redirects.conf,
 # удаляет лишние info/guides/*.md, заменяет ссылки в content/**/*.md и info/**/*.md.
 # Запуск из корня: pwsh scripts/wave-w1-merge-banner-dated.ps1
 

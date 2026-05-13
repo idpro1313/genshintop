@@ -1,12 +1,12 @@
 # Волны редакционного рефакторинга гайдов
 
-Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). **Архив** массового корпуса после **W1** и **W2** — порядка **~232** файла в **`content/guides-archive/`**; **живые** опорные статьи на сайте — **`info/guides/`** (матрица и счётчики — [`info/README.md`](../info/README.md)). Инвентаризация и кандидаты merge/split — [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
+Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). **Архив** массового корпуса после **W1** и **W2** — порядка **~232** файла в **`content/guides-archive/`**; **живые** опорные статьи на сайте — **`info/guides/`** (матрица и счётчики — [`info/README.md`](../info/README.md)). Инвентаризация и кандидаты merge/split — в локально генерируемом **`reports/guides-refactor-inventory.json`** (каталог **`reports/`** не в git, см. **`.gitignore`**).
 
 ## Инструменты
 
 | Действие | Команда / артефакт |
 |----------|-------------------|
-| Инвентаризация slug, метаданных, «лесенки», кандидатов merge/split | `php scripts/guides-refactor-inventory.php` или `pwsh scripts/guides-refactor-inventory.ps1` → `reports/guides-refactor-inventory.json` |
+| Инвентаризация slug, метаданных, «лесенки», кандидатов merge/split | `php scripts/guides-refactor-inventory.php` или `pwsh scripts/guides-refactor-inventory.ps1` → локально `reports/guides-refactor-inventory.json` |
 | **W1:** слияние датированных дублей `banner-*` (отчёт `mergeCandidatesByTitle`) | `pwsh scripts/wave-w1-merge-banner-dated.ps1` из корня репозитория |
 | Склейка «лесенки» в одном файле (не массово) | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath info/guides/<slug>.md` |
 

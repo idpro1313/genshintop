@@ -6,6 +6,8 @@ dist/
 # Архивы и снимки Markdown (guides-archive, characters-archive, snapshot-*): только локально.
 # Рантайм сайта читает только info/guides и info/characters (см. lib/ContentRepository.php).
 content/
+# JSON-отчёт инвентаризации гайдов и прочие артефакты скриптов — только локально (mkdir при первом запуске).
+reports/
 docker/.env
 grace/
 docs/

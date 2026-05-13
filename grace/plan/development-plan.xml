@@ -69,7 +69,7 @@
         </errors>
       </contract>
       <interface>
-        <export-inventory-php PURPOSE="php scripts/guides-refactor-inventory.php → reports/guides-refactor-inventory.json" />
+        <export-inventory-php PURPOSE="php scripts/guides-refactor-inventory.php → локально reports/guides-refactor-inventory.json (каталог не в git)" />
         <export-inventory-ps PURPOSE="pwsh scripts/guides-refactor-inventory.ps1 — альтернатива без PHP в PATH" />
         <export-character-pages PURPOSE="pwsh scripts/rebuild-character-pages.ps1 → резерв из info/characters в content/characters-archive/ (локально, не в git), новое тело в info/characters/*.md" />
       </interface>
@@ -82,7 +82,6 @@
         <source>docs/guides-refactor-waves.md</source>
         <source>docs/GUIDES_MERGE_SPLIT.md</source>
         <source>scripts/rebuild-character-pages.ps1</source>
-        <source>reports/guides-refactor-inventory.json</source>
         <source>docker/genshintop-redirects.conf</source>
       </target>
       <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
@@ -129,7 +128,7 @@
   <DataFlow>
     <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в info/ или внешняя подготовка файлов">
       <step-1>Изменения в info/guides, info/characters и при необходимости архива content/guides-archive (только локально, не в git)</step-1>
-      <step-2>При смене slug — строки rewrite в docker/genshintop-redirects.conf; при необходимости инвентаризация scripts/guides-refactor-inventory.php или scripts/guides-refactor-inventory.ps1 → reports/guides-refactor-inventory.json</step-2>
+      <step-2>При смене slug — строки rewrite в docker/genshintop-redirects.conf; при необходимости инвентаризация scripts/guides-refactor-inventory.php или scripts/guides-refactor-inventory.ps1 → локально reports/guides-refactor-inventory.json</step-2>
       <step-3>Сборка образа: docker build -f docker/Dockerfile . ; sitemap через lib/build-sitemap.php</step-3>
       <evidence>Канон для сайта — info/**; content/** при необходимости только локально для архивов и скриптов; образ собирается docker build -f docker/Dockerfile .</evidence>
     </DF-CONTENT-MIGRATE>
