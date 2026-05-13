@@ -288,3 +288,9 @@
 - **Почему:** пользовательская ошибка выдачи сертификата Let's Encrypt через Traefik (`genshintop@docker`, certresolver `le`).
 - **Файлы:** `deploy/README.md`, `deploy/env.example`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.0.6** — правки только документации и метаданных версии; конфиг Traefik живёт в репозитории webserver.
+
+### nginx: цикл редиректов ERR_TOO_MANY_REDIRECTS (1.0.7)
+- **Что:** удалён блок **`location = /index.php`** с **`return 301 …/`** в **`docker/nginx-default.conf`** (оставлен комментарий почему). Внутренний переход **`try_files` → `/index.php`** попадал в тот же **`location =`** и снова отдавал **301** на **`/`**, что давало бесконечный редирект в браузере (часто за Traefik).
+- **Почему:** сообщение пользователя «слишком много переадресаций» на **`genshintop.ru`**.
+- **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.0.7**. Прямой заход на **`/index.php`** теперь обрабатывается тем же **`location ~ ^/index\.php$`**, что и внутренний роутинг (контент главной; при желании каноникал задаётся в приложении).
