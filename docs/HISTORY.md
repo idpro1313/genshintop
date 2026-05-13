@@ -348,3 +348,9 @@
 - **Почему:** сообщение пользователя с фрагментом кода выявило обрыв библиотеки; без восстановления **`ContentRepository::markdownToHtml`** и сборка образа ломались бы при загрузке Parsedown.
 - **Файлы:** `lib/Parsedown.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.1** — поведение API **`Parsedown::text()`** / **`setSafeMode()`** без изменений относительно ожиданий **`ContentRepository`**.
+
+### Parsedown 1.8.0 (1.3.2)
+- **Что:** **`lib/Parsedown.php`** обновлён до **[Parsedown 1.8.0](https://github.com/erusev/parsedown/releases/tag/1.8.0)** из репозитория **[erusev/parsedown](https://github.com/erusev/parsedown)** (сырой файл с тега **`1.8.0`**). **`VERSION`**, узел **`Project`** и **`TechnologyStack`** → **1.3.2**.
+- **Почему:** запрос пользователя — использовать актуальный релиз **1.8.0**.
+- **Файлы:** `lib/Parsedown.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.2** — **`ContentRepository::markdownToHtml`** по-прежнему использует **`Parsedown::text()`** и **`setSafeMode(false)`**.
