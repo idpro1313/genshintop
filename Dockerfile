@@ -15,14 +15,12 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /var/www
 
-COPY bootstrap.php config.php ./
 COPY lib ./lib/
 COPY content ./content/
 COPY public ./public/
-COPY scripts/build-sitemap.php scripts/build-sitemap.php
 COPY deploy/genshintop-redirects.conf /etc/nginx/conf.d/genshintop-redirects.conf
 
-RUN php scripts/build-sitemap.php
+RUN php lib/build-sitemap.php
 
 EXPOSE 80
 

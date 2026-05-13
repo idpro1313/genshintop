@@ -308,7 +308,13 @@
 - **Решение:** PATCH **1.0.9**.
 
 ### Перенос templates/ и data/og-manifest.json в lib/ (1.1.0)
-- **Что:** удалены корневые **`templates/`** и **`data/`**; шаблоны — **`lib/templates/`** (`layout.php`, **`partials/`**); манифест OG — **`lib/og-manifest.json`**; **`Router.php`** подключает **`lib/templates/layout.php`**; **`public/index.php`** вызывает **`OgManifest::load(.../lib/og-manifest.json)`**; **`Dockerfile`** больше не копирует отдельно **`templates/`** и **`data/`** (входит в **`COPY lib`**). Обновлены **`docs/AGENTS.md`**, **`deploy/SEO-CHECKLIST.md`**, **`grace/**/*.xml`**.
+- **Что:** удалены корневые **`templates/`** и **`data/`**; шаблоны — **`lib/templates/`** (`layout.php`, **`partials/`**); манифест OG — **`lib/og-manifest.json`**; **`Router.php`** подключает **`lib/templates/layout.php`**; **`public/index.php`** вызывает **`OgManifest::load(.../lib/og-manifest.json)`**; **`Dockerfile`** больше не копирует отдельно **`templates/`** и **`data/`** (входит в **`COPY lib`**). Обновлены **`docs/AGENTS.md`**, **`docs/SEO-CHECKLIST.md`**, **`grace/**/*.xml`**.
 - **Почему:** запрос пользователя — держать код сайта в **`lib/`**, без отдельных **`templates/`** и **`data/`**.
 - **Файлы:** перемещены в **`lib/templates/**`**, **`lib/og-manifest.json`**; удалены **`templates/**`**, **`data/og-manifest.json`**; правки `Dockerfile`, `lib/Router.php`, `public/index.php`, `VERSION`, GRACE, документация.
 - **Решение:** MINOR **1.1.0** — только реорганизация путей; URL сайта не менялись.
+
+### Весь PHP приложения под lib/, тонкий public/index.php (1.2.0)
+- **Что:** **`bootstrap.php`** и **`config.php`** перенесены в **`lib/`** (`SITE_ROOT` в **`lib/bootstrap.php`** = корень репозитория); добавлен **`lib/web_dispatch.php`** (bootstrap + config + OgManifest + `Router::dispatch`); **`public/index.php`** только **`require …/lib/web_dispatch.php`**; **`scripts/build-sitemap.php`** заменён на **`lib/build-sitemap.php`** (`php lib/build-sitemap.php`); **`Dockerfile`**: без отдельного **`COPY`** корневых **`bootstrap`/`config`** и **`scripts/`**, **`RUN php lib/build-sitemap.php`**. Чек-лист SEO — только **`docs/SEO-CHECKLIST.md`**; ссылки на **`deploy/SEO-CHECKLIST.md`** заменены на **`docs/…`** в **`deploy/README.md`**, **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/plan/development-plan.xml`**. Обновлены **`README.md`**, **`docs/SEO-CHECKLIST.md`**, **`grace/**/*.xml`**.
+- **Почему:** запрос пользователя — собрать все PHP в **`lib/`** (в **`public/`** остаётся минимальная точка входа для nginx/FastCGI); единый канонический путь SEO-чеклиста под **`docs/`**.
+- **Файлы:** `lib/bootstrap.php`, `lib/config.php`, `lib/web_dispatch.php`, `lib/build-sitemap.php`, `public/index.php`, `Dockerfile`, `VERSION`, удалены корневые `bootstrap.php`, `config.php`, `scripts/build-sitemap.php`, при необходимости **`deploy/SEO-CHECKLIST.md`** (дубликат).
+- **Решение:** MINOR **1.2.0**.

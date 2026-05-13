@@ -7,7 +7,7 @@
 При наличии PHP в PATH:
 
 ```powershell
-php scripts/build-sitemap.php
+php lib/build-sitemap.php
 ```
 
 Тот же шаг выполняется автоматически при **`docker build`** (см. корневой **`Dockerfile`**).

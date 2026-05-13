@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 /**
  * CLI: собирает единый public/sitemap.xml (Sitemap 0.9).
- * Запуск: php scripts/build-sitemap.php (из корня репозитория).
+ * Запуск из корня репозитория: php lib/build-sitemap.php
  */
 
-require dirname(__DIR__) . '/bootstrap.php';
+require __DIR__ . '/bootstrap.php';
 
-$cfg = require SITE_ROOT . '/config.php';
+$cfg = require __DIR__ . '/config.php';
 $base = rtrim((string) ($cfg['site_url'] ?? 'https://genshintop.ru'), '/');
 
 /** @return array{0: string, 1: string} priority, changefreq */

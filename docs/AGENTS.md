@@ -9,13 +9,13 @@
 
 Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. Единственный канонический корпус — Markdown в **`content/{guides,characters}`**.
 
-Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. Сборка прод-образа выполняет **`php scripts/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
+Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. Сборка прод-образа выполняет **`php lib/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
 
 ### Команды и операции
 
 | Команда / действие | Назначение |
 |-------------------|------------|
-| `php scripts/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
+| `php lib/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
 | Docker | **`deploy/README.md`** — образ GHCR, `deploy/docker-compose.yml`, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build` корневого Dockerfile |
 | Обновление на сервере | `bash deploy/update-from-github.sh` — pull образа, `up -d` |
@@ -24,7 +24,7 @@
 
 ### Модули (GRACE)
 
-- **M-PHP-SITE** — `public/index.php`, `bootstrap.php`, `config.php`, **`lib/`** (PHP, **`lib/templates/`** шаблоны, **`lib/og-manifest.json`**), **`public/css/site.css`**, **`scripts/build-sitemap.php`**, **`public/og/`**, Docker/nginx, **`deploy/genshintop-redirects.conf`**. JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
+- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`lib/templates/`**, **`lib/og-manifest.json`**), **`public/css/site.css`**, **`public/og/`**, Docker/nginx, **`deploy/genshintop-redirects.conf`**. JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
 
 ### Гайды: таксономия и frontmatter
 
@@ -140,23 +140,21 @@ Testing rules:
 
 ## File Structure
 ```
-public/index.php        - Front-controller (точка входа PHP)
-bootstrap.php, config.php
+public/index.php        - Только require lib/web_dispatch.php (nginx → PHP-FPM)
 lib/
+  bootstrap.php, config.php, web_dispatch.php, build-sitemap.php
   *.php                 - Router, PageRenderer, Seo, контент, хабы, OG
   templates/            - layout.php, partials (header, footer, lootbar_banner)
   og-manifest.json      - список ключей OG-PNG для OgManifest (ручная правка / внешний генератор)
 content/
   guides/, characters/  - Канонический Markdown
-scripts/
-  build-sitemap.php     - Генерация public/sitemap.xml (docker build / локально при наличии PHP)
 public/
   css/site.css          - Ванильный CSS
   robots.txt, favicon, og/** (PNG при необходимости)
 docker/
   nginx-default.conf, supervisord.conf, docker-entrypoint.sh
-Dockerfile              - php-fpm-alpine + nginx + supervisor; копируется только scripts/build-sitemap.php; без Node
-deploy/                 - docker-compose.yml, genshintop-redirects.conf, env.example, update-from-github.sh, SEO-CHECKLIST.md
+Dockerfile              - php-fpm-alpine + nginx + supervisor; RUN php lib/build-sitemap.php; без Node
+deploy/                 - docker-compose.yml, genshintop-redirects.conf, env.example, update-from-github.sh
 reports/                - content-audit.json, migration-report.json, guides-audit.json
 grace/
   requirements/requirements.xml
@@ -167,6 +165,7 @@ grace/
 docs/
   AGENTS.md             - Этот документ
   HISTORY.md            - Журнал итераций для агентов
+  SEO-CHECKLIST.md      - Чек-лист после выката (URL, sitemap, редиректы)
 .cursor/rules/          - Правила Cursor (GRACE, история, git)
 .kilo/                  - Навыки Kilo / GRACE
 ```

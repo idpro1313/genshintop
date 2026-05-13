@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-define('SITE_ROOT', __DIR__);
+define('SITE_ROOT', dirname(__DIR__));
 
 require_once SITE_ROOT . '/lib/Parsedown.php';
 require_once SITE_ROOT . '/lib/Frontmatter.php';

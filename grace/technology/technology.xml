@@ -1,10 +1,10 @@
-<TechnologyStack VERSION="1.1.0">
+<TechnologyStack VERSION="1.2.0">
   <Runtime>Продакшен: PHP 8.2 + nginx + PHP-FPM в одном Alpine-образе (supervisord). Контент: Markdown в content/. Node.js и npm в репозитории не используются.</Runtime>
   <Language>PHP, Markdown, JSON</Language>
   <Framework>Серверный рендер PHP (lib/templates/). Ванильный CSS в public/css/site.css.</Framework>
 
   <Dependencies>
-    <dep name="php" version="8.2-fpm-alpine (Docker)" purpose="Рантайм сайта; CLI для scripts/build-sitemap.php при сборке образа" />
+    <dep name="php" version="8.2-fpm-alpine (Docker)" purpose="Рантайм сайта; CLI для lib/build-sitemap.php при сборке образа" />
     <dep name="nginx" version="Alpine package" purpose="Reverse proxy и статика из public/" />
   </Dependencies>
 

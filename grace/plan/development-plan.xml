@@ -19,7 +19,7 @@
   <Modules>
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php, контент Markdown в content/, шаблоны PHP в lib/templates/, ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей, /lootbar/*, /regions/*, страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация scripts/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/templates/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/templates/partials и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
+        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), контент Markdown в content/, шаблоны PHP в lib/templates/, ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей, /lootbar/*, /regions/*, страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация lib/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/templates/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/templates/partials и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
         <inputs>
           <param name="content" type="markdown" />
           <param name="config.php" type="php-config" />
@@ -33,22 +33,19 @@
       </contract>
       <interface>
         <export-docker-build PURPOSE="docker build . — nginx+supervisor+php-fpm, без Node в runtime" />
-        <export-sitemap-build PURPOSE="php scripts/build-sitemap.php → public/sitemap.xml" />
+        <export-sitemap-build PURPOSE="php lib/build-sitemap.php → public/sitemap.xml" />
       </interface>
       <depends>none</depends>
       <target>
         <source>Dockerfile</source>
         <source>docker/nginx-default.conf</source>
         <source>docker/supervisord.conf</source>
-        <source>bootstrap.php</source>
-        <source>config.php</source>
         <source>public/index.php</source>
         <source>lib/</source>
-        <source>scripts/build-sitemap.php</source>
         <source>deploy/docker-compose.yml</source>
         <source>deploy/genshintop-redirects.conf</source>
         <source>deploy/update-from-github.sh</source>
-        <source>deploy/SEO-CHECKLIST.md</source>
+        <source>docs/SEO-CHECKLIST.md</source>
         <source>.github/workflows/docker-image.yml</source>
       </target>
       <verification-ref>V-M-PHP-SITE</verification-ref>
@@ -96,7 +93,7 @@
     <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в content/ или внешняя подготовка файлов">
       <step-1>Изменения в content/guides и content/characters (локально или импорт из внешнего источника)</step-1>
       <step-2>При необходимости — генерация OG, редиректов и отчётов вне этого репозитория</step-2>
-      <step-3>Сборка образа docker build; sitemap через scripts/build-sitemap.php</step-3>
+      <step-3>Сборка образа docker build; sitemap через lib/build-sitemap.php</step-3>
       <evidence>Контент в content/**; образ сайта собирается docker build</evidence>
     </DF-CONTENT-MIGRATE>
 
@@ -123,7 +120,7 @@
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
-      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории (1.1.0).</goal>
+      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории (1.2.0).</goal>
       <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
     </Phase-5>
 

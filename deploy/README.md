@@ -73,7 +73,7 @@ docker run --rm -p 8080:80 genshintop-web
 
 ## Паритет URL и SEO (кратко)
 
-После миграции на PHP проверьте вручную (или по **`deploy/SEO-CHECKLIST.md`**):
+После миграции на PHP проверьте вручную (или по **`docs/SEO-CHECKLIST.md`**):
 
 - Ключевые маршруты (`/`, `/guides`, `/characters`, хабы, `/lootbar/*`, `/regions/*`, trust-страницы) открываются с ожидаемым HTTP-кодом.
 - **`https://genshintop.ru/sitemap.xml`** — единый `urlset`, без индекса из нескольких файлов.
@@ -129,11 +129,11 @@ certificatesResolvers:
 
 | Файл | Назначение |
 |------|------------|
-| `Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php scripts/build-sitemap.php` |
+| `Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php lib/build-sitemap.php` |
 | `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
 | `deploy/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
 | `deploy/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор) |
-| `deploy/SEO-CHECKLIST.md` | Чек-лист после выката |
+| `docs/SEO-CHECKLIST.md` | Чек-лист после выката |
 | `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` |
 | `deploy/update-from-github.sh` | Обновление на Linux: git fast-forward, pull образа, up -d |
 | `.dockerignore` | Контекст сборки образа |
