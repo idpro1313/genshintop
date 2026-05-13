@@ -6,7 +6,8 @@
 
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Корень репозитория: каталог скрипта; pwd -P — физический путь (без «висящих» symlink в компонентах пути).
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 cd "$ROOT"
 
 COMPOSE_FILE="$ROOT/docker/docker-compose.yml"
@@ -21,8 +22,23 @@ fi
 BRANCH="${1:-main}"
 REMOTE="${REMOTE:-origin}"
 
+echo ">>> репозиторий: $ROOT"
+echo ">>> compose: $COMPOSE_FILE"
+
 echo ">>> параметры из $ENV_FILE (проверьте, что это этот сайт, не копия .env с другого):"
 grep -E '^(SITE_CONTAINER_NAME|TRAEFIK_ROUTER|SITE_IMAGE)=' "$ENV_FILE" || true
+
+# На сервере часто export COMPOSE_FILE=... под один сайт — Compose тогда мержит файлы и трогает чужой стек.
+compose_run() {
+  (
+    unset COMPOSE_FILE COMPOSE_PROJECT_NAME
+    docker compose \
+      --project-directory "$ROOT" \
+      --env-file "$ENV_FILE" \
+      -f "$COMPOSE_FILE" \
+      "$@"
+  )
+}
 
 echo ">>> git fetch $REMOTE $BRANCH"
 git fetch "$REMOTE" "$BRANCH"
@@ -34,7 +50,7 @@ if ! git merge --ff-only "$REMOTE/$BRANCH"; then
 fi
 
 echo ">>> docker compose pull"
-if ! docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" pull; then
+if ! compose_run pull; then
   echo
   echo "Ошибка: Docker не смог скачать образ из GHCR."
   echo "Проверьте, что GitHub package ghcr.io/idpro1313/genshintop публичный"
@@ -46,7 +62,7 @@ if ! docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" pull; then
 fi
 
 echo ">>> docker compose up -d"
-docker compose --env-file "$ENV_FILE" -f "$COMPOSE_FILE" up -d
+compose_run up -d
 
 docker image prune -f >/dev/null 2>&1 || true
 

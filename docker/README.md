@@ -18,6 +18,8 @@ grep -E '^(SITE_CONTAINER_NAME|TRAEFIK_ROUTER|SITE_IMAGE)=' docker/.env
 
 Для genshintop ожидаются **`genshintop_web`**, **`genshintop`**, образ **`ghcr.io/…/genshintop`**.
 
+Не задавайте в **`~/.bashrc`** глобально **`export COMPOSE_FILE=…`** и **`COMPOSE_PROJECT_NAME`** под один сайт: Compose подмешивает их ко всем вызовам. Скрипт **`update-from-github.sh`** перед **`docker compose`** сбрасывает эти переменные в подпроцессе; надёжнее не экспортировать их вообще и вызывать compose только из скриптов с явным **`-f`**.
+
 ---
 
 ## Docker из GHCR

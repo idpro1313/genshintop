@@ -360,3 +360,9 @@
 - **Почему:** на сервере при обновлении из каталога genshintop пересоздавался контейнер **`dandangers_web`** — типичный случай **`SITE_CONTAINER_NAME`** из чужого **`.env`**.
 - **Файлы:** `docker/docker-compose.yml`, `docker/env.example`, `docker/README.md`, `update-from-github.sh`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.3** — на проде в **`genshintop/docker/.env`** должны быть **`SITE_CONTAINER_NAME=genshintop_web`** и **`TRAEFIK_ROUTER=genshintop`** (не значения с dandangers).
+
+### update-from-github.sh: изоляция docker compose от COMPOSE_FILE (1.3.4)
+- **Что:** вызовы **`docker compose`** обёрнуты в подпроцесс с **`unset COMPOSE_FILE`** и **`unset COMPOSE_PROJECT_NAME`** (если на сервере они экспортированы под другой сайт, Compose раньше мог подмешивать чужой compose и пересоздавать не тот контейнер при уникальном **`docker/.env`**); добавлены **`--project-directory "$ROOT"`**, вывод путей **`ROOT`** и **`COMPOSE_FILE`**; **`ROOT`** через **`pwd -P`**. В **`docker/README.md`** — предупреждение не выставлять глобально **`COMPOSE_FILE`** / **`COMPOSE_PROJECT_NAME`** в shell.
+- **Почему:** пользователь подтвердил уникальность env; типичная причина — переменные окружения shell от первого сайта.
+- **Файлы:** `update-from-github.sh`, `docker/README.md`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.4**.
