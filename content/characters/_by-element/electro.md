@@ -11,14 +11,24 @@ element: Electro
 
 Электро — стихия молнии. Сильна в реакциях «Сверхзаряд» (с гидро), «Перегрузка» (с пиро), «Стимул/Цветение» (с дендро) и «Заряд» (с гидро). Часто отвечает за восстановление энергии.
 
-## Известные представители
+## Ключевые представители
 
-Райдэн Сёгун, Яэ Мико, Сара, Кудзё Сара, Бэй Доу, Кэ Цин, Лиза, Куки Синобу, Дори, Сетос, Иансан, Мизуки, Емилия (с дендро отдельно), Скирк (по последним патчам), Оророн.
+- [Райдэн Сёгун](/characters/raiden-shogun) — Electro Archon, burst DPS / battery.
+- [Яэ Мико](/characters/yae-miko) — off-field turret DPS.
+- [Кудзё Сара](/characters/kujou-sara) — Electro/ATK buffer.
+- [Бэй Доу](/characters/beidou) — burst sub-DPS.
+- [Кэ Цин](/characters/keqing) — Aggravate DPS.
+- [Лиза](/characters/lisa) — starter Electro catalyst.
+- [Куки Шинобу](/characters/kuki-shinobu) — Hyperbloom trigger + healer.
+- [Дори](/characters/dori) — healer/battery.
+- [Сетос](/characters/sethos) — Electro bow DPS.
+- [Оророн](/characters/ororon) — Natlan Electro support.
+- [Иансан](/characters/iansan) — Natlan Electro support/DPS.
 
 ## Резонанс и сеты
 
 - Электро-резонанс «Высокое напряжение»: ускоряет восстановление энергии и усиливает реакции с электро.
-- Сеты: «Громовая ярость» — урон электро и реакции, «Громобой» — старый сет на физический урон, «Поборник реакций» — для саппортов через реакции.
+- Сеты: [Thundering Fury](/artifacts/thundering-fury), [Emblem of Severed Fate](/artifacts/emblem-of-severed-fate), [Gilded Dreams](/artifacts/gilded-dreams), [Flower of Paradise Lost](/artifacts/flower-of-paradise-lost).
 
 ## Связанные материалы
 

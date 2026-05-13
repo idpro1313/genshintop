@@ -9,9 +9,22 @@ updatedAt: 2026-05-13
 weapon: catalyst
 ---
 
-Катализатор — единственный класс, у которого обычная атака сразу даёт стихийный урон. Идеально для саппортов (Бэннетт-аналоги среди катализаторов — Сахароза, Лиза), магических дамагеров (Кли, Яэ Мико, Невилетт) и реакционных персонажей (Нахида, Алхайтам).
+Катализатор — единственный класс, у которого обычная атака сразу даёт стихийный урон. Хорош для реакционных драйверов, хилеров и магических DPS.
 
-Список собирается из карточек с полем `weapon: catalyst`. Известные: Нахида, Невилетт, Яэ Мико, Кли, Мона, Лиза, Сахароза, Сяо Гун (Странник), Бай Чжу, Сетос, Пуля Кокоми (нет — Кокоми оружие — катализатор? — да, катализатор), Эми́лия (катализатор), Скирк (по новостям — меч), Маваруэр (катализатор), Колумбина (по слухам), Лань Янь (катализатор), Эмилия.
+## Ключевые представители
+
+- [Нахида](/characters/nahida) — Dendro applier / EM buffer.
+- [Невиллетт](/characters/neuvillette) — Hydro charged beam DPS.
+- [Яэ Мико](/characters/yae-miko) — Electro turret DPS.
+- [Кли](/characters/klee) — Pyro catalyst DPS.
+- [Мона](/characters/mona) — Hydro burst buffer.
+- [Лиза](/characters/lisa) — starter Electro catalyst.
+- [Сахароза](/characters/sucrose) — EM/VV support.
+- [Странник](/characters/wanderer) — Anemo on-field DPS.
+- [Бай Чжу](/characters/baizhu) — Dendro healer/shield.
+- [Кокоми](/characters/kokomi) — Hydro healer.
+- [Шарлотта](/characters/charlotte) — Cryo healer.
+- [Мизуки](/characters/mizuki) — catalyst support, если карточка добавлена в каталоге.
 
 ## Связанные материалы
 

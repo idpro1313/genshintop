@@ -13,7 +13,7 @@ related:
   - /weapons
 ---
 
-В Genshin Impact доступно ~100 играбельных героев плюс «региональные» новички каждый патч. Этот каталог даёт по каждому короткий редакционный портрет, разбор талантов и созвездий, рекомендации по артефактам, оружию и командам.
+В Genshin Impact доступно более 100 играбельных героев плюс новые персонажи каждого крупного патча. В `content/characters/` сейчас лежит 115 карточек: большинство — compact wiki, ключевые герои постепенно расширяются до полного формата.
 
 ## Как искать
 
@@ -32,10 +32,24 @@ related:
 - рекомендации по артефактам и оружию;
 - 2–3 эталонные команды и заметки про ротации.
 
+## Статусы карточек
+
+- **Full wiki:** подробные карточки с лором, талантами, созвездиями, билдом, оружием, командами и ротациями.
+- **Compact wiki:** короткие карточки на 250-500 слов с главным применением героя.
+- **Lore-safe:** карточки персонажей, чьи игровые данные официально не подтверждены; в них не указываются неподтверждённые стихия, оружие и билды.
+
 ## Стандарт
 
 Структура и тон — [`STYLE.md`](../STYLE.md). Шаблон — [`_templates/character.md`](../_templates/character.md).
 
-## Альтернативные сравнения
+## Индексы
 
-Карточки вида `<a>-vs-<b>` и `why-pull-<x>` — служебные сравнительные материалы; они тоже лежат плоско в `characters/`, помечены `kind: comparison` или `kind: pull-advisor` в frontmatter.
+- [`_by-element/anemo`](_by-element/anemo) — Anemo
+- [`_by-element/geo`](_by-element/geo) — Geo
+- [`_by-element/electro`](_by-element/electro) — Electro
+- [`_by-element/dendro`](_by-element/dendro) — Dendro
+- [`_by-element/hydro`](_by-element/hydro) — Hydro
+- [`_by-element/pyro`](_by-element/pyro) — Pyro
+- [`_by-element/cryo`](_by-element/cryo) — Cryo
+- [`_by-weapon/sword`](_by-weapon/sword), [`bow`](_by-weapon/bow), [`catalyst`](_by-weapon/catalyst), [`claymore`](_by-weapon/claymore), [`polearm`](_by-weapon/polearm)
+- [`_by-region/`](_by-region/) — регионы происхождения

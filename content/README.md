@@ -41,21 +41,21 @@
 
 | Раздел | live | draft | stub | total |
 |--------|-----:|------:|-----:|------:|
-| characters | 114 | 1 | 0 | 115 |
+| characters | 115 | 0 | 0 | 115 |
 | weapons | 57 | 0 | 0 | 57 |
 | artifacts | 38 | 0 | 0 | 38 |
-| materials | 27 | 1 | 0 | 28 |
+| materials | 28 | 0 | 0 | 28 |
 | enemies | 20 | 0 | 0 | 20 |
-| guides | 35 | 2 | 0 | 37 |
+| guides | 37 | 0 | 0 | 37 |
 | tools | 4 | 0 | 0 | 4 |
 | world/regions | 7 | 0 | 0 | 7 |
 | world/lore | 6 | 0 | 0 | 6 |
 | world/factions | 24 | 0 | 0 | 24 |
-| world/npc | 13 | 0 | 7 | 20 |
+| world/npc | 20 | 0 | 0 | 20 |
 | news/events | 6 | 0 | 0 | 6 |
 | news/announcements | 5 | 0 | 0 | 5 |
 | news/banners | 19 | 0 | 0 | 19 |
-| news/patches | 42 | 1 | 0 | 43 |
-| community | 1 | 3 | 0 | 4 |
+| news/patches | 43 | 0 | 0 | 43 |
+| community | 4 | 0 | 0 | 4 |
 
-Снимок: после **Wave 3** (2026-05-13). Все основные draft закрыты — guides/basics, guides/advanced, world/factions полностью live. Wave 4 закроет оставшиеся stub в `world/npc`, draft в `community` и расширит compact карточки персонажей в полные wiki (топ-50 героев).
+Снимок: после **Wave 4** (2026-05-13). В рабочих разделах `content/` больше нет `draft`/`stub` во frontmatter: шаблонные `stub` остаются только в `content/_templates/` как намеренный пример статуса для новых материалов. Wave 5 — расширение следующих compact карточек персонажей до full wiki и подготовка миграции `lib/ContentRepository.php` на `content/`.

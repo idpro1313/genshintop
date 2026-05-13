@@ -11,7 +11,19 @@ weapon: claymore
 
 Двуручник — медленный, но мощный класс. Эффективен против щитов и брони, частые ноки. Часто роль основного дамагера в физ-билдах или тяжёлых пиро/гео-сборках.
 
-Список собирается из карточек с полем `weapon: claymore` в frontmatter. Известные: Дилюк, Эола, Сяо (полеарм, не сюда), Бэй Доу, Иттo, Чжон Юнь (Чун Юнь), Ноэлль, Дори, Сай Ну, Аруда (Арутага), Кавэ, Дехья, Мавуика (двуручник), Ризли, Сето́с — у каждого профиль в [`characters/<slug>.md`](../).
+## Ключевые представители
+
+- [Дилюк](/characters/diluc) — классический Pyro claymore DPS.
+- [Эола](/characters/eula) — Physical/Cryo DPS.
+- [Бэй Доу](/characters/beidou) — Electro burst sub-DPS.
+- [Аратаки Итто](/characters/arataki-itto) — Geo/DEF claymore main DPS.
+- [Чун Юнь](/characters/chongyun) — Cryo infusion support.
+- [Ноэлль](/characters/noelle) — shield/heal/carry.
+- [Дори](/characters/dori) — healer/battery.
+- [Кавех](/characters/kaveh) — Dendro Bloom driver.
+- [Дехья](/characters/dehya) — defensive Pyro bruiser.
+- [Саю](/characters/sayu) — Anemo healer/mobility.
+- [Навия](/characters/navia) — Geo shotgun DPS.
 
 ## Связанные материалы
 

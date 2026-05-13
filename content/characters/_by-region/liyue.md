@@ -11,7 +11,13 @@ region: Liyue
 
 Ли Юэ — регион Гео-архонта Моракса (Чжун Ли). Сильна торговля, адепты, наёмники Миллелит.
 
-Список собирается по полю `region: Liyue`. Известные: Чжун Ли, Сяо, Ху Тао, Ке Цин, Гань Юй, Шэнь Хэ, Чун Юнь, Бэй Доу, Сян Лин, Нин Гуан, Ци Ци, Юнь Цзинь, Бай Чжу, Янь Фэй, Лан Янь, Сюй Инь.
+## Ключевые представители
+
+- [Чжон Ли](/characters/zhongli) — Моракс / Гео Архонт.
+- [Сяо](/characters/xiao), [Гань Юй](/characters/ganyu), [Шэнь Хэ](/characters/shenhe) — Адепты и связанные с ними герои.
+- [Нин Гуан](/characters/ningguang), [Кэ Цин](/characters/keqing), [Е Лань](/characters/yelan) — Цисин и разведка.
+- [Ху Тао](/characters/hu-tao), [Ци Ци](/characters/qiqi), [Бай Чжу](/characters/baizhu), [Янь Фэй](/characters/yanfei) — городские профессии.
+- [Чун Юнь](/characters/chongyun), [Сян Лин](/characters/xiangling), [Син Цю](/characters/xingqiu), [Бэй Доу](/characters/beidou), [Юнь Цзинь](/characters/yun-jin), [Яо Яо](/characters/yaoyao), [Сянь Юнь](/characters/xianyun).
 
 ## Связанные материалы
 

@@ -11,14 +11,26 @@ element: Pyro
 
 Пиро — стихия огня. Один из самых мощных по урону элементов в мете: пар (с гидро), расплавление (с крио), перегрузка (с электро), бурление (с дендро+гидро). Много основных дамагеров.
 
-## Известные представители
+## Ключевые представители
 
-Ху Тао, Дилюк, Беннетт, Сян Лин, Кли, Ёимия, Тома, Шань Ху Лин (Сян Лин), Арлекино, Линни, Ди Сян, Дехья, Эмбер, Чевреза, Шарлотта (партс), Маваруэ́р (отдельно), Мавуика, Иансан (электро/пиро), Мика (отдельно — крио).
+- [Ху Тао](/characters/hu-tao) — single-target Pyro DPS через Vaporize.
+- [Дилюк](/characters/diluc) — классический claymore DPS.
+- [Беннетт](/characters/bennett) — heal + ATK buff, один из лучших 4★.
+- [Сян Лин](/characters/xiangling) — off-field Pyro через Pyronado.
+- [Кли](/characters/klee) — catalyst burst DPS.
+- [Ёимия](/characters/yoimiya) — ranged single-target DPS.
+- [Тома](/characters/thoma) — shield + Burgeon trigger.
+- [Арлекино](/characters/arlecchino) — Bond of Life Pyro DPS.
+- [Лини](/characters/lyney) — charged-shot Pyro DPS.
+- [Дехья](/characters/dehya) — defensive Pyro bruiser.
+- [Эмбер](/characters/amber) — стартовый Pyro bow.
+- [Чеврёз](/characters/chevreuse) — Overload support.
+- [Мавуика](/characters/mavuika) — Pyro Archon / Natlan core.
 
 ## Резонанс и сеты
 
 - Пиро-резонанс «Пламя страсти»: +25% к атаке отряда. Один из самых ценных резонансов.
-- Сеты: «Багряная ведьма пламени» — пиро/реакции, «Преступник долины золотого пламени» — для бурления/Натлановых реакций, «Восход» — старый сет под физ.урон.
+- Сеты: [Crimson Witch of Flames](/artifacts/crimson-witch-of-flames), [Emblem of Severed Fate](/artifacts/emblem-of-severed-fate), [Scroll of the Hero of Cinder City](/artifacts/scroll-of-the-hero-of-cinder-city).
 
 ## Связанные материалы
 

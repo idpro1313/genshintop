@@ -11,14 +11,26 @@ element: Hydro
 
 Гидро — стихия воды. Самая «универсальная» подложка для реакций: пар (с пиро), заморозка (с крио), заряд/сверхзаряд (с электро), цветение (с дендро). Многие гидро-герои — основные дамагеры или сильные саппорты.
 
-## Известные представители
+## Ключевые представители
 
-Фурина, Невилетт, Е Лань, Тарталья (Чайльд), Мона, Кокоми, Аято, Сян Лин (через ульт-дождь), Сигевинне, Маваруэр, Микато (Мизуки — частично), Эскирия, Эмилия (хайдр).
+- [Фурина](/characters/furina) — Hydro Archon, team-wide damage buffer.
+- [Невиллетт](/characters/neuvillette) — charged beam Hydro DPS.
+- [Е Лань](/characters/yelan) — off-field Hydro sub-DPS.
+- [Син Цю](/characters/xingqiu) — 4★ off-field Hydro core.
+- [Тарталья](/characters/childe) — on-field Hydro driver.
+- [Мона](/characters/mona) — burst buffer.
+- [Кокоми](/characters/kokomi) — healer + Hydro applier.
+- [Камисато Аято](/characters/ayato) — on-field Hydro DPS.
+- [Нилу](/characters/nilou) — Bloom archetype.
+- [Кандис](/characters/candace) — Hydro infusion support.
+- [Барбара](/characters/barbara) — starter healer.
+- [Сигевинн](/characters/sigewinne) — Fontaine healer.
+- [Мауалани](/characters/mualani) — Natlan Hydro DPS.
 
 ## Резонанс и сеты
 
 - Гидро-резонанс «Сонная вода»: +25% к максимальному HP отряда.
-- Сеты: «Жертва океана» — на гидро-урон, «Мечты тысячи цветов» — на бурление/цветение, «Песнь скитальца» — для саппортов с лечением через ульт.
+- Сеты: [Heart of Depth](/artifacts/heart-of-depth), [Nymph's Dream](/artifacts/nymphs-dream), [Marechaussee Hunter](/artifacts/marechaussee-hunter), [Golden Troupe](/artifacts/golden-troupe).
 
 ## Связанные материалы
 

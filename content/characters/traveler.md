@@ -65,7 +65,7 @@ related:
 - Эксплорер-команда (Anemo): Traveler + Беннетт + Кэйа + Лиза.
 - Геo-резонанс: Geo Traveler + Альбедо + Чжон Ли + любой DPS.
 - Hyperbloom: Electro Traveler + Накида + Сюй Цю + Кокоми.
-- Bloom: Dendro Traveler + Сюй Цю + Кокоми + Беннетт (нет, конфликт огня).
+- Bloom/Hyperbloom: Dendro Traveler + Син Цю + Кокоми + Куки Шинобу.
 
 ## Кому подойдёт
 

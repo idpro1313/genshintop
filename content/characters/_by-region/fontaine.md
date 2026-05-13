@@ -9,9 +9,16 @@ updatedAt: 2026-05-13
 region: Fontaine
 ---
 
-Фонтейн — регион Гидро-архонта Фокалор (Фурина). Магистрат, инженерия, мелузины и арки.
+Фонтейн — регион Гидро-архонта Фокалор и публичного образа Фурины. Главные темы: суд, Опера Эпиклезис, мелюзины, Meka-инженерия, Fortress of Meropide и тайна пророчества.
 
-Список собирается по полю `region: Fontaine`. Известные: Фурина, Невилетт, Лини, Лиэна, Ризли, Сигевинне, Шеврёз, Шарлотта, Эмили, Е Лань (Ли Юэ — нет), Кло́рин (Клоринда), Фрейминэ́ (Фремине́), Мизуки (нет — Инадзума), Фаль́мине, Эмили, Ди Сян (нет), Чевреза.
+## Ключевые представители
+
+- [Фурина](/characters/furina) — публичная Hydro-Archon figure.
+- [Невиллетт](/characters/neuvillette) — Chief Justice.
+- [Лини](/characters/lyney), [Линетт](/characters/lynette), [Фремине](/characters/freminet) — House of the Hearth / Fontaine performers.
+- [Ризли](/characters/wriothesley), [Сигевинн](/characters/sigewinne) — Fortress of Meropide.
+- [Шарлотта](/characters/charlotte) — The Steambird.
+- [Клоринда](/characters/clorinde), [Навия](/characters/navia), [Шеврёз](/characters/chevreuse), [Эмили](/characters/emilie), [Арлекино](/characters/arlecchino), [Эскоффье](/characters/escoffier).
 
 ## Связанные материалы
 

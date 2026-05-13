@@ -11,7 +11,14 @@ region: Natlan
 
 Натлан — регион Пиро-архонта Мавуики. Племена, ритуалы Ночной Души, союз с сабровани́. Релиз — патч 5.0+.
 
-Список собирается по полю `region: Natlan`. Известные: Мавуика, Кинич, Часка, Муалани, Шилонэн, Иансан, Варесса, Хейцзо (нет — Инадзума), Оророн, Айло́я, Цицлали, Маваруэ́р (Маваруэ́р), Каки, Шалай, Сетос (Сумеру — нет).
+## Ключевые представители
+
+- [Мавуика](/characters/mavuika) — Pyro Archon.
+- [Кинич](/characters/kinich), [Качина](/characters/kachina) — Children of Echoes.
+- [Муалани](/characters/mualani) — People of the Springs.
+- [Часка](/characters/chasca) — Flower-Feather Clan.
+- [Силонэн](/characters/xilonen) — Geo/Natlan support.
+- [Иансан](/characters/iansan), [Оророн](/characters/ororon), [Цитлали](/characters/citlali), [Вареса](/characters/varesa).
 
 ## Связанные материалы
 

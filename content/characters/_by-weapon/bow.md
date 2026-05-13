@@ -11,7 +11,20 @@ weapon: bow
 
 Лук — единственный класс с прицельным ударом и стихийным зарядом. Часто используется для сабдамаг-ролей или специфических архетипов (Гань Юй с криозарядом, Тигнари с Дендро-зарядом).
 
-Список собирается из карточек с полем `weapon: bow`. Известные: Гань Юй, Тигнари, Е Лань, Тарталья, Лини, Аму́ла́ни (Муалани — катализатор, не сюда), Венти, Колумбина (по слухам), Чевреза, Эмбер, Сара, Сэнхью́н Мика́, Файрру́зан, Хай́сан (последние патчи).
+## Ключевые представители
+
+- [Гань Юй](/characters/ganyu) — Cryo charged-shot DPS.
+- [Тигнари](/characters/tighnari) — Dendro charged-shot DPS.
+- [Е Лань](/characters/yelan) — Hydro sub-DPS.
+- [Тарталья](/characters/childe) — Hydro stance DPS.
+- [Лини](/characters/lyney) — Pyro charged-shot DPS.
+- [Венти](/characters/venti) — Anemo crowd control.
+- [Эмбер](/characters/amber) — starter Pyro bow.
+- [Кудзё Сара](/characters/kujou-sara) — Electro buffer.
+- [Фарузан](/characters/faruzan) — Anemo buffer.
+- [Коллеи](/characters/collei) — Dendro support.
+- [Ёимия](/characters/yoimiya) — Pyro normal-attack DPS.
+- [Часка](/characters/chasca) — Natlan Anemo bow.
 
 ## Связанные материалы
 

@@ -11,9 +11,18 @@ weapon: sword
 
 Одноручный меч — самый универсальный класс оружия: быстрая обычная атака, высокая частота элементальных hit'ов, удобен для сабдамаг-ролей.
 
-## Известные представители
+## Ключевые представители
 
-Кадзуха, Сяо (полеарм — нет, переходим), Бэннетт, Кэ Цин, Дзинь, Митеру, Айяка, Альбедо, Сёгун Райдэн (полеарм — нет), Алхайтам, Е Лань (лук — нет), Кейя, Чун Юнь (двуручник — нет): чистый список одноручников приведён в каждой карточке через поле `weapon: sword`.
+- [Кадзуха](/characters/kazuha) — Anemo support.
+- [Беннетт](/characters/bennett) — Pyro healer/buffer.
+- [Кэ Цин](/characters/keqing) — Electro Aggravate DPS.
+- [Джин](/characters/jean) — Anemo healer.
+- [Аяка](/characters/ayaka) — Cryo Freeze DPS.
+- [Альбедо](/characters/albedo) — Geo off-field DPS.
+- [Алхайтам](/characters/alhaitham) — Dendro on-field DPS.
+- [Кэйа](/characters/kaeya) — starter Cryo sword.
+- [Син Цю](/characters/xingqiu) — Hydro sub-DPS.
+- [Куки Шинобу](/characters/kuki-shinobu) — Hyperbloom trigger.
 
 ## Связанные материалы
 

@@ -11,9 +11,18 @@ element: Anemo
 
 Анемо — стихия ветра. В мете чаще выступает как утилита: рассеивание элементальных аур, группировка врагов, баффы через сет «Изумрудная тень». Прямой стихийный урон вторичен, но у части героев есть мощные ультимейты с реакциями swirl.
 
-## Полный список
+## Ключевые представители
 
-Список карточек собирается из [`characters/`](../) по полю `element: Anemo` в frontmatter. Известные представители: Венти, Сяо, Кадзуха, Странник, Сайю, Сахароза, Хейцзо, Фару́зан, Дзинь, Лань Янь, Сюй Инь, Часка (по последним патчам).
+- [Венти](/characters/venti) — группировка и Anemo burst.
+- [Сяо](/characters/xiao) — Plunge DPS.
+- [Кадзуха](/characters/kazuha) — лучший Anemo buffer/VV support.
+- [Странник](/characters/wanderer) — Anemo on-field DPS.
+- [Джин](/characters/jean) — heal + cleanse + Anemo.
+- [Сахароза](/characters/sucrose) — EM buffer и бюджетный VV support.
+- [Саю](/characters/sayu) — heal + mobility.
+- [Хэйдзо](/characters/heizou) — catalyst driver.
+- [Фарузан](/characters/faruzan) — Anemo damage support.
+- [Часка](/characters/chasca) — Natlan Anemo carry.
 
 Карточки добавляются в каталог [`characters/<slug>.md`](../). Этот индекс обновляется вместе с появлением новых героев.
 

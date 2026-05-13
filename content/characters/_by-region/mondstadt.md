@@ -11,7 +11,13 @@ region: Mondstadt
 
 Мондштадт — первая страна сюжета, регион Анемо-архонта Барбатоса (Венти). Большинство первых героев — из Ордо Фавониус.
 
-Список собирается по полю `region: Mondstadt` в карточках. Известные: Венти, Дзинь, Эола, Дилюк, Кэйа, Эмбер, Лиза, Беннетт, Альбедо, Чжон Юнь (Чун Юнь — нет, Ли Юэ), Сахароза, Розария, Ноэлль, Кли, Мика, Файрру́зан, Дайон.
+## Ключевые представители
+
+- [Венти](/characters/venti) — Архонт Анемо.
+- [Джин](/characters/jean), [Кэйа](/characters/kaeya), [Эмбер](/characters/amber), [Лиза](/characters/lisa), [Ноэлль](/characters/noelle) — Орден Фавониус.
+- [Дилюк](/characters/diluc) — Dawn Winery, бывший рыцарь.
+- [Альбедо](/characters/albedo), [Сахароза](/characters/sucrose), [Тимей](/world/npc/timaeus) — алхимия.
+- [Кли](/characters/klee), [Диона](/characters/diona), [Розария](/characters/rosaria), [Эола](/characters/eula), [Мика](/characters/mika), [Беннетт](/characters/bennett), [Фишль](/characters/fischl), [Мона](/characters/mona), [Рэйзор](/characters/razor), [Барбара](/characters/barbara).
 
 ## Связанные материалы
 

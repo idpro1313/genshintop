@@ -87,7 +87,7 @@ related:
 - 4pc: vs frozen / Cryo-affected enemies: **+20% Crit Rate** (+40% если frozen).
 - **BiS для Freeze teams.**
 
-### Альтернатива — Gladiator's Finale (4pc) или Crimson Witch (нет — Cryo не работает)
+### Альтернатива — Gladiator's Finale (4pc)
 
 - **Gladiator 4pc**: +18% ATK + 35% Sword DMG. Хорошо для Mono-Cryo.
 
@@ -122,7 +122,7 @@ related:
 1. **Аяка: E → Q → Cryo-NA combo**.
 2. Hydro applier (Кокоми / Сюй Цю / Е Лань): E → switch.
 3. Cryo battery / Buffer (Шэнь Хэ / Кадзуха): rotation.
-4. Heal / Buffer (Беннетт-нет — Pyro расплавляет; обычно нет healer).
+4. Heal / Buffer: Кокоми, Диона или другой sustain без лишнего Pyro.
 
 ## Команды
 
@@ -142,7 +142,7 @@ related:
 | Main DPS | **Аяка** | Cryo on-field |
 | Sub-DPS | [Гань Юй](/characters/ganyu) | Cryo |
 | Buff | [Шэнь Хэ](/characters/shenhe) | +ATK + Cryo DMG |
-| Heal | Кокоми (нет — Hydro) или Дион | Cryo-heal |
+| Heal | Диона / Лайла + healer flex | Sustain |
 
 ### Команда 3: Бюджет (4★)
 
