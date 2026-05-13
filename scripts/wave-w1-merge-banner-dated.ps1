@@ -1,6 +1,6 @@
 # W1: датированные дубли баннеров → один канонический slug (без суффикса даты).
 # Читает reports/guides-refactor-inventory.json, дописывает docker/genshintop-redirects.conf,
-# удаляет лишние content/guides/*.md, заменяет ссылки в content/**/*.md.
+# удаляет лишние info/guides/*.md, заменяет ссылки в content/**/*.md и info/**/*.md.
 # Запуск из корня: pwsh scripts/wave-w1-merge-banner-dated.ps1
 
 $ErrorActionPreference = 'Stop'
@@ -31,7 +31,7 @@ foreach ($grp in $inv.mergeCandidatesByTitle) {
         continue
     }
     $canonical = $undated[0]
-    $cf = Join-Path $root "content/guides/$canonical.md"
+    $cf = Join-Path $root "info/guides/$canonical.md"
     if (-not (Test-Path $cf)) {
         Write-Warning "Skip group (missing canonical): $canonical"
         continue
@@ -39,7 +39,7 @@ foreach ($grp in $inv.mergeCandidatesByTitle) {
 
     foreach ($s in $slugs) {
         if ($s -eq $canonical) { continue }
-        $pf = Join-Path $root "content/guides/$s.md"
+        $pf = Join-Path $root "info/guides/$s.md"
         if (-not (Test-Path $pf)) { continue }
         $slugMap[$s] = $canonical
     }
@@ -66,29 +66,36 @@ Add-Content -Path $confPath -Value ($newRewrites -join "`n") -Encoding UTF8
 # Replace links / relatedGuides before deleting files (longest slug first).
 $sortedOld = $slugMap.Keys | Sort-Object { $_.Length } -Descending
 $utf8 = New-Object System.Text.UTF8Encoding($false)
-Get-ChildItem (Join-Path $root 'content') -Recurse -Filter '*.md' | ForEach-Object {
-    $text = [System.IO.File]::ReadAllText($_.FullName, $utf8)
-    $orig = $text
-    foreach ($old in $sortedOld) {
-        $new = $slugMap[$old]
-        $text = $text.Replace("/guides/$old`"", "/guides/$new`"")
-        $text = $text.Replace('/guides/' + $old + '/', '/guides/' + $new + '/')
-        $text = $text.Replace("/guides/$old)", "/guides/$new)")
-        $text = $text.Replace("/guides/$old>", "/guides/$new>")
-        $text = $text.Replace("`"- $old`"", "`"- $new`"")
-        $text = $text.Replace("- $old`r`n", "- $new`r`n")
-        $text = $text.Replace("- $old`n", "- $new`n")
-        $text = $text.Replace("($old.md)", "($new.md)")
-    }
-    if ($text -cne $orig) {
-        [System.IO.File]::WriteAllText($_.FullName, $text, $utf8)
-        Write-Host "Updated links: $($_.FullName.Substring($root.Length))"
+$scanRoots = @(
+    (Join-Path $root 'content'),
+    (Join-Path $root 'info')
+)
+foreach ($scanRoot in $scanRoots) {
+    if (-not (Test-Path $scanRoot)) { continue }
+    Get-ChildItem $scanRoot -Recurse -Filter '*.md' | ForEach-Object {
+        $text = [System.IO.File]::ReadAllText($_.FullName, $utf8)
+        $orig = $text
+        foreach ($old in $sortedOld) {
+            $new = $slugMap[$old]
+            $text = $text.Replace("/guides/$old`"", "/guides/$new`"")
+            $text = $text.Replace('/guides/' + $old + '/', '/guides/' + $new + '/')
+            $text = $text.Replace("/guides/$old)", "/guides/$new)")
+            $text = $text.Replace("/guides/$old>", "/guides/$new>")
+            $text = $text.Replace("`"- $old`"", "`"- $new`"")
+            $text = $text.Replace("- $old`r`n", "- $new`r`n")
+            $text = $text.Replace("- $old`n", "- $new`n")
+            $text = $text.Replace("($old.md)", "($new.md)")
+        }
+        if ($text -cne $orig) {
+            [System.IO.File]::WriteAllText($_.FullName, $text, $utf8)
+            Write-Host "Updated links: $($_.FullName.Substring($root.Length))"
+        }
     }
 }
 
 $deleted = 0
 foreach ($old in $slugMap.Keys) {
-    $pf = Join-Path $root "content/guides/$old.md"
+    $pf = Join-Path $root "info/guides/$old.md"
     if (Test-Path $pf) {
         Remove-Item -LiteralPath $pf -Force
         $deleted++

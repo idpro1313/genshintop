@@ -528,3 +528,9 @@
 - **Почему:** в коммите **1.11.0** на `origin/main` вошли **`info/**`**, скрипт и **`VERSION`**, а отслеживаемые правки **docs/** и **grace/** остались только в рабочей копии — перенос в git отдельным патчем.
 - **Файлы:** `docs/AGENTS.md`, `docs/CHARACTER_EDITORIAL.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`
 - **Решение:** PATCH **1.11.1** — синхронизация журнала и GRACE с фактическим контентным релизом.
+
+### Удаление пустых слоёв content/guides и content/characters (1.11.2)
+- **Что:** из репозитория удалены **`content/guides/README.md`** и **`content/characters/README.md`** (каталоги больше не используются). Обновлены **`info/README.md`**, **`docs/AGENTS.md`**, **`docs/GUIDES_MERGE_SPLIT.md`**, **`docs/guides-refactor-waves.md`**, **`scripts/wave-w1-merge-banner-dated.ps1`** (пути **`info/guides`**, скан **`info/**`** при замене ссылок), **`scripts/normalize-short-line-runons.ps1`** (пример пути), **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.11.2**.
+- **Почему:** запрос пользователя — убрать **`content/guides`** и **`content/characters`** как ненужные; канон остаётся **`info/guides`** и **`info/characters`**, архивы — **`content/guides-archive`** и **`content/characters-archive`**.
+- **Файлы:** удалены `content/guides/README.md`, `content/characters/README.md`; правки в перечисленных выше файлах, `docs/HISTORY.md`, `VERSION`
+- **Решение:** PATCH **1.11.2** — устранение устаревшей схемы «пустой слой + README».

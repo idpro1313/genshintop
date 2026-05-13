@@ -1,6 +1,6 @@
 # Волны редакционного рефакторинга гайдов
 
-Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). Корпус гайдов после **W1** и остаточных слияний **W2** — порядка **~232** файлов в **`content/guides/`** (до объединения было ~430); работа идёт волнами с фиксированными критериями готовности и опорой на [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
+Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). **Архив** массового корпуса после **W1** и **W2** — порядка **~232** файла в **`content/guides-archive/`**; **живые** опорные статьи на сайте — **`info/guides/`** (матрица и счётчики — [`info/README.md`](../info/README.md)). Инвентаризация и кандидаты merge/split — [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
 
 ## Инструменты
 
@@ -8,7 +8,7 @@
 |----------|-------------------|
 | Инвентаризация slug, метаданных, «лесенки», кандидатов merge/split | `php scripts/guides-refactor-inventory.php` или `pwsh scripts/guides-refactor-inventory.ps1` → `reports/guides-refactor-inventory.json` |
 | **W1:** слияние датированных дублей `banner-*` (отчёт `mergeCandidatesByTitle`) | `pwsh scripts/wave-w1-merge-banner-dated.ps1` из корня репозитория |
-| Склейка «лесенки» в одном файле (не массово) | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath content/guides/<slug>.md` |
+| Склейка «лесенки» в одном файле (не массово) | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath info/guides/<slug>.md` |
 
 Поля отчёта (ключевые):
 
@@ -36,7 +36,7 @@
 
 **Готово, когда:** как W1; по возможности единый формат «дата / тип молитвы / персонажи и оружие».
 
-**Пример качества текста:** **`content/guides/paralogism-5-6.md`** — структура **`##`**, оглавление, якоря; при необходимости препроцессинг абзацев через **`normalize-short-line-runons.ps1`**.
+**Пример качества текста:** **`content/guides-archive/paralogism-5-6.md`** — структура **`##`**, оглавление, якоря; при необходимости препроцессинг абзацев через **`normalize-short-line-runons.ps1`**.
 
 **Прогресс:** остаточные дубли из **`mergeCandidatesByTitle`** (без «бездатного» slug в группе) сведены к канону **`banner-essentsiya-ambrozii`** и существующему **`banner-blagoslovenie-plameni`** + **301** в **`docker/genshintop-redirects.conf`**; отчёт **`mergeCandidatesByTitle`** после правок пуст. Дальше — редакторская нормализация **`update-*`** и прочих **`banner-*`** (высокий **`ladderRatio`** у патчей — чаще списки имён, не «лесенка» абзацев).
 

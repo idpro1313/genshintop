@@ -1,10 +1,10 @@
 # Опорный корпус контента (редакция GenshinTop)
 
-Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт **гайды** из **`info/guides/*.md`** и **карточки персонажей** из **`info/characters/*.md`** (см. [`ContentRepository`](../lib/ContentRepository.php)). **Новые и правки гайдов** — только в **`info/guides/`**; **карточки персонажей** — только в **`info/characters/`** (без дублирования в `content/characters/` — там пояснение в **`content/characters/README.md`**).
+Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт **гайды** из **`info/guides/*.md`** и **карточки персонажей** из **`info/characters/*.md`** (см. [`ContentRepository`](../lib/ContentRepository.php)). **Новые и правки** — только в **`info/guides/`** и **`info/characters/`**; отдельных зеркал под **`content/`** нет.
 
 ## Гайды
 
-Каталог **`info/guides/`** — канон опорных гайдов для сайта (новые тексты по матрице ниже, без смыслового копирования из архива). Массовый старый корпус лежит в [`content/guides-archive/`](../content/guides-archive); пустой слой **`content/guides/`** без `.md` — см. [`content/guides/README.md`](../content/guides/README.md).
+Каталог **`info/guides/`** — канон опорных гайдов для сайта (новые тексты по матрице ниже, без смыслового копирования из архива). Массовый старый корпус лежит в [`content/guides-archive/`](../content/guides-archive).
 
 ### Информационная архитектура (без смысловых дублей)
 
@@ -253,11 +253,11 @@
 
 ## Персонажи
 
-Каталог **`info/characters/`** — канон карточек для сайта (см. **`content/characters/README.md`** про пустой слой `content/characters/`).
+Каталог **`info/characters/`** — канон карточек для сайта.
 
 - **Стандарт текста:** [`docs/CHARACTER_EDITORIAL.md`](../docs/CHARACTER_EDITORIAL.md) — короткий профиль без копипасты талантов из клиента, ссылками на опорные гайды.
 - **Снимок до пересборки:** при массовом переходе на новый формат прежние тексты копируются скриптом в **`content/characters-archive/`** (резерв, не в индексе сайта).
-- **Пересборка тел из YAML:** `pwsh scripts/rebuild-character-pages.ps1` из корня — копирует `*.md` из **`info/characters/`** в `characters-archive/`, генерирует новое **тело** из существующего frontmatter (~**114** профильных slug + компактный формат для **~83** вспомогательных страниц).
+- **Пересборка тел из frontmatter:** `pwsh scripts/rebuild-character-pages.ps1` из корня — копирует `*.md` из **`info/characters/`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`**, генерирует новое **тело** из существующего frontmatter (**197** slug, в том числе `why-pull-*` и `*-vs-*`).
 - **Frontmatter:** `name`, `title`, `element`, `weapon`, `rating` (опц.), `sourceSlug`, `relatedWeapons`, `relatedArtifacts`, `relatedGuides`; при пересборке добавляются `summary`, `gameVersion`, `reviewedAt`, если их не было.
 
 **Счётчик:** **197** файлов `.md` (включая `why-pull-*`, `*-vs-*` и прочие вспомогательные URL в том же каталоге).

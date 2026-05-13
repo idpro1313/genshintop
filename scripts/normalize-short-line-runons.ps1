@@ -1,7 +1,7 @@
 # Склеивает «лесенку»: игнорирует пустые строки, сливает подряд идущие строки в абзацы.
 # Разрыв абзаца — когда предыдущий закончен [.!?…] и следующая строка длинная (≥55) и с заглавной.
 # Поддерживает строки-заголовки Markdown ## … .
-# Запуск: pwsh scripts/normalize-short-line-runons.ps1 -RelativePath content/guides/paralogism-5-6.md
+# Запуск: pwsh scripts/normalize-short-line-runons.ps1 -RelativePath info/guides/bystriy-start-teyvat.md
 
 param(
     [Parameter(Mandatory = $true)]

@@ -1,6 +1,6 @@
 # Merge, split и смена slug гайдов
 
-Операционный playbook для информационной архитектуры корпуса [`content/guides/`](../content/guides/).
+Операционный playbook для информационной архитектуры **живых** гайдов [`info/guides/`](../info/guides/) (архив массового корпуса — [`content/guides-archive/`](../content/guides-archive/)).
 
 ## Принципы
 
@@ -13,14 +13,14 @@
 
 1. Выбрать **канонический** slug (латиница, читаемость, SEO).
 2. Перенести уникальный контент со вторичных статей в каноническую; вычитать дубли.
-3. Удалить вторичные файлы из `content/guides/`.
+3. Удалить вторичные файлы из `info/guides/`.
 4. Добавить строки в **[`docker/genshintop-redirects.conf`](../docker/genshintop-redirects.conf)**:
 
 ```nginx
 rewrite ^/guides/old-slug/?$ /guides/canonical-slug permanent;
 ```
 
-5. Пройтись по **`content/`** (guides + characters): заменить ссылки `/guides/old-slug` и пункты `relatedGuides` со старым slug.
+5. Пройтись по **`info/`** и **`content/`** (guides + characters, архивы при необходимости): заменить ссылки `/guides/old-slug` и пункты `relatedGuides` со старым slug.
 6. Обновить **`public/sitemap.xml`** не вручную — он собирается при `php lib/build-sitemap.php` в образе после изменений контента.
 
 ## Split (разбиение)
