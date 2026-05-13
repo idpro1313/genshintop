@@ -27,8 +27,8 @@ relatedGuides:
   - 5-reasons-haitam
   - all-travel-guide-gi
   - banner-skitayushchayasya-chasha-rosy
-  - banner-sumerechnyy-vershitel-01-03-2023
-  - banner-sumerechnyy-vershitel-28-11-2023
+  - banner-sumerechnyy-vershitel
+  - banner-sumerechnyy-vershitel
   - banner-sumerechnyy-vershitel
   - kak-kritovat
   - manga-po-genshin-impact

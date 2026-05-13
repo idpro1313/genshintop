@@ -27,10 +27,10 @@ relatedGuides:
   - 5-things-people-hate
   - all-travel-guide-gi
   - bai-chzu-who
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-08-04-2026
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-19-08-2025
   - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga-06-08-2024
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-belaya-raduga
 ---
 
 # Кэ Цин

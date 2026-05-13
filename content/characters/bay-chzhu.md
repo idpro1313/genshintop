@@ -25,8 +25,8 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - bai-chzu-who
-  - banner-bienie-mudrogo-serdtsa-08-11-2023
-  - banner-bienie-mudrogo-serdtsa-14-05-2024
+  - banner-bienie-mudrogo-serdtsa
+  - banner-bienie-mudrogo-serdtsa
   - banner-bienie-mudrogo-serdtsa
   - banner-dumy-nefrita-i-kamnya
   - strimchik-razrabotchikov-36

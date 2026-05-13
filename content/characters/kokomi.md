@@ -25,8 +25,8 @@ relatedArtifacts:
   - vse-artifakti-sumeru
 relatedGuides:
   - all-travel-guide-gi
-  - banner-dreyfuyushchee-svechenie-08-03-2022
-  - banner-dreyfuyushchee-svechenie-26-07-2023
+  - banner-dreyfuyushchee-svechenie
+  - banner-dreyfuyushchee-svechenie
   - banner-dreyfuyushchee-svechenie
   - banner-grom-sotryasaet-neba-ravniny
   - banner-zhemchuzhina-mudrosti

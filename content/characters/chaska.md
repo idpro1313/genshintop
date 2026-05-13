@@ -25,8 +25,8 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - archon-quest-5-1
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-08-04-2026
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-19-08-2025
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-bagrovyy-vspolokh-metkogo-vystrela
   - genshin-updates-2024
   - geshin-impact-travelguide5-8

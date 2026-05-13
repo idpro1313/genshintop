@@ -25,10 +25,10 @@ relatedArtifacts:
   - rytsar-krovi
 relatedGuides:
   - all-travel-guide-gi
-  - banner-rozhdyennaya-morskoy-volnoy-05-07-2023
-  - banner-rozhdyennaya-morskoy-volnoy-24-11-2021
   - banner-rozhdyennaya-morskoy-volnoy
-  - banner-stikhi-utrennego-vetra-25-02-2026
+  - banner-rozhdyennaya-morskoy-volnoy
+  - banner-rozhdyennaya-morskoy-volnoy
+  - banner-stikhi-utrennego-vetra
   - banner-stikhi-utrennego-vetra
   - druzya-genshin
   - genshinimpact-anniversary-awards-6-0

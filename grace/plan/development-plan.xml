@@ -159,7 +159,7 @@
 
     <Phase-6 name="GuideCorpusEditorialRefactor" status="in-progress">
       <goal>Единый редакционный стандарт гайдов, отчёт инвентаризации, редиректы при ИА; волны W1–W3 по отчёту</goal>
-      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, скрипты инвентаризации, первая волна cornerstone и merge banner→banners</step-1>
+      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, инвентаризация, W0 cornerstone и merge banner→banners; W1 датированные дубли banner-* → канон + 301; пример W2 «лесенки» — paralogism-5-6.md (остальной хвост W2/W3 — по отчёту)</step-1>
     </Phase-6>
 
     <!-- Phases use unique tags:

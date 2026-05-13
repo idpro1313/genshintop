@@ -23,7 +23,7 @@ relatedArtifacts:
   - okhota-na-ten
 relatedGuides:
   - all-travel-guide-gi
-  - banner-prishestvie-zvezdy-pustoty-17-03-2026
+  - banner-prishestvie-zvezdy-pustoty
   - banner-prishestvie-zvezdy-pustoty
   - gi-who-is-this
   - new-features-genshin-impact-moon-4

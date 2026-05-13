@@ -24,7 +24,7 @@ relatedArtifacts:
   - okhota-na-ten
 relatedGuides:
   - all-travel-guide-gi
-  - banner-odinokiy-svet-v-nochi-25-02-2026
+  - banner-odinokiy-svet-v-nochi
   - banner-odinokiy-svet-v-nochi
   - new-features-genshin-impact-moon-1
   - update-6-0-tanets-vyugi-v-sizoy-chashche

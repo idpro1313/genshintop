@@ -25,9 +25,9 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-ozarenie-lunnoy-travy-10-09-2025
-  - banner-ozarenie-lunnoy-travy-12-04-2023
-  - banner-ozarenie-lunnoy-travy-29-10-2024
+  - banner-ozarenie-lunnoy-travy
+  - banner-ozarenie-lunnoy-travy
+  - banner-ozarenie-lunnoy-travy
   - banner-ozarenie-lunnoy-travy
   - banner-sredotochie-chistoty-31-01-2024
   - best-geroy

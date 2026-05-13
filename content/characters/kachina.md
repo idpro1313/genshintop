@@ -20,10 +20,10 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-08-04-2026
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-19-08-2025
   - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga-30-09-2025
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-belaya-raduga
   - banner-blagoslovenie-plameni-15-04-2025
   - banner-blagoslovenie-plameni-23-12-2025
   - banner-blagoslovenie-plameni

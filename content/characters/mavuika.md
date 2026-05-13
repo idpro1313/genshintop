@@ -26,7 +26,7 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - archon-quest-5-1
-  - banner-oslepitelnoe-plamya-drevnosti-08-07-2025
+  - banner-oslepitelnoe-plamya-drevnosti
   - banner-oslepitelnoe-plamya-drevnosti
   - genshin-updates-2024
   - genshinimpact-anniversary-awards-6-0

@@ -36,7 +36,7 @@ relatedGuides:
   - all-travel-guide-gi
   - anime-genshin
   - ban-genshin-honkai
-  - banner-stikhi-utrennego-vetra-25-02-2026
+  - banner-stikhi-utrennego-vetra
 ---
 
 # Кли

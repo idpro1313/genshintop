@@ -22,13 +22,13 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-08-04-2026
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-19-08-2025
   - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga-06-08-2024
-  - banner-belaya-raduga-30-09-2025
-  - banner-bienie-mudrogo-serdtsa-08-11-2023
-  - banner-bienie-mudrogo-serdtsa-14-05-2024
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-belaya-raduga
+  - banner-belaya-raduga
+  - banner-bienie-mudrogo-serdtsa
+  - banner-bienie-mudrogo-serdtsa
 ---
 
 # Шарлотта

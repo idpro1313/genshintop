@@ -33,7 +33,7 @@ relatedGuides:
   - banner-dumy-nefrita-i-kamnya
   - banner-grom-sotryasaet-neba-ravniny
   - banner-skitayushchayasya-chasha-rosy
-  - banner-stikhi-utrennego-vetra-25-02-2026
+  - banner-stikhi-utrennego-vetra
   - banner-stikhi-utrennego-vetra
 ---
 

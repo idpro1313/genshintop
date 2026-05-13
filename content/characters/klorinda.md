@@ -23,7 +23,7 @@ relatedArtifacts:
   - konets-gladiatora
 relatedGuides:
   - all-travel-guide-gi
-  - banner-svetozarnaya-molniya-22-01-2025
+  - banner-svetozarnaya-molniya
   - banner-svetozarnaya-molniya
   - new-features-genshin-impact-part2
   - tier-list-4-8

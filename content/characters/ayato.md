@@ -27,8 +27,8 @@ relatedGuides:
   - 5-reasons-haitam
   - all-travel-guide-gi
   - banner-grom-sotryasaet-neba-ravniny
-  - banner-lazurnyy-pokhod-27-12-2022
-  - banner-lazurnyy-pokhod-28-11-2023
+  - banner-lazurnyy-pokhod
+  - banner-lazurnyy-pokhod
   - banner-lazurnyy-pokhod
   - genshinimpact-anniversary-awards-6-0
   - kak-kritovat

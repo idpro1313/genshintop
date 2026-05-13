@@ -25,10 +25,10 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-stikhi-utrennego-vetra-25-02-2026
   - banner-stikhi-utrennego-vetra
-  - banner-tainstvennye-sekrety-14-10-2022
-  - banner-tainstvennye-sekrety-24-11-2021
+  - banner-stikhi-utrennego-vetra
+  - banner-tainstvennye-sekrety
+  - banner-tainstvennye-sekrety
   - banner-tainstvennye-sekrety
   - hexerei-team-bonus
   - konets-igri-teorii

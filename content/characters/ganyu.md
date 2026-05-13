@@ -31,9 +31,9 @@ relatedGuides:
   - 5voprosov-k-teiwatu
   - all-travel-guide-gi
   - banner-dumy-nefrita-i-kamnya
-  - banner-efemernoe-nedoverie-02-05-2023
-  - banner-efemernoe-nedoverie-25-01-2022
-  - banner-efemernoe-nedoverie-russkiy
+  - banner-efemernoe-nedoverie
+  - banner-efemernoe-nedoverie
+  - banner-efemernoe-nedoverie
   - banner-efemernoe-nedoverie
 ---
 

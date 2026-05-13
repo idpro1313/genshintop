@@ -25,7 +25,7 @@ relatedArtifacts:
   - okhota-na-ten
 relatedGuides:
   - all-travel-guide-gi
-  - banner-pirshestvo-zrelishch-23-12-2025
+  - banner-pirshestvo-zrelishch
   - banner-pirshestvo-zrelishch
   - update-5-5-den-vozvrashcheniya-ognya
 ---

@@ -23,7 +23,7 @@ relatedArtifacts:
   - stoykost-millelita
 relatedGuides:
   - all-travel-guide-gi
-  - banner-romarinskaya-bezmyatezhnost-12-02-2025
+  - banner-romarinskaya-bezmyatezhnost
   - banner-romarinskaya-bezmyatezhnost
   - new-features-genshin-impact-part4
   - new-features-genshin-impact

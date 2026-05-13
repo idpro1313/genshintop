@@ -24,9 +24,9 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - banner-grom-sotryasaet-neba-ravniny
-  - banner-pirshestvo-ni-07-12-2022
-  - banner-pirshestvo-ni-13-03-2024
-  - banner-pirshestvo-ni-21-06-2022
+  - banner-pirshestvo-ni
+  - banner-pirshestvo-ni
+  - banner-pirshestvo-ni
   - banner-pirshestvo-ni
   - best-geroy
   - prichiny-rollyt

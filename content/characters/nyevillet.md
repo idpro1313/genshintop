@@ -22,9 +22,9 @@ relatedArtifacts:
   - stranstvuyushchiy-ansambl
 relatedGuides:
   - all-travel-guide-gi
-  - banner-zavet-glubin-02-04-2024
-  - banner-zavet-glubin-03-02-2026
-  - banner-zavet-glubin-10-12-2024
+  - banner-zavet-glubin
+  - banner-zavet-glubin
+  - banner-zavet-glubin
   - banner-zavet-glubin
   - gi-who-is-this
   - tier-list-4-8

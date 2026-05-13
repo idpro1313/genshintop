@@ -23,7 +23,7 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - banner-grom-sotryasaet-neba-ravniny
-  - banner-spletenie-shyelkovykh-oblakov-09-10-2024
+  - banner-spletenie-shyelkovykh-oblakov
   - banner-spletenie-shyelkovykh-oblakov
   - genshin-updates-2024
   - new-features-genshin-impact-part3

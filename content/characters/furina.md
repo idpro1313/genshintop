@@ -22,9 +22,9 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-pesn-vodam-mira-04-03-2025
-  - banner-pesn-vodam-mira-22-10-2025
-  - banner-pesn-vodam-mira-26-06-2024
+  - banner-pesn-vodam-mira
+  - banner-pesn-vodam-mira
+  - banner-pesn-vodam-mira
   - banner-pesn-vodam-mira
   - ka-min-6-errors
   - oratris

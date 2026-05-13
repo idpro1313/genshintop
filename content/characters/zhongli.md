@@ -27,11 +27,11 @@ relatedGuides:
   - 5-things-people-hate
   - all-travel-guide-gi
   - bai-chzu-who
-  - banner-gory-i-rynki-06-09-2023
-  - banner-gory-i-rynki-10-12-2024
-  - banner-gory-i-rynki-11-11-2025
-  - banner-gory-i-rynki-24-08-2022
-  - banner-gory-i-rynki-25-01-2022
+  - banner-gory-i-rynki
+  - banner-gory-i-rynki
+  - banner-gory-i-rynki
+  - banner-gory-i-rynki
+  - banner-gory-i-rynki
 ---
 
 # Чжун Ли

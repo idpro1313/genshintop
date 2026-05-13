@@ -24,7 +24,7 @@ relatedArtifacts:
   - zabludshiy-v-meteli
 relatedGuides:
   - all-travel-guide-gi
-  - banner-bushuyushchiy-rok-04-03-2025
+  - banner-bushuyushchiy-rok
   - banner-bushuyushchiy-rok
   - tier-list-4-8
   - update-4-1-k-siyaniyu-zvyezd-v-glubine

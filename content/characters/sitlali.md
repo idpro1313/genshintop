@@ -25,7 +25,7 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - archon-quest-5-1
-  - banner-shyepot-zvyezdnoy-nochi-30-07-2025
+  - banner-shyepot-zvyezdnoy-nochi
   - banner-shyepot-zvyezdnoy-nochi
   - genshin-updates-2024
   - geshin-impact-travelguide5-8

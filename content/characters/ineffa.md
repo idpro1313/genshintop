@@ -24,7 +24,7 @@ relatedArtifacts:
   - serenada-shyelkovoy-luny
 relatedGuides:
   - all-travel-guide-gi
-  - banner-zvyezdnoe-probuzhdenie-14-01-2026
+  - banner-zvyezdnoe-probuzhdenie
   - banner-zvyezdnoe-probuzhdenie
   - geshin-impact-travelguide5-8
   - new-features-genshin-impact-moon-1

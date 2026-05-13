@@ -28,10 +28,10 @@ relatedGuides:
   - 5-bezpoleznyh-mehanik
   - all-travel-guide-gi
   - bai-chzu-who
-  - banner-moment-tsveteniya-02-11-2021
-  - banner-moment-tsveteniya-07-02-2023
-  - banner-moment-tsveteniya-27-09-2023
-  - banner-moment-tsveteniya-29-10-2024
+  - banner-moment-tsveteniya
+  - banner-moment-tsveteniya
+  - banner-moment-tsveteniya
+  - banner-moment-tsveteniya
 ---
 
 # Ху Тао

@@ -1,12 +1,14 @@
 # Волны редакционного рефакторинга гайдов
 
-Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). Корпус большой (~430 файлов); работа идёт волнами с фиксированными критериями готовности и опорой на [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
+Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). Корпус гайдов после слияния датированных баннеров (**W1**) — порядка **~235** файлов в **`content/guides/`** (до объединения было ~430); работа идёт волнами с фиксированными критериями готовности и опорой на [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
 
 ## Инструменты
 
 | Действие | Команда / артефакт |
 |----------|-------------------|
 | Инвентаризация slug, метаданных, «лесенки», кандидатов merge/split | `php scripts/guides-refactor-inventory.php` или `pwsh scripts/guides-refactor-inventory.ps1` → `reports/guides-refactor-inventory.json` |
+| **W1:** слияние датированных дублей `banner-*` (отчёт `mergeCandidatesByTitle`) | `pwsh scripts/wave-w1-merge-banner-dated.ps1` из корня репозитория |
+| Склейка «лесенки» в одном файле (не массово) | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath content/guides/<slug>.md` |
 
 Поля отчёта (ключевые):
 
@@ -26,11 +28,15 @@
 
 **Готово, когда:** дубли объединены или явно разведены редакционно; все смены slug с редиректами из [`docker/genshintop-redirects.conf`](../docker/genshintop-redirects.conf).
 
+**Прогресс:** автоматически обработаны датированные дубли **banner** с каноническим slug без даты (**~194** удалённых файла); группы без «бездатного» slug в паре требуют ручного решения (скрипт выводит предупреждение).
+
 ## W2 — Остальные баннеры и патчи
 
 **Состав:** хвост `banner-*` / `update-*`, не попавший в W1.
 
 **Готово, когда:** как W1; по возможности единый формат «дата / тип молитвы / персонажи и оружие».
+
+**Пример качества текста:** **`content/guides/paralogism-5-6.md`** — структура **`##`**, оглавление, якоря; при необходимости препроцессинг абзацев через **`normalize-short-line-runons.ps1`**.
 
 ## W3 — Общий зал (`general`), техно, кириллические slug
 

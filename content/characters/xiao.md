@@ -30,10 +30,10 @@ relatedGuides:
   - all-travel-guide-gi
   - bai-chzu-who
   - banner-dumy-nefrita-i-kamnya
-  - banner-priglashenie-k-mirskoy-zhizni-05-01-2022
-  - banner-priglashenie-k-mirskoy-zhizni-18-01-2023
-  - banner-priglashenie-k-mirskoy-zhizni-20-02-2024
-  - banner-priglashenie-k-mirskoy-zhizni-31-05-2022
+  - banner-priglashenie-k-mirskoy-zhizni
+  - banner-priglashenie-k-mirskoy-zhizni
+  - banner-priglashenie-k-mirskoy-zhizni
+  - banner-priglashenie-k-mirskoy-zhizni
   - banner-priglashenie-k-mirskoy-zhizni
 ---
 

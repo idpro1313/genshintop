@@ -26,8 +26,8 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - banner-dumy-nefrita-i-kamnya
-  - banner-vozvrashchenie-v-mir-smertnykh-18-06-2025
-  - banner-vozvrashchenie-v-mir-smertnykh-21-03-2023
+  - banner-vozvrashchenie-v-mir-smertnykh
+  - banner-vozvrashchenie-v-mir-smertnykh
   - banner-vozvrashchenie-v-mir-smertnykh
   - gi-who-is-this
   - kak-kritovat

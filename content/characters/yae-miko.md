@@ -26,9 +26,9 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - banner-grom-sotryasaet-neba-ravniny
-  - banner-vechnotsvetushchiy-purpur-03-05-2023
-  - banner-vechnotsvetushchiy-purpur-18-11-2022
-  - banner-vechnotsvetushchiy-purpur-21-02-2024
+  - banner-vechnotsvetushchiy-purpur
+  - banner-vechnotsvetushchiy-purpur
+  - banner-vechnotsvetushchiy-purpur
   - banner-vechnotsvetushchiy-purpur
   - druzya-genshin
   - genshinimpact-anniversary-awards-6-0

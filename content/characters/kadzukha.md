@@ -26,10 +26,10 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - banner-grom-sotryasaet-neba-ravniny
-  - banner-listya-na-vetru-02-04-2024
-  - banner-listya-na-vetru-13-06-2023
-  - banner-listya-na-vetru-13-07-2022
-  - banner-listya-na-vetru-28-08-2024
+  - banner-listya-na-vetru
+  - banner-listya-na-vetru
+  - banner-listya-na-vetru
+  - banner-listya-na-vetru
   - banner-listya-na-vetru
   - best-geroy
 ---

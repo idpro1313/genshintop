@@ -33,8 +33,8 @@ relatedGuides:
   - all-travel-guide-gi
   - bai-chzu-who
   - ban-genshin-honkai
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-08-04-2026
-  - banner-belaya-raduga-30-09-2025
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
+  - banner-belaya-raduga
   - banner-blagoslovenie-plameni-23-12-2025
 ---
 

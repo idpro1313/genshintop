@@ -25,11 +25,11 @@ relatedArtifacts:
   - konets-gladiatora
 relatedGuides:
   - all-travel-guide-gi
-  - banner-stikhi-iz-vinnogo-kubka-03-12-2025
-  - banner-stikhi-iz-vinnogo-kubka-15-04-2025
-  - banner-stikhi-iz-vinnogo-kubka-18-10-2023
-  - banner-stikhi-iz-vinnogo-kubka-28-09-2022
-  - banner-stikhi-iz-vinnogo-kubka-30-03-2022
+  - banner-stikhi-iz-vinnogo-kubka
+  - banner-stikhi-iz-vinnogo-kubka
+  - banner-stikhi-iz-vinnogo-kubka
+  - banner-stikhi-iz-vinnogo-kubka
+  - banner-stikhi-iz-vinnogo-kubka
   - banner-stikhi-iz-vinnogo-kubka
   - best-geroy
 ---

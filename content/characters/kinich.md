@@ -26,7 +26,7 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-iskatel-ognennykh-tayn-28-05-2025
+  - banner-iskatel-ognennykh-tayn
   - banner-iskatel-ognennykh-tayn
   - genshin-updates-2024
   - new-features-genshin-impact-part3

@@ -26,9 +26,9 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - banner-grom-sotryasaet-neba-ravniny
-  - banner-sad-beloy-tsapli-19-04-2022
-  - banner-sad-beloy-tsapli-20-12-2023
-  - banner-sad-beloy-tsapli-21-03-2023
+  - banner-sad-beloy-tsapli
+  - banner-sad-beloy-tsapli
+  - banner-sad-beloy-tsapli
   - banner-sad-beloy-tsapli
   - best-geroy
   - genshinimpact-anniversary-awards-6-0

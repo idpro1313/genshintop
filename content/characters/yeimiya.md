@@ -23,10 +23,10 @@ relatedArtifacts:
   - ochishchenie-pamyati
 relatedGuides:
   - all-travel-guide-gi
-  - banner-gobelen-zolotogo-plameni-02-08-2022
-  - banner-gobelen-zolotogo-plameni-02-11-2022
-  - banner-gobelen-zolotogo-plameni-03-05-2023
-  - banner-gobelen-zolotogo-plameni-09-01-2024
+  - banner-gobelen-zolotogo-plameni
+  - banner-gobelen-zolotogo-plameni
+  - banner-gobelen-zolotogo-plameni
+  - banner-gobelen-zolotogo-plameni
   - banner-gobelen-zolotogo-plameni
   - banner-grom-sotryasaet-neba-ravniny
   - kak-kritovat

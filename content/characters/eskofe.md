@@ -24,7 +24,7 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-la-shanson-seriz-17-03-2026
+  - banner-la-shanson-seriz
   - banner-la-shanson-seriz
   - new-features-genshin-impact-moon-3
   - new-features-genshin-impact-moon-5

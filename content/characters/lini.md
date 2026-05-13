@@ -25,8 +25,8 @@ relatedArtifacts:
 relatedGuides:
   - 5-bezpoleznyh-mehanik
   - all-travel-guide-gi
-  - banner-volshebstvo-sveta-i-teni-20-11-2024
-  - banner-volshebstvo-sveta-i-teni-24-04-2024
+  - banner-volshebstvo-sveta-i-teni
+  - banner-volshebstvo-sveta-i-teni
   - banner-volshebstvo-sveta-i-teni
   - easter-eggs-simulanka
   - geshin-impact-travelguide5-8

@@ -17,12 +17,12 @@ relatedArtifacts:
   - stranstvuyushchiy-ansambl
 relatedGuides:
   - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela-08-04-2026
+  - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-entsiklopediya-ya-kho-kho
   - banner-garmoniya-izobiliya
-  - banner-la-shanson-seriz-17-03-2026
-  - banner-odinokiy-svet-v-nochi-25-02-2026
-  - banner-prishestvie-zvezdy-pustoty-17-03-2026
+  - banner-la-shanson-seriz
+  - banner-odinokiy-svet-v-nochi
+  - banner-prishestvie-zvezdy-pustoty
   - banner-triumfalnaya-pesn-severnogo-vetra
 ---
 

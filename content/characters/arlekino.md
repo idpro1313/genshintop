@@ -24,8 +24,8 @@ relatedArtifacts:
   - otgoloski-podnosheniya
 relatedGuides:
   - all-travel-guide-gi
-  - banner-pepelnaya-ten-ochaga-11-11-2025
-  - banner-pepelnaya-ten-ochaga-22-01-2025
+  - banner-pepelnaya-ten-ochaga
+  - banner-pepelnaya-ten-ochaga
   - banner-pepelnaya-ten-ochaga
   - new-features-genshin-impact-moon-3
   - new-features-genshin-impact-part3

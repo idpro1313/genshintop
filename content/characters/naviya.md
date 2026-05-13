@@ -25,8 +25,8 @@ relatedArtifacts:
   - okhota-na-ten
 relatedGuides:
   - all-travel-guide-gi
-  - banner-vo-imya-rozy-07-05-2025
-  - banner-vo-imya-rozy-17-07-2024
+  - banner-vo-imya-rozy
+  - banner-vo-imya-rozy
   - banner-vo-imya-rozy
   - genshinimpact-anniversary-awards-6-0
   - tier-list-4-8

@@ -24,7 +24,7 @@ relatedArtifacts:
   - zabludshiy-v-meteli
 relatedGuides:
   - all-travel-guide-gi
-  - banner-stikhi-utrennego-vetra-25-02-2026
+  - banner-stikhi-utrennego-vetra
   - banner-stikhi-utrennego-vetra
   - banner-zhazhda-stranstviy
   - best-geroy

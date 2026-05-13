@@ -21,7 +21,7 @@ relatedArtifacts:
   - son-nimfy
 relatedGuides:
   - all-travel-guide-gi
-  - banner-zubastyy-syerf-19-08-2025
+  - banner-zubastyy-syerf
   - banner-zubastyy-syerf
   - genshin-updates-2024
   - geshin-impact-travelguide5-8

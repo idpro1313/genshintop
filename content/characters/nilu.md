@@ -24,8 +24,8 @@ relatedArtifacts:
   - vse-artifakti-sumeru
 relatedGuides:
   - all-travel-guide-gi
-  - banner-kruzhashchiysya-lotos-12-04-2023
-  - banner-kruzhashchiysya-lotos-17-07-2024
+  - banner-kruzhashchiysya-lotos
+  - banner-kruzhashchiysya-lotos
   - banner-kruzhashchiysya-lotos
   - banner-skitayushchayasya-chasha-rosy
   - kirara
