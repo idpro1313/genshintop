@@ -490,3 +490,9 @@
 - **Почему:** запрос пользователя **«продолжи»** после волн 5–7 — следующие три волны опорного корпуса.
 - **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.9.0** — расширение гайдов и метаданных версии.
+
+### Финальные волны опорного корпуса: +32 гайда, волны 11–14 (1.10.0)
+- **Что:** в **`info/guides/`** и **`content/guides/`** добавлены **32** статьи (завершение запланированного расширения без архивного merge): деревья подношений, сили/головоломки, руда оружия, Везервёр, озвучка, возвращение ветеранов, мировые квесты vs архонты, путеводитель, региональные гаджеты, типы сундуков, испытания времени, театр демо, пресеты отряда, кик в коопе, официальная карта, выбор сервера, TCG-рейтинг, неймкарты, соло/кооп доменов, корона талантов, параметры экрана, опросы HoYoverse, мобильные ресурсы, пинг, конвертация книг, боссы vs домены, партнёрский раздел `/lootbar`, восстановление аккаунта, уведомления, возрастной рейтинг, косметика, политика читов. В **`docker/genshintop-redirects.conf`** расширен negative lookahead. Обновлены **`info/README.md`** (итого **125** статей), **`VERSION` → 1.10.0**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя **«закончи с оставшимися всеми гайдами»** в контексте опорного корпуса (не W3 архива).
+- **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.10.0** — закрывающий блок волн 11–14; архив **`content/guides-archive/`** по-прежнему вне этого этапа.

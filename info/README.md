@@ -181,6 +181,60 @@
 
 **Итого после волн 8–10:** 93 статьи в `info/guides/` и `content/guides/`.
 
+### Волна 11 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| general | `derevya-podnosheniya-i-kollektsii` | Деревья подношений и коллекции |
+| newbie | `seelie-i-mir-golovolomok` | Сили и мирные головоломки |
+| economy | `ruda-usileniya-oruzhiya` | Руда и кристаллы опыта оружия |
+| newbie | `vezerver-i-vodnye-marshruty` | Везервёр и водные маршруты |
+| tech | `zvuk-ozvuchka-yazykovye-pakety` | Звук и языковые пакеты |
+| economy | `stellarnoe-vozobnovlenie-veteran` | Звёздное воссоединение |
+| lore | `mirovye-kvesty-i-arhonty` | Мировые квесты и архонты |
+| newbie | `kniga-iskatelya-nagrady` | Путеводитель искателя |
+
+### Волна 12 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| newbie | `regionalnye-gadzhety-elektrogranum` | Региональные гаджеты (электрогранум и др.) |
+| newbie | `tipy-sundukov-nagrady-shkala` | Типы сундуков и шкала наград |
+| general | `ispytaniya-vremeni-trialy` | Испытания времени |
+| general | `teatr-demo-personazhey` | Театр и демо персонажей |
+| general | `bystrye-sbory-otryada` | Пресеты отряда |
+| general | `kooperativ-kick-limity` | Кик, лимиты и этикет коопа |
+| tech | `ofitsialnaya-karta-interaktivnaya` | Официальная интерактивная карта |
+| newbie | `server-region-uid-asiya-evropa` | Выбор сервера и UID |
+
+### Волна 13 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| general | `tcg-reyting-taverny-nagrady` | Рейтинг TCG и таверны |
+| general | `namekarty-profil-igroka` | Неймкарты и профиль |
+| general | `podzemelya-solo-ili-koop-smola` | Домены соло и кооп |
+| economy | `korona-zhemchuzhina-mudrosti` | Корона талантов |
+| general | `boevye-parametry-ekrana` | Боевые параметры на экране |
+| economy | `oprosy-hoyoverse-nagrady` | Опросы HoYoverse |
+| tech | `mobilnye-dop-resursy-skachka` | Доп. ресурсы на мобильных |
+| tech | `ping-zaderzhka-kooperativ` | Пинг в кооперативе |
+
+### Волна 14 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| economy | `konvertatsiya-knig-talantov` | Конвертация книг талантов |
+| general | `mirovyi-boss-i-materialy-domena` | Боссы и материалы доменов |
+| economy | `partnerskiy-razdel-topap-genshintop` | Партнёрский раздел и топ-ап |
+| newbie | `vosstanovlenie-akkaunta-podderzhka` | Восстановление аккаунта |
+| tech | `uvedomleniya-privatnost-klient` | Уведомления и приватность |
+| general | `vozrast-regionalnye-ogranicheniya` | Возраст и региональные ограничения |
+| economy | `kosmeticheskie-krylya-skin` | Крылья и скины |
+| general | `cheat-modding-politika` | Читы, моды и честная игра |
+
+**Итого после волн 11–14:** 125 статей в `info/guides/` и `content/guides/`.
+
 ## Персонажи
 
 Каталог `info/characters/` — зеркало [`content/characters/`](../content/characters): правки ведите в `info/characters/`, затем копируйте в `content/characters/` для публикации.
