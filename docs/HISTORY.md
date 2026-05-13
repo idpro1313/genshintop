@@ -252,3 +252,9 @@
 - **Почему:** запрос пользователя — полный переход с Astro SSG на стек как у dandangers с сохранением URL и без RSS.
 - **Файлы:** удалены `src/**`, `astro.config.mjs`, `tailwind.config.mjs`, `scripts/sitemap-lastmod.mjs`; добавлены `scripts/guide-taxonomy.ts`, `scripts/seo-helpers.ts`; правки в `scripts/*.ts`, `public/css/site.css`, `grace/**`, `docs/**`, `deploy/**`, `README.md`, `package-lock.json`, и др. по диффу.
 - **Решение:** версия **`VERSION` = 1.0.0** (MAJOR cutover). Локальный запуск приложения для проверки не выполнялся (`no-local-app-verification`).
+
+### Чистка устаревших файлов после PHP-cutover (1.0.1)
+- **Что:** удалены **`deploy/nginx-docker.conf`** (дубль документации при активном **`docker/nginx-default.conf`**), **`deploy/docker-compose.example.yml`** (схема только для старого `dist/` + static-site), пустой каталог **`tests/`**; обновлены комментарии в **`deploy/genshintop-redirects.conf`**, **`scripts/enrich-guides.ts`**, таблица в **`deploy/README.md`**, формулировка в **`docs/AGENTS.md`**; версия **`VERSION` → 1.0.1**, синхронизирован **`package.json`** и узел версии в **`grace/knowledge-graph/knowledge-graph.xml`**.
+- **Почему:** запрос пользователя убрать всё ненужное в проекте после миграции — меньше путаницы с nginx и legacy compose.
+- **Файлы:** удалены перечисленные; правки `deploy/README.md`, `deploy/genshintop-redirects.conf`, `scripts/enrich-guides.ts`, `docs/AGENTS.md`, `docs/HISTORY.md`, `VERSION`, `package.json`, `grace/knowledge-graph/knowledge-graph.xml`
+- **Решение:** не трогали **`gi-database/`** и сгенерированные отчёты — это рабочие данные/артефакты пайплайна; **`scripts/sitemap-lastmod.mjs`** в дереве уже отсутствовал.

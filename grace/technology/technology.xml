@@ -1,4 +1,4 @@
-<TechnologyStack VERSION="1.0.0">
+<TechnologyStack VERSION="1.0.1">
   <Runtime>Продакшен: PHP 8.2 + nginx + PHP-FPM в одном Alpine-образе (supervisord). Контент: Markdown в content/. Локальные утилиты: Node.js + tsx + sharp только для скриптов (миграция, OG).</Runtime>
   <Language>PHP, TypeScript (scripts only), Markdown, JSON</Language>
   <Framework>Фронт: серверный рендер в PHP (шаблоны templates/). Без Astro/Tailwind в проде.</Framework>

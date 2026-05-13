@@ -180,7 +180,7 @@ docs/
 .cursor/rules/          - Правила Cursor (GRACE, история, git)
 .kilo/                  - Навыки Kilo / GRACE
 ```
-При появлении `tests/` — описать здесь и в `grace/knowledge-graph/knowledge-graph.xml`.
+При добавлении каталога `tests/` — описать здесь и в `grace/knowledge-graph/knowledge-graph.xml`.
 
 ## Documentation Artifacts - Unique Tag Convention
 

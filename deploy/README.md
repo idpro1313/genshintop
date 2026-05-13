@@ -88,8 +88,7 @@ docker run --rm -p 8080:80 genshintop-web
 | Файл | Назначение |
 |------|------------|
 | `Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php scripts/build-sitemap.php` |
-| `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt` |
-| `deploy/nginx-docker.conf` | Наследие / подсказки; боевой конфиг в образе — **`docker/nginx-default.conf`** |
+| `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
 | `deploy/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
 | `deploy/genshintop-redirects.conf` | Редиректы slug (генерирует также `npm run content:enrich`) |
 | `deploy/SEO-CHECKLIST.md` | Чек-лист после выката |

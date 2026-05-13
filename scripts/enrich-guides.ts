@@ -7,7 +7,7 @@
  *    updatedAt, reviewedAt, sources, relatedCharacters, relatedGuides, summary;
  *  - чистка тела: ссылки `[label](#)` -> просто `label`;
  *  - запись карты редиректов в reports/slug-redirects.json и deploy/genshintop-redirects.conf
- *    для подключения через nginx-docker.conf.
+ *    для include из docker/nginx-default.conf в образе.
  * Запуск: npm run content:enrich
  */
 import fs from 'node:fs';
