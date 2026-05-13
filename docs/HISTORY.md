@@ -264,3 +264,9 @@
 - **Почему:** запрос пользователя убрать npm и node_modules из проекта — сайт полностью на PHP в проде.
 - **Файлы:** удалены перечисленные; правки `Dockerfile`, `VERSION`, `docs/HISTORY.md`, и др. по диффу.
 - **Решение:** PATCH **1.0.2**. Пайплайны переноса **`gi-database` → `content/`**, массовой генерации OG и enrich редиректов остаются **вне репозитория** (ручной процесс или отдельный инструмент).
+
+### Удаление каталога gi-database из репозитория (1.0.3)
+- **Что:** удалён весь каталог **`gi-database/`** из git; убран узел **M-GI-DATABASE** и CrossLink из **`grace/knowledge-graph/knowledge-graph.xml`**; поток **DF-CONTENT-MIGRATE** переименован по смыслу на редакционное ведение **`content/`**; **UC-002** без миграции из gi-database; обновлены **`README.md`**, **`docs/AGENTS.md`**, **`grace/plan/development-plan.xml`**, **`grace/requirements/requirements.xml`**, **`grace/technology/technology.xml`** (версия стека **1.0.3**); из **`.dockerignore`** удалена строка **`gi-database`**.
+- **Почему:** запрос пользователя — исходный корпус gi-database больше не нужен в проекте; канон — только **`content/`**.
+- **Файлы:** удалён **`gi-database/**`**; правки перечисленных файлов, **`VERSION` → 1.0.3**, **`docs/HISTORY.md`**.
+- **Решение:** PATCH **1.0.3**. История в журнале о прошлых фазах Astro/npm сохранена как архив; массовые пайплайны при необходимости живут вне репо.

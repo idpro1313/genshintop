@@ -1,8 +1,8 @@
 <RequirementsAnalysis VERSION="0.1.0">
   <Project>
     <name>genshintop</name>
-    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; канонический контент в content/. Исходный корпус gi-database до завершения миграции и вычищения.</annotation>
-    <keywords>genshin-impact, php, seo, gi-database, guides, characters, docker</keywords>
+    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; единственный канонический корпус — Markdown в content/.</annotation>
+    <keywords>genshin-impact, php, seo, guides, characters, docker</keywords>
   </Project>
 
   <Actors>
@@ -27,10 +27,10 @@
 
     <UC-002>
       <Actor>Редактор / агент</Actor>
-      <Action>Запускает миграцию контента из gi-database</Action>
-      <Goal>Получить канонический контент в content/ перед удалением gi-database</Goal>
-      <Preconditions>Наличие папки gi-database с 01_characters и 06_guides</Preconditions>
-      <AcceptanceCriteria>reports/migration-report.json при наличии; канонический контент ведётся в content/</AcceptanceCriteria>
+      <Action>Ведёт и обновляет Markdown в content/guides и content/characters</Action>
+      <Goal>Актуальный канонический корпус на сайте без промежуточного каталога в репозитории</Goal>
+      <Preconditions>Корректный frontmatter и согласованность slug с URL маршрутизации</Preconditions>
+      <AcceptanceCriteria>Новые и изменённые статьи попадают в сборку Docker и в sitemap</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-002>

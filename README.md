@@ -30,6 +30,6 @@ docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d
 - **`deploy/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
-Исходный корпус Markdown (не входит в рантайм сайта): **`gi-database/`** (`INDEX.md`, `database.json`). Синхронизация с **`content/`** — вручную или отдельным инструментом вне этого репо.
+Канонический контент — только **`content/{guides,characters}`**. Массовая генерация OG, карты редиректов и прочие тяжёлые пайплайны — вне этого репо при необходимости.
 
 Версия проекта: **`VERSION`** (SemVer).

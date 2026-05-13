@@ -94,12 +94,11 @@
   </Modules>
 
   <DataFlow>
-    <DF-CONTENT-MIGRATE NAME="GiToSiteContent" TRIGGER="ручная или внешняя синхронизация gi-database → content/">
-      <step-1>Обход gi-database/01_characters и 06_guides</step-1>
-      <step-2>Очистка и извлечение метаданных, обогащение ссылками на оружие/артефакты</step-2>
-      <step-3>Запись content/** и reports/migration-report.json</step-3>
-      <step-4>Повторяемая чистка Markdown-артефактов в content/guides</step-4>
-      <evidence>reports/migration-report.json; образ сайта собирается docker build</evidence>
+    <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в content/ или внешняя подготовка файлов">
+      <step-1>Изменения в content/guides и content/characters (локально или импорт из внешнего источника)</step-1>
+      <step-2>При необходимости — генерация OG, редиректов и отчётов вне этого репозитория</step-2>
+      <step-3>Сборка образа docker build; sitemap через scripts/build-sitemap.php</step-3>
+      <evidence>Контент в content/**; образ сайта собирается docker build</evidence>
     </DF-CONTENT-MIGRATE>
 
     <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click">
@@ -125,7 +124,7 @@
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
-      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node в репозитории (1.0.2).</goal>
+      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории (1.0.3).</goal>
       <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
     </Phase-5>
 
