@@ -330,3 +330,9 @@
 - **Почему:** запрос пользователя — каталог не используется рантаймом сайта и не нужен для текущего PHP-стека.
 - **Файлы:** удалён **`reports/**`**; правки `.dockerignore`, `docs/AGENTS.md`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.2.2** — локальные отчёты аудита при необходимости создаются вне репозитория.
+
+### Dockerfile перенесён в docker/Dockerfile (1.2.3)
+- **Что:** **`Dockerfile`** из корня перенесён в **`docker/Dockerfile`**; в комментарии в файле указана сборка **`docker build -f docker/Dockerfile .`** (контекст — корень репозитория, пути **`COPY`** без изменений); **`.github/workflows/docker-image.yml`** — **`file: ./docker/Dockerfile`**; обновлены **`README.md`**, **`deploy/README.md`**, **`docs/AGENTS.md`**, **`.cursor/rules/github-actions.mdc`**, **`grace/**/*.xml`**, **`VERSION` → 1.2.3**.
+- **Почему:** запрос пользователя — держать Dockerfile рядом с остальной docker-конфигурацией; исторически корень репо использовался как дефолт для CI и **`docker build .`**.
+- **Файлы:** `docker/Dockerfile` (перемещён из корня), `.github/workflows/docker-image.yml`, `README.md`, `deploy/README.md`, `docs/AGENTS.md`, `.cursor/rules/github-actions.mdc`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.2.3**.

@@ -1,4 +1,4 @@
-<TechnologyStack VERSION="1.2.2">
+<TechnologyStack VERSION="1.2.3">
   <Runtime>Продакшен: PHP 8.2 + nginx + PHP-FPM в одном Alpine-образе (supervisord). Контент: Markdown в content/. Node.js и npm в репозитории не используются.</Runtime>
   <Language>PHP, Markdown, JSON</Language>
   <Framework>Серверный рендер PHP (шаблоны в корне lib/). Ванильный CSS в public/css/site.css.</Framework>
@@ -12,7 +12,7 @@
   </VersionConstraints>
 
   <Tooling>
-    <tool name="github-actions" value=".github/workflows/docker-image.yml" purpose="docker build ./Dockerfile; push GHCR на main" />
+    <tool name="github-actions" value=".github/workflows/docker-image.yml" purpose="docker build -f docker/Dockerfile .; push GHCR на main" />
   </Tooling>
 
   <Testing>

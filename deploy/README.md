@@ -54,7 +54,7 @@ chmod +x deploy/update-from-github.sh   # один раз
 ### Локальный просмотр без Traefik
 
 ```bash
-docker build -t genshintop-web .
+docker build -f docker/Dockerfile -t genshintop-web .
 docker run --rm -p 8080:80 genshintop-web
 # открыть http://localhost:8080
 ```
@@ -129,7 +129,7 @@ certificatesResolvers:
 
 | Файл | Назначение |
 |------|------------|
-| `Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php lib/build-sitemap.php` |
+| `docker/Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php lib/build-sitemap.php`; сборка: **`docker build -f docker/Dockerfile .`** из корня репо |
 | `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
 | `deploy/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
 | `deploy/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор) |

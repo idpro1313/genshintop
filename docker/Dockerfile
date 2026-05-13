@@ -1,4 +1,5 @@
 # GenshinTop: nginx + PHP-FPM + supervisord (как dandangers). Без Node в runtime.
+# Сборка из корня репозитория: docker build -f docker/Dockerfile .
 # syntax=docker/dockerfile:1
 
 FROM php:8.2-fpm-alpine

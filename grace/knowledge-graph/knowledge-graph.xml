@@ -1,11 +1,11 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.2.2">
+    <Project NAME="genshintop" VERSION="1.2.3">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): Markdown в content/, роутинг public/index.php, шаблоны PHP в корне lib/, стили public/css/site.css; без Node/npm в репозитории; единый /sitemap.xml; деплой GHCR + Traefik.</annotation>
 
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" STATUS="implemented">
       <purpose>Публичный SEO-сайт genshintop.ru: PHP front-controller (public/index.php → lib/web_dispatch.php); персонажи/гайды из content/; кластер /lootbar/*; регионы; JSON-LD через lib/Seo.php; sitemap через lib/build-sitemap.php при docker build; без RSS; OgManifest + lib/og-manifest.json + public/og/*.png в репозитории.</purpose>
-      <path>Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, public/index.php, lib/, public/css/site.css, deploy/docker-compose.yml, deploy/genshintop-redirects.conf, deploy/update-from-github.sh, docs/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
+      <path>docker/Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, public/index.php, lib/, public/css/site.css, deploy/docker-compose.yml, deploy/genshintop-redirects.conf, deploy/update-from-github.sh, docs/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
       <depends>none</depends>
       <verification-ref>V-M-PHP-SITE</verification-ref>
       <annotations>

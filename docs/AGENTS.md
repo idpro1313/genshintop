@@ -17,7 +17,7 @@
 |-------------------|------------|
 | `php lib/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
 | Docker | **`deploy/README.md`** — образ GHCR, `deploy/docker-compose.yml`, Traefik |
-| GitHub Actions | `.github/workflows/docker-image.yml` — `docker build` корневого Dockerfile |
+| GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` |
 | Обновление на сервере | `bash deploy/update-from-github.sh` — pull образа, `up -d` |
 
 Аудит гайдов в масштабе репозитория, генерация OG-PNG и массовые правки редиректов **не входят в обязательный состав этого репозитория** (при необходимости — вручную или отдельным инструментом).
@@ -32,7 +32,7 @@
 
 ### Деплой
 
-Инструкция для Traefik + Docker: **`deploy/README.md`** (готовый образ GHCR; локально — `docker build` корневого `Dockerfile`).
+Инструкция для Traefik + Docker: **`deploy/README.md`** (готовый образ GHCR; локально — **`docker build -f docker/Dockerfile .`** из корня репозитория).
 
 # GRACE Framework - Project Engineering Protocol
 
@@ -152,8 +152,8 @@ public/
   css/site.css          - Ванильный CSS
   robots.txt, favicon, og/** (PNG при необходимости)
 docker/
+  Dockerfile            - образ сайта: php-fpm-alpine + nginx + supervisor; RUN php lib/build-sitemap.php
   nginx-default.conf, supervisord.conf, docker-entrypoint.sh
-Dockerfile              - php-fpm-alpine + nginx + supervisor; RUN php lib/build-sitemap.php; без Node
 deploy/                 - docker-compose.yml, genshintop-redirects.conf, env.example, update-from-github.sh
 grace/
   requirements/requirements.xml

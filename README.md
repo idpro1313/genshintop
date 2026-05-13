@@ -10,7 +10,7 @@
 php lib/build-sitemap.php
 ```
 
-Тот же шаг выполняется автоматически при **`docker build`** (см. корневой **`Dockerfile`**).
+Тот же шаг выполняется автоматически при **`docker build -f docker/Dockerfile .`** (контекст — корень репозитория).
 
 ## Docker и обновление с GitHub
 
