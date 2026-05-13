@@ -378,3 +378,9 @@
 - **Почему:** отчёт с прод-сервера: **`docker compose pull`** падал на строке с unset/unbound **`COMPOSE_FILE`**.
 - **Файлы:** `update-from-github.sh`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.6**.
+
+### Баннер LootBar в виде карточки как на dandangers.ru (1.3.7)
+- **Что:** **`lib/lootbar_banner.php`** — разметка карточки: иконка в оранжевом скруглённом квадрате, жирный оранжевый заголовок, серый подзаголовок, pill-кнопка «Подробнее» на партнёрский URL; в тексте ссылка **Раздел на GenshinTop** → **`/lootbar`** (`lootbar_banner_hub_link`). **`public/css/site.css`** — градиентный фон карточки, рамка, тени, адаптивная вёрстка на узких экранах. **`grace/verification`** — учтён новый reachGoal в VF-002.
+- **Почему:** запрос пользователя — такой же привлекательный промо-баннер, как на [dandangers.ru](https://dandangers.ru/).
+- **Файлы:** `lib/lootbar_banner.php`, `public/css/site.css`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.7** — текст промо по образцу вики; проценты/купоны при необходимости синхронизировать с актуальными условиями LootBar.
