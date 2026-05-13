@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 final class Seo
 {
-    public const DEFAULT_OG_IMAGE_PATH = '/og-default.svg';
+    public const DEFAULT_OG_IMAGE_PATH = '/apple-touch-icon.png';
+    public const DEFAULT_OG_W = 180;
+    public const DEFAULT_OG_H = 180;
     public const OG_W = 1200;
     public const OG_H = 630;
 
@@ -71,11 +73,12 @@ final class Seo
             '@id' => $site . '/#organization',
             'name' => 'GenshinTop',
             'url' => $site,
+            'description' => 'Гайды, билды и справка по Genshin Impact на русском.',
             'logo' => [
                 '@type' => 'ImageObject',
                 'url' => self::absoluteUrl($cfg, self::DEFAULT_OG_IMAGE_PATH),
-                'width' => self::OG_W,
-                'height' => self::OG_H,
+                'width' => self::DEFAULT_OG_W,
+                'height' => self::DEFAULT_OG_H,
             ],
             'sameAs' => $sameAs,
         ], fn ($v) => $v !== null && $v !== []);
@@ -182,6 +185,27 @@ final class Seo
         ];
     }
 
+    /**
+     * Универсальный узел VideoGame для микроразметки страниц о Genshin Impact
+     * (используется как `about` у Article-узлов).
+     */
+    public static function genshinVideoGameNode(): array
+    {
+        return [
+            '@type' => 'VideoGame',
+            'name' => 'Genshin Impact',
+            'inLanguage' => 'ru-RU',
+            'applicationCategory' => 'Game',
+            'gamePlatform' => ['PC', 'PlayStation 4', 'PlayStation 5', 'Android', 'iOS'],
+            'publisher' => [
+                '@type' => 'Organization',
+                'name' => 'HoYoverse',
+                'url' => 'https://www.hoyoverse.com/',
+            ],
+            'url' => 'https://genshin.hoyoverse.com/',
+        ];
+    }
+
     /** @param array<string,mixed> $cfg */
     public static function lootbarServiceSchema(array $cfg, array $params): array
     {
@@ -222,5 +246,21 @@ final class Seo
     public static function encodeJsonLd(array $data): string
     {
         return json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @return array{w:int,h:int,mime:string}
+     */
+    public static function ogImageDimensions(string $imagePath): array
+    {
+        $mime = str_ends_with($imagePath, '.svg')
+            ? 'image/svg+xml'
+            : (str_ends_with($imagePath, '.jpg') || str_ends_with($imagePath, '.jpeg')
+                ? 'image/jpeg'
+                : 'image/png');
+        if ($imagePath === self::DEFAULT_OG_IMAGE_PATH) {
+            return ['w' => self::DEFAULT_OG_W, 'h' => self::DEFAULT_OG_H, 'mime' => $mime];
+        }
+        return ['w' => self::OG_W, 'h' => self::OG_H, 'mime' => $mime];
     }
 }

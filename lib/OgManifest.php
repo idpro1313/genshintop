@@ -34,6 +34,6 @@ final class OgManifest
         if (isset(self::$set[$key])) {
             return '/og/' . $key . '.png';
         }
-        return '/og-default.svg';
+        return Seo::DEFAULT_OG_IMAGE_PATH;
     }
 }

@@ -7,6 +7,7 @@ Allow: /
 Disallow: /404
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_id /
 Clean-param: aff_short&from&ref&fbclid&gclid&yclid /
+Clean-param: q&topic&cat&status&category /guides
 
 Host: genshintop.ru
 Sitemap: https://genshintop.ru/sitemap.xml

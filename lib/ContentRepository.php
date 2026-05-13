@@ -118,6 +118,56 @@ final class ContentRepository
         return (int) @filemtime((string) ($g['path'] ?? ''));
     }
 
+    /**
+     * Возвращает best-effort Unix timestamp последней модификации записи:
+     * meta.updatedAt → meta.reviewedAt → meta.date → filemtime.
+     *
+     * @param array<string,mixed> $item
+     */
+    public static function itemMtime(array $item): int
+    {
+        $meta = $item['meta'] ?? [];
+        if (is_array($meta)) {
+            foreach (['updatedAt', 'reviewedAt', 'date'] as $k) {
+                if (!empty($meta[$k]) && is_string($meta[$k])) {
+                    $t = strtotime($meta[$k]);
+                    if ($t !== false) {
+                        return $t;
+                    }
+                }
+            }
+        }
+        $path = (string) ($item['path'] ?? '');
+        if ($path !== '') {
+            $t = @filemtime($path);
+            if ($t !== false) {
+                return $t;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Максимальный mtime по подмножеству контента, отфильтрованному callable.
+     * Если фильтр не задан, считает по всему живому корпусу.
+     *
+     * @param (callable(array<string,mixed>):bool)|null $filter
+     */
+    public static function latestMtime(?callable $filter = null): int
+    {
+        $max = 0;
+        foreach (self::allLive() as $item) {
+            if ($filter !== null && !$filter($item)) {
+                continue;
+            }
+            $t = self::itemMtime($item);
+            if ($t > $max) {
+                $max = $t;
+            }
+        }
+        return $max;
+    }
+
     /** @return list<array<string,mixed>> */
     public static function guidesSortedByRecent(): array
     {
@@ -172,8 +222,59 @@ final class ContentRepository
             $parser->setSafeMode(false);
         }
         $html = $parser->text($md);
+        $html = self::sanitizeContentLinks($html);
 
-        return self::sanitizeContentLinks($html);
+        return self::seoEnhanceContentHtml($html);
+    }
+
+    /**
+     * SEO-постпроцессор для HTML, собранного из Markdown:
+     *  - всем <img> без атрибута loading= добавляет loading="lazy" decoding="async";
+     *  - внешним абсолютным <a href="http(s)://other-host"> без rel= добавляет
+     *    rel="nofollow noopener" target="_blank".
+     *  Партнёрские LootBar-ссылки собираются вручную в шаблонах с rel="sponsored"
+     *  и через этот пайплайн не проходят.
+     */
+    private static function seoEnhanceContentHtml(string $html): string
+    {
+        if ($html === '') {
+            return $html;
+        }
+
+        $html = (string) preg_replace_callback('/<img\b([^>]*)>/i', static function (array $m): string {
+            $attrs = $m[1];
+            if (stripos($attrs, ' loading=') === false && stripos($attrs, "\tloading=") === false) {
+                $attrs .= ' loading="lazy"';
+            }
+            if (stripos($attrs, ' decoding=') === false && stripos($attrs, "\tdecoding=") === false) {
+                $attrs .= ' decoding="async"';
+            }
+            return '<img' . $attrs . '>';
+        }, $html);
+
+        $siteHost = 'genshintop.ru';
+
+        $html = (string) preg_replace_callback(
+            '#<a\b([^>]*?)\bhref=("|\')(https?://[^"\']+)\2([^>]*)>#i',
+            static function (array $m) use ($siteHost): string {
+                $pre = $m[1];
+                $quote = $m[2];
+                $href = $m[3];
+                $post = $m[4];
+                $allAttrs = $pre . ' ' . $post;
+                if (stripos($allAttrs, ' rel=') !== false) {
+                    return $m[0];
+                }
+                $host = parse_url($href, PHP_URL_HOST);
+                if (is_string($host) && strcasecmp($host, $siteHost) === 0) {
+                    return $m[0];
+                }
+                return '<a' . $pre . 'href=' . $quote . $href . $quote . $post . ' rel="nofollow noopener" target="_blank">';
+            },
+            $html
+        );
+
+        return $html;
     }
 
     /**

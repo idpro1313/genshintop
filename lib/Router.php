@@ -10,7 +10,11 @@ final class Router
         $path = parse_url($uri, PHP_URL_PATH);
         $path = $path === null || $path === '' ? '/' : $path;
         if ($path !== '/' && str_ends_with($path, '/')) {
-            $path = rtrim($path, '/') ?: '/';
+            $clean = rtrim($path, '/') ?: '/';
+            $qs = parse_url($uri, PHP_URL_QUERY);
+            $target = $clean . ($qs !== null && $qs !== '' ? '?' . $qs : '');
+            header('Location: ' . $target, true, 301);
+            return;
         }
 
         if ($path === '/rss.xml') {
@@ -150,12 +154,38 @@ final class Router
             'ogAlt' => '',
             'articleTimes' => null,
             'jsonLdRaw' => null,
+            'lastModifiedTs' => null,
         ];
         $page = array_merge($defaults, $page);
         if (isset($page['jsonLd']) && is_array($page['jsonLd'])) {
             $page['jsonLdRaw'] = json_encode($page['jsonLd'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR);
             unset($page['jsonLd']);
         }
+
+        $robotsHeader = (string) ($page['robots'] ?? 'index, follow');
+        $isNoindex = stripos($robotsHeader, 'noindex') !== false;
+
+        $lastModTs = $page['lastModifiedTs'] ?? null;
+        $lastModTs = is_int($lastModTs) && $lastModTs > 0 ? $lastModTs : null;
+
+        if (!headers_sent()) {
+            header('Cache-Control: public, max-age=0, must-revalidate');
+            if ($lastModTs !== null) {
+                header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $lastModTs) . ' GMT');
+            }
+        }
+
+        if ($lastModTs !== null && !$isNoindex) {
+            $ifMod = $_SERVER['HTTP_IF_MODIFIED_SINCE'] ?? '';
+            if (is_string($ifMod) && $ifMod !== '') {
+                $clientTs = strtotime($ifMod);
+                if ($clientTs !== false && $clientTs >= $lastModTs) {
+                    http_response_code(304);
+                    return;
+                }
+            }
+        }
+
         $merged = array_merge(['cfg' => $cfg], $page);
         extract($merged, EXTR_SKIP);
         require SITE_ROOT . '/lib/layout.php';

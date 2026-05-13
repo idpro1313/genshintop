@@ -33,7 +33,9 @@
       </contract>
       <interface>
         <export-docker-build PURPOSE="docker build -f docker/Dockerfile . — nginx+supervisor+php-fpm, без Node в runtime" />
-        <export-static-sitemap PURPOSE="public/sitemap.xml поддерживается вручную как статический urlset" />
+        <export-static-sitemap PURPOSE="public/sitemap.xml поддерживается вручную как статический urlset (без &lt;lastmod&gt;)" />
+        <export-router-conditional PURPOSE="С 1.19.0: 301 для trailing slash, Last-Modified + If-Modified-Since/304, Cache-Control: public, max-age=0, must-revalidate" />
+        <export-indexnow-cli PURPOSE="С 1.19.0: php bin/indexnow-ping.php [--match=REGEX] [--limit=N] [--dry-run] — пинг IndexNow по public/sitemap.xml" />
       </interface>
       <depends>none</depends>
       <target>
@@ -42,10 +44,10 @@
         <source>docker/supervisord.conf</source>
         <source>public/index.php</source>
         <source>lib/</source>
+        <source>bin/indexnow-ping.php</source>
         <source>docker/docker-compose.yml</source>
         <source>docker/env.example</source>
         <source>update-from-github.sh</source>
-        <source>docs/SEO-CHECKLIST.md</source>
         <source>.github/workflows/docker-image.yml</source>
       </target>
       <verification-ref>V-M-PHP-SITE</verification-ref>
@@ -166,6 +168,7 @@
       <step-6 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Ревизия навигации 1.18.0: специальные /guides и /characters имеют приоритет над generic content-роутером; /regions и nginx-редиректы удалены; /world/regions/* — единственный региональный канон; public/sitemap.xml переведён в статический файл без build-sitemap.php.</step-6>
       <step-7 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Миграция lib/ContentRepository.php на content/. Архивирование info/ как guide-archive/.</step-7>
       <step-8 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Рефакторинг /lootbar (1.18.1): удалены 4 тонкие подстраницы (/lootbar/promokod, /lootbar/kristally-sotvoreniya, /lootbar/blagoslovenie-luny, /lootbar/bezopasnost-i-oplata), их полезная начинка свёрнута в якорные секции #promokod, #kristally, #welkin, #bezopasnost на хабе /lootbar. Плашка lib/lootbar_banner.php ведёт в одну точку (/lootbar/skidki-i-kupony) одним кликом. Удалены упоминания «не официальный магазин HoYoverse» применительно к LootBar (фразы про сам сайт как «неофициальный фан-сайт» в /about и footer не трогали).</step-8>
+      <step-9 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Yandex SEO pass (1.19.0): A — удалён public/og-default.svg, OG-fallback переведён на /apple-touch-icon.png 180×180 (Seo::DEFAULT_OG_IMAGE_PATH/DEFAULT_OG_W/H, Seo::ogImageDimensions, OgManifest::imageForEntry); в layout добавлены hreflang ru/x-default, format-detection и max-image-preview:large; B — Router отдаёт 301 для trailing slash, шлёт Cache-Control: must-revalidate и Last-Modified, отвечает 304 на If-Modified-Since &gt;= mtime для не-noindex; PageRenderer пробрасывает lastModifiedTs во всех рендерах, /guides?q= → noindex,follow; добавлены ContentRepository::itemMtime/latestMtime; C — robots.txt получил Clean-param: q&amp;topic&amp;cat&amp;status&amp;category /guides; D — ContentRepository::seoEnhanceContentHtml клеит loading=lazy/decoding=async к &lt;img&gt; и rel=nofollow noopener target=_blank к внешним &lt;a&gt;; E — Seo::genshinVideoGameNode (about=VideoGame у character/contentArticle), contentSectionIndex получил CollectionPage с inLanguage/isPartOf/breadcrumb-id, contentArticle — полноценный Article (image=apple-touch-icon, dateModified, author/publisher); F — добавлены lib/IndexNow.php (DEFAULT_KEY=cfee9df50829202f695cf93c8b24f554, ENDPOINT=https://yandex.com/indexnow, BATCH_SIZE=10000, submit/submitMany), public/cfee9df50829202f695cf93c8b24f554.txt и CLI bin/indexnow-ping.php (--match/--limit/--dry-run по public/sitemap.xml); docker/env.example — секция INDEXNOW_KEY. Sitemap не трогали (статический, без lastmod, решение 1.18.0).</step-9>
     </Phase-7>
 
     <!-- Phases use unique tags:

@@ -23,14 +23,17 @@ $fullTitle = str_contains($pageTitleRaw, 'GenshinTop') ? $pageTitleRaw : ($pageT
 $canonical = Seo::absoluteUrl($cfg, $canonicalPath);
 $imagePath = $ogImage ?? Seo::DEFAULT_OG_IMAGE_PATH;
 $imageUrl = Seo::absoluteUrl($cfg, $imagePath);
-$imageMime = str_ends_with($imagePath, '.svg')
-    ? 'image/svg+xml'
-    : (str_ends_with($imagePath, '.jpg') || str_ends_with($imagePath, '.jpeg')
-        ? 'image/jpeg'
-        : 'image/png');
+$imageDims = Seo::ogImageDimensions($imagePath);
+$imageW = $imageDims['w'];
+$imageH = $imageDims['h'];
+$imageMime = $imageDims['mime'];
 $imageAlt = $ogAlt ?? ($pageTitleRaw . ' — GenshinTop');
 $ymId = (int) ($cfg['yandex_metrika_id'] ?? 109020836);
 $verification = $cfg['meta_verification'] ?? [];
+$robotsValue = (string) $robots;
+if ($robotsValue === '' || $robotsValue === 'index, follow') {
+    $robotsValue = 'index, follow, max-image-preview:large, max-snippet:-1';
+}
 header('Content-Type: text/html; charset=utf-8');
 ?><!DOCTYPE html>
 <html lang="ru">
@@ -38,12 +41,15 @@ header('Content-Type: text/html; charset=utf-8');
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0a0e14" />
+  <meta name="format-detection" content="telephone=no" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  <link rel="alternate" hreflang="ru" href="<?= Html::e($canonical) ?>" />
+  <link rel="alternate" hreflang="x-default" href="<?= Html::e($canonical) ?>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Onest:wght@400;500;600;700&amp;display=swap" />
@@ -51,7 +57,7 @@ header('Content-Type: text/html; charset=utf-8');
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Onest:wght@400;500;600;700&amp;display=swap" /></noscript>
   <title><?= Html::e($fullTitle) ?></title>
   <meta name="description" content="<?= Html::e($pageDescription) ?>" />
-  <meta name="robots" content="<?= Html::e($robots) ?>" />
+  <meta name="robots" content="<?= Html::e($robotsValue) ?>" />
   <link rel="canonical" href="<?= Html::e($canonical) ?>" />
 <?php if (!empty($verification['yandex'])): ?>
   <meta name="yandex-verification" content="<?= Html::e((string) $verification['yandex']) ?>" />
@@ -71,8 +77,8 @@ header('Content-Type: text/html; charset=utf-8');
   <meta property="og:image" content="<?= Html::e($imageUrl) ?>" />
   <meta property="og:image:secure_url" content="<?= Html::e($imageUrl) ?>" />
   <meta property="og:image:type" content="<?= Html::e($imageMime) ?>" />
-  <meta property="og:image:width" content="<?= (string) Seo::OG_W ?>" />
-  <meta property="og:image:height" content="<?= (string) Seo::OG_H ?>" />
+  <meta property="og:image:width" content="<?= (string) $imageW ?>" />
+  <meta property="og:image:height" content="<?= (string) $imageH ?>" />
   <meta property="og:image:alt" content="<?= Html::e($imageAlt) ?>" />
 <?php if ($ogType === 'article' && !empty($articleTimes['publishedTime'])): ?>
   <meta property="article:published_time" content="<?= Html::e((string) $articleTimes['publishedTime']) ?>" />

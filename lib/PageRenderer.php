@@ -224,6 +224,7 @@ HTML;
             'canonicalPath' => '/',
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => ContentRepository::latestMtime() ?: null,
         ];
     }
 
@@ -400,12 +401,16 @@ HTML;
 </script>
 HTML;
 
+        $guidesMtime = ContentRepository::latestMtime(static fn (array $i) => !$i['isIndex'] && str_starts_with((string) $i['section'], 'guides'));
+
         return [
             'pageTitle' => 'Гайды Genshin Impact',
             'pageDescription' => 'Гайды по Genshin Impact: баннеры, патчи, промокоды, тир-листы.',
             'canonicalPath' => '/guides',
+            'robots' => $qRaw !== '' ? 'noindex, follow' : 'index, follow',
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $guidesMtime ?: null,
         ];
     }
 
@@ -465,12 +470,21 @@ HTML;
             ],
         ]);
 
+        $hubMtime = 0;
+        foreach ($guides as $hg) {
+            $t = ContentRepository::itemMtime($hg);
+            if ($t > $hubMtime) {
+                $hubMtime = $t;
+            }
+        }
+
         return [
             'pageTitle' => $hubDef['title'],
             'pageDescription' => $desc,
             'canonicalPath' => $canonicalPath,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $hubMtime ?: null,
         ];
     }
 
@@ -606,6 +620,7 @@ HTML;
             'articleTimes' => $articleTimes !== [] ? $articleTimes : null,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => ContentRepository::itemMtime($g) ?: null,
         ];
     }
 
@@ -736,12 +751,15 @@ HTML;
             ],
         ]);
 
+        $charsMtime = ContentRepository::latestMtime(static fn (array $i) => !$i['isIndex'] && (string) $i['section'] === 'characters');
+
         return [
             'pageTitle' => 'Персонажи Genshin Impact',
             'pageDescription' => 'Каталог персонажей Genshin Impact: стихия, оружие, редкость и ссылки на материалы.',
             'canonicalPath' => '/characters',
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $charsMtime ?: null,
         ];
     }
 
@@ -832,12 +850,21 @@ HTML;
             ],
         ]);
 
+        $hubMtime = 0;
+        foreach ($items as $hi) {
+            $t = ContentRepository::itemMtime($hi);
+            if ($t > $hubMtime) {
+                $hubMtime = $t;
+            }
+        }
+
         return [
             'pageTitle' => $title,
             'pageDescription' => $description,
             'canonicalPath' => $canonicalPath,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $hubMtime ?: null,
         ];
     }
 
@@ -895,6 +922,8 @@ HTML;
             . '</article>';
 
         $ogPath = OgManifest::imageForEntry('characters', $slug);
+        $charMtime = ContentRepository::itemMtime($c);
+        $charDateModified = $charMtime > 0 ? gmdate('c', $charMtime) : null;
         $jsonLd = Seo::jsonLdGraph([
             Seo::publisherOrganization($cfg),
             Seo::breadcrumbListSchema($cfg, [
@@ -902,7 +931,7 @@ HTML;
                 ['label' => 'Персонажи', 'href' => '/characters'],
                 ['label' => $name, 'href' => $canonicalPath],
             ]),
-            [
+            array_filter([
                 '@type' => 'Article',
                 '@id' => Seo::absoluteUrl($cfg, $canonicalPath) . '#article',
                 'headline' => $displayTitle,
@@ -916,12 +945,16 @@ HTML;
                 'image' => [Seo::absoluteUrl($cfg, $ogPath)],
                 'author' => ['@id' => Seo::siteUrl($cfg) . '/#editorial-team'],
                 'publisher' => ['@id' => Seo::siteUrl($cfg) . '/#organization'],
+                'dateModified' => $charDateModified,
                 'about' => [
-                    '@type' => 'Thing',
-                    'name' => $name,
-                    'description' => self::elementRu($element) . ', ' . $weapon . '. Персонаж Genshin Impact.',
+                    [
+                        '@type' => 'Thing',
+                        'name' => $name,
+                        'description' => self::elementRu($element) . ', ' . $weapon . '. Персонаж Genshin Impact.',
+                    ],
+                    Seo::genshinVideoGameNode(),
                 ],
-            ],
+            ], static fn ($v) => $v !== null && $v !== ''),
             Seo::editorialTeamPerson($cfg),
         ]);
 
@@ -934,6 +967,7 @@ HTML;
             'ogAlt' => $name . ' — ' . self::elementRu($element) . ', ' . $weapon . ' | GenshinTop',
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $charMtime ?: null,
         ];
     }
 
@@ -1312,10 +1346,36 @@ HTML;
 
         $slot = $bc . '<article class="article prose-flow"><header class="article-head"><h1>' . Html::e($title) . '</h1></header><div class="prose">' . $htmlBody . '</div></article>' . $subsectionsHtml . $articlesHtml;
 
+        $sectionUrl = Seo::absoluteUrl($cfg, $canonicalPath);
         $jsonLd = Seo::jsonLdGraph([
             Seo::publisherOrganization($cfg),
+            Seo::webSiteNode($cfg),
             Seo::breadcrumbListSchema($cfg, $bcList),
+            [
+                '@type' => 'CollectionPage',
+                '@id' => $sectionUrl . '#webpage',
+                'name' => $title,
+                'description' => $desc,
+                'url' => $sectionUrl,
+                'inLanguage' => 'ru-RU',
+                'isPartOf' => ['@id' => Seo::siteUrl($cfg) . '/#website'],
+                'breadcrumb' => ['@id' => $sectionUrl . '#breadcrumb'],
+            ],
         ]);
+
+        $sectionMtime = ContentRepository::itemMtime($item);
+        foreach ($subsections as $sc) {
+            $t = ContentRepository::itemMtime($sc);
+            if ($t > $sectionMtime) {
+                $sectionMtime = $t;
+            }
+        }
+        foreach ($articles as $ac) {
+            $t = ContentRepository::itemMtime($ac);
+            if ($t > $sectionMtime) {
+                $sectionMtime = $t;
+            }
+        }
 
         return [
             'pageTitle' => $title . ' — GenshinTop',
@@ -1323,6 +1383,7 @@ HTML;
             'canonicalPath' => $canonicalPath,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $sectionMtime ?: null,
         ];
     }
 
@@ -1341,9 +1402,29 @@ HTML;
 
         $slot = $bc . '<article class="article prose-flow"><header class="article-head"><h1>' . Html::e($title) . '</h1></header><div class="prose">' . $htmlBody . '</div></article>';
 
+        $articleUrl = Seo::absoluteUrl($cfg, $canonicalPath);
+        $itemMtime = ContentRepository::itemMtime($item);
+        $articleNode = array_filter([
+            '@type' => 'Article',
+            '@id' => $articleUrl . '#article',
+            'headline' => $title,
+            'description' => $desc,
+            'inLanguage' => 'ru-RU',
+            'url' => $articleUrl,
+            'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $articleUrl],
+            'image' => [Seo::absoluteUrl($cfg, Seo::DEFAULT_OG_IMAGE_PATH)],
+            'author' => ['@id' => Seo::siteUrl($cfg) . '/#editorial-team'],
+            'publisher' => ['@id' => Seo::siteUrl($cfg) . '/#organization'],
+            'dateModified' => $itemMtime > 0 ? gmdate('c', $itemMtime) : null,
+            'about' => Seo::genshinVideoGameNode(),
+        ], static fn ($v) => $v !== null && $v !== '');
+
         $jsonLd = Seo::jsonLdGraph([
             Seo::publisherOrganization($cfg),
-            Seo::breadcrumbListSchema($cfg, $bcList)
+            Seo::webSiteNode($cfg),
+            Seo::breadcrumbListSchema($cfg, $bcList),
+            $articleNode,
+            Seo::editorialTeamPerson($cfg),
         ]);
 
         return [
@@ -1352,6 +1433,7 @@ HTML;
             'canonicalPath' => $canonicalPath,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => $itemMtime ?: null,
         ];
     }
 }
