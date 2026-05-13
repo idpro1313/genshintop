@@ -342,3 +342,9 @@
 - **Почему:** запрос пользователя — один каталог **`docker/`** для образа и прод-оркестрации; скрипт серверного обновления удобнее вызывать из корня клона.
 - **Файлы:** `docker/docker-compose.yml`, `docker/genshintop-redirects.conf`, `docker/env.example`, `docker/README.md`, `update-from-github.sh`, удалён `deploy/**`, правки `docker/Dockerfile`, `.gitignore`, `README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.3.0** — операторы должны перенести секреты из **`deploy/.env`** в **`docker/.env`** и вызывать **`./update-from-github.sh`** вместо **`deploy/update-from-github.sh`**.
+
+### Восстановление lib/Parsedown.php (1.3.1)
+- **Что:** файл **`lib/Parsedown.php`** был повреждён (отсутствовали **`<?php`**, объявление **`class Parsedown`**, метод **`text()`** и начало класса); заменён на каноническую копию **[Parsedown 1.7.4](https://github.com/erusev/parsedown)** (upstream **`erusev/parsedown`**). **`VERSION`**, узел **`Project`** и **`TechnologyStack`** → **1.3.1**.
+- **Почему:** сообщение пользователя с фрагментом кода выявило обрыв библиотеки; без восстановления **`ContentRepository::markdownToHtml`** и сборка образа ломались бы при загрузке Parsedown.
+- **Файлы:** `lib/Parsedown.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.1** — поведение API **`Parsedown::text()`** / **`setSafeMode()`** без изменений относительно ожиданий **`ContentRepository`**.
