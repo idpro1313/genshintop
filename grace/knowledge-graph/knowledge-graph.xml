@@ -1,11 +1,11 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.18.1">
+    <Project NAME="genshintop" VERSION="1.18.2">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живой контент в content/; служебные content/**/_by-* не индексируются; каталоги scripts/ и reports/ отсутствуют; зеркал нет; роутинг public/index.php; lib/; без Node/npm; статический public/sitemap.xml поддерживается вручную; GHCR + Traefik.</annotation>
 
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" STATUS="implemented">
       <purpose>Публичный SEO-сайт genshintop.ru: PHP front-controller (public/index.php → lib/web_dispatch.php); контент из content/; обогащённые каталоги /guides и /characters; generic content-роутер для остальных разделов; кластер /lootbar/*; JSON-LD через lib/Seo.php; статический public/sitemap.xml в git; без RSS; OgManifest + lib/og-manifest.json + public/og/*.png в репозитории.</purpose>
-      <path>docker/Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, docker/docker-compose.yml, docker/env.example, public/index.php, public/sitemap.xml, lib/, public/css/site.css, update-from-github.sh, docs/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
+      <path>docker/Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, docker/docker-compose.yml, docker/env.example, public/index.php, public/sitemap.xml, public/favicon.ico, public/favicon.svg, public/favicon-16x16.png, public/favicon-32x32.png, public/apple-touch-icon.png, public/icon-192.png, public/icon-512.png, public/site.webmanifest, lib/, public/css/site.css, update-from-github.sh, docs/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
       <depends>none</depends>
       <verification-ref>V-M-PHP-SITE</verification-ref>
       <annotations>
@@ -15,6 +15,7 @@
         <route-content-generic PURPOSE="Generic content-роутер обслуживает /weapons, /artifacts, /materials, /enemies, /world, /news, /tools, /community и вложенные section/slug" />
         <route-trust PURPOSE="E-E-A-T: editorial-policy, partnership-disclosure, contacts, content-updates" />
         <static-sitemap PURPOSE="public/sitemap.xml — ручной статический urlset 0.9; генератор удалён" />
+        <favicon-set PURPOSE="С 1.18.2: полный фавикон-набор для роботов (Яндекс/Google) — public/favicon.ico (мультиразмерный 16+32), public/favicon-{16x16,32x32}.png, public/apple-touch-icon.png (180), public/icon-{192,512}.png, public/site.webmanifest. lib/layout.php содержит rel=icon (ico+svg+png), apple-touch-icon, manifest. nginx отдаёт /favicon.ico как реальный файл (try_files $uri /favicon.svg как fallback)" />
         <fn-webSiteSearchAction PURPOSE="Seo::webSiteNode — SearchAction на /guides?q={search_term_string}" />
         <fn-no-rss PURPOSE="/rss.xml возвращает 404 (Router)" />
       </annotations>
