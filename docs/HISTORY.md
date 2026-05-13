@@ -324,3 +324,9 @@
 - **Почему:** запрос пользователя — в **`lib/`** без подпапок (единый каталог PHP и шаблонов).
 - **Файлы:** `lib/layout.php`, `lib/header.php`, `lib/footer.php`, `lib/lootbar_banner.php`, `lib/Router.php`, удалены `lib/templates/**`, `VERSION`, `docs/AGENTS.md`, `docs/SEO-CHECKLIST.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`
 - **Решение:** PATCH **1.2.1** — только файловая структура и документация; публичные URL не менялись.
+
+### Удаление каталога reports/ (1.2.2)
+- **Что:** удалены **`reports/`** (**`.gitkeep`**, **`migration-report.json`** — артефакты старого пайплайна Astro/npm); убрана строка **`reports`** из **`.dockerignore`**; в **`docs/AGENTS.md`** удалены упоминания **`reports/`** и строка в блоке структуры репозитория; **`VERSION`**, узел **`Project`** в **`grace/knowledge-graph/knowledge-graph.xml`** и **`TechnologyStack`** в **`grace/technology/technology.xml`** → **1.2.2**.
+- **Почему:** запрос пользователя — каталог не используется рантаймом сайта и не нужен для текущего PHP-стека.
+- **Файлы:** удалён **`reports/**`**; правки `.dockerignore`, `docs/AGENTS.md`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.2.2** — локальные отчёты аудита при необходимости создаются вне репозитория.

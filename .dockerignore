@@ -4,5 +4,4 @@ dist
 .git
 .cursor
 .kilo
-reports
 **/*.log

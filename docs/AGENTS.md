@@ -20,7 +20,7 @@
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build` корневого Dockerfile |
 | Обновление на сервере | `bash deploy/update-from-github.sh` — pull образа, `up -d` |
 
-Аудит гайдов в масштабе репозитория, генерация OG-PNG и массовые правки редиректов **не входят в обязательный состав этого репозитория** (при необходимости — вручную или отдельным инструментом). В **`reports/`** могут оставаться старые JSON-отчёты.
+Аудит гайдов в масштабе репозитория, генерация OG-PNG и массовые правки редиректов **не входят в обязательный состав этого репозитория** (при необходимости — вручную или отдельным инструментом).
 
 ### Модули (GRACE)
 
@@ -155,7 +155,6 @@ docker/
   nginx-default.conf, supervisord.conf, docker-entrypoint.sh
 Dockerfile              - php-fpm-alpine + nginx + supervisor; RUN php lib/build-sitemap.php; без Node
 deploy/                 - docker-compose.yml, genshintop-redirects.conf, env.example, update-from-github.sh
-reports/                - content-audit.json, migration-report.json, guides-audit.json
 grace/
   requirements/requirements.xml
   technology/technology.xml
