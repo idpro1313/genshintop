@@ -73,7 +73,7 @@
 | party | `energiya-vosstanovlenie-vzryva` | Энергия, частицы и стабильные ульты |
 | newbie | `chekhlist-materialov-personazha` | Чеклист материалов на нового героя |
 | general | `chaynik-bezmyatezhnosti-vvedenie` | Чайник безмятежности: награды и доверие |
-| economy | `sozvezdiya-i-krutki-investicii` | Созвёрстия и разумный бюджет круток |
+| economy | `sozvezdiya-i-krutki-investicii` | Созвездия и разумный бюджет круток |
 | party / выживание | `schit-lechenie-i-vyzhivaemost` | Щит vs лечение, нагрузка на отряд |
 | party | `elementarnyy-masterstvo-kogda-kachat` | EM для реакций и билдов |
 | newbie / мир | `gadzhety-i-komfort-issledovaniya` | Гаджеты и удобство исследования |
