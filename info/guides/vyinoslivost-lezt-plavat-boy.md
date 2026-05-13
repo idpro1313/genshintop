@@ -5,7 +5,7 @@ topic: newbie
 status: active
 audience: beginner
 gameVersion: "6.x"
-summary: "Стамина в Genshin Impact: лесть, рывок в воде, рывки в бою и как не утонуть с полной полоской."
+summary: "Стамина в Genshin Impact: лазанье по стенам, рывок в воде, рывки в бою и как не утонуть с полной полоской."
 sourceSlug: vyinoslivost-lezt-plavat-boy
 date: 2026-05-13
 updatedAt: 2026-05-13

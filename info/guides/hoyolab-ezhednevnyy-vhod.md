@@ -18,7 +18,7 @@ relatedGuides:
   - "pochtovye-nagrady-i-rozygryshi"
 ---
 
-**HoYoLAB** — официальная экосистема HoYoverse: форум, иногда **веб-чекин** и статьи по [Genshin Impact](https://genshin.hoyoverse.com/). Награды за вход часто **выслаются в почту** на UID.
+**HoYoLAB** — официальная экосистема HoYoverse: форум, иногда **ежедневная отметка в приложении** и статьи по [Genshin Impact](https://genshin.hoyoverse.com/). Награды за вход часто **высылаются в почту** на UID.
 
 ## Безопасность
 

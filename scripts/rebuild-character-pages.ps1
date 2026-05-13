@@ -16,7 +16,10 @@ if (-not (Test-Path -LiteralPath $CharDir)) {
 }
 
 New-Item -ItemType Directory -Force -Path $ArchiveDir | Out-Null
-Copy-Item -Path (Join-Path $CharDir '*.md') -Destination $ArchiveDir -Force
+# Снимок текущего канона перед пересборкой (дата в имени; см. docs/HISTORY.md)
+$snapshotDir = Join-Path $ArchiveDir ('snapshot-' + (Get-Date -Format 'yyyy-MM-dd'))
+New-Item -ItemType Directory -Force -Path $snapshotDir | Out-Null
+Copy-Item -Path (Join-Path $CharDir '*.md') -Destination $snapshotDir -Force
 
 $ElRuMap = @{
     'Pyro'    = 'Пиро'
@@ -200,4 +203,4 @@ foreach ($file in $files) {
     [System.IO.File]::WriteAllText($file.FullName, $out, $utf8NoBom)
 }
 
-Write-Host "Готово: $($files.Count) файлов, архив: $ArchiveDir"
+Write-Host "Готово: $($files.Count) файлов, архив: $ArchiveDir, снимок: $snapshotDir"

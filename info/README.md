@@ -6,6 +6,22 @@
 
 Каталог **`info/guides/`** — канон опорных гайдов для сайта (новые тексты по матрице ниже, без смыслового копирования из архива). Массовый старый корпус лежит в [`content/guides-archive/`](../content/guides-archive); пустой слой **`content/guides/`** без `.md` — см. [`content/guides/README.md`](../content/guides/README.md).
 
+### Информационная архитектура (без смысловых дублей)
+
+- **Эталон набора тем** — таблицы slug в этом файле; стиль и антипаттерны — [`docs/GUIDE_EDITORIAL.md`](../docs/GUIDE_EDITORIAL.md).
+- **Один файл — одна зона ответственности**: общие тезисы не копируются; при пересечении тем вводный абзац отсылает к «ведущему» материалу по той же строке матрицы.
+- **URL не снимаем** ради дедупликации: пересечения закрываются редакцией текста и перекрёстными ссылками.
+
+| Кластер тем | Slug (примеры) | Кто про что (без дубля смысла) |
+|-------------|----------------|--------------------------------|
+| Кооператив | `kooperativ-miry-i-farm`, `kooperativ-kick-limity` | Первый — зачем заходить в чужой мир и фарм; второй — лимиты мира, кик, этикет, безопасность. |
+| Чайник | `chaynik-bezmyatezhnosti-vvedenie`, `chaynik-monety-ukrasheniya-doverie` | Первый — вход и система безмятежности; второй — монеты уюта, украшения, доверие. |
+| Бездна и циклы | `vitaya-bezdna-vvedenie`, `spiral-i-ciklicheskie-boevye` | Первый — правило двух команд и база Бездны; второй — прочие циклические боевые режимы и награды. |
+| Журнал и награды | `zhurnal-priklyucheniy-nagrady`, `ezhednevnye-porucheniya-nagrady`, `kniga-iskatelya-nagrady` | Справочник и одноразовые пакеты vs ежедневные комиссии vs путеводитель искателя. |
+| Квесты | `kvesty-arhontov-bez-spoilerov`, `mirovye-kvesty-i-arhonty`, `navigatsiya-po-kvestam-i-markeram` | Дорожная карта архонтов vs мир vs журнал/UI трекера. |
+| Валюта и оплата | `primogemy-kopim-tratim`, `genesis-kristally-i-oplata`, `partnerskiy-razdel-topap-genshintop` | F2P-план примогемов vs IAP кристаллы vs партнёрский топ-ап на сайте. |
+| Профиль | `namekarty-profil-igroka`, `skrytye-dostizheniya-i-namekarty` | Визитка и оформление vs достижения как источник карточек. |
+
 ## Инвентаризация исходного корпуса (на момент работ)
 
 | Кластер | Ориентиры в архиве `content/guides-archive` | Куда смысл уходит в новом корпусе |

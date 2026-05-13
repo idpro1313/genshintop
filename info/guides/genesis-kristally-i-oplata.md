@@ -18,7 +18,7 @@ relatedGuides:
   - "bannery-sobytiya-molitvy"
 ---
 
-**Genesis Crystals** — премиум-валюта магазина клиента. После покупки вы обычно **конвертируете** их в [примогемы](/guides/primogemy-kopim-tratim) по курсу экрана — не оставляйте кристаллы «мёртвым грузом», если план уже [молитва](/guides/bannery-sobytiya-molitvy).
+**Genesis Crystals** — премиум-валюта магазина клиента. После покупки вы обычно **конвертируете** их в [примогемы](/guides/primogemy-kopim-tratim) по курсу экрана — не оставляйте кристаллы «мёртвым грузом», если план уже [молитва](/guides/bannery-sobytiya-molitvy). **Зона статьи** — **официальный** IAP в экосистеме HoYoverse. **План без доната** — [примогемы в игре](/guides/primogemy-kopim-tratim); **про сервисы пополнения вокруг сайта** — [партнёрский материал GenshinTop](/guides/partnerskiy-razdel-topap-genshintop).
 
 ## Где покупать
 
