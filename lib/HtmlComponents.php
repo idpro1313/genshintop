@@ -143,6 +143,56 @@ HTML;
 HTML;
     }
 
+    public static function contentCard(array $c): string
+    {
+        $url = '/' . ltrim(($c['section'] ?? '') . '/' . ($c['slug'] ?? ''), '/');
+        $title = (string) ($c['title'] ?? '');
+        $summary = isset($c['summary']) && is_string($c['summary']) ? $c['summary'] : '';
+        $meta = is_array($c['meta'] ?? null) ? $c['meta'] : [];
+        
+        $urlEsc = Html::e($url);
+        $titleEsc = Html::e($title);
+        $excerpt = Seo::cleanMetaDescription($summary, $title, 220);
+        $excerptEsc = Html::e($excerpt);
+        
+        $timeHtml = '';
+        $displayTs = null;
+        foreach (['updatedAt', 'date'] as $dk) {
+            if (!empty($meta[$dk]) && is_string($meta[$dk])) {
+                $t = strtotime($meta[$dk]);
+                if ($t !== false) {
+                    $displayTs = $t;
+                    break;
+                }
+            }
+        }
+        if ($displayTs) {
+            $iso = gmdate('c', $displayTs);
+            $ru = date('d.m.Y', $displayTs);
+            $timeHtml = '<div class="guide-card-badges"><time class="guide-card-time" datetime="' . Html::e($iso) . '">' . Html::e($ru) . '</time></div>';
+        }
+
+        $excerptBlock = $excerpt !== '' ? '<p class="guide-card-excerpt">' . $excerptEsc . '</p>' : '';
+
+        $thumbLetters = preg_replace('/[^\p{L}\p{N}]/u', '', $title);
+        $thumbLetters = is_string($thumbLetters) ? mb_strtoupper(mb_substr($thumbLetters, 0, 2)) : '';
+        if ($thumbLetters === '') {
+            $thumbLetters = 'GT';
+        }
+        $thumbEsc = Html::e($thumbLetters);
+
+        return <<<HTML
+<a href="{$urlEsc}" class="guide-catalog-card">
+  <span class="guide-card-thumb" aria-hidden="true"><span class="guide-card-thumb-inner">{$thumbEsc}</span></span>
+  <div class="guide-card-content">
+    {$timeHtml}
+    <h2 class="guide-card-title">{$titleEsc}</h2>
+    {$excerptBlock}
+  </div>
+</a>
+HTML;
+    }
+
     /** @param list<string>|null $slugs */
     public static function guideBadgeLinks(?array $slugs): string
     {
