@@ -80,12 +80,14 @@
         <check-3>Статически: content/STYLE.md описывает длину по типам, тон, slug-конвенцию и атрибуцию; нет ссылок на удалённые docs/GUIDE_EDITORIAL.md и docs/CHARACTER_EDITORIAL.md</check-3>
         <check-4>Статически: каждая карточка content/&lt;section&gt;/&lt;slug&gt;.md имеет в frontmatter title, section, slug, status (live|draft|stub), summary, gameVersion, updatedAt</check-4>
         <check-5>Статически: внутренние ссылки в content/ — относительные внутри content/ (нет ссылок на /info/* в теле статей)</check-5>
-        <check-6>Статически: lib/ContentRepository.php продолжает читать info/ — content/ не подключён к рантайму (это запланировано после волны 2, см. Phase-7 step-4)</check-6>
+        <check-6>Статически: lib/ContentRepository.php продолжает читать info/ — content/ не подключён к рантайму (миграция запланирована после Wave 3, см. Phase-7 step-5)</check-6>
+        <check-7>Статически (Wave 2 / 1.14.0): characters >= 110 live, weapons >= 55 live, artifacts >= 35 live, news/patches >= 40 live, news/banners >= 18 live, world/factions >= 15 live, enemies >= 18 live, materials >= 18 live</check-7>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Редактор открывает content/&lt;section&gt;/_index.md и видит структуру раздела со списком слугов и шаблоном</scenario-1>
         <scenario-2 kind="success">Новый материал создаётся через content/_templates/&lt;type&gt;.md → копия в content/&lt;section&gt;/&lt;slug&gt;.md → заполнение frontmatter и тела</scenario-2>
         <scenario-3 kind="failure">Нет «битых» ссылок в content/ на несуществующие slug (проверяется обходом md-ссылок)</scenario-3>
+        <scenario-4 kind="success">Wave 2 снимок: content/README.md содержит таблицу прогресса с колонками live/draft/stub/total и совпадает с фактическим Get-ChildItem подсчётом (зафиксировано 2026-05-13)</scenario-4>
       </scenarios>
       <required-log-markers />
     </V-M-CONTENT-V2>

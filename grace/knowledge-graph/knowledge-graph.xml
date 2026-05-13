@@ -36,7 +36,7 @@
         <ax-mirror PURPOSE="Каждый раздел docs/PLAN.md имеет свой каталог в content/ с _index.md" />
         <ax-templates PURPOSE="content/_templates/*.md — единые YAML-шаблоны frontmatter по 11 типам (article, character, weapon, artifact, region, faction, npc, banner, patch, enemy, material)" />
         <ax-style PURPOSE="content/STYLE.md заменяет удалённые docs/GUIDE_EDITORIAL.md и docs/CHARACTER_EDITORIAL.md: длина по типам, тон, атрибуция, slug-конвенция, запреты" />
-        <ax-status PURPOSE="frontmatter status: live | draft | stub. На 1.13.0 в основном live для опорных материалов и draft для расширения" />
+        <ax-status PURPOSE="frontmatter status: live | draft | stub. На 1.14.0 (Wave 2): characters 114 live / 1 draft, weapons 57 live, artifacts 38 live, news/patches 42 live, news/banners 19 live, world/factions 16 live + 8 draft, enemies 20 live, materials 20 live + 1 draft. Wave 3 закроет оставшиеся draft и расширит world/npc, news/events, news/announcements" />
       </annotations>
     </M-CONTENT-V2>
 

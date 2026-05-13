@@ -39,25 +39,23 @@
 
 Сводка по разделам (обновляется по завершении батча):
 
-| Раздел | live | draft | stub |
-|--------|-----:|------:|-----:|
-| characters | — | — | — |
-| weapons | — | — | — |
-| artifacts | — | — | — |
-| materials | — | — | — |
-| enemies | — | — | — |
-| guides/basics | — | — | — |
-| guides/advanced | — | — | — |
-| guides/walkthroughs | — | — | — |
-| tools | — | — | — |
-| world/regions | — | — | — |
-| world/lore | — | — | — |
-| world/factions | — | — | — |
-| world/npc | — | — | — |
-| news/events | — | — | — |
-| news/announcements | — | — | — |
-| news/banners | — | — | — |
-| news/patches | — | — | — |
-| community | — | — | — |
+| Раздел | live | draft | stub | total |
+|--------|-----:|------:|-----:|------:|
+| characters | 114 | 1 | 0 | 115 |
+| weapons | 57 | 0 | 0 | 57 |
+| artifacts | 38 | 0 | 0 | 38 |
+| materials | 20 | 1 | 0 | 21 |
+| enemies | 20 | 0 | 0 | 20 |
+| guides | 20 | 17 | 0 | 37 |
+| tools | 4 | 0 | 0 | 4 |
+| world/regions | 7 | 0 | 0 | 7 |
+| world/lore | 6 | 0 | 0 | 6 |
+| world/factions | 16 | 8 | 0 | 24 |
+| world/npc | 7 | 0 | 2 | 9 |
+| news/events | 0 | 0 | 0 | 0 |
+| news/announcements | 0 | 0 | 0 | 0 |
+| news/banners | 19 | 0 | 0 | 19 |
+| news/patches | 42 | 1 | 0 | 43 |
+| community | 1 | 3 | 0 | 4 |
 
-Цифры заполняет финальный батч синхронизации.
+Снимок: после **Wave 2** (2026-05-13). Wave 3 закроет оставшиеся `draft`/`stub` и расширит `news/events`, `news/announcements`, `world/npc`.
