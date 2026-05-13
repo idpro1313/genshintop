@@ -197,7 +197,7 @@ final class ContentRepository
                 $postAttrs = $m[3];
                 $inner = $m[4];
 
-                $isAbsolute = preg_match('#^(?:[a-z][a-z0-9+.\-]*:|//|mailto:|tel:|#)#i', $href) === 1;
+                $isAbsolute = preg_match('~^(?:[a-z][a-z0-9+.\-]*:|//|mailto:|tel:|\#)~i', $href) === 1;
 
                 $cleanInner = static function (string $s): string {
                     if (preg_match('#^\s*<code>(.*)</code>\s*$#is', $s, $cm) === 1) {
@@ -218,9 +218,9 @@ final class ContentRepository
                 $isService =
                     str_contains($stripped, '_templates/')
                     || str_contains($stripped, '_by-')
-                    || preg_match('#(^|/)STYLE\.md(?:[/?#]|$)#i', $stripped) === 1
-                    || preg_match('#(^|/)README\.md(?:[/?#]|$)#i', $stripped) === 1
-                    || preg_match('#(^|/)info/#i', $stripped) === 1;
+                    || preg_match('~(^|/)STYLE\.md(?:[/?\#]|$)~i', $stripped) === 1
+                    || preg_match('~(^|/)README\.md(?:[/?\#]|$)~i', $stripped) === 1
+                    || preg_match('~(^|/)info/~i', $stripped) === 1;
 
                 if ($isService) {
                     return $cleanInner($inner);
