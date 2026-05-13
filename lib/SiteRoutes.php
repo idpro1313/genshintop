@@ -16,11 +16,7 @@ final class SiteRoutes
             '/partnership-disclosure',
             '/content-updates',
             '/lootbar',
-            '/lootbar/kristally-sotvoreniya',
-            '/lootbar/blagoslovenie-luny',
-            '/lootbar/promokod',
             '/lootbar/kak-popolnit-genshin-impact',
-            '/lootbar/bezopasnost-i-oplata',
             '/lootbar/skidki-i-kupony',
         ];
     }

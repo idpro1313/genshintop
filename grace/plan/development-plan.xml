@@ -19,7 +19,7 @@
   <Modules>
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), канонический контент Markdown в content/ (читает ContentRepository), шаблоны PHP в корне lib (layout.php, header.php, footer.php, lootbar_banner.php), ванильный CSS в public/css/site.css. Публичные URL: обогащённые /guides и /characters; столпы PLAN /guides/basics, /guides/advanced, /guides/walkthroughs через content-индексы; тематические хабы /guides/*; /lootbar/*; /world/regions/*; страницы доверия. SEO: lib/Seo.php (meta, canonical, JSON-LD), статический public/sitemap.xml в git. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/lootbar_banner.php и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
+        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), канонический контент Markdown в content/ (читает ContentRepository), шаблоны PHP в корне lib (layout.php, header.php, footer.php, lootbar_banner.php), ванильный CSS в public/css/site.css. Публичные URL: обогащённые /guides и /characters; столпы PLAN /guides/basics, /guides/advanced, /guides/walkthroughs через content-индексы; тематические хабы /guides/*; /world/regions/*; страницы доверия. Кластер LootBar (1.18.1): /lootbar (хаб с якорными секциями #promokod, #kristally, #welkin, #bezopasnost), /lootbar/skidki-i-kupony, /lootbar/kak-popolnit-genshin-impact; других подстраниц нет. SEO: lib/Seo.php (meta, canonical, JSON-LD), статический public/sitemap.xml в git. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/lootbar_banner.php (единый клик на /lootbar/skidki-i-kupony) и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
         <inputs>
           <param name="content" type="markdown" />
           <param name="config.php" type="php-config" />
@@ -124,10 +124,10 @@
       <evidence>Канон для сайта — content/**; образ собирается docker build -f docker/Dockerfile .</evidence>
     </DF-CONTENT-MIGRATE>
 
-    <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click">
-      <step-1>Пользователь видит пункт навигации, плашку под шапкой или ссылку на главной</step-1>
-      <step-2>Переходит на внутренний маршрут /lootbar с SEO и JSON-LD</step-2>
-      <step-3>Нажимает внешний CTA на LootBar.gg с параметром aff_short=dandnagers</step-3>
+    <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click" VERSION="1.18.1">
+      <step-1>Пользователь видит пункт навигации, плашку под шапкой (единый клик на /lootbar/skidki-i-kupony) или ссылку на главной</step-1>
+      <step-2>Переходит на одну из трёх страниц кластера: /lootbar (хаб с якорными секциями #promokod, #kristally, #welkin, #bezopasnost), /lootbar/skidki-i-kupony (лендинг), /lootbar/kak-popolnit-genshin-impact (инструкция)</step-2>
+      <step-3>Нажимает внешний CTA на LootBar.gg с параметром aff_short=dandnagers и UTM (lootbar_hero, lootbar_hub_crystals, lootbar_hub_welkin, lootbar_discounts_top_cta, lootbar_howto_open_vitrina и т.п.)</step-3>
       <evidence>lib/PageRenderer.php (кластер /lootbar), lib/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php</evidence>
     </DF-LOOTBAR-AFFILIATE>
 
@@ -165,6 +165,7 @@
       <step-5 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Wave 4 (1.16.0): закрыты оставшиеся рабочие draft/stub: community/forum + community/user-guides + community/best-guides → live; basics drafts (teyvat-lore-no-spoilers, furniture-housing) → live; silk-flower, patch 6.0, skirk → live с безопасным TBA/ожидательным форматом; world/npc 7 stub → live как NPC-role/lore-role; character-индексы _by-element/_by-region/_by-weapon очищены от ошибочных имён; 4 персонажа (Fischl, Sucrose, Beidou, Navia) compact→full wiki. Итог: во всех рабочих разделах content/ 0 draft/0 stub; templates сохраняют stub как пример.</step-5>
       <step-6 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Ревизия навигации 1.18.0: специальные /guides и /characters имеют приоритет над generic content-роутером; /regions и nginx-редиректы удалены; /world/regions/* — единственный региональный канон; public/sitemap.xml переведён в статический файл без build-sitemap.php.</step-6>
       <step-7 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Миграция lib/ContentRepository.php на content/. Архивирование info/ как guide-archive/.</step-7>
+      <step-8 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Рефакторинг /lootbar (1.18.1): удалены 4 тонкие подстраницы (/lootbar/promokod, /lootbar/kristally-sotvoreniya, /lootbar/blagoslovenie-luny, /lootbar/bezopasnost-i-oplata), их полезная начинка свёрнута в якорные секции #promokod, #kristally, #welkin, #bezopasnost на хабе /lootbar. Плашка lib/lootbar_banner.php ведёт в одну точку (/lootbar/skidki-i-kupony) одним кликом. Удалены упоминания «не официальный магазин HoYoverse» применительно к LootBar (фразы про сам сайт как «неофициальный фан-сайт» в /about и footer не трогали).</step-8>
     </Phase-7>
 
     <!-- Phases use unique tags:

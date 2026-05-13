@@ -22,7 +22,7 @@
 
     <VF-002 NAME="LootBarAffiliateRoute" USE_CASES="UC-003" DATA_FLOW="DF-LOOTBAR-AFFILIATE" PRIORITY="medium">
       <scenario>Пользователь переходит из сайта в партнёрский топ-ап LootBar</scenario>
-      <expected-outcome>/lootbar и дочерние URL доступны (включая /lootbar/skidki-i-kupony); внешние CTA используют aff_short=dandnagers и sponsored rel; reachGoal на кликах (хаб: lootbar_hero_cta; баннер: lootbar_banner_discounts_page, lootbar_banner_hub_link; страница скидок: lootbar_discounts_top_cta, lootbar_discounts_bottom_cta; инструкция: lootbar_howto_open_vitrina; подстраницы: lootbar_sub_cta и др.; тематические CTA сохранены)</expected-outcome>
+      <expected-outcome>Кластер /lootbar содержит ровно три URL (1.18.1): /lootbar (хаб с якорными секциями #promokod, #kristally, #welkin, #bezopasnost), /lootbar/skidki-i-kupony, /lootbar/kak-popolnit-genshin-impact. Удалённые подстраницы (/lootbar/promokod, /lootbar/kristally-sotvoreniya, /lootbar/blagoslovenie-luny, /lootbar/bezopasnost-i-oplata) отдают 404. Плашка lib/lootbar_banner.php — одна кликабельная ссылка с data-reach-goal=lootbar_banner_cta на /lootbar/skidki-i-kupony. Внешние CTA используют aff_short=dandnagers и sponsored rel; reachGoal на кликах (хаб: lootbar_hub_cta, lootbar_hub_crystals_cta, lootbar_hub_welkin_cta; страница скидок: lootbar_discounts_top_cta, lootbar_discounts_bottom_cta; инструкция: lootbar_howto_open_vitrina). В HTML кластера нет фраз «не официальный магазин HoYoverse» применительно к LootBar.</expected-outcome>
       <required-signals>
         <log-marker>[StaticCheck] lootbar affiliate links present</log-marker>
       </required-signals>
@@ -37,7 +37,7 @@
         <check-2>Статически: docker/nginx-default.conf — try_files → /index.php; только location = /index.php с FastCGI и явным SCRIPT_FILENAME; location ~ \.php$ deny для прочих; без location = с 301 на /</check-2>
         <check-3>Статически: docker/Dockerfile копирует lib/, content/ и public/; legacy-редиректы и RUN php lib/build-sitemap.php отсутствуют; supervisord php-fpm+nginx</check-3>
         <check-4>Статически: lib/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
-        <check-5>Статически: кластер /lootbar в lib/PageRenderer.php, lib/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
+        <check-5>Статически (1.18.1): lib/SiteRoutes.php::staticPaths содержит только три lootbar-URL (/lootbar, /lootbar/skidki-i-kupony, /lootbar/kak-popolnit-genshin-impact); lib/PageRenderer.php::lootbarSubpage возвращает null для всех остальных слагов; lib/lootbar_banner.php — единый кликабельный &lt;a href="/lootbar/skidki-i-kupony"&gt;; public/sitemap.xml содержит ровно три lootbar-URL; в lib/PageRenderer.php нет фраз про «не официальный магазин HoYoverse» применительно к LootBar</check-5>
         <check-6>Статически: public/sitemap.xml — Sitemap 0.9 urlset в git; lib/build-sitemap.php отсутствует</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — docker/build-push-action на ./docker/Dockerfile (context .); PR без push, main — push GHCR</check-7>
         <check-8>Статически: docker/docker-compose.yml — имя проекта Compose name: genshintop; готовый образ GHCR, Traefik labels; корневой update-from-github.sh — compose pull + up -d с docker/.env</check-8>
@@ -56,6 +56,7 @@
         <scenario-2 kind="success">В public/og/{guides,characters}/ присутствуют PNG для записей из og-manifest; превью og:image согласовано с OgManifest</scenario-2>
         <scenario-3 kind="success">Ключевые маршруты перечислены в едином статическом public/sitemap.xml</scenario-3>
         <scenario-4 kind="success">V-NAV-1.18: /guides и /characters отдаются специальными каталогами с фильтрами; /world и /news показывают подразделы; /regions и неизвестные legacy URL получают 404 без 301</scenario-4>
+        <scenario-5 kind="success">V-LOOTBAR-1.18.1: запрос /lootbar/promokod, /lootbar/kristally-sotvoreniya, /lootbar/blagoslovenie-luny, /lootbar/bezopasnost-i-oplata возвращает 404; плашка lib/lootbar_banner.php кликабельна одним блоком на /lootbar/skidki-i-kupony; хаб /lootbar содержит якорные секции #promokod, #kristally, #welkin, #bezopasnost</scenario-5>
       </scenarios>
       <required-log-markers />
     </V-M-PHP-SITE>

@@ -1145,8 +1145,20 @@ img {
   --lootbar-orange: #f57c00;
   --lootbar-orange-deep: #e65100;
   --lootbar-cream: #fff9e6;
+  display: block;
   padding: 0.85rem 1.25rem 0;
   background: var(--bg-page);
+  color: inherit;
+  text-decoration: none;
+}
+
+.lootbar-banner:hover .lootbar-banner-card {
+  box-shadow: 0 6px 22px rgba(245, 124, 0, 0.18);
+}
+
+.lootbar-banner:hover .lootbar-banner-cta {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 14px rgba(230, 81, 0, 0.45);
 }
 
 .lootbar-banner-wrap {
@@ -1205,19 +1217,6 @@ img {
   line-height: 1.45;
 }
 
-.lootbar-banner-inline-link {
-  font-weight: 600;
-  color: var(--wiki-accent);
-  text-decoration: none;
-  margin-left: 0.15rem;
-  white-space: nowrap;
-}
-
-.lootbar-banner-inline-link:hover {
-  color: var(--wiki-accent-hover);
-  text-decoration: underline;
-}
-
 .lootbar-banner-cta {
   flex-shrink: 0;
   margin-left: auto;
@@ -1259,10 +1258,33 @@ img {
     max-width: 280px;
     align-self: center;
   }
+}
 
-  .lootbar-banner-inline-link {
-    white-space: normal;
-  }
+/* ——— LootBar: якорная навигация на хабе ——— */
+
+.lootbar-anchor-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.lootbar-anchor-nav a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--wiki-accent);
+  background: rgba(245, 124, 0, 0.08);
+  border: 1px solid rgba(245, 124, 0, 0.25);
+}
+
+.lootbar-anchor-nav a:hover {
+  background: rgba(245, 124, 0, 0.16);
+  color: var(--wiki-accent-hover);
 }
 
 /* ——— LootBar: лендинг скидок (как lootbar-discounts.html) ——— */

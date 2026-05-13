@@ -61,7 +61,7 @@ final class PageRenderer
 <p>Мы не связаны с HoYoverse; материалы основаны на открытых данных игры и редакции сайта.</p>
 <p>Раздел <a href="/lootbar">пополнение через LootBar.gg</a> — партнёрский топ-ап с прозрачными условиями.</p>
 </div>
-<section class="callout"><h2>Топ-ап</h2><p><a href="/lootbar/kristally-sotvoreniya">Кристаллы Сотворения</a>, <a href="/lootbar/blagoslovenie-luny">Благословение Полой Луны</a>, <a href="/lootbar/promokod">промокод</a>, <a href="/lootbar/bezopasnost-i-oplata">безопасность</a>.</p></section>
+<section class="callout"><h2>Топ-ап</h2><p><a href="/lootbar/skidki-i-kupony">Скидки и купоны LootBar</a> · <a href="/lootbar/kak-popolnit-genshin-impact">Как пополнить Genshin Impact</a> · <a href="/lootbar">хаб раздела</a>.</p></section>
 </article>
 HTML;
 
@@ -941,6 +941,8 @@ HTML;
     public static function lootbarIndex(array $cfg): array
     {
         $topupUrl = Partners::lootbarGenshinTopupUrl('lootbar_hero');
+        $crystalsUrl = Partners::lootbarGenshinTopupUrl('lootbar_hub_crystals');
+        $welkinUrl = Partners::lootbarGenshinTopupUrl('lootbar_hub_welkin');
         $howTo = Seo::howToSchema([
             'name' => 'Как получить и применить купон на LootBar.gg для Genshin Impact',
             'description' => 'Общий порядок действий для скидок на стороннем топ-апе.',
@@ -948,8 +950,8 @@ HTML;
         ]);
         $faqs = [
             ['question' => 'Как купить Genshin Impact дешевле через LootBar?', 'answer' => 'Откройте страницу Genshin Impact на LootBar.gg по партнёрской ссылке, выберите пакет и оплатите. Условия зависят от региона и акций сервиса.'],
-            ['question' => 'LootBar.gg — официальный магазин HoYoverse?', 'answer' => 'Нет. LootBar.gg — сторонний сервис пополнения. GenshinTop — неофициальный фан-сайт.'],
-            ['question' => 'Безопасно ли пополнение через LootBar?', 'answer' => 'Обычно используется UID без пароля; проверяйте домен lootbar.gg и сохраняйте чек. Подробнее — /lootbar/bezopasnost-i-oplata.'],
+            ['question' => 'Безопасно ли пополнение через LootBar?', 'answer' => 'Обычно используется UID без пароля; проверяйте домен lootbar.gg и сохраняйте чек. Подробнее — секция «Безопасность» на /lootbar.'],
+            ['question' => 'Где посмотреть UID и какой регион выбрать?', 'answer' => 'UID виден в клиенте: меню паузы → Настройки → раздел про аккаунт. Регион в форме LootBar должен совпадать с регионом аккаунта Genshin Impact (Asia, Europe, America, TW/HK/MO).'],
         ];
         $faqSchema = Seo::faqPageSchema($faqs);
         $url = Seo::absoluteUrl($cfg, '/lootbar');
@@ -969,28 +971,54 @@ HTML;
         ]);
 
         $outUrl = Html::e($topupUrl);
+        $crystalsOut = Html::e($crystalsUrl);
+        $welkinOut = Html::e($welkinUrl);
         $slot = <<<HTML
 <article class="article prose-flow lootbar-hub">
 <p class="muted"><a href="/partnership-disclosure">Раскрытие партнёрства</a></p>
 <h1>Пополнение Genshin Impact через LootBar.gg</h1>
 <p class="lead">Партнёрский раздел: внешние ссылки помечены как <code>rel=sponsored</code>. Цены и условия — на стороне LootBar.</p>
 <p><a class="btn btn-lootbar" href="{$outUrl}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_hub_cta">Перейти к топ-апу на LootBar.gg</a></p>
-<section class="callout">
-  <h2>Подстраницы</h2>
-  <ul class="link-list">
-    <li><a href="/lootbar/skidki-i-kupony">Скидки и купоны</a> — выгодные цены и промокоды</li>
-    <li><a href="/lootbar/kak-popolnit-genshin-impact">Как пополнить</a></li>
-    <li><a href="/lootbar/promokod">Промокод</a></li>
-    <li><a href="/lootbar/kristally-sotvoreniya">Кристаллы Сотворения</a></li>
-    <li><a href="/lootbar/blagoslovenie-luny">Благословение Полой Луны</a></li>
-    <li><a href="/lootbar/bezopasnost-i-oplata">Безопасность и оплата</a></li>
+<nav class="lootbar-anchor-nav" aria-label="Содержание раздела LootBar">
+  <a href="/lootbar/skidki-i-kupony">Скидки и купоны</a>
+  <a href="/lootbar/kak-popolnit-genshin-impact">Как пополнить</a>
+  <a href="#promokod">Промокод</a>
+  <a href="#kristally">Кристаллы</a>
+  <a href="#welkin">Welkin Moon</a>
+  <a href="#bezopasnost">Безопасность</a>
+</nav>
+<section id="promokod">
+  <h2>Промокод и купоны LootBar</h2>
+  <p>Магазинный купон LootBar — это скидка сервиса, она применяется при оплате на <strong>lootbar.gg</strong> и не пересекается с кодами обмена HoYoverse (HoYoLAB / Daily Login). Промокоды HoYoverse дают примогемы и материалы внутри игры; купоны LootBar дают скидку на покупку валюты у партнёра.</p>
+  <p>После регистрации по партнёрской ссылке в профиле LootBar обычно появляются два купона для новых пользователей — 6% и 10% OFF. Срок и потолок скидки указаны в самом профиле.</p>
+  <p><a class="btn btn-secondary" href="/lootbar/skidki-i-kupony">Все купоны и условия →</a></p>
+</section>
+<section id="kristally">
+  <h2>Кристаллы Сотворения (Genesis Crystals)</h2>
+  <p>Genesis Crystals — премиумная валюта Genshin Impact. В игре они конвертируются в Камни Истока (Primogems), которые тратятся на молитвы, восстановление Смолы и Battle Pass. На витрине LootBar доступны пакеты разного объёма; цена и доступность зависят от региона аккаунта.</p>
+  <p><a class="btn btn-lootbar" href="{$crystalsOut}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_hub_crystals_cta">Открыть пакеты кристаллов</a></p>
+</section>
+<section id="welkin">
+  <h2>Благословение Полой Луны (Welkin Moon)</h2>
+  <p>Welkin Moon — месячная подписка: разовая выдача Genesis Crystals и затем по 90 Primogems каждый день в течение 30 дней при заходе в игру. В пересчёте на день обычно выгоднее разовых пакетов кристаллов того же бюджета — но требует регулярного входа.</p>
+  <p><a class="btn btn-lootbar" href="{$welkinOut}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_hub_welkin_cta">Купить Welkin Moon</a></p>
+</section>
+<section id="bezopasnost">
+  <h2>Безопасность и оплата</h2>
+  <ul>
+    <li>LootBar пополняет аккаунт по <strong>UID</strong> — пароль от HoYoverse сторонним сервисам передавать не нужно.</li>
+    <li>Проверяйте домен <code>lootbar.gg</code> в адресной строке перед оплатой; партнёрская ссылка GenshinTop ведёт сразу на нужную витрину с UTM-метками.</li>
+    <li>Сохраняйте чек и номер заказа — они нужны для поддержки LootBar в случае спорной ситуации.</li>
+    <li>Регион в форме оплаты должен совпадать с регионом аккаунта (Asia, Europe, America, TW/HK/MO), иначе доставка может не пройти.</li>
   </ul>
+  <p><a class="btn btn-secondary" href="/lootbar/kak-popolnit-genshin-impact">Подробная инструкция по пополнению →</a></p>
 </section>
 <section>
   <h2>FAQ</h2>
   <dl class="faq-dl">
-    <dt>Как купить дешевле через LootBar?</dt><dd>Используйте партнёрскую ссылку и проверьте купоны на сайте сервиса перед оплатой.</dd>
-    <dt>Это официальный магазин?</dt><dd>Нет; официальные покупки — в клиенте и у HoYoverse.</dd>
+    <dt>Как купить дешевле через LootBar?</dt><dd>Используйте партнёрскую ссылку и проверьте купоны в профиле сервиса перед оплатой.</dd>
+    <dt>Безопасно ли пополнение?</dt><dd>Платёж по UID без пароля; домен — <code>lootbar.gg</code>; чек сохраняйте до выполнения заказа.</dd>
+    <dt>Где посмотреть UID?</dt><dd>В клиенте: меню паузы → Настройки → раздел про аккаунт. Регион в форме LootBar должен совпадать с регионом аккаунта.</dd>
   </dl>
 </section>
 </article>
@@ -1015,75 +1043,7 @@ HTML;
         if ($slug === 'skidki-i-kupony') {
             return self::lootbarDiscountsLanding($cfg);
         }
-
-        $pages = [
-            'promokod' => [
-                'title' => 'Промокод LootBar для Genshin Impact — купоны и скидки',
-                'description' => 'Где смотреть промокод LootBar и чем он отличается от кодов HoYoverse.',
-                'bodyIntro' => 'Магазинный купон LootBar применяется при оплате на lootbar.gg.',
-                'utm' => 'lootbar_promo',
-            ],
-            'kristally-sotvoreniya' => [
-                'title' => 'Кристаллы Сотворения Genshin Impact на LootBar.gg',
-                'description' => 'Что такое Кристаллы Сотворения и как купить пакеты через партнёрскую витрину.',
-                'bodyIntro' => 'Genesis Crystals конвертируются в Камни Истока в игре. Актуальные пакеты смотрите на LootBar.',
-                'utm' => 'lootbar_crystals',
-            ],
-            'blagoslovenie-luny' => [
-                'title' => 'Благословение Полой Луны (Welkin) — Genshin Impact на LootBar',
-                'description' => 'Что даёт Welkin Moon и когда это выгоднее пакетов кристаллов.',
-                'bodyIntro' => 'Месячная подписка: часть наград приходит ежедневно — не забывайте заходить в игру.',
-                'utm' => 'lootbar_welkin',
-            ],
-            'bezopasnost-i-oplata' => [
-                'title' => 'Безопасность пополнения Genshin Impact и оплата',
-                'description' => 'Риски стороннего топ-апа, проверка домена и куда обращаться при спорах.',
-                'bodyIntro' => 'Не передавайте пароль от аккаунта сторонним сервисам; сохраняйте чеки заказов.',
-                'utm' => 'lootbar_safety',
-            ],
-        ];
-        if (!isset($pages[$slug])) {
-            return null;
-        }
-        $p = $pages[$slug];
-        $canonicalPath = '/lootbar/' . $slug;
-        $topupUrl = Partners::lootbarGenshinTopupUrl($p['utm']);
-        $outUrl = Html::e($topupUrl);
-
-        $slot = '<article class="article prose-flow">'
-            . '<p class="back-link"><a href="/lootbar">← Хаб LootBar</a></p>'
-            . '<h1>' . Html::e($p['title']) . '</h1>'
-            . '<p class="lead">' . Html::e($p['bodyIntro']) . '</p>'
-            . '<p class="muted"><a href="/partnership-disclosure">Раскрытие партнёрства</a></p>'
-            . '<p><a class="btn btn-lootbar" href="' . $outUrl . '" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_sub_cta">Открыть LootBar.gg</a></p>'
-            . '</article>';
-
-        $url = Seo::absoluteUrl($cfg, $canonicalPath);
-        $jsonLd = Seo::jsonLdGraph([
-            Seo::publisherOrganization($cfg),
-            Seo::webSiteNode($cfg),
-            Seo::breadcrumbListSchema($cfg, [
-                ['label' => 'Главная', 'href' => '/'],
-                ['label' => 'LootBar', 'href' => '/lootbar'],
-                ['label' => $p['title'], 'href' => $canonicalPath],
-            ]),
-            [
-                '@type' => 'WebPage',
-                '@id' => $url . '#webpage',
-                'name' => $p['title'],
-                'url' => $url,
-                'isPartOf' => ['@id' => Seo::siteUrl($cfg) . '/#website'],
-            ],
-        ]);
-
-        return [
-            'pageTitle' => $p['title'],
-            'pageDescription' => $p['description'],
-            'canonicalPath' => $canonicalPath,
-            'hideLootBarPromo' => true,
-            'slot' => $slot,
-            'jsonLd' => $jsonLd,
-        ];
+        return null;
     }
 
     /**
@@ -1129,7 +1089,7 @@ HTML;
 <p>В клиенте откройте меню паузы (иконка Паймона) → <strong>Настройки</strong> (шестерёнка, слева внизу) → раздел про аккаунт / пользовательское соглашение — там отображается <strong>UID</strong>. Его копируют в форму на LootBar; <strong>пароль от аккаунта HoYoverse не передавайте</strong> сторонним сервисам.</p>
 <h2>Купоны и скидки</h2>
 <p>Промокоды магазина LootBar применяются на шаге оплаты. Если только что зарегистрировались, проверьте профиль и страницу <a href="/lootbar/skidki-i-kupony">Скидки и купоны</a>.</p>
-<p><a class="btn btn-secondary" href="/lootbar/bezopasnost-i-oplata">Безопасность и оплата →</a></p>
+<p><a class="btn btn-secondary" href="/lootbar#bezopasnost">Безопасность и оплата →</a></p>
 </article>
 HTML;
 
@@ -1182,8 +1142,7 @@ HTML;
         $faqs = [
             ['question' => 'Как долго действуют купоны LootBar?', 'answer' => 'Срок и лимиты отображаются в вашем профиле на LootBar.gg после регистрации по партнёрской ссылке — обычно это ограниченное окно (несколько дней). Уточняйте на стороне сервиса перед оплатой.'],
             ['question' => 'Можно ли использовать оба купона — 6% и 10%?', 'answer' => 'Как правило, каждый купон можно применить к отдельной покупке согласно правилам LootBar. Точные условия указаны в кабинете пользователя.'],
-            ['question' => 'LootBar — официальный магазин HoYoverse?', 'answer' => 'Нет. LootBar.gg — сторонний сервис пополнения. Официальные покупки — в клиенте Genshin Impact и у HoYoverse.'],
-            ['question' => 'Это безопасно?', 'answer' => 'Используйте только домен lootbar.gg, не передавайте пароль от аккаунта и сохраняйте чеки. Подробнее — страница /lootbar/bezopasnost-i-oplata.'],
+            ['question' => 'Это безопасно?', 'answer' => 'Используйте только домен lootbar.gg, не передавайте пароль от аккаунта и сохраняйте чеки. Подробнее — секция «Безопасность» на /lootbar.'],
             ['question' => 'Где посмотреть актуальные цены на кристаллы и Welkin?', 'answer' => 'Цены и пакеты зависят от региона и акций — откройте витрину Genshin Impact на LootBar.gg по партнёрской ссылке ниже.'],
         ];
         $faqSchema = Seo::faqPageSchema($faqs);
@@ -1197,8 +1156,7 @@ HTML;
 <p><a class="btn btn-lootbar" href="{$outUrl}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_discounts_top_cta">Получить купон на скидку</a></p>
 <hr />
 <h2>LootBar.gg — партнёрский сервис</h2>
-<p>Сервис специализируется на пополнении популярных игр. Для Genshin Impact доступны пакеты кристаллов и подписки. Оплата проходит на стороне LootBar; доставка привязана к вашему UID.</p>
-<p><strong>Важно:</strong> это не официальный магазин HoYoverse. Условия, налоги и доступность способов оплаты зависят от региона.</p>
+<p>Сервис специализируется на пополнении популярных игр. Для Genshin Impact доступны пакеты кристаллов и подписки. Оплата проходит на стороне LootBar; доставка привязана к вашему UID. Условия, налоги и доступность способов оплаты зависят от региона.</p>
 <hr />
 <h2>Доступные купоны</h2>
 <p>При регистрации по партнёрской ссылке GenshinTop новые пользователи LootBar могут получить два купона на скидку (конкретные проценты и потолок скидки отображаются в профиле на lootbar.gg):</p>
@@ -1254,7 +1212,7 @@ HTML;
   <dt>Минимальная сумма заказа?</dt>
   <dd>Зависит от условий конкретного купона на LootBar.gg.</dd>
   <dt>Это безопасно?</dt>
-  <dd>Используйте официальный домен lootbar.gg и инструкции сервиса; см. также <a href="/lootbar/bezopasnost-i-oplata">безопасность и оплату</a>.</dd>
+  <dd>Используйте только домен lootbar.gg и инструкции сервиса; см. также <a href="/lootbar#bezopasnost">секцию о безопасности</a>.</dd>
 </dl>
 <hr />
 <h2>Готовы получить скидку?</h2>
