@@ -19,7 +19,7 @@ WORKDIR /var/www
 COPY lib ./lib/
 COPY content ./content/
 COPY public ./public/
-COPY deploy/genshintop-redirects.conf /etc/nginx/conf.d/genshintop-redirects.conf
+COPY docker/genshintop-redirects.conf /etc/nginx/conf.d/genshintop-redirects.conf
 
 RUN php lib/build-sitemap.php
 

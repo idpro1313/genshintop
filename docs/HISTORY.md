@@ -336,3 +336,9 @@
 - **Почему:** запрос пользователя — держать Dockerfile рядом с остальной docker-конфигурацией; исторически корень репо использовался как дефолт для CI и **`docker build .`**.
 - **Файлы:** `docker/Dockerfile` (перемещён из корня), `.github/workflows/docker-image.yml`, `README.md`, `deploy/README.md`, `docs/AGENTS.md`, `.cursor/rules/github-actions.mdc`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.2.3**.
+
+### Объединение deploy/ в docker/, скрипт обновления в корне (1.3.0)
+- **Что:** каталог **`deploy/`** убран; **`docker-compose.yml`**, **`genshintop-redirects.conf`**, **`env.example`**, **`README.md`** деплоя перенесены в **`docker/`**; **`update-from-github.sh`** — в **корень репозитория** (пути к **`docker/docker-compose.yml`** и **`docker/.env`**); **`docker/Dockerfile`**: **`COPY docker/genshintop-redirects.conf`**; **`.gitignore`**: **`docker/.env`**; обновлены **`README.md`**, **`docker/README.md`**, **`docs/AGENTS.md`**, **`grace/**/*.xml`**, **`VERSION` → 1.3.0**.
+- **Почему:** запрос пользователя — один каталог **`docker/`** для образа и прод-оркестрации; скрипт серверного обновления удобнее вызывать из корня клона.
+- **Файлы:** `docker/docker-compose.yml`, `docker/genshintop-redirects.conf`, `docker/env.example`, `docker/README.md`, `update-from-github.sh`, удалён `deploy/**`, правки `docker/Dockerfile`, `.gitignore`, `README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.3.0** — операторы должны перенести секреты из **`deploy/.env`** в **`docker/.env`** и вызывать **`./update-from-github.sh`** вместо **`deploy/update-from-github.sh`**.

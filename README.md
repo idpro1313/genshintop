@@ -15,19 +15,19 @@ php lib/build-sitemap.php
 ## Docker и обновление с GitHub
 
 ```bash
-cp deploy/env.example deploy/.env   # настроить домены
-docker compose --env-file deploy/.env -f deploy/docker-compose.yml pull
-docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d
-./deploy/update-from-github.sh      # дальше обновления с тем же compose
+cp docker/env.example docker/.env   # настроить домены
+docker compose --env-file docker/.env -f docker/docker-compose.yml pull
+docker compose --env-file docker/.env -f docker/docker-compose.yml up -d
+./update-from-github.sh               # дальше обновления с тем же compose
 ```
 
-Подробно: **`deploy/README.md`** (откат образом, паритет URL).
+Подробно: **`docker/README.md`** (откат образом, паритет URL).
 
 ## Документация
 
 - **`docs/AGENTS.md`** — карта проекта для агентов и разработчиков  
 - **`docs/HISTORY.md`** — журнал итераций  
-- **`deploy/README.md`** — Docker, Traefik, откат  
+- **`docker/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
 Канонический контент — только **`content/{guides,characters}`**. Массовая генерация OG, карты редиректов и прочие тяжёлые пайплайны — вне этого репо при необходимости.

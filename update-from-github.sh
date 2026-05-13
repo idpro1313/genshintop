@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 # Обновление репозитория с GitHub и запуск готового Docker-образа из registry.
-# Запуск с сервера (Linux), из любой директории:
-#   bash deploy/update-from-github.sh [ветка]
+# Запуск на сервере (Linux), из корня клонированного репозитория:
+#   bash ./update-from-github.sh [ветка]
 # По умолчанию ветка: main. Переменная REMOTE (по умолчанию origin).
 
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
-COMPOSE_FILE="$ROOT/deploy/docker-compose.yml"
-ENV_FILE="$ROOT/deploy/.env"
+COMPOSE_FILE="$ROOT/docker/docker-compose.yml"
+ENV_FILE="$ROOT/docker/.env"
 
 if [[ ! -f "$ENV_FILE" ]]; then
   echo "Ошибка: нет файла $ENV_FILE"
-  echo "Скопируйте: cp deploy/env.example deploy/.env и заполните значения."
+  echo "Скопируйте: cp docker/env.example docker/.env и заполните значения."
   exit 1
 fi
 

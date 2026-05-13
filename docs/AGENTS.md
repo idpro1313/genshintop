@@ -16,15 +16,15 @@
 | Команда / действие | Назначение |
 |-------------------|------------|
 | `php lib/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
-| Docker | **`deploy/README.md`** — образ GHCR, `deploy/docker-compose.yml`, Traefik |
+| Docker | **`docker/README.md`** — образ GHCR, **`docker/docker-compose.yml`**, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` |
-| Обновление на сервере | `bash deploy/update-from-github.sh` — pull образа, `up -d` |
+| Обновление на сервере | **`bash ./update-from-github.sh`** из корня репозитория — pull образа, `up -d` |
 
 Аудит гайдов в масштабе репозитория, генерация OG-PNG и массовые правки редиректов **не входят в обязательный состав этого репозитория** (при необходимости — вручную или отдельным инструментом).
 
 ### Модули (GRACE)
 
-- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`**, **`public/og/`**, Docker/nginx, **`deploy/genshintop-redirects.conf`**. JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
+- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`**, **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе через **`docker/Dockerfile`**). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
 
 ### Гайды: таксономия и frontmatter
 
@@ -32,7 +32,7 @@
 
 ### Деплой
 
-Инструкция для Traefik + Docker: **`deploy/README.md`** (готовый образ GHCR; локально — **`docker build -f docker/Dockerfile .`** из корня репозитория).
+Инструкция для Traefik + Docker: **`docker/README.md`** (готовый образ GHCR; локально — **`docker build -f docker/Dockerfile .`** из корня репозитория).
 
 # GRACE Framework - Project Engineering Protocol
 
@@ -152,9 +152,9 @@ public/
   css/site.css          - Ванильный CSS
   robots.txt, favicon, og/** (PNG при необходимости)
 docker/
-  Dockerfile            - образ сайта: php-fpm-alpine + nginx + supervisor; RUN php lib/build-sitemap.php
-  nginx-default.conf, supervisord.conf, docker-entrypoint.sh
-deploy/                 - docker-compose.yml, genshintop-redirects.conf, env.example, update-from-github.sh
+  Dockerfile, docker-compose.yml, nginx-default.conf, supervisord.conf, docker-entrypoint.sh
+  genshintop-redirects.conf, env.example (шаблон docker/.env), README.md — деплой Traefik/GHCR
+update-from-github.sh   - С сервера: git ff + compose pull/up (исполнять из корня репо)
 grace/
   requirements/requirements.xml
   technology/technology.xml

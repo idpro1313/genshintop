@@ -1,5 +1,5 @@
 # Запуск сайта в Docker за Traefik (сеть web должна существовать — см. webserver).
-# Скопируйте env.example → .env и подставьте домены.
+# Скопируйте docker/env.example → docker/.env и подставьте домены.
 
 services:
   web:

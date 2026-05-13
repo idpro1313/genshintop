@@ -42,9 +42,10 @@
         <source>docker/supervisord.conf</source>
         <source>public/index.php</source>
         <source>lib/</source>
-        <source>deploy/docker-compose.yml</source>
-        <source>deploy/genshintop-redirects.conf</source>
-        <source>deploy/update-from-github.sh</source>
+        <source>docker/docker-compose.yml</source>
+        <source>docker/genshintop-redirects.conf</source>
+        <source>docker/env.example</source>
+        <source>update-from-github.sh</source>
         <source>docs/SEO-CHECKLIST.md</source>
         <source>.github/workflows/docker-image.yml</source>
       </target>
@@ -120,7 +121,7 @@
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
-      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории; шаблоны только файлы в корне lib без подпапок (1.2.1).</goal>
+      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории; шаблоны только файлы в корне lib без подпапок (1.2.1); Traefik/GHCR-артефакты в каталоге docker/, скрипт обновления сервера — update-from-github.sh в корне (1.3.0).</goal>
       <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
     </Phase-5>
 

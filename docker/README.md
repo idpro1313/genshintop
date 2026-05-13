@@ -16,8 +16,8 @@
 cd /opt   # или ваш каталог
 git clone https://github.com/ВАШ_АКК/genshintop.git
 cd genshintop
-cp deploy/env.example deploy/.env
-# отредактируйте deploy/.env — домены в TRAEFIK_RULE
+cp docker/env.example docker/.env
+# отредактируйте docker/.env — домены в TRAEFIK_RULE
 ```
 
 Если при `docker compose pull` появляется `unauthorized`, значит GHCR package приватный или сервер не залогинен.
@@ -34,17 +34,17 @@ echo "GITHUB_TOKEN" | docker login ghcr.io -u idpro1313 --password-stdin
 
 ```bash
 cd /opt/genshintop
-docker compose --env-file deploy/.env -f deploy/docker-compose.yml pull
-docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d
+docker compose --env-file docker/.env -f docker/docker-compose.yml pull
+docker compose --env-file docker/.env -f docker/docker-compose.yml up -d
 ```
 
 ### Обновление с GitHub
 
 ```bash
 cd /opt/genshintop
-chmod +x deploy/update-from-github.sh   # один раз
-./deploy/update-from-github.sh          # ветка main по умолчанию
-./deploy/update-from-github.sh develop  # другая ветка
+chmod +x ./update-from-github.sh   # один раз (из корня репозитория)
+./update-from-github.sh            # ветка main по умолчанию
+./update-from-github.sh develop    # другая ветка
 ```
 
 Переменная окружения **`REMOTE`** (по умолчанию `origin`) задаёт имя remote.
@@ -64,8 +64,8 @@ docker run --rm -p 8080:80 genshintop-web
 ## Откат после выката
 
 1. В GitHub Packages найти предыдущий образ по digest или по тегу (`sha-<gitsha>` публикует workflow).
-2. На сервере в `deploy/.env` задать `SITE_IMAGE=ghcr.io/…@sha256:…` (или конкретный тег).
-3. Выполнить `docker compose --env-file deploy/.env -f deploy/docker-compose.yml pull && … up -d`.
+2. На сервере в `docker/.env` задать `SITE_IMAGE=ghcr.io/…@sha256:…` (или конкретный тег).
+3. Выполнить `docker compose --env-file docker/.env -f docker/docker-compose.yml pull && … up -d`.
 
 Без смены тега `latest` откат — только через указание другого `SITE_IMAGE`.
 
@@ -79,7 +79,7 @@ docker run --rm -p 8080:80 genshintop-web
 - **`https://genshintop.ru/sitemap.xml`** — единый `urlset`, без индекса из нескольких файлов.
 - **`robots.txt`** содержит одну строку **`Sitemap:`** на этот файл.
 - **`/rss.xml`** возвращает **404** (RSS отключён).
-- Редиректы slug работают (**`deploy/genshintop-redirects.conf`** подключается из **`docker/nginx-default.conf`**).
+- Редиректы slug работают (**`docker/genshintop-redirects.conf`** подключается из **`docker/nginx-default.conf`** в образе).
 
 ---
 
@@ -131,11 +131,11 @@ certificatesResolvers:
 |------|------------|
 | `docker/Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php lib/build-sitemap.php`; сборка: **`docker build -f docker/Dockerfile .`** из корня репо |
 | `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
-| `deploy/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
-| `deploy/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор) |
+| `docker/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
+| `docker/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор), копируется в образ |
+| `docker/env.example` | Шаблон `docker/.env`, включая `SITE_IMAGE` |
 | `docs/SEO-CHECKLIST.md` | Чек-лист после выката |
-| `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` |
-| `deploy/update-from-github.sh` | Обновление на Linux: git fast-forward, pull образа, up -d |
+| **`update-from-github.sh`** | В корне репозитория: git ff + compose pull/up |
 | `.dockerignore` | Контекст сборки образа |
 
-`deploy/.env` в репозиторий не коммитится (см. `.gitignore`).
+`docker/.env` в репозиторий не коммитится (см. `.gitignore`).
