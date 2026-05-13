@@ -7,7 +7,7 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живые гайды и карточки** — только **`info/guides/*.md`** и **`info/characters/*.md`** (см. **`lib/ContentRepository.php`**). **Папка `content/`** (**`guides-archive`**, **`characters-archive`**, снимки) при необходимости — **только локально**, не в git (см. **`.gitignore`**). Редакция: **`docs/GUIDE_EDITORIAL.md`**, **`docs/CHARACTER_EDITORIAL.md`**, матрица гайдов — **`info/README.md`**.
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живые гайды и карточки** — только **`info/guides/*.md`** и **`info/characters/*.md`** (см. **`lib/ContentRepository.php`**).  матрица гайдов — **`info/README.md`**.
 
 Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. Сборка прод-образа выполняет **`php lib/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
 
@@ -20,14 +20,12 @@
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` из корня репозитория |
 | Обновление на сервере | **`bash ./update-from-github.sh`** из корня репозитория — pull образа, `up -d` |
 
-Merge/split слагов, редиректы и правки **`info/*.md`** — **вручную**; при смене публичного URL — строки **`rewrite`** в **`docker/genshintop-redirects.conf`** (см. **`docs/GUIDE_EDITORIAL.md`**).
 
-Редакционный стандарт гайдов: **`docs/GUIDE_EDITORIAL.md`**, карточек персонажей — **`docs/CHARACTER_EDITORIAL.md`**. Генерация OG-PNG и прочие внешние пайплайны контента при необходимости выполняются отдельно от этого репозитория.
 
 ### Модули (GRACE)
 
 - **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`** (тёмная тема и компоненты в духе [idpro1313/dandangers](https://github.com/idpro1313/dandangers) `modern-styles.css`: teal/violet, карточный prose; опционально light через `prefers-color-scheme`), **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе **`/etc/nginx/snippets/genshintop-redirects.conf`**, не `conf.d` — иначе `rewrite` попадает в контекст `http`). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
-- **M-CONTENT-GUIDE-REFACTOR** — контент **`info/guides`**, **`info/characters`**; при необходимости локальный архив **`content/**`** (не в git); редакционные документы **`docs/GUIDE_EDITORIAL.md`**, **`docs/CHARACTER_EDITORIAL.md`**; редиректы **`docker/genshintop-redirects.conf`**.
+- **M-CONTENT-GUIDE-REFACTOR** — контент **`info/guides`**, **`info/characters`**;  редиректы **`docker/genshintop-redirects.conf`**.
 
 ### Гайды: таксономия и frontmatter
 

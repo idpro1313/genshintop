@@ -5,7 +5,7 @@ dist/
 .DS_Store
 # Архивы и снимки Markdown (guides-archive, characters-archive): только локально, не в git.
 # Рантайм сайта читает только info/guides и info/characters (см. lib/ContentRepository.php).
-content/
+archive/
 docker/.env
 grace/
 docs/
