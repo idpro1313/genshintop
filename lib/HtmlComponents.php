@@ -77,11 +77,13 @@ final class HtmlComponents
             $timeHtml = '<time class="guide-card-time" datetime="' . Html::e($iso) . '">' . Html::e($ru) . '</time>';
         }
 
+        $excerptBlock = $excerpt !== '' ? '<p class="guide-card-excerpt">' . $excerptEsc . '</p>' : '';
+
         return <<<HTML
 <a href="/guides/{$slugEsc}" class="guide-catalog-card" data-guide-card data-category="{$category}" data-topic="{$topicEsc}" data-status="{$statusEsc}" data-search-haystack="{$haystackEsc}">
   <div class="guide-card-badges">{$badges}{$timeHtml}</div>
   <h2 class="guide-card-title">{$titleEsc}</h2>
-  {$excerpt !== '' ? '<p class="guide-card-excerpt">' . $excerptEsc . '</p>' : ''}
+  {$excerptBlock}
 </a>
 HTML;
     }

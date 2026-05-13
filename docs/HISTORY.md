@@ -270,3 +270,9 @@
 - **Почему:** запрос пользователя — исходный корпус gi-database больше не нужен в проекте; канон — только **`content/`**.
 - **Файлы:** удалён **`gi-database/**`**; правки перечисленных файлов, **`VERSION` → 1.0.3**, **`docs/HISTORY.md`**.
 - **Решение:** PATCH **1.0.3**. История в журнале о прошлых фазах Astro/npm сохранена как архив; массовые пайплайны при необходимости живут вне репо.
+
+### Исправление parse error в HtmlComponents heredoc (1.0.4)
+- **Что:** в **`lib/HtmlComponents.php`** (`guideCatalogCard`) условный блок excerpt вынесен в переменную **`$excerptBlock`** — внутри heredoc недопустимо **`{$excerpt !== '' ? …}`** (парсер ожидает простую интерполяцию после `{`).
+- **Почему:** падение **`docker build`** на шаге **`RUN php scripts/build-sitemap.php`** (PHP parse error на строке 84).
+- **Файлы:** `lib/HtmlComponents.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.0.4**.
