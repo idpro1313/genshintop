@@ -9,6 +9,10 @@
 
 Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, глобальный футер с версией из корневого `VERSION`. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
 
+### PHP runtime (параллельная миграция)
+
+В репозитории развивается **PHP-версия сайта** (по образцу dandangers): Markdown в **`content/{guides,characters}`**, точка входа **`public/index.php`**, **`bootstrap.php`**, **`config.php`**, библиотеки **`lib/*.php`** (`Router`, `PageRenderer`, `ContentRepository`, таксономия и пр.), шаблоны **`templates/`**, ванильный CSS **`public/css/site.css`**, дубликат OG-манифеста **`data/og-manifest.json`**. Образ Docker и nginx по умолчанию по-прежнему отдают статический вывод Astro из **`dist/`**; перевод деплоя на PHP-FPM — отдельный шаг.
+
 ### Команды
 
 | Команда | Назначение |

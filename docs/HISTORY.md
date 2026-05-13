@@ -238,3 +238,9 @@
 ### VERSION и синхронизация манифестов (0.7.0)
 - **Что:** `VERSION` **0.6.0 → 0.7.0**; синхронизированы `package.json` и корневые поля `package-lock.json`; граф знаний уже на `0.7.0`, дополнен `docs/AGENTS.md` и этот журнал.
 - **Файлы:** `VERSION`, `package.json`, `package-lock.json`, `docs/AGENTS.md`, `docs/HISTORY.md`
+
+### PHP: PageRenderer, роутер, точка входа, CSS (0.7.1)
+- **Что:** реализован **`lib/PageRenderer.php`** со всеми методами, вызываемыми из `Router` (`home`, `guidesIndex`, хабы и статьи гайдов, каталог и хабы персонажей, статьи персонажей, регионы, кластер LootBar); в **`bootstrap.php`** подключён `PageRenderer` до `Router.php`; в **`Router`** добавлен маршрут **`/`** на главную; точка входа **`public/index.php`** загружает конфиг, `OgManifest` и вызывает `Router::dispatch`; добавлен базовый ванильный **`public/css/site.css`** (layout Teyvat, карточки, фильтры, типографика статей); карточка персонажа получила **`data-character-card`**, **`data-element`**/**weapon**/**rarity**/**name** и русские подписи стихий для фильтров каталога.
+- **Почему:** продолжение миграции с Astro на PHP: приложение до этого падало из‑за отсутствия `PageRenderer` и неполной маршрутизации главной.
+- **Файлы:** `bootstrap.php`, `config.php`, `lib/PageRenderer.php`, `lib/Router.php`, `lib/*.php`, `templates/**`, `content/**`, `data/og-manifest.json`, `public/index.php`, `public/css/site.css`, `VERSION`, `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/AGENTS.md`, `docs/HISTORY.md`
+- **Решение:** PATCH `0.7.0 → 0.7.1`. Контент по-прежнему читается из `content/`; Docker/nginx пока отдаёт статический Astro `dist` — включение PHP-FPM запланировано отдельной фазой. Локальный запуск PHP/nginx для проверки не выполнялся (`no-local-app-verification`).

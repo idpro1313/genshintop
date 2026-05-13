@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+/** @var array<string,mixed> $cfg */
+$path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+$path = $path === null || $path === '' ? '/' : $path;
+$nav = [
+    ['href' => '/', 'label' => 'Главная'],
+    ['href' => '/characters', 'label' => 'Персонажи'],
+    ['href' => '/guides', 'label' => 'Гайды'],
+    ['href' => '/regions', 'label' => 'Регионы'],
+    ['href' => '/lootbar', 'label' => 'Пополнение'],
+    ['href' => '/about', 'label' => 'О проекте'],
+];
+?>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="site-logo">
+      <span class="site-logo-title">GenshinTop</span>
+      <span class="site-logo-domain">genshintop.ru</span>
+    </a>
+    <nav class="site-nav" aria-label="Основное меню">
+      <?php foreach ($nav as $item) :
+          $href = $item['href'];
+          $active = $path === $href || ($href !== '/' && str_starts_with($path, $href));
+          ?>
+        <a href="<?= Html::e($href) ?>" class="site-nav-link<?= $active ? ' is-active' : '' ?>"><?= Html::e($item['label']) ?></a>
+      <?php endforeach; ?>
+    </nav>
+  </div>
+</header>

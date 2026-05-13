@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="0.7.0">
+    <Project NAME="genshintop" VERSION="0.7.1">
     <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat, youthful-ui, rss, sitemap-lastmod</keywords>
     <annotation>Статический сайт GenshinTop (Astro 5): контент src/content/, хабы, /regions/*, /lootbar/*; SEO: sitemap с lastmod из frontmatter/fs, RSS /rss.xml, SearchAction на /guides?q=, optional sameAs; визуал Teyvat для молодёжи; nginx без SPA-fallback на XML.</annotation>
 
@@ -37,7 +37,7 @@
 
     <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
       <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, хабы и /regions/*, кластер /lootbar/*; sitemap с **lastmod** (scripts/sitemap-lastmod.mjs), RSS **/rss.xml**, JSON-LD **SearchAction** на поиск по /guides?q=; UI Teyvat; мета/OG/schema.org; футер; nginx.</purpose>
-      <path>src/, src/lib/elements.ts (elementCardAccentClass), src/pages/rss.xml.ts, scripts/sitemap-lastmod.mjs, src/data/lootbar.ts, src/data/og-manifest.json, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts (matchHubEvents/Tcg/Domains/Bosses/Quests), src/lib/partners.ts, src/lib/character-hub.ts, src/components/RegionPage.astro, src/components/LootBarGlossary.astro, src/content.config.ts, astro.config.mjs (sitemap serialize + lastmod), public/og-default.svg, Dockerfile, deploy/genshintop-redirects.conf, deploy/nginx-docker.conf, deploy/docker-compose.yml, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
+      <path>src/, src/lib/elements.ts (elementCardAccentClass), src/pages/rss.xml.ts, scripts/sitemap-lastmod.mjs, src/data/lootbar.ts, src/data/og-manifest.json, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts (matchHubEvents/Tcg/Domains/Bosses/Quests), src/lib/partners.ts, src/lib/character-hub.ts, src/components/RegionPage.astro, src/components/LootBarGlossary.astro, src/content.config.ts, astro.config.mjs (sitemap serialize + lastmod), public/og-default.svg, Dockerfile, deploy/genshintop-redirects.conf, deploy/nginx-docker.conf, deploy/docker-compose.yml, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml; параллельно каркас PHP: bootstrap.php, public/index.php, lib/PageRenderer.php, lib/Router.php, lib/ContentRepository.php, content/, templates/, public/css/site.css</path>
       <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
       <verification-ref>V-M-WEBSITE</verification-ref>
       <annotations>
