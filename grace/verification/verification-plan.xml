@@ -47,7 +47,7 @@
         <check-12>Статически: страницы регионов и lib/header.php содержат навигацию на /regions</check-12>
         <check-13>Статически: PageRenderer или шаблоны гайда/персонажа выводят связанные персонажи/гайды из frontmatter</check-13>
         <check-14>Статически: lootbar-кластер и editorial-policy используют JSON-LD (Service, AboutPage) через lib/Seo.php</check-14>
-        <check-15>Статически: шаблоны подключают Onest и Cinzel; public/css/site.css — prefers-reduced-motion и компоненты Teyvat</check-15>
+        <check-15>Статически: шаблоны подключают Inter и Onest (кириллица); public/css/site.css — prefers-reduced-motion и светлый wiki-UI (шапка, карточки, баннер LootBar)</check-15>
         <check-16>Статически: в шаблонах нет ссылки alternate на /rss.xml; маршрут RSS отсутствует по контракту</check-16>
         <check-17>Статически: guides/index — поиск ?q= и фильтрация карточек (JS или сервер), согласовано с SearchAction</check-17>
       </module-checks>

@@ -184,14 +184,32 @@ HTML;
         $cardsC = implode('', array_map(fn ($c) => HtmlComponents::characterCard($c), $chars));
         $cardsG = implode('', array_map(fn ($g) => HtmlComponents::guideCatalogCard($g), $guides));
         $slot = <<<HTML
-<section class="hero">
-  <p class="hero-kicker">Гайды · билды · баннеры</p>
-  <h1 class="hero-title">Твой <span class="text-gradient-gold">Teyvat</span> без лишней суеты</h1>
-  <p class="hero-lead">Персонажи, свежие гайды и коды — меньше гуглить, больше играть. Пополнение — <a href="/lootbar" class="link-mint" data-reach-goal="lootbar_home_hero_link">раздел LootBar</a>.</p>
-  <div class="hero-actions"><a class="btn btn-primary" href="/characters">К персонажам</a><a class="btn btn-secondary" href="/guides">К гайдам</a></div>
+<section class="home-hero-wrap" aria-labelledby="home-hero-title">
+  <div class="hero-card">
+    <div class="hero-card-brand"><span class="hero-card-logo" aria-hidden="true">GT</span></div>
+    <div class="hero-card-main">
+      <p class="hero-kicker">Гайды · билды · баннеры</p>
+      <h1 class="hero-title" id="home-hero-title">Твой <span class="hero-title-accent">Teyvat</span> без лишней суеты</h1>
+      <p class="hero-lead">Персонажи, свежие гайды и коды — меньше гуглить, больше играть. Пополнение — <a href="/lootbar" class="link-mint" data-reach-goal="lootbar_home_hero_link">раздел LootBar</a>.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="/characters">К персонажам</a><a class="btn btn-secondary" href="/guides">К гайдам</a></div>
+    </div>
+  </div>
 </section>
-<section class="section"><h2>Персонажи</h2><div class="grid-cards">{$cardsC}</div><p class="section-more"><a href="/characters">Все персонажи →</a></p></section>
-<section class="section"><h2>Свежие гайды</h2><div class="grid-guides">{$cardsG}</div><p class="section-more"><a href="/guides">Все гайды →</a></p></section>
+<p class="site-intro">Добро пожаловать в справочник по Genshin Impact: персонажи, гайды и актуальные материалы на русском — в одном месте.</p>
+<section class="section section-wiki">
+  <h2 class="section-heading"><span class="section-heading-icon" aria-hidden="true">⚔️</span> Персонажи</h2>
+  <p class="section-lead">Карточки стихий и оружия — быстрый переход к странице героя.</p>
+  <h3 class="section-subheading"><span class="section-subheading-bar" aria-hidden="true"></span> Популярное на главной</h3>
+  <div class="grid-cards grid-cards-wiki">{$cardsC}</div>
+  <p class="section-more"><a href="/characters">Все персонажи →</a></p>
+</section>
+<section class="section section-wiki">
+  <h2 class="section-heading"><span class="section-heading-icon" aria-hidden="true">📚</span> Свежие гайды</h2>
+  <p class="section-lead">Недавно обновлённые материалы из каталога.</p>
+  <h3 class="section-subheading"><span class="section-subheading-bar" aria-hidden="true"></span> Подборка для старта</h3>
+  <div class="grid-guides">{$cardsG}</div>
+  <p class="section-more"><a href="/guides">Все гайды →</a></p>
+</section>
 HTML;
         $jsonLd = Seo::jsonLdGraph([
             Seo::publisherOrganization($cfg),

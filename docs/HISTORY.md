@@ -366,3 +366,9 @@
 - **Почему:** пользователь подтвердил уникальность env; типичная причина — переменные окружения shell от первого сайта.
 - **Файлы:** `update-from-github.sh`, `docker/README.md`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.4**.
+
+### Светлый wiki-like UI главной и шаблонов (1.3.5)
+- **Что:** **`public/css/site.css`** переведён на светлую палитру (фон страницы, белые карточки, тени, бирюзовый акцент в духу dandangers.ru): шапка `sticky`, навигация с активным pill, hero-карточка с логотипом **GT**, секции с заголовками и вертикальным акцентом; карточки персонажей и гайдов — горизонтальный блок-превью слева (первая буква имени / две буквы заголовка); баннер LootBar — жёлтая полоска и горизонтальный ряд с иконкой и CTA. **`lib/layout.php`**: шрифты **Inter + Onest**, `theme-color` под светлую тему. Обновлены **`lib/PageRenderer.php`** (разметка `home()`), **`lib/lootbar_banner.php`**, **`lib/HtmlComponents.php`** (карточки). Синхронизированы **`grace/knowledge-graph`**, **`grace/technology`**, **`grace/verification`** (`check-15`), **`docs/AGENTS.md`**, **`VERSION` → 1.3.5**.
+- **Почему:** запрос пользователя — поправить вёрстку и оформление по качественному эталону [Tiles Survive Wiki](https://dandangers.ru/).
+- **Файлы:** `public/css/site.css`, `lib/layout.php`, `lib/PageRenderer.php`, `lib/lootbar_banner.php`, `lib/HtmlComponents.php`, `VERSION`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.5** — визуальный слой без изменения URL и контрактов данных.

@@ -79,11 +79,21 @@ final class HtmlComponents
 
         $excerptBlock = $excerpt !== '' ? '<p class="guide-card-excerpt">' . $excerptEsc . '</p>' : '';
 
+        $thumbLetters = preg_replace('/[^\p{L}\p{N}]/u', '', $title);
+        $thumbLetters = is_string($thumbLetters) ? mb_strtoupper(mb_substr($thumbLetters, 0, 2)) : '';
+        if ($thumbLetters === '') {
+            $thumbLetters = 'GT';
+        }
+        $thumbEsc = Html::e($thumbLetters);
+
         return <<<HTML
 <a href="/guides/{$slugEsc}" class="guide-catalog-card" data-guide-card data-category="{$category}" data-topic="{$topicEsc}" data-status="{$statusEsc}" data-search-haystack="{$haystackEsc}">
-  <div class="guide-card-badges">{$badges}{$timeHtml}</div>
-  <h2 class="guide-card-title">{$titleEsc}</h2>
-  {$excerptBlock}
+  <span class="guide-card-thumb" aria-hidden="true"><span class="guide-card-thumb-inner">{$thumbEsc}</span></span>
+  <div class="guide-card-content">
+    <div class="guide-card-badges">{$badges}{$timeHtml}</div>
+    <h2 class="guide-card-title">{$titleEsc}</h2>
+    {$excerptBlock}
+  </div>
 </a>
 HTML;
     }
@@ -119,8 +129,12 @@ HTML;
             $n = (int) $rarity;
             $stars = '<span class="char-rarity">' . str_repeat('★', max(0, min(5, $n))) . '</span>';
         }
+        $thumbLetterRaw = mb_substr($nameRaw, 0, 1);
+        $thumbLetterEsc = Html::e(mb_strtoupper($thumbLetterRaw));
+
         return <<<HTML
 <a class="card card-character accent-{$elKey}" href="/characters/{$slug}" data-character-card data-element="{$elementAttr}" data-weapon="{$weapon}" data-rarity="{$rarityAttr}" data-name="{$nameSearch}">
+  <span class="char-card-thumb char-card-thumb--{$elKey}" aria-hidden="true">{$thumbLetterEsc}</span>
   <div class="card-body">
     <div class="char-meta"><span class="pill pill-element {$elKey}">{$elementLabel}</span>{$stars}<span class="pill pill-muted">{$weapon}</span></div>
     <h3 class="card-title">{$nameEsc}</h3>

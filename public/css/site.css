@@ -1,25 +1,35 @@
-/* GenshinTop — vanilla layout (PHP stack). Teyvat-inspired palette. */
+/* GenshinTop — vanilla layout (PHP stack). Light wiki-inspired UI (reference: dandangers.ru). */
 
 :root {
-  --bg-deep: #12121f;
-  --bg-panel: rgba(255, 255, 255, 0.04);
-  --border: rgba(255, 255, 255, 0.12);
-  --text: #e8eaf0;
-  --muted: #9aa3b5;
-  --accent: #c9a227;
-  --mint: #69f0ae;
-  --gold: #ffd76a;
-  --danger: #ff6b4a;
-  --pyro: #ff6b4a;
-  --hydro: #4fc3f7;
-  --electro: #b388ff;
-  --cryo: #81d4fa;
-  --anemo: #69f0ae;
-  --geo: #ffd54f;
-  --dendro: #a5d6a7;
+  --bg-page: #f4f6f8;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --text: #0f172a;
+  --text-soft: #334155;
+  --muted: #64748b;
+  --wiki-accent: #0d9488;
+  --wiki-accent-hover: #0f766e;
+  --wiki-accent-soft: rgba(13, 148, 136, 0.12);
+  --wiki-accent-border: rgba(13, 148, 136, 0.35);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 10px 40px rgba(15, 23, 42, 0.07);
   --radius: 14px;
-  --font-sans: "Onest", system-ui, sans-serif;
-  --font-display: "Cinzel", serif;
+  --radius-lg: 18px;
+  --font-sans: "Inter", "Onest", system-ui, sans-serif;
+  --font-display: "Inter", "Onest", system-ui, sans-serif;
+  --accent: #0f766e;
+  --mint: #0d9488;
+  --gold: #ca8a04;
+  --danger: #ea580c;
+  --pyro: #ea580c;
+  --hydro: #0284c7;
+  --electro: #7c3aed;
+  --cryo: #0369a1;
+  --anemo: #059669;
+  --geo: #ca8a04;
+  --dendro: #16a34a;
 }
 
 *,
@@ -37,18 +47,23 @@ body {
   min-height: 100vh;
   font-family: var(--font-sans);
   color: var(--text);
-  background: radial-gradient(ellipse 120% 80% at 50% -10%, #2a2a4a 0%, var(--bg-deep) 45%), var(--bg-deep);
+  background: var(--bg-page);
   line-height: 1.55;
 }
 
 a {
-  color: var(--mint);
+  color: var(--wiki-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
 a:hover {
-  color: var(--gold);
+  color: var(--wiki-accent-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--wiki-accent);
+  outline-offset: 2px;
 }
 
 img {
@@ -56,16 +71,22 @@ img {
   height: auto;
 }
 
+/* ——— Header ——— */
+
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   border-bottom: 1px solid var(--border);
-  background: rgba(10, 10, 20, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 }
 
 .site-header-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0.75rem 1.25rem;
+  padding: 0.65rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -73,16 +94,69 @@ img {
   flex-wrap: wrap;
 }
 
+.site-logo {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  text-decoration: none;
+  color: var(--text);
+  line-height: 1.15;
+}
+
+.site-logo:hover {
+  color: var(--wiki-accent);
+}
+
+.site-logo-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.site-logo-domain {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.site-nav-link {
+  padding: 0.38rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  text-decoration: none;
+}
+
+.site-nav-link:hover {
+  background: var(--surface-2);
+  color: var(--wiki-accent);
+}
+
+.site-nav-link.is-active {
+  background: var(--wiki-accent-soft);
+  color: var(--wiki-accent);
+}
+
 .logo {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.15rem;
-  color: var(--gold);
+  color: var(--wiki-accent);
   text-decoration: none;
 }
 
 .logo:hover {
-  color: var(--accent);
+  color: var(--wiki-accent-hover);
 }
 
 .nav-main {
@@ -93,19 +167,19 @@ img {
 }
 
 .nav-main a {
-  color: var(--text);
+  color: var(--text-soft);
   font-size: 0.92rem;
   text-decoration: none;
 }
 
 .nav-main a:hover {
-  color: var(--mint);
+  color: var(--wiki-accent);
 }
 
 .site-main {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 1.5rem 1.25rem 3.5rem;
 }
 
 .site-footer {
@@ -113,7 +187,7 @@ img {
   padding: 2rem 1.25rem;
   color: var(--muted);
   font-size: 0.88rem;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--surface);
 }
 
 .footer-inner {
@@ -127,7 +201,8 @@ img {
 .footer-brand {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--gold);
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .footer-heading {
@@ -156,55 +231,178 @@ img {
   color: var(--muted);
 }
 
+/* ——— Home hero (wiki card) ——— */
+
+.home-hero-wrap {
+  margin-bottom: 0.25rem;
+}
+
+.hero-card {
+  display: flex;
+  gap: 1.15rem;
+  align-items: flex-start;
+  padding: 1.35rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.hero-card-brand {
+  flex-shrink: 0;
+}
+
+.hero-card-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.35rem;
+  height: 3.35rem;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #14b8a6, #3b82f6);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: -0.04em;
+}
+
+.hero-card-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-card-main .hero-kicker {
+  margin: 0 0 0.35rem;
+}
+
+.hero-card-main .hero-title {
+  margin: 0 0 0.5rem;
+}
+
+.hero-card-main .hero-lead {
+  margin: 0;
+}
+
+.hero-card-main .hero-actions {
+  margin-top: 1.1rem;
+}
+
 .hero {
   padding: 2rem 0 2.5rem;
 }
 
 .hero-kicker {
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 600;
   color: var(--muted);
 }
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 4vw, 2.6rem);
-  margin: 0.5rem 0;
+  font-size: clamp(1.55rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   line-height: 1.15;
+  color: var(--text);
 }
 
+.hero-title-accent,
 .text-gradient-gold {
-  background: linear-gradient(90deg, var(--gold), var(--accent));
+  background: linear-gradient(90deg, #0d9488, #0891b2);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .hero-lead {
-  max-width: 38rem;
+  max-width: 40rem;
   color: var(--muted);
+  font-size: 0.96rem;
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
+  gap: 0.65rem;
 }
+
+.site-intro {
+  margin: 1.35rem 0 0;
+  max-width: 44rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ——— Sections ——— */
 
 .section {
-  margin-top: 2.5rem;
+  margin-top: 2.35rem;
 }
 
-.section h2 {
+.section h2:not(.section-heading) {
   font-family: var(--font-display);
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+  color: var(--text);
+}
+
+.section-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+  color: var(--wiki-accent);
+  margin: 0 0 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  letter-spacing: -0.02em;
+}
+
+.section-heading-icon {
+  font-size: 1.15em;
+  line-height: 1;
+}
+
+.section-lead {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.section-subheading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.65rem;
+}
+
+.section-subheading-bar {
+  width: 4px;
+  height: 1.05em;
+  border-radius: 2px;
+  background: var(--wiki-accent);
+  flex-shrink: 0;
 }
 
 .section-more {
   margin-top: 1rem;
+}
+
+.section-more a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.section-more a:hover {
+  text-decoration: underline;
 }
 
 .grid-cards {
@@ -213,69 +411,110 @@ img {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
 
+.grid-cards-wiki {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 232px), 1fr));
+}
+
 .grid-guides {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+@media (min-width: 880px) {
+  .grid-guides {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .card,
 .guide-catalog-card {
-  display: block;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: var(--bg-panel);
+  background: var(--surface);
   text-decoration: none;
   color: inherit;
   transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .card:hover,
 .guide-catalog-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(201, 162, 39, 0.45);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  border-color: var(--wiki-accent-border);
+  box-shadow: 0 12px 36px rgba(13, 148, 136, 0.12);
 }
 
 .card-character {
-  border-left-width: 4px;
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  border-left: none;
 }
 
-.accent-pyro {
-  border-left-color: var(--pyro);
+.char-card-thumb {
+  flex: 0 0 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
 }
 
-.accent-hydro {
-  border-left-color: var(--hydro);
+.char-card-thumb--pyro {
+  background: linear-gradient(160deg, #fb923c, #ea580c);
 }
 
-.accent-electro {
-  border-left-color: var(--electro);
+.char-card-thumb--hydro {
+  background: linear-gradient(160deg, #38bdf8, #0284c7);
 }
 
-.accent-cryo {
-  border-left-color: var(--cryo);
+.char-card-thumb--electro {
+  background: linear-gradient(160deg, #a78bfa, #7c3aed);
 }
 
-.accent-anemo {
-  border-left-color: var(--anemo);
+.char-card-thumb--cryo {
+  background: linear-gradient(160deg, #7dd3fc, #0369a1);
 }
 
-.accent-geo {
-  border-left-color: var(--geo);
+.char-card-thumb--anemo {
+  background: linear-gradient(160deg, #34d399, #0d9488);
 }
 
+.char-card-thumb--geo {
+  background: linear-gradient(160deg, #fcd34d, #ca8a04);
+}
+
+.char-card-thumb--dendro {
+  background: linear-gradient(160deg, #86efac, #16a34a);
+}
+
+.accent-pyro,
+.accent-hydro,
+.accent-electro,
+.accent-cryo,
+.accent-anemo,
+.accent-geo,
 .accent-dendro {
-  border-left-color: var(--dendro);
+  border-left: none;
 }
 
 .card-body {
-  padding: 1rem 1.1rem;
+  flex: 1;
+  padding: 0.85rem 1rem;
+  min-width: 0;
 }
 
 .card-title {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
 }
 
 .char-meta {
@@ -283,7 +522,7 @@ img {
   flex-wrap: wrap;
   gap: 0.35rem;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 
 .char-rarity {
@@ -298,47 +537,49 @@ img {
   border-radius: 999px;
   font-size: 0.72rem;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--surface-2);
+  color: var(--text-soft);
 }
 
 .pill-element.pyro {
-  border-color: rgba(255, 107, 74, 0.45);
-  color: #ffb39a;
+  border-color: rgba(234, 88, 12, 0.35);
+  color: #c2410c;
 }
 
 .pill-element.hydro {
-  border-color: rgba(79, 195, 247, 0.45);
-  color: #b3e9ff;
+  border-color: rgba(2, 132, 199, 0.35);
+  color: #0369a1;
 }
 
 .pill-element.electro {
-  border-color: rgba(179, 136, 255, 0.45);
-  color: #ddd0ff;
+  border-color: rgba(124, 58, 237, 0.35);
+  color: #6d28d9;
 }
 
 .pill-element.cryo {
-  border-color: rgba(129, 212, 250, 0.45);
-  color: #cfefff;
+  border-color: rgba(3, 105, 161, 0.35);
+  color: #075985;
 }
 
 .pill-element.anemo {
-  border-color: rgba(105, 240, 174, 0.45);
-  color: #c7ffe5;
+  border-color: rgba(5, 150, 105, 0.35);
+  color: #047857;
 }
 
 .pill-element.geo {
-  border-color: rgba(255, 213, 79, 0.45);
-  color: #ffe9a5;
+  border-color: rgba(202, 138, 4, 0.35);
+  color: #a16207;
 }
 
 .pill-element.dendro {
-  border-color: rgba(165, 214, 167, 0.45);
-  color: #dcf5dd;
+  border-color: rgba(22, 163, 74, 0.35);
+  color: #15803d;
 }
 
 .pill-mint {
-  border-color: rgba(105, 240, 174, 0.35);
-  color: var(--mint);
+  border-color: var(--wiki-accent-border);
+  color: var(--wiki-accent);
+  background: var(--wiki-accent-soft);
 }
 
 .pill-muted {
@@ -346,12 +587,38 @@ img {
 }
 
 .pill-gold {
-  border-color: rgba(255, 215, 106, 0.35);
-  color: var(--gold);
+  border-color: rgba(202, 138, 4, 0.35);
+  color: #a16207;
+  background: rgba(254, 243, 199, 0.45);
 }
 
 .guide-catalog-card {
-  padding: 1rem 1.1rem;
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+}
+
+.guide-card-thumb {
+  flex: 0 0 3.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #14b8a6, #3b82f6);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.guide-card-thumb-inner {
+  line-height: 1;
+}
+
+.guide-card-content {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  min-width: 0;
 }
 
 .guide-card-badges {
@@ -359,18 +626,22 @@ img {
   flex-wrap: wrap;
   gap: 0.35rem;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 
 .guide-card-title {
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
 }
 
 .guide-card-excerpt {
-  margin: 0.5rem 0 0;
-  font-size: 0.88rem;
+  margin: 0.45rem 0 0;
+  font-size: 0.875rem;
   color: var(--muted);
+  line-height: 1.45;
 }
 
 .guide-card-time {
@@ -383,7 +654,7 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.55rem 1.2rem;
+  padding: 0.55rem 1.15rem;
   border-radius: 999px;
   font-weight: 600;
   font-size: 0.88rem;
@@ -393,25 +664,36 @@ img {
 }
 
 .btn-primary {
-  background: linear-gradient(120deg, rgba(201, 162, 39, 0.35), rgba(105, 240, 174, 0.18));
-  border-color: rgba(201, 162, 39, 0.45);
-  color: var(--gold);
+  background: var(--wiki-accent);
+  border-color: var(--wiki-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--wiki-accent-hover);
+  border-color: var(--wiki-accent-hover);
+  color: #fff;
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--border);
-  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text-soft);
+}
+
+.btn-secondary:hover {
+  border-color: var(--wiki-accent);
+  color: var(--wiki-accent);
 }
 
 .btn-lootbar {
-  background: linear-gradient(120deg, rgba(255, 107, 74, 0.35), rgba(105, 240, 174, 0.15));
-  border-color: rgba(105, 240, 174, 0.35);
-  color: var(--mint);
+  background: linear-gradient(120deg, rgba(234, 88, 12, 0.12), rgba(13, 148, 136, 0.12));
+  border-color: var(--wiki-accent-border);
+  color: var(--wiki-accent);
 }
 
 .link-mint {
-  color: var(--mint);
+  color: var(--wiki-accent);
   font-weight: 600;
 }
 
@@ -433,13 +715,14 @@ img {
   padding: 1rem 1.25rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--surface-2);
 }
 
 .callout h2 {
   margin-top: 0;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.08rem;
+  font-weight: 700;
 }
 
 .hub-links a {
@@ -463,7 +746,9 @@ img {
 
 .article-head h1 {
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.55rem, 3vw, 2.05rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
   margin: 0.25rem 0 0;
 }
 
@@ -474,12 +759,27 @@ img {
   margin-bottom: 1rem;
 }
 
+.related-block {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.related-block h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--wiki-accent);
+  margin: 0 0 0.65rem;
+}
+
 .prose-flow .prose {
   margin-top: 1.25rem;
 }
 
 .prose :where(h1, h2, h3, h4) {
   font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
   margin-top: 1.5rem;
 }
 
@@ -487,11 +787,27 @@ img {
   overflow-x: auto;
   padding: 1rem;
   border-radius: 10px;
-  background: rgba(0, 0, 0, 0.35);
+  background: #1e293b;
+  color: #e2e8f0;
+  border: 1px solid var(--border-strong);
+}
+
+.prose code {
+  font-size: 0.9em;
+  padding: 0.12rem 0.35rem;
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: #0f172a;
+}
+
+.prose pre code {
+  padding: 0;
+  background: none;
+  color: inherit;
 }
 
 .prose blockquote {
-  border-left: 3px solid rgba(201, 162, 39, 0.55);
+  border-left: 3px solid var(--wiki-accent);
   margin-left: 0;
   padding-left: 1rem;
   color: var(--muted);
@@ -510,7 +826,13 @@ img {
   border: 1px solid var(--border);
   font-size: 0.82rem;
   text-decoration: none;
-  color: var(--text);
+  color: var(--text-soft);
+  background: var(--surface);
+}
+
+.pill-link:hover {
+  border-color: var(--wiki-accent-border);
+  color: var(--wiki-accent);
 }
 
 .meta-reviewed {
@@ -555,7 +877,7 @@ img {
   padding: 0.55rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface);
   color: var(--text);
 }
 
@@ -580,17 +902,22 @@ img {
 .filter-pill {
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--text);
+  background: var(--surface);
+  color: var(--text-soft);
   padding: 0.35rem 0.75rem;
   font-size: 0.82rem;
   cursor: pointer;
 }
 
+.filter-pill:hover {
+  border-color: var(--wiki-accent-border);
+  color: var(--wiki-accent);
+}
+
 .filter-pill.is-active {
-  border-color: rgba(201, 162, 39, 0.55);
-  background: rgba(201, 162, 39, 0.14);
-  color: var(--gold);
+  border-color: var(--wiki-accent-border);
+  background: var(--wiki-accent-soft);
+  color: var(--wiki-accent);
 }
 
 .catalog-count {
@@ -628,7 +955,7 @@ img {
   padding: 0.45rem 0.65rem;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface);
   color: var(--text);
 }
 
@@ -641,16 +968,77 @@ img {
   font-size: 0.85rem;
 }
 
+/* ——— LootBar promo strip ——— */
+
 .lootbar-banner {
-  background: linear-gradient(90deg, rgba(255, 107, 74, 0.15), rgba(105, 240, 174, 0.08));
-  border-bottom: 1px solid var(--border);
+  background: #fffbeb;
+  border-bottom: 1px solid #fcd34d;
 }
 
 .lootbar-banner-inner {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0.65rem 1.25rem;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1rem;
+}
+
+.lootbar-banner-icon {
+  font-size: 1.65rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.lootbar-banner-copy {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.lootbar-banner-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #b45309;
+  background: rgba(251, 191, 36, 0.35);
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+}
+
+.lootbar-banner-text {
+  margin: 0.35rem 0 0;
   font-size: 0.88rem;
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
+.lootbar-banner-link {
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.lootbar-banner-cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-decoration: none;
+  background: var(--wiki-accent);
+  color: #fff;
+  border: 1px solid var(--wiki-accent);
+}
+
+.lootbar-banner-cta:hover {
+  background: var(--wiki-accent-hover);
+  border-color: var(--wiki-accent-hover);
+  color: #fff;
 }
 
 .back-link {

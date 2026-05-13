@@ -24,7 +24,7 @@
 
 ### Модули (GRACE)
 
-- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`**, **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе через **`docker/Dockerfile`**). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
+- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`** (светлый wiki-like UI, бирюзовый акцент), **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе через **`docker/Dockerfile`**). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
 
 ### Гайды: таксономия и frontmatter
 
@@ -149,7 +149,7 @@ lib/
 content/
   guides/, characters/  - Канонический Markdown
 public/
-  css/site.css          - Ванильный CSS
+  css/site.css          - Ванильный CSS (светлый wiki-like UI)
   robots.txt, favicon, og/** (PNG при необходимости)
 docker/
   Dockerfile, docker-compose.yml, nginx-default.conf, supervisord.conf, docker-entrypoint.sh
