@@ -372,3 +372,9 @@
 - **Почему:** запрос пользователя — поправить вёрстку и оформление по качественному эталону [Tiles Survive Wiki](https://dandangers.ru/).
 - **Файлы:** `public/css/site.css`, `lib/layout.php`, `lib/PageRenderer.php`, `lib/lootbar_banner.php`, `lib/HtmlComponents.php`, `VERSION`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.5** — визуальный слой без изменения URL и контрактов данных.
+
+### update-from-github.sh: COMPOSE_FILE и set -u (1.3.6)
+- **Что:** в **`compose_run`** путь к compose сохраняется в **`compose_path`** до **`unset COMPOSE_FILE`**; для **`docker compose -f`** используется **`$compose_path`**, чтобы при **`set -u`** не было ошибки «COMPOSE_FILE: unbound variable» после unset.
+- **Почему:** отчёт с прод-сервера: **`docker compose pull`** падал на строке с unset/unbound **`COMPOSE_FILE`**.
+- **Файлы:** `update-from-github.sh`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.6**.
