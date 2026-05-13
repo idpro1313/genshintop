@@ -1124,6 +1124,7 @@ HTML;
 <section class="callout">
   <h2>Подстраницы</h2>
   <ul class="link-list">
+    <li><a href="/lootbar/skidki-i-kupony">Скидки и купоны</a> — выгодные цены и промокоды</li>
     <li><a href="/lootbar/kak-popolnit-genshin-impact">Как пополнить</a></li>
     <li><a href="/lootbar/promokod">Промокод</a></li>
     <li><a href="/lootbar/kristally-sotvoreniya">Кристаллы Сотворения</a></li>
@@ -1154,6 +1155,10 @@ HTML;
     /** @return array<string,mixed>|null */
     public static function lootbarSubpage(array $cfg, string $slug): ?array
     {
+        if ($slug === 'skidki-i-kupony') {
+            return self::lootbarDiscountsLanding($cfg);
+        }
+
         $pages = [
             'kak-popolnit-genshin-impact' => [
                 'title' => 'Как пополнить Genshin Impact через LootBar.gg — пошаговый топ-ап',
@@ -1223,6 +1228,136 @@ HTML;
         return [
             'pageTitle' => $p['title'],
             'pageDescription' => $p['description'],
+            'canonicalPath' => $canonicalPath,
+            'hideLootBarPromo' => true,
+            'slot' => $slot,
+            'jsonLd' => $jsonLd,
+        ];
+    }
+
+    /**
+     * Страница уровня dandangers.ru/lootbar-discounts.html — цены, купоны, шаги (Genshin Impact).
+     *
+     * @param array<string,mixed> $cfg
+     *
+     * @return array<string,mixed>
+     */
+    private static function lootbarDiscountsLanding(array $cfg): array
+    {
+        $canonicalPath = '/lootbar/skidki-i-kupony';
+        $topupUrl = Partners::lootbarGenshinTopupUrl('lootbar_discounts');
+        $outUrl = Html::e($topupUrl);
+        $pageTitle = 'Выгодные цены на Genshin Impact — скидки до 32% и купоны LootBar';
+        $pageDescription = 'Партнёрский топ-ап Genshin Impact на LootBar.gg: скидки до 32%, купоны 6% и 10% для новых пользователей, как получить промокод и безопасно пополнить аккаунт.';
+        $h1 = 'Самые выгодные цены на топ-ап Genshin Impact';
+
+        $faqs = [
+            ['question' => 'Как долго действуют купоны LootBar?', 'answer' => 'Срок и лимиты отображаются в вашем профиле на LootBar.gg после регистрации по партнёрской ссылке — обычно это ограниченное окно (несколько дней). Уточняйте на стороне сервиса перед оплатой.'],
+            ['question' => 'Можно ли использовать оба купона — 6% и 10%?', 'answer' => 'Как правило, каждый купон можно применить к отдельной покупке согласно правилам LootBar. Точные условия указаны в кабинете пользователя.'],
+            ['question' => 'LootBar — официальный магазин HoYoverse?', 'answer' => 'Нет. LootBar.gg — сторонний сервис пополнения. Официальные покупки — в клиенте Genshin Impact и у HoYoverse.'],
+            ['question' => 'Это безопасно?', 'answer' => 'Используйте только домен lootbar.gg, не передавайте пароль от аккаунта и сохраняйте чеки. Подробнее — страница /lootbar/bezopasnost-i-oplata.'],
+            ['question' => 'Где посмотреть актуальные цены на кристаллы и Welkin?', 'answer' => 'Цены и пакеты зависят от региона и акций — откройте витрину Genshin Impact на LootBar.gg по партнёрской ссылке ниже.'],
+        ];
+        $faqSchema = Seo::faqPageSchema($faqs);
+
+        $slot = <<<HTML
+<article class="article prose-flow lootbar-discounts-page">
+<p class="back-link"><a href="/lootbar">← Хаб LootBar</a></p>
+<p class="muted"><a href="/partnership-disclosure">Раскрытие партнёрства</a></p>
+<h1>{$h1}</h1>
+<p class="lead">Покупайте <strong>Genesis Crystals</strong>, <strong>Благословение Полой Луны</strong> и другие пакеты на LootBar — часто выгоднее, чем напрямую в игре. Новые пользователи получают купоны на дополнительную скидку.</p>
+<p><a class="btn btn-lootbar" href="{$outUrl}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_discounts_top_cta">Получить купон на скидку</a></p>
+<hr />
+<h2>LootBar.gg — партнёрский сервис</h2>
+<p>Сервис специализируется на пополнении популярных игр. Для Genshin Impact доступны пакеты кристаллов и подписки. Оплата проходит на стороне LootBar; доставка привязана к вашему UID.</p>
+<p><strong>Важно:</strong> это не официальный магазин HoYoverse. Условия, налоги и доступность способов оплаты зависят от региона.</p>
+<hr />
+<h2>Доступные купоны</h2>
+<p>При регистрации по партнёрской ссылке GenshinTop новые пользователи LootBar могут получить два купона на скидку (конкретные проценты и потолок скидки отображаются в профиле на lootbar.gg):</p>
+<h3>Купон 10% OFF</h3>
+<ul>
+  <li><strong>Условие:</strong> действует для подходящих заказов согласно правилам купона в кабинете LootBar.</li>
+  <li><strong>Срок:</strong> ограниченный период после получения — проверьте таймер в профиле.</li>
+</ul>
+<h3>Купон 6% OFF</h3>
+<ul>
+  <li><strong>Условие:</strong> аналогично правилам сервиса для второго купона.</li>
+  <li><strong>Срок:</strong> смотрите в профиле LootBar.</li>
+</ul>
+<hr />
+<h2>Как получить купоны</h2>
+<ol>
+  <li>Перейдите по нашей партнёрской ссылке на LootBar.gg.</li>
+  <li>Зарегистрируйте аккаунт на платформе (если его ещё нет).</li>
+  <li>Проверьте раздел купонов или профиль — промокоды должны появиться автоматически.</li>
+  <li>Выберите игру <strong>Genshin Impact</strong> и нужный пакет.</li>
+  <li>Примените купон при оформлении заказа.</li>
+</ol>
+<p>Детальная инструкция по полям формы — на странице <a href="/lootbar/kak-popolnit-genshin-impact">Как пополнить Genshin Impact через LootBar</a>.</p>
+<hr />
+<h2>Почему LootBar?</h2>
+<table class="lootbar-benefits-table">
+  <thead><tr><th>Преимущество</th><th>Описание</th></tr></thead>
+  <tbody>
+    <tr><td>🔒 Безопасность</td><td>Платёж проводится у провайдера; не делитесь паролем от аккаунта Genshin.</td></tr>
+    <tr><td>⚡ Доставка</td><td>Пополнение по UID — следуйте подсказкам после оплаты на LootBar.</td></tr>
+    <tr><td>💰 Цены</td><td>Часто ниже витрины в клиенте за счёт акций и купонов.</td></tr>
+    <tr><td>🎧 Поддержка</td><td>Вопросы по заказу — через поддержку LootBar.gg.</td></tr>
+  </tbody>
+</table>
+<hr />
+<h2>Таблица цен</h2>
+<p><strong>Экономия до 32%</strong> — типичный маркетинговый ориентир относительно базовых цен в игре; фактическая выгода зависит от пакета, курса и купона. Актуальные суммы всегда смотрите на витрине после перехода по ссылке.</p>
+<table class="lootbar-benefits-table">
+  <thead><tr><th>Категория</th><th>Что купить</th></tr></thead>
+  <tbody>
+    <tr><td>💎 Кристаллы</td><td>Пакеты Genesis Crystals разного объёма.</td></tr>
+    <tr><td>🌙 Подписка</td><td>Благословение Полой Луны (Welkin).</td></tr>
+    <tr><td>🎁 Наборы</td><td>Сезонные и промо-предложения на странице игры на LootBar.</td></tr>
+  </tbody>
+</table>
+<hr />
+<h2>Частые вопросы</h2>
+<dl class="faq-dl">
+  <dt>Как долго действуют купоны?</dt>
+  <dd>Срок указан в профиле LootBar после получения купона.</dd>
+  <dt>Можно ли использовать оба купона?</dt>
+  <dd>Обычно каждый купон применяется к отдельной покупке по правилам сервиса.</dd>
+  <dt>Минимальная сумма заказа?</dt>
+  <dd>Зависит от условий конкретного купона на LootBar.gg.</dd>
+  <dt>Это безопасно?</dt>
+  <dd>Используйте официальный домен lootbar.gg и инструкции сервиса; см. также <a href="/lootbar/bezopasnost-i-oplata">безопасность и оплату</a>.</dd>
+</dl>
+<hr />
+<h2>Готовы получить скидку?</h2>
+<p><a class="btn btn-lootbar" href="{$outUrl}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_discounts_bottom_cta">Перейти на LootBar.gg</a></p>
+<p class="muted"><a href="/lootbar/kak-popolnit-genshin-impact">Инструкция по пополнению →</a></p>
+</article>
+HTML;
+
+        $url = Seo::absoluteUrl($cfg, $canonicalPath);
+        $jsonLd = Seo::jsonLdGraph([
+            Seo::publisherOrganization($cfg),
+            Seo::webSiteNode($cfg),
+            Seo::breadcrumbListSchema($cfg, [
+                ['label' => 'Главная', 'href' => '/'],
+                ['label' => 'LootBar', 'href' => '/lootbar'],
+                ['label' => 'Скидки и купоны', 'href' => $canonicalPath],
+            ]),
+            [
+                '@type' => 'WebPage',
+                '@id' => $url . '#webpage',
+                'name' => $pageTitle,
+                'url' => $url,
+                'description' => $pageDescription,
+                'isPartOf' => ['@id' => Seo::siteUrl($cfg) . '/#website'],
+            ],
+            $faqSchema,
+        ]);
+
+        return [
+            'pageTitle' => $pageTitle . ' — GenshinTop',
+            'pageDescription' => $pageDescription,
             'canonicalPath' => $canonicalPath,
             'hideLootBarPromo' => true,
             'slot' => $slot,

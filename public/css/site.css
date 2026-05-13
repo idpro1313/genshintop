@@ -1094,6 +1094,43 @@ img {
   }
 }
 
+/* ——— LootBar: лендинг скидок (как lootbar-discounts.html) ——— */
+
+.lootbar-discounts-page hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.75rem 0;
+}
+
+.lootbar-benefits-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.lootbar-benefits-table th,
+.lootbar-benefits-table td {
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.lootbar-benefits-table thead th {
+  background: var(--surface-2);
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.lootbar-benefits-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
 .back-link {
   font-size: 0.88rem;
 }

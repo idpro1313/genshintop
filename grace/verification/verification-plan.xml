@@ -22,7 +22,7 @@
 
     <VF-002 NAME="LootBarAffiliateRoute" USE_CASES="UC-003" DATA_FLOW="DF-LOOTBAR-AFFILIATE" PRIORITY="medium">
       <scenario>Пользователь переходит из сайта в партнёрский топ-ап LootBar</scenario>
-      <expected-outcome>/lootbar и дочерние URL доступны; внешние CTA используют aff_short=dandnagers и sponsored rel; reachGoal на кликах (хаб: lootbar_hero_cta, lootbar_coupon_*, lootbar_table_cta, lootbar_calc_cta, lootbar_bottom_*; баннер: lootbar_banner_click, lootbar_banner_hub_link; тематические CTA сохранены)</expected-outcome>
+      <expected-outcome>/lootbar и дочерние URL доступны (включая /lootbar/skidki-i-kupony); внешние CTA используют aff_short=dandnagers и sponsored rel; reachGoal на кликах (хаб: lootbar_hero_cta; баннер: lootbar_banner_discounts_page, lootbar_banner_hub_link; страница скидок: lootbar_discounts_top_cta, lootbar_discounts_bottom_cta; подстраницы: lootbar_sub_cta и др.; тематические CTA сохранены)</expected-outcome>
       <required-signals>
         <log-marker>[StaticCheck] lootbar affiliate links present</log-marker>
       </required-signals>

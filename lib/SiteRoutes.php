@@ -52,6 +52,7 @@ final class SiteRoutes
             '/lootbar/promokod',
             '/lootbar/kak-popolnit-genshin-impact',
             '/lootbar/bezopasnost-i-oplata',
+            '/lootbar/skidki-i-kupony',
         ];
     }
 

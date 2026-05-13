@@ -384,3 +384,9 @@
 - **Почему:** запрос пользователя — такой же привлекательный промо-баннер, как на [dandangers.ru](https://dandangers.ru/).
 - **Файлы:** `lib/lootbar_banner.php`, `public/css/site.css`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.7** — текст промо по образцу вики; проценты/купоны при необходимости синхронизировать с актуальными условиями LootBar.
+
+### Страница /lootbar/skidki-i-kupony и баннер на неё (1.3.8)
+- **Что:** добавлен лендинг **`/lootbar/skidki-i-kupony`** по образцу [lootbar-discounts на dandangers.ru](https://dandangers.ru/lootbar-discounts.html): блоки про купоны 10%/6%, шаги получения, таблица преимуществ, FAQ и партнёрские CTA (`lootbar_discounts_*`). **`lib/lootbar_banner.php`** — кнопка «Подробнее» ведёт на эту страницу (`lootbar_banner_discounts_page`). **`lib/SiteRoutes.php`** — маршрут в sitemap; хаб **`/lootbar`** — пункт «Скидки и купоны». **`public/css/site.css`** — таблицы `.lootbar-benefits-table`. Обновлён VF-002 в **`grace/verification`**.
+- **Почему:** запрос пользователя — чтобы баннер вёл на такую же по смыслу страницу, как у dandangers.
+- **Файлы:** `lib/PageRenderer.php`, `lib/lootbar_banner.php`, `lib/SiteRoutes.php`, `public/css/site.css`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.8** — точные рублёвые строки как у другой игры не копировались; акцент на актуальные цены на LootBar.gg и локальной инструкции.
