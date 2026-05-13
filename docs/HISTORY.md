@@ -452,3 +452,9 @@
 - **Почему:** запрос пользователя сделать с персонажами **«так же»**, как с опорным корпусом гайдов — единый редакционный контур.
 - **Файлы:** `info/characters/*.md`, `info/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.6.3** — дублирование контента намеренное для редакции; **`content/characters/`** в этом коммите не менялся (уже совпадает с копией).
+
+### Волна расширения опорного корпуса: +8 гайдов (1.6.4)
+- **Что:** в **`info/guides/`** и **`content/guides/`** добавлены **8** статей волны 4 (криты, бонус стихии и резисты, магазин блеска и звёздного блеска, сюжетные ключи и легенды, порядок слотов отряда и снимок бафов, компас сокровищ, кодекс противников, растворитель снов и конвертация материалов боссов). Обновлены **`docker/genshintop-redirects.conf`** (whitelist новых slug), **`info/README.md`** (волна 4, итого **45** статей), **`VERSION` → 1.6.4**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя **«следующая волна»** опорных гайдов после волны 3.
+- **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.6.4** — только новые гайды, редиректы и метаданные версии.

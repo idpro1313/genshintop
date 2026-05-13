@@ -84,6 +84,21 @@
 
 **Итого:** 37 статей в `info/guides/` и `content/guides/`.
 
+### Волна 4 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| party | `krit-shans-i-krit-uron-baza` | Шанс и урон крита, ориентир 1:2 |
+| party | `bonus-stihii-i-soprotivleniya-vragov` | Бонус стихии, физический урон, резисты |
+| economy | `magazin-bleska-prioritety-zvezdnogo` | Магазин звёздного блеска и блеска |
+| newbie | `syuzhetnye-klyuchi-i-zadaniya-legend` | Сюжетные ключи и легенды |
+| party | `poryadok-slota-otryada-i-snimok` | Слоты отряда и снимок бафов |
+| newbie | `kompas-sokrovishch-i-poiski-sundukov` | Компас сокровищ и сундуки |
+| party | `kodeks-protivnikov-kak-chitat` | Кодекс противников перед боем |
+| economy / прокачка | `rastvoritel-snov-i-materialy-bossov` | Растворитель снов и материалы боссов |
+
+**Итого:** 45 статей в `info/guides/` и `content/guides/`.
+
 ## Персонажи
 
 Каталог `info/characters/` — зеркало всех карточек из [`content/characters/`](../content/characters). Редактируйте здесь (или добавляйте новые `*.md`), затем копируйте в `content/characters/` тем же способом, что гайды из `info/guides/` → `content/guides/`.
