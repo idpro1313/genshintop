@@ -54,7 +54,7 @@
 
     <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" LAYER="1" ORDER="3" STATUS="implemented">
       <contract>
-        <purpose>Редакционные стандарты и playbook для info/guides/, info/characters/: docs/GUIDE_EDITORIAL.md, CHARACTER_EDITORIAL.md, guides-refactor-waves.md, GUIDES_MERGE_SPLIT.md; смена slug через docker/genshintop-redirects.conf; опционально локальный архив content/ (не в git). Автоматические скрипты и каталог reports/ из репозитория удалены.</purpose>
+        <purpose>Редакционные стандарты для info/guides/, info/characters/: docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md; смена slug через docker/genshintop-redirects.conf; опционально локальный архив content/ (не в git). Плановые MD «волн» и merge/split playbook удалены как устаревшие.</purpose>
         <inputs>
           <param name="guides_md" type="markdown-glob" />
           <param name="characters_md" type="markdown-glob" />
@@ -68,14 +68,12 @@
         </errors>
       </contract>
       <interface>
-        <export-editorial-playbook PURPOSE="docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md — ручная ИА и merge/split" />
+        <export-editorial-playbook PURPOSE="docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md — ручная редакция; merge/split и 301 в nginx-snippet" />
       </interface>
       <depends>M-PHP-SITE</depends>
       <target>
         <source>docs/GUIDE_EDITORIAL.md</source>
         <source>docs/CHARACTER_EDITORIAL.md</source>
-        <source>docs/guides-refactor-waves.md</source>
-        <source>docs/GUIDES_MERGE_SPLIT.md</source>
         <source>docker/genshintop-redirects.conf</source>
       </target>
       <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
@@ -155,8 +153,8 @@
     </Phase-5>
 
     <Phase-6 name="GuideCorpusEditorialRefactor" status="in-progress">
-      <goal>Единый редакционный стандарт гайдов, ручной playbook волн W0–W3, редиректы при смене slug</goal>
-      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, guides-refactor-waves.md, GUIDES_MERGE_SPLIT.md; W0 cornerstone; W1/W2 дубли banner-* и патчи — вручную + 301 в nginx; W3 general и кириллические slug; без скриптов inventory/wave в репозитории</step-1>
+      <goal>Единый редакционный стандарт гайдов и персонажей; ручные правки корпуса; редиректы при смене slug</goal>
+      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md; merge/split и обновление ссылок вручную; 301 в docker/genshintop-redirects.conf; без скриптов inventory/wave в репозитории</step-1>
     </Phase-6>
 
     <!-- Phases use unique tags:

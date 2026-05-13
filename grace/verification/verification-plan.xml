@@ -63,7 +63,7 @@
       <test-files />
       <module-checks>
         <check-1>Статически: в репозитории отсутствуют каталоги scripts/ и reports/</check-1>
-        <check-2>Статически: docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md не ссылаются на удалённые скрипты инвентаризации или wave-w1</check-2>
+        <check-2>Статически: docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md не ссылаются на удалённые скрипты инвентаризации или wave-w1 и не ссылаются на удалённые плановые MD (волны / merge-split)</check-2>
         <check-3>Статически: docker/genshintop-redirects.conf присутствует и допускает строки rewrite для смены slug гайдов</check-3>
       </module-checks>
       <scenarios>

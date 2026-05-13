@@ -558,3 +558,9 @@
 - **Почему:** запрос пользователя — папки **`reports`** и **`scripts`** больше не нужны.
 - **Файлы:** удалён **`scripts/**`**; `.gitignore`, перечисленные docs и grace, `VERSION`, `info/README.md`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.12.0** — снятие редакционной автоматизации из репозитория без изменения рантайма PHP-сайта.
+
+### Удаление устаревших плановых MD в docs/ (1.12.1)
+- **Что:** удалены **`docs/guides-refactor-waves.md`** и **`docs/GUIDES_MERGE_SPLIT.md`**. Краткие инструкции по смене slug в **`docs/GUIDE_EDITORIAL.md`**. Обновлены **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/plan/development-plan.xml`**, **`grace/requirements/requirements.xml`**, **`grace/verification/verification-plan.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.12.1**.
+- **Почему:** запрос пользователя — убрать старые «плановые» markdown-документы из **`docs/`** после перехода на ручную редакцию без волнового playbook.
+- **Файлы:** удалены `docs/guides-refactor-waves.md`, `docs/GUIDES_MERGE_SPLIT.md`; правки в `docs/GUIDE_EDITORIAL.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/verification/verification-plan.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.12.1** — живущий контракт редакции только **`GUIDE_EDITORIAL`** + **`CHARACTER_EDITORIAL`** и **`info/README.md`** (матрица ИА).

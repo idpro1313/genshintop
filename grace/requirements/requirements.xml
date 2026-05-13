@@ -97,7 +97,7 @@
 
     <UC-009>
       <Actor>Редактор / агент</Actor>
-      <Action>Выполняет редакционный рефакторинг корпуса (архив content/guides-archive, живые статьи info/guides) по docs/GUIDE_EDITORIAL.md и волнам docs/guides-refactor-waves.md</Action>
+      <Action>Выполняет редакционный рефакторинг корпуса (архив content/guides-archive при необходимости, живые статьи info/guides) по docs/GUIDE_EDITORIAL.md</Action>
       <Goal>Связная проза, корректная разметка, актуальный frontmatter; при ИА — merge/split и 301 в docker/genshintop-redirects.conf</Goal>
       <Preconditions>При необходимости локальный архив content/guides-archive для сверки старых slug</Preconditions>
       <AcceptanceCriteria>Нет «лесенки» и битых якорей в отредактированных статьях; relatedGuides указывают на существующие slug; редиректы добавлены при удалении или переименовании slug</AcceptanceCriteria>

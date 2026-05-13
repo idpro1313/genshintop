@@ -31,10 +31,9 @@
 ## Внутренние ссылки
 
 - Использовать относительные URL сайта: `/guides/...`, `/characters/...`, `/guides/banners` и т.д.
-- При переименовании файла (slug) — см. [`docs/GUIDES_MERGE_SPLIT.md`](GUIDES_MERGE_SPLIT.md): редирект и обновление `relatedGuides`.
+- При переименовании файла (slug): добавить **`rewrite … permanent`** (301) в **`docker/genshintop-redirects.conf`**, обновить ссылки **`/guides/…`** в **`info/guides/**`** и **`info/characters/**`**, поле **`relatedGuides`** в затронутых статьях.
 
 ## Связанные документы
 
-- [Слияние и разбиение статей, редиректы](GUIDES_MERGE_SPLIT.md)
-- [Волны массовой редакции и критерии готовности](guides-refactor-waves.md)
 - Семантическая карта: [`docs/AGENTS.md`](AGENTS.md)
+- Карточки персонажей: [`docs/CHARACTER_EDITORIAL.md`](CHARACTER_EDITORIAL.md)
