@@ -44,7 +44,7 @@ Akademiya (Академия Сумеру) — научная и политиче
 ## Связанные материалы
 
 - [Сумеру](/world/regions/sumeru)
-- [Герои Сумеру](/characters/_by-region/sumeru)
+- [Каталог героев](/characters)
 - [Нахида](/characters/nahida)
 
 ## Источники

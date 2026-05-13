@@ -49,7 +49,7 @@ related:
 ## Связанные материалы
 
 - [Натлан](/world/regions/natlan)
-- [Герои Натлана](/characters/_by-region/natlan)
+- [Каталог героев](/characters)
 - [Sauroform Tribal Warrior — common враг](/enemies/common/sauroform-tribal-warrior)
 
 ## Источники

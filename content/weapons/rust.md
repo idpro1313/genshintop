@@ -18,7 +18,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Rust", title: "Rust — Wiki", accessed: "2026-05-13"}
 related:
   - /characters/yoimiya
-  - /characters/_by-weapon/bow
+  - /characters/bow
 ---
 
 Rust — лучший 4★ лук для DPS, чей урон в обычных автоатаках (без прицельных).

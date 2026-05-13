@@ -19,7 +19,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Staff_of_Homa", title: "Staff of Homa — Wiki", accessed: "2026-05-13"}
 related:
   - /characters/hu-tao
-  - /characters/_by-weapon/polearm
+  - /characters/polearm
 ---
 
 Посох Хомы — флагманское древковое 5★ для героев, чей урон масштабируется по HP (Ху Тао) или по атаке (Сяо).
@@ -53,7 +53,7 @@ related:
 ## Связанные материалы
 
 - [Ху Тао — карточка](/characters/hu-tao)
-- [Древковое оружие](/weapons/_by-type/polearm)
+- [Каталог оружия](/weapons)
 - [Опорный гайд по молитвам](/news/banners/evergreen-prayer-guide)
 
 ## Источники

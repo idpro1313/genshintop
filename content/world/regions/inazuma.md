@@ -17,7 +17,7 @@ sources:
 related:
   - /world/factions/shogunate
   - /world/factions/tri-commission
-  - /characters/_by-region/inazuma
+  - /characters
 ---
 
 Инадзума — третий регион. Стихия — Электро. Архонт — Райдэн Эи (Сёгун). Идея — Вечность, изоляция, Хокуса́й-эстетика.
@@ -50,7 +50,7 @@ related:
 ## Связанные материалы
 
 - [Сёгунат](/world/factions/shogunate)
-- [Герои Инадзумы](/characters/_by-region/inazuma)
+- [Каталог героев](/characters)
 
 ## Источники
 

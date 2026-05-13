@@ -46,7 +46,7 @@ related:
 ## Связанные материалы
 
 - [Фонтейн](/world/regions/fontaine)
-- [Герои Фонтейна](/characters/_by-region/fontaine)
+- [Каталог героев](/characters)
 - [Marechaussee Hunter — артефакты](/artifacts/marechaussee-hunter)
 
 ## Источники

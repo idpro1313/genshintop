@@ -10,19 +10,13 @@ updatedAt: 2026-05-13
 
 Раздел отвечает PLAN-блоку «События и Обновления».
 
-## Подкаталоги
+## Что в подразделах
 
-- [`events/`](events/) — текущие и прошедшие ивенты.
-- [`announcements/`](announcements/) — анонсы, стримы разработчиков, дорожные карты.
-- [`banners/`](banners/) — молитвы (события и стандарт), хабы по типам, опорный гайд.
-- [`patches/`](patches/) — патчноуты по версиям 1.0–6.x.
-
-## Стандарты
-
-- Шаблоны: [`banner.md`](../_templates/banner.md), [`patch.md`](../_templates/patch.md).
-- В банн́ерах поле `bannerType: character-event | weapon-event | standard | chronicled`.
-- В патчах — `version`, `releaseDate`, `name`, `newCharacters[]`.
+- [Ивенты](/news/events) — текущие и прошедшие игровые мероприятия.
+- [Анонсы](/news/announcements) — стримы разработчиков, дорожные карты, обслуживание и компенсации.
+- [Молитвы (баннеры)](/news/banners) — события персонажей и оружия, стандарт и хроника, опорный гайд по питти.
+- [Патчи](/news/patches) — патчноуты по версиям 1.0–6.x.
 
 ## Источники
 
-Базовые тексты по баннерам и патчам — переписка `archive/banner-*.md` и `archive/update-*.md` с веб-сверкой дат и состава по `genshin-impact.fandom.com` и HoYoLAB.
+Базовые тексты по баннерам и патчам сверены по `genshin-impact.fandom.com` и HoYoLAB. В каждой карточке указаны конкретные ссылки.

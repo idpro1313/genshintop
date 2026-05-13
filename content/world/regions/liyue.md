@@ -17,7 +17,7 @@ sources:
 related:
   - /world/factions/adepts
   - /world/factions/millelith
-  - /characters/_by-region/liyue
+  - /characters
 ---
 
 Ли Юэ — второй регион игры. Стихия — Гео. Архонт — Моракс (Чжон Ли). Идея региона — контракт, торговля, традиции. Открыт на старте, расширен в Чазм-патче (2.6).
@@ -52,7 +52,7 @@ related:
 
 - [Адепты](/world/factions/adepts)
 - [Миллелит](/world/factions/millelith)
-- [Герои Ли Юэ](/characters/_by-region/liyue)
+- [Каталог героев](/characters)
 
 ## Источники
 

@@ -17,7 +17,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Skyward_Atlas", title: "Skyward Atlas — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-weapon/catalyst
+  - /characters/catalyst
 ---
 
 Skyward Atlas — стандартный катализатор 5★ с самой высокой базовой ATK среди катализаторов и +33.1% ATK% как доп. стат.

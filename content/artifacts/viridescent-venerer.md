@@ -15,7 +15,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Viridescent_Venerer", title: "Viridescent Venerer — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/anemo
+  - /characters/anemo
   - /characters/kazuha
 ---
 
@@ -51,6 +51,6 @@ Viridescent Venerer — must-have для каждого Анемо-саппор�
 
 ## Связанные материалы
 
-- [Анемо-герои](/characters/_by-element/anemo)
+- [Анемо-герои](/characters/anemo)
 - [Кадзуха](/characters/kazuha)
 - [Стихии и реакции](/guides/basics/elemental-reactions)

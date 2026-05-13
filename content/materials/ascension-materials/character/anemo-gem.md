@@ -12,7 +12,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Vayuda_Turquoise", title: "Vayuda Turquoise — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/anemo
+  - /characters/anemo
   - /materials/ascension-materials
 ---
 
@@ -45,5 +45,5 @@ Vayuda Turquoise — драгоценный камень Анемо. Испол�
 
 ## Связанные материалы
 
-- [Анемо-герои](/characters/_by-element/anemo)
+- [Анемо-герои](/characters/anemo)
 - [Каталог материалов](/materials)

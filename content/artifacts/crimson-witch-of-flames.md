@@ -15,7 +15,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Crimson_Witch_of_Flames", title: "Crimson Witch of Flames — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/pyro
+  - /characters/pyro
 ---
 
 Crimson Witch of Flames — основной сет для пиро-DPS, особенно тех, кто играет через пар или расплавление.
@@ -47,4 +47,4 @@ Crimson Witch of Flames — основной сет для пиро-DPS, осо�
 
 ## Связанные материалы
 
-- [Пиро-герои](/characters/_by-element/pyro)
+- [Пиро-герои](/characters/pyro)

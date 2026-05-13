@@ -16,7 +16,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Fontaine", title: "Fontaine — Genshin Impact Wiki", accessed: "2026-05-13"}
 related:
   - /world/factions/fontaine-marechaussee
-  - /characters/_by-region/fontaine
+  - /characters
 ---
 
 Фонтейн — пятый регион. Стихия — Гидро. Архонт — Фокалор (Фурина). Идея — Справедливость, эстетика модерн ар-нуво и пара. Великая опера, инженерия, лас́ертум (Lacertum) и подводный мир.
@@ -50,7 +50,7 @@ related:
 ## Связанные материалы
 
 - [Марешоссе](/world/factions/fontaine-marechaussee)
-- [Герои Фонтейна](/characters/_by-region/fontaine)
+- [Каталог героев](/characters)
 
 ## Источники
 

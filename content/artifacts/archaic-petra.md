@@ -15,7 +15,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Archaic_Petra", title: "Archaic Petra — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/geo
+  - /characters/geo
 ---
 
 Archaic Petra — сет с уникальным «бонус-эффектом», масштабирующим командный урон через реакцию Кристалла.

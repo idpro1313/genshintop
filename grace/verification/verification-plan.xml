@@ -50,6 +50,8 @@
         <check-15>Статически: шаблоны подключают Inter и Onest; public/css/site.css — prefers-reduced-motion, тёмная тема в духе idpro1313/dandangers modern-styles.css (опционально light через prefers-color-scheme)</check-15>
         <check-16>Статически: в шаблонах нет ссылки alternate на /rss.xml; маршрут RSS отсутствует по контракту</check-16>
         <check-17>Статически: guides/index — поиск ?q= и фильтрация карточек (JS или сервер), согласовано с SearchAction</check-17>
+        <check-18>Статически (1.18.3): lib/ContentRepository.php::markdownToHtml вызывает private sanitizeContentLinks; в HTML рендера контента не остаётся &lt;a href&gt; на относительные .md, на _templates/, _by-, STYLE.md, README.md, info/; лейблы вида &lt;code&gt;foo.md&lt;/code&gt; разворачиваются в plain text без .md и без &lt;code&gt;</check-18>
+        <check-19>Статически (1.18.3): в публичных content/**/_index.md и в публичных статьях нет ручных навигаторов на *.md, _templates/, STYLE.md, /characters/_by-element/*, /characters/_by-weapon/*, /characters/_by-region/*, /weapons/_by-type/*; вместо них используются работающие хабы (/characters/anemo, /characters/sword, /weapons и т.п.) или довер автонавигации contentSectionIndex</check-19>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги, хабы и динамические slug-страницы отдаются через PHP</scenario-1>
@@ -58,6 +60,7 @@
         <scenario-4 kind="success">V-NAV-1.18: /guides и /characters отдаются специальными каталогами с фильтрами; /world и /news показывают подразделы; /regions и неизвестные legacy URL получают 404 без 301</scenario-4>
         <scenario-5 kind="success">V-LOOTBAR-1.18.1: запрос /lootbar/promokod, /lootbar/kristally-sotvoreniya, /lootbar/blagoslovenie-luny, /lootbar/bezopasnost-i-oplata возвращает 404; плашка lib/lootbar_banner.php кликабельна одним блоком на /lootbar/skidki-i-kupony; хаб /lootbar содержит якорные секции #promokod, #kristally, #welkin, #bezopasnost</scenario-5>
         <scenario-6 kind="success">V-FAVICON-1.18.2: public/ содержит favicon.ico (мультиразмерный 16+32), favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png, icon-192.png, icon-512.png, site.webmanifest; lib/layout.php содержит rel=icon (.ico+.svg+png), apple-touch-icon, manifest; docker/nginx-default.conf отдаёт /favicon.ico через try_files $uri /favicon.svg (без rewrite на .svg) и /site.webmanifest с MIME application/manifest+json</scenario-6>
+        <scenario-7 kind="success">V-NAV-CLEAN-1.18.3: на публичных страницах (/artifacts, /characters, /enemies, /materials, /news, /tools, /weapons, /world и подразделах) нет редакторских ссылок на _by-source/*.md, _templates/*.md, STYLE.md, info/*.md; ContentRepository::markdownToHtml::sanitizeContentLinks подтверждает поведение даже для случайно оставленных в новых материалах паттернов</scenario-7>
       </scenarios>
       <required-log-markers />
     </V-M-PHP-SITE>

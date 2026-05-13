@@ -15,7 +15,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Thundering_Fury", title: "Thundering Fury — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/electro
+  - /characters/electro
 ---
 
 Thundering Fury — сет для электро-DPS, чей урон в реакциях. Сейчас часто заменяется на Gilded Dreams (для аггра-сборки) или Emblem of Severed Fate.

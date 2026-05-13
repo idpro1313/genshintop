@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Paimon", title: "Paimon — Genshin Impact Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-region/unknown
+  - /characters
   - /world/lore/teyvat-overview
 ---
 

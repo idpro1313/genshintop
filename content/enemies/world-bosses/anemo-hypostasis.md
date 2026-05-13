@@ -16,7 +16,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Anemo_Hypostasis", title: "Anemo Hypostasis — Wiki", accessed: "2026-05-13"}
 related:
   - /materials/ascension-materials/character/anemo-gem
-  - /characters/_by-element/anemo
+  - /characters/anemo
 ---
 
 Анемо-гипостаз — кубическое существо стихии Анемо, левитирует над пиком на западе Мондштадта. После 3-х фаз превращается в «семя», которое нужно атаковать (иначе восстановит здоровье).
@@ -42,4 +42,4 @@ related:
 ## Связанные материалы
 
 - [Камень Анемо](/materials/ascension-materials/character/anemo-gem)
-- [Анемо-герои](/characters/_by-element/anemo)
+- [Анемо-герои](/characters/anemo)

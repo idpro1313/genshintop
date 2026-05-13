@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Nagadus_Emerald", title: "Nagadus Emerald — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/dendro
+  - /characters/dendro
   - /materials/ascension-materials
 ---
 
@@ -37,5 +37,5 @@ Nagadus Emerald — драгоценный камень Dendro. Возвышен
 
 ## Связанные материалы
 
-- [Dendro-герои](/characters/_by-element/dendro)
+- [Dendro-герои](/characters/dendro)
 - [Каталог материалов](/materials)

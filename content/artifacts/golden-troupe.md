@@ -15,7 +15,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Golden_Troupe", title: "Golden Troupe — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/pyro
+  - /characters/pyro
 ---
 
 Golden Troupe — сет, релизнутый в 4.1. Подходит off-field DPS-героям, чей основной урон — Е, а не Q.

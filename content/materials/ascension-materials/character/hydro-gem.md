@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Varunada_Lazurite", title: "Varunada Lazurite — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/hydro
+  - /characters/hydro
   - /materials/ascension-materials
 ---
 
@@ -39,5 +39,5 @@ Varunada Lazurite — драгоценный камень Hydro. Возвыше�
 
 ## Связанные материалы
 
-- [Hydro-герои](/characters/_by-element/hydro)
+- [Hydro-герои](/characters/hydro)
 - [Каталог материалов](/materials)

@@ -10,8 +10,10 @@ updatedAt: 2026-05-13
 
 Тейват разбит на семь королевств, каждым правит свой Архонт. На момент 6.x открыты: Мондштадт, Ли Юэ, Инадзума, Сумеру, Фонтейн, Натлан. Снежная — будет позже.
 
-## Файлы
+## Что в подразделе
 
-- [`mondstadt.md`](mondstadt.md), [`liyue.md`](liyue.md), [`inazuma.md`](inazuma.md), [`sumeru.md`](sumeru.md), [`fontaine.md`](fontaine.md), [`natlan.md`](natlan.md), [`snezhnaya.md`](snezhnaya.md), [`khaenri-ah.md`](khaenri-ah.md), [`celestia.md`](celestia.md), [`enkanomiya.md`](enkanomiya.md), [`chasm.md`](chasm.md).
+- Семь королевств: [Мондштадт](/world/regions/mondstadt), [Ли Юэ](/world/regions/liyue), [Инадзума](/world/regions/inazuma), [Сумеру](/world/regions/sumeru), [Фонтейн](/world/regions/fontaine), [Натлан](/world/regions/natlan), [Снежная](/world/regions/snezhnaya).
+- Лор-территории: [Кхэнри'а](/world/regions/khaenri-ah), [Селестия](/world/regions/celestia).
+- Подрегионы и аномалии: [Энканомия](/world/regions/enkanomiya), [Чазм](/world/regions/chasm).
 
-Подрегионы (например, Энкано́мия для Инадзумы, Чазм для Ли Юэ) — отдельные карточки.
+Карточки регионов и подрегионов показаны ниже автоматически.

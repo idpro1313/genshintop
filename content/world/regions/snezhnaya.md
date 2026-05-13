@@ -17,7 +17,7 @@ sources:
 related:
   - /world/factions/fatui
   - /world/factions/fatui-harbingers
-  - /characters/_by-region/snezhnaya
+  - /characters
 ---
 
 Снежная — седьмой регион Тейвата и единственный, который ещё **закрыт** для исследования (на 6.x). Стихия — Крио. Архонт — Царица. Идея — революция против Селестии. Эстетика северных империй XVIII–XIX веков.

@@ -18,7 +18,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Primordial_Jade_Winged-Spear", title: "Primordial Jade Winged-Spear — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-weapon/polearm
+  - /characters/polearm
 ---
 
 «Древко тысячи возрождений» — высший базовый ATK среди древковых 5★. Выпадает только из стандарта.

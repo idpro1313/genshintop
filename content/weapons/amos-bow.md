@@ -18,7 +18,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Amos%27_Bow", title: "Amos' Bow — Wiki", accessed: "2026-05-13"}
 related:
   - /characters/ganyu
-  - /characters/_by-weapon/bow
+  - /characters/bow
 ---
 
 Amos' Bow — лучший лук для прицельных стрел и стрелов. Базовая ATK 608 и пассив «масштабирование с дистанцией» делают его сигнатурным для Гань Юй и других криозарядных героев.

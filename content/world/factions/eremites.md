@@ -45,7 +45,7 @@ related:
 ## Связанные материалы
 
 - [Сумеру](/world/regions/sumeru)
-- [Герои Сумеру](/characters/_by-region/sumeru)
+- [Каталог героев](/characters)
 - [Eremite — common враг](/enemies/common/eremite)
 
 ## Источники

@@ -17,7 +17,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Wolf%27s_Gravestone", title: "Wolf's Gravestone — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-weapon/claymore
+  - /characters/claymore
   - /characters/diluc
 ---
 

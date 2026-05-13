@@ -17,7 +17,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Prototype_Archaic", title: "Prototype Archaic — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-weapon/claymore
+  - /characters/claymore
 ---
 
 Prototype Archaic — крафт 4★ двуручник из кузницы. Бюджетный DPS-вариант для двуручников.

@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Vajrada_Amethyst", title: "Vajrada Amethyst — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/electro
+  - /characters/electro
   - /materials/ascension-materials
 ---
 
@@ -37,5 +37,5 @@ Vajrada Amethyst — драгоценный камень Electro. Возвыше
 
 ## Связанные материалы
 
-- [Electro-герои](/characters/_by-element/electro)
+- [Electro-герои](/characters/electro)
 - [Каталог материалов](/materials)

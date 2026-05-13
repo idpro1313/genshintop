@@ -16,7 +16,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Natlan", title: "Natlan — Genshin Impact Wiki", accessed: "2026-05-13"}
 related:
   - /world/factions/tribes-of-natlan
-  - /characters/_by-region/natlan
+  - /characters
 ---
 
 Натлан — шестой регион. Стихия — Пиро. Архонт — Мавуика. Идея — Война и Победа. Эстетика месоамериканских мифов и пост-апокалипсиса.
@@ -49,7 +49,7 @@ related:
 ## Связанные материалы
 
 - [Племена Натлана](/world/factions/tribes-of-natlan)
-- [Герои Натлана](/characters/_by-region/natlan)
+- [Каталог героев](/characters)
 
 ## Источники
 

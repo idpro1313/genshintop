@@ -17,7 +17,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Favonius_Sword", title: "Favonius Sword — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-weapon/sword
+  - /characters/sword
 ---
 
 Favonius Sword — лучший 4★ меч для энерго-саппортов. Серия «Favonius» (есть аналоги для всех типов оружия) — про генерацию частиц энергии всему отряду через шанс при крите.

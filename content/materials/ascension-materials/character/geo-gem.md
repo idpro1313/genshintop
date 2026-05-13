@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Prithiva_Topaz", title: "Prithiva Topaz — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/geo
+  - /characters/geo
   - /materials/ascension-materials
 ---
 
@@ -38,5 +38,5 @@ Prithiva Topaz — драгоценный камень Geo. Возвышение
 
 ## Связанные материалы
 
-- [Geo-герои](/characters/_by-element/geo)
+- [Geo-герои](/characters/geo)
 - [Каталог материалов](/materials)

@@ -18,7 +18,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Mistsplitter_Reforged", title: "Mistsplitter Reforged — Wiki", accessed: "2026-05-13"}
 related:
   - /characters/ayaka
-  - /characters/_by-weapon/sword
+  - /characters/sword
 ---
 
 Mistsplitter Reforged — сигнатурное оружие Айяки. Идеально для крио-DPS, отлично работает с большинством элементальных мечников.

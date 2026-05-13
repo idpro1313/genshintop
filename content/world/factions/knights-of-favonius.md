@@ -14,7 +14,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Knights_of_Favonius", title: "Knights of Favonius — Genshin Impact Wiki", accessed: "2026-05-13"}
 related:
   - /world/regions/mondstadt
-  - /characters/_by-region/mondstadt
+  - /characters
 ---
 
 Орден Фавониус — главная гражданская и военная сила Мондштадта. Основан после свержения аристократии семьи Лоуренс. Действующий магистр — Дзинь Гу́ннхильдр.
@@ -41,7 +41,7 @@ related:
 ## Связанные материалы
 
 - [Мондштадт](/world/regions/mondstadt)
-- [Герои Мондштадта](/characters/_by-region/mondstadt)
+- [Каталог героев](/characters)
 
 ## Источники
 

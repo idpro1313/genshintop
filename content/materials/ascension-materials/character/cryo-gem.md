@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Shivada_Jade", title: "Shivada Jade — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/cryo
+  - /characters/cryo
   - /materials/ascension-materials
 ---
 
@@ -38,5 +38,5 @@ Shivada Jade — драгоценный камень Cryo. Возвышение 
 
 ## Связанные материалы
 
-- [Cryo-герои](/characters/_by-element/cryo)
+- [Cryo-герои](/characters/cryo)
 - [Каталог материалов](/materials)

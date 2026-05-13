@@ -13,7 +13,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Agnidus_Agate", title: "Agnidus Agate — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/pyro
+  - /characters/pyro
   - /materials/ascension-materials
 ---
 
@@ -39,5 +39,5 @@ Agnidus Agate — драгоценный камень Pyro. Возвышение
 
 ## Связанные материалы
 
-- [Pyro-герои](/characters/_by-element/pyro)
+- [Pyro-герои](/characters/pyro)
 - [Каталог материалов](/materials)

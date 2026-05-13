@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.18.2">
+    <Project NAME="genshintop" VERSION="1.18.3">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живой контент в content/; служебные content/**/_by-* не индексируются; каталоги scripts/ и reports/ отсутствуют; зеркал нет; роутинг public/index.php; lib/; без Node/npm; статический public/sitemap.xml поддерживается вручную; GHCR + Traefik.</annotation>
 
@@ -18,6 +18,7 @@
         <favicon-set PURPOSE="С 1.18.2: полный фавикон-набор для роботов (Яндекс/Google) — public/favicon.ico (мультиразмерный 16+32), public/favicon-{16x16,32x32}.png, public/apple-touch-icon.png (180), public/icon-{192,512}.png, public/site.webmanifest. lib/layout.php содержит rel=icon (ico+svg+png), apple-touch-icon, manifest. nginx отдаёт /favicon.ico как реальный файл (try_files $uri /favicon.svg как fallback)" />
         <fn-webSiteSearchAction PURPOSE="Seo::webSiteNode — SearchAction на /guides?q={search_term_string}" />
         <fn-no-rss PURPOSE="/rss.xml возвращает 404 (Router)" />
+        <fn-sanitizeContentLinks PURPOSE="С 1.18.3 ContentRepository::markdownToHtml после Parsedown пропускает HTML через sanitizeContentLinks: для относительных href срезается суффикс .md; ссылки на служебные пути (_templates/, _by-, STYLE.md, README.md, info/) разворачиваются в plain text без href; лейблы вида <code>foo.md</code> чистятся от .md и обёртки <code>. Абсолютные http(s)://, mailto:, tel:, # href — без изменений." />
       </annotations>
     </M-PHP-SITE>
 
@@ -38,6 +39,7 @@
         <ax-templates PURPOSE="content/_templates/*.md — единые YAML-шаблоны frontmatter по 11 типам (article, character, weapon, artifact, region, faction, npc, banner, patch, enemy, material)" />
         <ax-style PURPOSE="content/STYLE.md заменяет удалённые docs/GUIDE_EDITORIAL.md и docs/CHARACTER_EDITORIAL.md: длина по типам, тон, атрибуция, slug-конвенция, запреты" />
         <ax-status PURPOSE="frontmatter status: live | draft | stub. На 1.16.0 (Wave 4): в рабочих разделах content/ нет draft/stub во frontmatter; templates сохраняют status: stub как образец. На 1.17.0 сайт использует content/ в качестве основного источника, info/ перенесён в archive/info/. На 1.18.0 служебные content/**/_by-* исключены из рантайм-индекса и sitemap." />
+        <ax-no-file-nav PURPOSE="С 1.18.3 в публичных _index.md разделов и в статьях нет ручных «навигаторов по файлам» (ссылок на *.md, _templates/, STYLE.md, README.md, info/, _by-*). Подразделы и статьи показываются автоматически через PageRenderer::contentSectionIndex; редакторские служебные ссылки нейтрализуются в ContentRepository::markdownToHtml." />
       </annotations>
     </M-CONTENT-V2>
 

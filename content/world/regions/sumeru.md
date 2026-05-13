@@ -17,7 +17,7 @@ sources:
 related:
   - /world/factions/sumeru-akademiya
   - /world/factions/eremites
-  - /characters/_by-region/sumeru
+  - /characters
 ---
 
 Сумеру — четвёртый регион. Стихия — Дендро. Архонт — Кусанали (Нахида), младший из Семёрых. Идея — Мудрость и природа, контраст лес/пустыня.
@@ -55,7 +55,7 @@ related:
 
 - [Академия Сумеру](/world/factions/sumeru-akademiya)
 - [Эремиты](/world/factions/eremites)
-- [Герои Сумеру](/characters/_by-region/sumeru)
+- [Каталог героев](/characters)
 - [Лор: Кхэнри'а](/world/lore/khaenri-ah)
 
 ## Источники

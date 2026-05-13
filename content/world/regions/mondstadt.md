@@ -19,7 +19,7 @@ sources:
 related:
   - /world/factions/knights-of-favonius
   - /world/lore/archons
-  - /characters/_by-region/mondstadt
+  - /characters
 ---
 
 Мондштадт — первое королевство, в которое попадает Путешественник в прологе. Стихия — Анемо. Архонт — Барбатос (Венти). Девиз — свобода, реальная политика — Орден Фавониус.
@@ -53,7 +53,7 @@ related:
 
 - [Орден Фавониус](/world/factions/knights-of-favonius)
 - [Архонты](/world/lore/archons)
-- [Герои Мондштадта](/characters/_by-region/mondstadt)
+- [Каталог героев](/characters)
 
 ## Источники
 

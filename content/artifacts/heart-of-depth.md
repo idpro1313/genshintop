@@ -15,7 +15,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Heart_of_Depth", title: "Heart of Depth — Wiki", accessed: "2026-05-13"}
 related:
-  - /characters/_by-element/hydro
+  - /characters/hydro
 ---
 
 Heart of Depth — сет для гидро-DPS, особенно тех, кто бьёт автоатаками или зарядами.

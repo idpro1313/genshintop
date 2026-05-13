@@ -171,7 +171,67 @@ final class ContentRepository
             /** @phpstan-ignore-next-line */
             $parser->setSafeMode(false);
         }
-        return $parser->text($md);
+        $html = $parser->text($md);
+
+        return self::sanitizeContentLinks($html);
+    }
+
+    /**
+     * Подчищает ссылки в готовом HTML контента:
+     *  - срезает суффикс `.md` у относительных href;
+     *  - нейтрализует ссылки на служебные пути (_templates/, _by-*, STYLE.md, README.md, info/);
+     *  - если текст ссылки — `<code>что-то.md</code>`, разворачивает <code> в обычный текст
+     *    без хвоста `.md`, чтобы редакторские «файловые» лейблы не выглядели плашкой.
+     */
+    private static function sanitizeContentLinks(string $html): string
+    {
+        if ($html === '' || stripos($html, '<a ') === false) {
+            return $html;
+        }
+
+        return (string) preg_replace_callback(
+            '#<a\b([^>]*?)\bhref="([^"]*)"([^>]*)>(.*?)</a>#is',
+            static function (array $m): string {
+                $preAttrs = $m[1];
+                $href = $m[2];
+                $postAttrs = $m[3];
+                $inner = $m[4];
+
+                $isAbsolute = preg_match('#^(?:[a-z][a-z0-9+.\-]*:|//|mailto:|tel:|#)#i', $href) === 1;
+
+                $cleanInner = static function (string $s): string {
+                    if (preg_match('#^\s*<code>(.*)</code>\s*$#is', $s, $cm) === 1) {
+                        $text = $cm[1];
+                        $text = preg_replace('/\.md$/i', '', $text) ?? $text;
+
+                        return $text;
+                    }
+
+                    return $s;
+                };
+
+                if ($isAbsolute) {
+                    return '<a' . $preAttrs . 'href="' . $href . '"' . $postAttrs . '>' . $cleanInner($inner) . '</a>';
+                }
+
+                $stripped = ltrim($href, './');
+                $isService =
+                    str_contains($stripped, '_templates/')
+                    || str_contains($stripped, '_by-')
+                    || preg_match('#(^|/)STYLE\.md(?:[/?#]|$)#i', $stripped) === 1
+                    || preg_match('#(^|/)README\.md(?:[/?#]|$)#i', $stripped) === 1
+                    || preg_match('#(^|/)info/#i', $stripped) === 1;
+
+                if ($isService) {
+                    return $cleanInner($inner);
+                }
+
+                $newHref = preg_replace('/\.md(?=$|[?#])/i', '', $href) ?? $href;
+
+                return '<a' . $preAttrs . 'href="' . $newHref . '"' . $postAttrs . '>' . $cleanInner($inner) . '</a>';
+            },
+            $html
+        ) ?: $html;
     }
 
     /** @param list<string>|null $slugs */
