@@ -89,11 +89,11 @@ docker run --rm -p 8080:80 genshintop-web
 
 После миграции на PHP проверьте вручную (или по **`docs/SEO-CHECKLIST.md`**):
 
-- Ключевые маршруты (`/`, `/guides`, `/characters`, хабы, `/lootbar/*`, `/regions/*`, trust-страницы) открываются с ожидаемым HTTP-кодом.
+- Ключевые маршруты (`/`, `/guides`, `/characters`, хабы, `/lootbar/*`, `/world/regions/*`, trust-страницы) открываются с ожидаемым HTTP-кодом.
 - **`https://genshintop.ru/sitemap.xml`** — единый `urlset`, без индекса из нескольких файлов.
 - **`robots.txt`** содержит одну строку **`Sitemap:`** на этот файл.
 - **`/rss.xml`** возвращает **404** (RSS отключён).
-- Редиректы slug работают (**`docker/genshintop-redirects.conf`** в образе как **`/etc/nginx/snippets/genshintop-redirects.conf`**, `include` только из **`server`** в **`docker/nginx-default.conf`** — не в `conf.d`, там контекст `http` и `rewrite` недопустим).
+- Legacy-редиректов нет: сайт ещё не использовался публично, канонические URL публикуются сразу.
 
 ---
 
@@ -143,10 +143,9 @@ certificatesResolvers:
 
 | Файл | Назначение |
 |------|------------|
-| `docker/Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php lib/build-sitemap.php`; сборка: **`docker build -f docker/Dockerfile .`** из корня репо |
-| `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
+| `docker/Dockerfile` | php-fpm-alpine + nginx + supervisor; сборка: **`docker build -f docker/Dockerfile .`** из корня репо |
+| `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt` |
 | `docker/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
-| `docker/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор); в образе **`/etc/nginx/snippets/genshintop-redirects.conf`** |
 | `docker/env.example` | Шаблон `docker/.env`, включая `SITE_IMAGE` |
 | `docs/SEO-CHECKLIST.md` | Чек-лист после выката |
 | **`update-from-github.sh`** | В корне репозитория: git ff + compose pull/up |

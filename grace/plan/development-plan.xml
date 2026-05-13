@@ -19,7 +19,7 @@
   <Modules>
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), канонический контент Markdown в info/guides/ и info/characters/ (читает ContentRepository), шаблоны PHP в корне lib (layout.php, header.php, footer.php, lootbar_banner.php), ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей — включая столпы PLAN /guides/game-basics, /guides/advanced-guides, /guides/quest-walkthroughs; /lootbar/*; /regions/*; страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация lib/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/lootbar_banner.php и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
+        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), канонический контент Markdown в content/ (читает ContentRepository), шаблоны PHP в корне lib (layout.php, header.php, footer.php, lootbar_banner.php), ванильный CSS в public/css/site.css. Публичные URL: обогащённые /guides и /characters; столпы PLAN /guides/basics, /guides/advanced, /guides/walkthroughs через content-индексы; тематические хабы /guides/*; /lootbar/*; /world/regions/*; страницы доверия. SEO: lib/Seo.php (meta, canonical, JSON-LD), статический public/sitemap.xml в git. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/lootbar_banner.php и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
         <inputs>
           <param name="content" type="markdown" />
           <param name="config.php" type="php-config" />
@@ -33,7 +33,7 @@
       </contract>
       <interface>
         <export-docker-build PURPOSE="docker build -f docker/Dockerfile . — nginx+supervisor+php-fpm, без Node в runtime" />
-        <export-sitemap-build PURPOSE="php lib/build-sitemap.php → public/sitemap.xml" />
+        <export-static-sitemap PURPOSE="public/sitemap.xml поддерживается вручную как статический urlset" />
       </interface>
       <depends>none</depends>
       <target>
@@ -43,7 +43,6 @@
         <source>public/index.php</source>
         <source>lib/</source>
         <source>docker/docker-compose.yml</source>
-        <source>docker/genshintop-redirects.conf</source>
         <source>docker/env.example</source>
         <source>update-from-github.sh</source>
         <source>docs/SEO-CHECKLIST.md</source>
@@ -54,11 +53,10 @@
 
     <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" LAYER="1" ORDER="3" STATUS="implemented">
       <contract>
-        <purpose>Редакционные стандарты для info/guides/, info/characters/: docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md; соответствие структуры docs/PLAN.md и поле planTrack — матрица в info/README.md; смена slug через docker/genshintop-redirects.conf; опционально локальный архив content/ (не в git). Плановые MD «волн» и merge/split playbook удалены как устаревшие.</purpose>
+        <purpose>Исторический модуль редакционных стандартов старого корпуса info/; публичный рантайм читает content/, legacy-редиректы удалены, смена slug до публикации правится напрямую в content/ и sitemap.</purpose>
         <inputs>
           <param name="guides_md" type="markdown-glob" />
           <param name="characters_md" type="markdown-glob" />
-          <param name="redirects_conf" type="nginx-snippet" />
         </inputs>
         <outputs>
           <param name="editorial_docs" type="markdown" />
@@ -68,7 +66,7 @@
         </errors>
       </contract>
       <interface>
-        <export-editorial-playbook PURPOSE="docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md — ручная редакция; merge/split и 301 в nginx-snippet" />
+        <export-editorial-playbook PURPOSE="Исторические редакционные договорённости; текущий стандарт описан в content/STYLE.md" />
       </interface>
       <depends>M-PHP-SITE</depends>
       <target>
@@ -76,7 +74,6 @@
         <source>docs/CHARACTER_EDITORIAL.md</source>
         <source>docs/PLAN.md</source>
         <source>info/README.md</source>
-        <source>docker/genshintop-redirects.conf</source>
       </target>
       <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
     </M-CONTENT-GUIDE-REFACTOR>
@@ -120,11 +117,11 @@
   </Modules>
 
   <DataFlow>
-    <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в info/ или внешняя подготовка файлов">
-      <step-1>Изменения в info/guides, info/characters и при необходимости архива content/guides-archive (только локально, не в git)</step-1>
-      <step-2>При смене slug — строки rewrite в docker/genshintop-redirects.conf; правки перекрёстных ссылок в info/** вручную</step-2>
-      <step-3>Сборка образа: docker build -f docker/Dockerfile . ; sitemap через lib/build-sitemap.php</step-3>
-      <evidence>Канон для сайта — info/**; content/** при необходимости только локально для архивов; образ собирается docker build -f docker/Dockerfile .</evidence>
+    <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в content/">
+      <step-1>Изменения в content/** и при необходимости связанных навигационных ссылок</step-1>
+      <step-2>При смене slug до публикации — правки перекрёстных ссылок в content/** и ручное обновление public/sitemap.xml</step-2>
+      <step-3>Сборка образа: docker build -f docker/Dockerfile . ; sitemap уже лежит в public/sitemap.xml</step-3>
+      <evidence>Канон для сайта — content/**; образ собирается docker build -f docker/Dockerfile .</evidence>
     </DF-CONTENT-MIGRATE>
 
     <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click">
@@ -145,29 +142,29 @@
 
   <ImplementationOrder>
     <Phase-1 name="SiteMVP" status="done">
-      <goal>Рабочий прод-сайт на PHP + nginx в Docker и канонический контент в info/</goal>
-      <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Роутинг, шаблоны, SEO, деплой GHCR; канонический Markdown в info/</step-1>
+      <goal>Рабочий прод-сайт на PHP + nginx в Docker и канонический контент в content/</goal>
+      <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Роутинг, шаблоны, SEO, деплой GHCR; канонический Markdown в content/</step-1>
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
       <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории; шаблоны только файлы в корне lib без подпапок (1.2.1); Traefik/GHCR-артефакты в каталоге docker/, скрипт обновления сервера — update-from-github.sh в корне (1.3.0).</goal>
-      <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
+      <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, статический public/sitemap.xml, хабы и регионы через content/</step-1>
     </Phase-5>
 
     <Phase-6 name="GuideCorpusEditorialRefactor" status="in-progress">
-      <goal>Единый редакционный стандарт гайдов и персонажей; ручные правки корпуса; редиректы при смене slug</goal>
-      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md; merge/split и обновление ссылок вручную; 301 в docker/genshintop-redirects.conf; без скриптов inventory/wave в репозитории</step-1>
+      <goal>Исторический редакционный стандарт старого корпуса; текущие правки идут через content/STYLE.md</goal>
+      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="done" verification="V-M-CONTENT-GUIDE-REFACTOR">Старый info-корпус архивирован; legacy-редиректы удалены до публичного использования сайта.</step-1>
     </Phase-6>
 
     <Phase-7 name="ContentV2CatalogScaffold" status="in-progress">
-      <goal>Параллельный каталог content/ — новая редакция корпуса сайта строго по docs/PLAN.md. info/ остаётся живым каталогом сайта. После завершения волн контента — отдельная миграционная задача переключит lib/ContentRepository.php на content/.</goal>
+      <goal>Каталог content/ — живая редакция корпуса сайта строго по docs/PLAN.md. Рантайм читает content/ через ContentRepository.</goal>
       <step-1 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Каркас content/: README, STYLE, _templates/ (11 шаблонов frontmatter), _index.md для всех разделов PLAN, индексы по стихии/оружию/региону для characters, по типу/звёздности для weapons, по источнику для artifacts, по семейству для enemies (B0)</step-1>
       <step-2 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Опорные материалы (1.13.0 / B1-B8): 5 walkthroughs + 4 PLAN-anchored basics + 9 поддерживающих basics drafts (B1); 7 advanced (B2); 7 регионов + 6 лор + 12 фракций + 2 NPC (B3); банн́ерный гайд + 6 ключевых патчей + 2 sample баннера (B4); 4 tools + 4 community + sample materials/enemies (B5); 5★ образцы оружия по типам + 4 ключевых 4★ (B6); 11 ключевых сетов артефактов (B7); 14 marquee-карточек персонажей (B8 wave 1)</step-2>
       <step-3 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Wave 2 (1.14.0 / W2-1..W2-11): +74 карточки персонажей (Mondstadt 16 + Liyue 12 + Inazuma 11 + Sumeru 13 + Fontaine 13 + Natlan 8 + Aloy + Traveler) — компактный wiki-формат; +36 оружия (18 5★ + 18 4★/3★) → 57 live; +16 артефактов → 38 live; +24 патча (1.1-5.7) → 42 live; +9 character-баннеров и +5 weapon-баннеров → 19 live; +11 Fatui Harbingers + 5 NPC → 24 фракций (16 live + 8 draft); +7 common families + 6 world-bosses + 3 weekly-bosses → 20 enemies; +12 local-specialties + 6 ascension-gems по стихиям → 21 материал.</step-3>
       <step-4 module="M-CONTENT-V2" status="in-progress" verification="V-M-CONTENT-V2">Wave 3 (1.15.0 / W3-1..W3-9): +12 NPC (Дайнслейф, Бо Лай, Верр Голдет, Мадам Пин, Дуньярзад, Николь, Сирин, Тимей, Хертa, Линнея, Rex Lapis-NPC + 5 stub) → 20 NPC; 8 фракций draft→live (eremites, marechaussee, millelith, qixing, shogunate, sumeru-akademiya, tri-commission, tribes-of-natlan) → 24 live; +6 ивентов (Lantern Rite, Summer, Anniversary, Windblume, Irodori, Sabzeruz); +5 анонсов (Special Program, Maintenance, HoYoLAB, Redeem Codes, Roadmap); 10 basics-гайдов draft→live (wishes, primogems, daily, cooking, co-op, fishing, promo, chests, enemies, local-specialties); 5 advanced draft→live (crit, EM, RES, tools, pity); +7 материалов (5 ingredients + hurricane-seed + book-of-resistance) → 28; 4 персонажа (Albedo, Kuki, Alhaitham, Ayaka) compact→full wiki. Топ-50 расширение остальных и community-наполнение — Wave 4.</step-4>
       <step-5 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Wave 4 (1.16.0): закрыты оставшиеся рабочие draft/stub: community/forum + community/user-guides + community/best-guides → live; basics drafts (teyvat-lore-no-spoilers, furniture-housing) → live; silk-flower, patch 6.0, skirk → live с безопасным TBA/ожидательным форматом; world/npc 7 stub → live как NPC-role/lore-role; character-индексы _by-element/_by-region/_by-weapon очищены от ошибочных имён; 4 персонажа (Fischl, Sucrose, Beidou, Navia) compact→full wiki. Итог: во всех рабочих разделах content/ 0 draft/0 stub; templates сохраняют stub как пример.</step-5>
-      <step-6 module="M-CONTENT-V2" status="planned" verification="V-M-CONTENT-V2">Wave 5: расширение compact→full wiki для следующих топ-персонажей (например Xiangling, Xingqiu, Yelan, Raiden, Furina, Neuvillette, Zhongli, Kazuha если требуется повторная редактура), предмиграционная проверка внутренних ссылок content/ и подготовка карты соответствия info/ → content/.</step-6>
-      <step-7 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Миграция lib/ContentRepository.php на content/ + редиректы для изменившихся slug. Архивирование info/ как guide-archive/.</step-7>
+      <step-6 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Ревизия навигации 1.18.0: специальные /guides и /characters имеют приоритет над generic content-роутером; /regions и nginx-редиректы удалены; /world/regions/* — единственный региональный канон; public/sitemap.xml переведён в статический файл без build-sitemap.php.</step-6>
+      <step-7 module="M-CONTENT-V2" status="done" verification="V-M-CONTENT-V2">Миграция lib/ContentRepository.php на content/. Архивирование info/ как guide-archive/.</step-7>
     </Phase-7>
 
     <!-- Phases use unique tags:

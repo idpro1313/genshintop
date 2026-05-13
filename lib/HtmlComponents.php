@@ -48,7 +48,7 @@ final class HtmlComponents
         $excerpt = Seo::cleanMetaDescription($summary, $title, 220);
         $excerptEsc = Html::e($excerpt);
         $titleEsc = Html::e($title);
-        $slugEsc = Html::e($slug);
+        $urlEsc = Html::e(ContentRepository::itemUrl($g));
 
         $badges = '<span class="pill pill-mint">' . $catLabel . '</span>';
         $badges .= '<span class="pill">' . $topicLabel . '</span>';
@@ -87,7 +87,7 @@ final class HtmlComponents
         $thumbEsc = Html::e($thumbLetters);
 
         return <<<HTML
-<a href="/guides/{$slugEsc}" class="guide-catalog-card" data-guide-card data-category="{$category}" data-topic="{$topicEsc}" data-status="{$statusEsc}" data-search-haystack="{$haystackEsc}">
+<a href="{$urlEsc}" class="guide-catalog-card" data-guide-card data-category="{$category}" data-topic="{$topicEsc}" data-status="{$statusEsc}" data-search-haystack="{$haystackEsc}">
   <span class="guide-card-thumb" aria-hidden="true"><span class="guide-card-thumb-inner">{$thumbEsc}</span></span>
   <div class="guide-card-content">
     <div class="guide-card-badges">{$badges}{$timeHtml}</div>
@@ -204,8 +204,10 @@ HTML;
             if (!is_string($s) || $s === '') {
                 continue;
             }
-            $slug = Html::e($s);
-            $html .= '<a class="pill-link" href="/guides/' . $slug . '">' . $slug . '</a>';
+            $guide = ContentRepository::guideBySlug($s);
+            $href = $guide ? ContentRepository::itemUrl($guide) : '/guides';
+            $label = $guide && isset($guide['title']) ? (string) $guide['title'] : $s;
+            $html .= '<a class="pill-link" href="' . Html::e($href) . '">' . Html::e($label) . '</a>';
         }
         $html .= '</div>';
 

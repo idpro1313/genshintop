@@ -18,9 +18,6 @@ final class PageRenderer
     private static function hubMatcher(string $hub): callable
     {
         return match ($hub) {
-            'game-basics' => fn (array $g) => GuideHub::matchHubGameBasics($g),
-            'advanced-guides' => fn (array $g) => GuideHub::matchHubAdvancedGuides($g),
-            'quest-walkthroughs' => fn (array $g) => GuideHub::matchHubQuestWalkthroughs($g),
             'banners' => fn (array $g) => GuideHub::matchHubBanners($g),
             'codes' => fn (array $g) => GuideHub::matchHubCodes($g),
             'patches' => fn (array $g) => GuideHub::matchHubPatches($g),
@@ -277,12 +274,11 @@ HTML;
         $recentForSchema = array_slice($all, 0, 24);
         $itemListElement = [];
         foreach ($recentForSchema as $i => $g) {
-            $slug = (string) ($g['slug'] ?? '');
             $itemListElement[] = [
                 '@type' => 'ListItem',
                 'position' => $i + 1,
-                'name' => $g['title'] ?? $slug,
-                'item' => Seo::absoluteUrl($cfg, '/guides/' . $slug),
+                'name' => $g['title'] ?? (string) ($g['slug'] ?? ''),
+                'item' => Seo::absoluteUrl($cfg, ContentRepository::itemUrl($g)),
             ];
         }
         $pageUrl = Seo::absoluteUrl($cfg, '/guides');
@@ -313,9 +309,9 @@ HTML;
 <section class="callout">
   <h2>По структуре сайта</h2>
   <p class="hub-links">
-    <a href="/guides/game-basics">Основы игры</a> ·
-    <a href="/guides/advanced-guides">Продвинутые гайды</a> ·
-    <a href="/guides/quest-walkthroughs">Квесты и прохождения</a>
+    <a href="/guides/basics">Основы игры</a> ·
+    <a href="/guides/advanced">Продвинутые гайды</a> ·
+    <a href="/guides/walkthroughs">Квесты и прохождения</a>
   </p>
 </section>
 <form class="guide-search-form" method="get" action="/guides" role="search">
@@ -438,12 +434,11 @@ HTML;
 
         $items = [];
         foreach (array_slice($guides, 0, 48) as $i => $g) {
-            $slug = (string) ($g['slug'] ?? '');
             $items[] = [
                 '@type' => 'ListItem',
                 'position' => $i + 1,
-                'name' => $g['title'] ?? $slug,
-                'item' => Seo::absoluteUrl($cfg, '/guides/' . $slug),
+                'name' => $g['title'] ?? (string) ($g['slug'] ?? ''),
+                'item' => Seo::absoluteUrl($cfg, ContentRepository::itemUrl($g)),
             ];
         }
         $url = Seo::absoluteUrl($cfg, $canonicalPath);
@@ -639,7 +634,7 @@ HTML;
 <p class="lead">Каталог героев: стихия, оружие, редкость. Фильтры на клиенте; все карточки — в HTML для индексации.</p>
 <section class="callout">
   <h2>Ещё по теме</h2>
-  <p><a href="/guides/game-basics">Основы</a> · <a href="/guides/advanced-guides">Продвинутые</a> · <a href="/guides/quest-walkthroughs">Квесты</a> · <a href="/guides/banners">Баннеры</a> · <a href="/guides/patches">Патчи</a> · <a href="/guides/tier-list">Тир-листы</a> · <a href="/guides/newbie">Новичкам</a> · <a href="/guides/codes">Промокоды</a></p>
+  <p><a href="/guides/basics">Основы</a> · <a href="/guides/advanced">Продвинутые</a> · <a href="/guides/walkthroughs">Квесты</a> · <a href="/guides/banners">Баннеры</a> · <a href="/guides/patches">Патчи</a> · <a href="/guides/tier-list">Тир-листы</a> · <a href="/guides/newbie">Новичкам</a> · <a href="/guides/codes">Промокоды</a></p>
   <p class="hub-links">
     <a href="/characters/pyro">Пиро</a> <a href="/characters/hydro">Гидро</a> <a href="/characters/electro">Электро</a>
     <a href="/characters/cryo">Крио</a> <a href="/characters/anemo">Анемо</a> <a href="/characters/geo">Гео</a> <a href="/characters/dendro">Дендро</a>
@@ -937,158 +932,6 @@ HTML;
             'ogType' => 'article',
             'ogImage' => $ogPath,
             'ogAlt' => $name . ' — ' . self::elementRu($element) . ', ' . $weapon . ' | GenshinTop',
-            'slot' => $slot,
-            'jsonLd' => $jsonLd,
-        ];
-    }
-
-    /** @param array<string,mixed> $cfg */
-    public static function regionsIndex(array $cfg): array
-    {
-        $defs = regions_definitions();
-        $cards = '';
-        foreach ($defs as $d) {
-            $slug = (string) ($d['slug'] ?? '');
-            $name = (string) ($d['name'] ?? $slug);
-            $cards .= '<a class="card region-card" href="/regions/' . Html::e($slug) . '"><div class="card-body"><h2 class="card-title">' . Html::e($name) . '</h2><p class="muted">' . Html::e((string) ($d['patchRange'] ?? '')) . '</p></div></a>';
-        }
-        $bc = HtmlComponents::breadcrumbs($cfg, [
-            ['label' => 'Главная', 'href' => '/'],
-            ['label' => 'Регионы Тейвата', 'href' => '/regions'],
-        ]);
-        $slot = $bc . '<article class="article catalog-page"><h1>Регионы Тейвата</h1><p class="lead">Обзоры ключевых регионов Genshin Impact.</p><div class="grid-cards">' . $cards . '</div></article>';
-
-        $items = [];
-        $i = 1;
-        foreach ($defs as $d) {
-            $slug = (string) ($d['slug'] ?? '');
-            $items[] = [
-                '@type' => 'ListItem',
-                'position' => $i++,
-                'name' => $d['name'] ?? $slug,
-                'item' => Seo::absoluteUrl($cfg, '/regions/' . $slug),
-            ];
-        }
-        $url = Seo::absoluteUrl($cfg, '/regions');
-        $jsonLd = Seo::jsonLdGraph([
-            Seo::publisherOrganization($cfg),
-            Seo::webSiteNode($cfg),
-            [
-                '@type' => 'CollectionPage',
-                '@id' => $url . '#webpage',
-                'name' => 'Регионы Тейвата',
-                'url' => $url,
-                'mainEntity' => [
-                    '@type' => 'ItemList',
-                    'numberOfItems' => count($defs),
-                    'itemListElement' => $items,
-                ],
-            ],
-        ]);
-
-        return [
-            'pageTitle' => 'Регионы Тейвата — Genshin Impact',
-            'pageDescription' => 'Обзоры регионов Genshin Impact: Сумеру, Фонтейн, Натлан.',
-            'canonicalPath' => '/regions',
-            'slot' => $slot,
-            'jsonLd' => $jsonLd,
-        ];
-    }
-
-    /** @param array<string,mixed> $cfg */
-    public static function regionPage(array $cfg, array $def): array
-    {
-        $slug = (string) ($def['slug'] ?? '');
-        $name = (string) ($def['name'] ?? $slug);
-        $canonicalPath = '/regions/' . $slug;
-        $description = (string) ($def['description'] ?? '');
-        $introduction = (string) ($def['introduction'] ?? '');
-        $nativeList = [];
-        if (!empty($def['nativeNames']) && is_array($def['nativeNames'])) {
-            foreach ($def['nativeNames'] as $nn) {
-                if (is_string($nn) && $nn !== '') {
-                    $nativeList[] = $nn;
-                }
-            }
-        }
-        $nativeSet = array_fill_keys($nativeList, true);
-        $regionChars = ContentRepository::filterCharacters(fn ($ch) => isset($nativeSet[(string) ($ch['name'] ?? '')]));
-        $charCards = implode('', array_map(fn ($ch) => HtmlComponents::characterCard($ch), $regionChars));
-
-        $mechanicsHtml = '';
-        if (!empty($def['keyMechanics']) && is_array($def['keyMechanics'])) {
-            $mechanicsHtml = '<section><h2>Ключевые механики региона</h2><ul>';
-            foreach ($def['keyMechanics'] as $m) {
-                if (is_string($m) && $m !== '') {
-                    $mechanicsHtml .= '<li>' . Html::e($m) . '</li>';
-                }
-            }
-            $mechanicsHtml .= '</ul></section>';
-        }
-
-        $sectionsHtml = '';
-        if (!empty($def['sections']) && is_array($def['sections'])) {
-            foreach ($def['sections'] as $sec) {
-                if (!is_array($sec)) {
-                    continue;
-                }
-                $h = isset($sec['heading']) && is_string($sec['heading']) ? $sec['heading'] : '';
-                $b = isset($sec['body']) && is_string($sec['body']) ? $sec['body'] : '';
-                if ($h === '' && $b === '') {
-                    continue;
-                }
-                $sectionsHtml .= '<section><h2>' . Html::e($h) . '</h2><p>' . Html::e($b) . '</p></section>';
-            }
-        }
-
-        $bc = HtmlComponents::breadcrumbs($cfg, [
-            ['label' => 'Главная', 'href' => '/'],
-            ['label' => 'Регионы Тейвата', 'href' => '/regions'],
-            ['label' => $name, 'href' => $canonicalPath],
-        ]);
-
-        $slot = $bc . '<article class="article prose-flow region-article">'
-            . '<header class="article-head"><p class="muted">' . Html::e((string) ($def['element'] ?? '')) . ' · Архонт: ' . Html::e((string) ($def['archon'] ?? ''))
-            . ' · ' . Html::e((string) ($def['patchRange'] ?? '')) . '</p>'
-            . '<h1>' . Html::e($name) . '</h1><p class="lead">' . Html::e($introduction) . '</p></header>'
-            . $mechanicsHtml . $sectionsHtml
-            . ($charCards !== '' ? '<section><h2>Персонажи региона</h2><div class="grid-cards">' . $charCards . '</div></section>' : '')
-            . '</article>';
-
-        $url = Seo::absoluteUrl($cfg, $canonicalPath);
-        $jsonLd = Seo::jsonLdGraph([
-            Seo::publisherOrganization($cfg),
-            Seo::webSiteNode($cfg),
-            Seo::breadcrumbListSchema($cfg, [
-                ['label' => 'Главная', 'href' => '/'],
-                ['label' => 'Регионы Тейвата', 'href' => '/regions'],
-                ['label' => $name, 'href' => $canonicalPath],
-            ]),
-            [
-                '@type' => 'Place',
-                '@id' => $url . '#place',
-                'name' => $name . ' (Genshin Impact)',
-                'description' => $description,
-                'url' => $url,
-                'isPartOf' => ['@id' => Seo::siteUrl($cfg) . '/#website'],
-                'additionalType' => 'Region',
-            ],
-            [
-                '@type' => 'Article',
-                '@id' => $url . '#article',
-                'headline' => $name . ' — регион Genshin Impact',
-                'description' => $description,
-                'inLanguage' => 'ru-RU',
-                'url' => $url,
-                'author' => ['@id' => Seo::siteUrl($cfg) . '/#editorial-team'],
-                'publisher' => ['@id' => Seo::siteUrl($cfg) . '/#organization'],
-            ],
-        ]);
-
-        return [
-            'pageTitle' => $name . ' — регион Genshin Impact: персонажи, квесты, механики',
-            'pageDescription' => $description,
-            'canonicalPath' => $canonicalPath,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
         ];
@@ -1452,45 +1295,68 @@ HTML;
 
     public static function contentSectionIndex(array $cfg, array $item): array
     {
-        $title = $item['title'];
-        $desc = $item['summary'] ?? $title;
-        $canonicalPath = '/' . $item['section'];
-        if (str_ends_with($canonicalPath, '/_index')) {
-            $canonicalPath = substr($canonicalPath, 0, -7);
-        }
+        $title = (string) $item['title'];
+        $desc = (string) ($item['summary'] ?? $title);
+        $section = trim((string) $item['section'], '/');
+        $canonicalPath = ContentRepository::itemUrl($item);
 
         $htmlBody = ContentRepository::markdownToHtml($item['body_md']);
 
-        $children = [];
+        $subsections = [];
+        $articles = [];
         foreach (ContentRepository::allLive() as $child) {
-            if (!$child['isIndex'] && $child['section'] === $item['section']) {
-                $children[] = $child;
+            $childSection = trim((string) ($child['section'] ?? ''), '/');
+            if ($child === $item || $childSection === '') {
+                continue;
+            }
+
+            if ($child['isIndex']) {
+                $prefix = $section === '' ? '' : $section . '/';
+                if (str_starts_with($childSection, $prefix)) {
+                    $relative = substr($childSection, strlen($prefix));
+                    if ($relative !== '' && !str_contains($relative, '/')) {
+                        $subsections[] = $child;
+                    }
+                }
+                continue;
+            }
+
+            if ($childSection === $section) {
+                $articles[] = $child;
             }
         }
-        usort($children, fn ($a, $b) => strcmp((string) $a['title'], (string) $b['title']));
+        usort($subsections, fn ($a, $b) => strcmp((string) $a['title'], (string) $b['title']));
+        usort($articles, fn ($a, $b) => strcmp((string) $a['title'], (string) $b['title']));
 
-        $cardsHtml = '<div class="guides-grid">';
-        foreach ($children as $c) {
-            $childUrl = '/' . ltrim($c['section'] . '/' . $c['slug'], '/');
-            $childTitle = $c['title'];
-            $childDesc = $c['summary'] ?? '';
-            $cardsHtml .= HtmlComponents::guideCard($childUrl, $childTitle, $childDesc);
+        $subsectionsHtml = '';
+        if ($subsections !== []) {
+            $subsectionsHtml = '<section class="section"><h2 class="section-heading">Подразделы</h2><div class="grid-guides">';
+            foreach ($subsections as $c) {
+                $subsectionsHtml .= HtmlComponents::contentCard($c);
+            }
+            $subsectionsHtml .= '</div></section>';
         }
-        $cardsHtml .= '</div>';
 
-        $bc = HtmlComponents::breadcrumbs($cfg, [
-            ['label' => 'Главная', 'href' => '/'],
-            ['label' => $title, 'href' => $canonicalPath],
-        ]);
+        $articlesHtml = '';
+        if ($articles !== []) {
+            $articlesHtml = '<section class="section"><h2 class="section-heading">Статьи</h2><div class="grid-guides">';
+            foreach ($articles as $c) {
+                $articlesHtml .= HtmlComponents::contentCard($c);
+            }
+            $articlesHtml .= '</div></section>';
+        }
 
-        $slot = $bc . '<article class="article prose-flow"><header class="article-head"><h1>' . Html::e($title) . '</h1></header><div class="prose">' . $htmlBody . '</div></article>' . $cardsHtml;
+        $bcList = SectionLabels::breadcrumbsForSection($section);
+        if (isset($bcList[array_key_last($bcList)])) {
+            $bcList[array_key_last($bcList)] = ['label' => $title, 'href' => $canonicalPath];
+        }
+        $bc = HtmlComponents::breadcrumbs($cfg, $bcList);
+
+        $slot = $bc . '<article class="article prose-flow"><header class="article-head"><h1>' . Html::e($title) . '</h1></header><div class="prose">' . $htmlBody . '</div></article>' . $subsectionsHtml . $articlesHtml;
 
         $jsonLd = Seo::jsonLdGraph([
             Seo::publisherOrganization($cfg),
-            Seo::breadcrumbListSchema($cfg, [
-                ['label' => 'Главная', 'href' => '/'],
-                ['label' => $title, 'href' => $canonicalPath],
-            ])
+            Seo::breadcrumbListSchema($cfg, $bcList),
         ]);
 
         return [
@@ -1504,29 +1370,13 @@ HTML;
 
     public static function contentArticle(array $cfg, array $item): array
     {
-        $title = $item['title'];
+        $title = (string) $item['title'];
         $desc = Seo::cleanMetaDescription($item['summary'] ?? '', $title);
-        $canonicalPath = '/' . ltrim($item['section'] . '/' . $item['slug'], '/');
-        
-        $meta = $item['meta'];
-
-        $publishedIso = self::metaIso($meta['date'] ?? null);
-        $modifiedIso = self::metaIso($meta['updatedAt'] ?? null) ?? $publishedIso;
+        $canonicalPath = ContentRepository::itemUrl($item);
 
         $htmlBody = ContentRepository::markdownToHtml($item['body_md']);
-        
-        $bcList = [
-            ['label' => 'Главная', 'href' => '/'],
-        ];
-        if ($item['section']) {
-            $sectionParts = explode('/', $item['section']);
-            $currentSectionPath = '';
-            foreach ($sectionParts as $part) {
-                if ($part === '') continue;
-                $currentSectionPath .= '/' . $part;
-                $bcList[] = ['label' => ucfirst($part), 'href' => $currentSectionPath];
-            }
-        }
+
+        $bcList = SectionLabels::breadcrumbsForSection((string) $item['section']);
         $bcList[] = ['label' => $title, 'href' => $canonicalPath];
 
         $bc = HtmlComponents::breadcrumbs($cfg, $bcList);

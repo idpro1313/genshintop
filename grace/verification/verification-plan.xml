@@ -14,7 +14,7 @@
   <CriticalFlows>
     <VF-001 NAME="DockerPhpSiteImage" USE_CASES="UC-001" DATA_FLOW="DF-CONTENT-MIGRATE" PRIORITY="high">
       <scenario>Сборка прод Docker-образа сайта (PHP + nginx)</scenario>
-      <expected-outcome>docker build завершается без ошибок; этап RUN php lib/build-sitemap.php создаёт public/sitemap.xml; образ слушает порт 80</expected-outcome>
+      <expected-outcome>docker build завершается без ошибок; статический public/sitemap.xml уже включён в образ; образ слушает порт 80</expected-outcome>
       <required-signals>
         <log-marker>[Docker] php-fpm + nginx healthy</log-marker>
       </required-signals>
@@ -35,16 +35,16 @@
       <module-checks>
         <check-1>Статически: public/index.php подключает lib/web_dispatch.php; lib/bootstrap.php, lib/config.php; lib/Router.php отвечает 404 на /rss.xml</check-1>
         <check-2>Статически: docker/nginx-default.conf — try_files → /index.php; только location = /index.php с FastCGI и явным SCRIPT_FILENAME; location ~ \.php$ deny для прочих; без location = с 301 на /</check-2>
-        <check-3>Статически: docker/Dockerfile копирует lib/, docker/genshintop-redirects.conf → /etc/nginx/snippets/ (include только из server{} в nginx-default.conf), supervisord php-fpm+nginx, RUN php lib/build-sitemap.php</check-3>
+        <check-3>Статически: docker/Dockerfile копирует lib/, content/ и public/; legacy-редиректы и RUN php lib/build-sitemap.php отсутствуют; supervisord php-fpm+nginx</check-3>
         <check-4>Статически: lib/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
         <check-5>Статически: кластер /lootbar в lib/PageRenderer.php, lib/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
-        <check-6>Статически: lib/build-sitemap.php использует SiteRoutes и ContentRepository; пишет Sitemap 0.9 urlset (без sitemap-index)</check-6>
+        <check-6>Статически: public/sitemap.xml — Sitemap 0.9 urlset в git; lib/build-sitemap.php отсутствует</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — docker/build-push-action на ./docker/Dockerfile (context .); PR без push, main — push GHCR</check-7>
         <check-8>Статически: docker/docker-compose.yml — имя проекта Compose name: genshintop; готовый образ GHCR, Traefik labels; корневой update-from-github.sh — compose pull + up -d с docker/.env</check-8>
         <check-9>Статически: public/robots.txt — Sitemap: https://genshintop.ru/sitemap.xml; User-agent: Yandex с Clean-param и Host где применимо</check-9>
         <check-10>Статически: lib/Seo.php — webSiteNode с SearchAction на /guides?q=; editorialTeamPerson; stripDescriptionNoise убирает U+3164; OG-теги в шаблонах статей</check-10>
-        <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — тематические хабы (events, tcg, domains, bosses, quests и др.) и столпы PLAN: game-basics, advanced-guides, quest-walkthroughs; фильтрация по полю planTrack во фронтматтере гайдов</check-11>
-        <check-12>Статически: страницы регионов и lib/header.php содержат навигацию на /regions</check-12>
+        <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — тематические хабы (events, tcg, domains, bosses, quests и др.); столпы PLAN идут через content-индексы /guides/basics, /guides/advanced, /guides/walkthroughs</check-11>
+        <check-12>Статически: /regions-роуты, regions_data.php и docker/genshintop-redirects.conf отсутствуют; навигация ведёт на /world/regions</check-12>
         <check-13>Статически: PageRenderer или шаблоны гайда/персонажа выводят связанные персонажи/гайды из frontmatter</check-13>
         <check-14>Статически: lootbar-кластер и editorial-policy используют JSON-LD (Service, AboutPage) через lib/Seo.php</check-14>
         <check-15>Статически: шаблоны подключают Inter и Onest; public/css/site.css — prefers-reduced-motion, тёмная тема в духе idpro1313/dandangers modern-styles.css (опционально light через prefers-color-scheme)</check-15>
@@ -54,7 +54,8 @@
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги, хабы и динамические slug-страницы отдаются через PHP</scenario-1>
         <scenario-2 kind="success">В public/og/{guides,characters}/ присутствуют PNG для записей из og-manifest; превью og:image согласовано с OgManifest</scenario-2>
-        <scenario-3 kind="success">Ключевые маршруты перечислены в едином public/sitemap.xml после сборки образа</scenario-3>
+        <scenario-3 kind="success">Ключевые маршруты перечислены в едином статическом public/sitemap.xml</scenario-3>
+        <scenario-4 kind="success">V-NAV-1.18: /guides и /characters отдаются специальными каталогами с фильтрами; /world и /news показывают подразделы; /regions и неизвестные legacy URL получают 404 без 301</scenario-4>
       </scenarios>
       <required-log-markers />
     </V-M-PHP-SITE>
@@ -64,7 +65,7 @@
       <module-checks>
         <check-1>Статически: в репозитории отсутствуют каталоги scripts/ и reports/</check-1>
         <check-2>Статически: docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md описывают planTrack и соответствие docs/PLAN.md (матрица в info/README.md); не ссылаются на удалённые скрипты инвентаризации или wave-w1 и не ссылаются на удалённые плановые MD (волны / merge-split)</check-2>
-        <check-3>Статически: docker/genshintop-redirects.conf присутствует и допускает строки rewrite для смены slug гайдов</check-3>
+        <check-3>Статически: docker/genshintop-redirects.conf отсутствует; смены slug до публикации правятся напрямую в content/ и sitemap</check-3>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Редактор вручную объединяет дубли slug и добавляет 301 в nginx-snippets</scenario-1>
@@ -84,7 +85,7 @@
         <check-7>Статически (Wave 2 / 1.14.0): characters >= 110 live, weapons >= 55 live, artifacts >= 35 live, news/patches >= 40 live, news/banners >= 18 live, world/factions >= 15 live, enemies >= 18 live, materials >= 18 live</check-7>
         <check-8>Статически (Wave 3 / 1.15.0): world/factions = 24 live (0 draft, все доведены), guides/basics >= 18 live (0 draft по приоритетным), guides/advanced >= 11 live (0 draft по приоритетным), news/events >= 6 live, news/announcements >= 5 live, world/npc >= 13 live, materials >= 27 live, characters extension >= 4 full-wiki cards (Albedo, Kuki, Alhaitham, Ayaka)</check-8>
         <check-9>Статически (Wave 4 / 1.16.0): вне content/_templates/ нет frontmatter status:draft или status:stub; characters = 115 live, guides = 37 live, materials = 28 live, news/patches = 43 live, world/npc = 20 live, community = 4 live; character indexes не содержат явных пометок «нет, не сюда» и мусорных имён из черновиков</check-9>
-        <check-10>Статически (1.17.0): lib/ContentRepository.php вызывает RecursiveDirectoryIterator по content/; Router.php использует findItemByUrl; sitemap генерируется из content/; нет упоминаний info/ в lib и docker, каталог info/ перемещён в archive/info/</check-10>
+        <check-10>Статически (1.18.0): lib/ContentRepository.php вызывает RecursiveDirectoryIterator по content/ и исключает _templates + _by-*; Router.php сначала обслуживает /guides и /characters, затем generic findItemByUrl; sitemap статический; нет упоминаний info/ в lib и docker, каталог info/ перемещён в archive/info/</check-10>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Редактор открывает content/&lt;section&gt;/_index.md и видит структуру раздела со списком слугов и шаблоном</scenario-1>
@@ -93,7 +94,7 @@
         <scenario-4 kind="success">Wave 2 снимок: content/README.md содержит таблицу прогресса с колонками live/draft/stub/total и совпадает с фактическим Get-ChildItem подсчётом (зафиксировано 2026-05-13)</scenario-4>
         <scenario-5 kind="success">Wave 3 снимок: world/factions полностью live (0 draft); guides/basics + guides/advanced все приоритетные draft закрыты; news/events + news/announcements заполнены минимум 5 файлами каждый; характерные расширения compact→full wiki содержат разделы Лор, Таланты с полным описанием, Созвездия с tier-list, Билд (артефакты + статы + цели), Оружие (R, tier, заметки), Энергия и ротация, минимум 3 командные комбо, Spiral Abyss/Theatre заметки</scenario-5>
         <scenario-6 kind="success">Wave 4 снимок: rg "^status:\s*(draft|stub)" content/ возвращает только content/_templates/* и пример draft внутри code block user-guides; рабочие карточки publish-ready. Character index pages используют representative lists с корректными ссылками, а Skirk и patch 6.0 оформлены как safe live/TBA pages без неподтверждённых механик</scenario-6>
-        <scenario-7 kind="success">Сайт рендерится из content/ через contentArticle и contentSectionIndex. Старые URL перенаправляются 301-редиректом через nginx.</scenario-7>
+        <scenario-7 kind="success">Сайт рендерится из content/ через contentArticle и contentSectionIndex. Старые URL не редиректятся: до публичного запуска они удалены и получают 404.</scenario-7>
       </scenarios>
       <required-log-markers />
     </V-M-CONTENT-V2>

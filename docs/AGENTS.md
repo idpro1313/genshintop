@@ -7,15 +7,14 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живые гайды и карточки** — только **`info/guides/*.md`** и **`info/characters/*.md`** (см. **`lib/ContentRepository.php`**).  матрица гайдов — **`info/README.md`**.
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей**, **гайдов**, оружия, артефактов, мира, новостей, инструментов, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живой контент** — каталог **`content/`** (см. **`lib/ContentRepository.php`**). Служебные `content/**/_by-*` не индексируются рантаймом и sitemap.
 
-Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. Сборка прод-образа выполняет **`php lib/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
+Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. **`public/sitemap.xml`** — ручной статический файл в git; при добавлении/удалении публичных страниц обновляйте его вместе с навигацией. Маршрут **`/rss.xml` не используется** (ответ 404).
 
 ### Команды и операции
 
 | Команда / действие | Назначение |
 |-------------------|------------|
-| `php lib/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
 | Docker | **`docker/README.md`** — образ GHCR, **`docker/docker-compose.yml`**, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` из корня репозитория |
 | Обновление на сервере | **`bash ./update-from-github.sh`** из корня репозитория — pull образа, `up -d` |
@@ -24,13 +23,13 @@
 
 ### Модули (GRACE)
 
-- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`** (тёмная тема и компоненты в духе [idpro1313/dandangers](https://github.com/idpro1313/dandangers) `modern-styles.css`: teal/violet, карточный prose; опционально light через `prefers-color-scheme`), **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе **`/etc/nginx/snippets/genshintop-redirects.conf`**, не `conf.d` — иначе `rewrite` попадает в контекст `http`). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
+- **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`** (тёмная тема и компоненты в духе [idpro1313/dandangers](https://github.com/idpro1313/dandangers) `modern-styles.css`: teal/violet, карточный prose; опционально light через `prefers-color-scheme`), **`public/sitemap.xml`**, **`public/og/`**, Docker/nginx. JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**; каталог персонажей: фильтры по стихии/оружию/редкости; generic content-роутер обслуживает остальные `content/`-разделы.
 - **M-CONTENT-GUIDE-REFACTOR** — контент **`info/guides`**, **`info/characters`**;  редиректы **`docker/genshintop-redirects.conf`**.
 - **M-CONTENT-V2** — параллельный каталог **`content/`** для новой редакции сайта по [`docs/PLAN.md`](PLAN.md). Зеркалит все разделы PLAN: characters/, weapons/, artifacts/, materials/, enemies/, guides/{basics,advanced,walkthroughs}/, tools/, world/{regions,lore,factions,npc}/, news/{events,announcements,banners,patches}/, community/. Стандарты — **`content/STYLE.md`**, шаблоны frontmatter — **`content/_templates/*.md`**. На момент 1.17.0 сайт переключён на чтение из `content/`. Старый контент перенесён в `archive/info/` и отключён от публичного роутера. Начиная с 1.16.0 все рабочие разделы `content/` имеют `status: live` во frontmatter.
 
 ### Гайды: таксономия и frontmatter
 
-В **`info/guides/*.md`**: как минимум **`title`**, **`category`**, **`sourceSlug`**; **`planTrack`** (`basics` | `advanced` | `walkthroughs`) — столп [`PLAN.md`](PLAN.md), см. [`info/README.md`](../info/README.md); опционально **`topic`**, **`gameVersion`**, **`status`**, **`audience`**, **`relatedCharacters`**, **`relatedGuides`**, даты, **`sources`**, **`summary`**. Эвристики на сайте — **`lib/GuideTaxonomy.php`**. Хабы **`/guides/*`** — **`lib/guide_hub_definitions.php`** / **`lib/GuideHub.php`** (включая **`game-basics`**, **`advanced-guides`**, **`quest-walkthroughs`**). Партнёрские URL — **`lib/Partners.php`**.
+В **`content/guides/**/*.md`**: как минимум **`title`**, **`section`**, **`slug`**, **`status`**, **`summary`**, **`planTrack`** (`basics` | `advanced` | `walkthroughs`). Эвристики на сайте — **`lib/GuideTaxonomy.php`**. Столпы PLAN обслуживаются content-индексами **`/guides/basics`**, **`/guides/advanced`**, **`/guides/walkthroughs`**; тематические хабы **`/guides/*`** — **`lib/guide_hub_definitions.php`** / **`lib/GuideHub.php`**. Партнёрские URL — **`lib/Partners.php`**.
 
 ### Деплой
 
@@ -144,19 +143,17 @@ Testing rules:
 ```
 public/index.php        - Только require lib/web_dispatch.php (nginx → PHP-FPM)
 lib/
-  bootstrap.php, config.php, web_dispatch.php, build-sitemap.php
+  bootstrap.php, config.php, web_dispatch.php
   *.php                 - Router, PageRenderer, Seo, контент, хабы, OG
   layout.php, header.php, footer.php, lootbar_banner.php — общая оболочка страниц
   og-manifest.json      - список ключей OG-PNG для OgManifest (ручная правка / внешний генератор)
-info/
-  guides/, characters/  - Канон Markdown для сайта (читает ContentRepository)
-content/                - Не в git: при необходимости локально guides-archive/, characters-archive/, snapshot-*
+content/                - Канон Markdown для сайта (читает ContentRepository); _by-* служебные и не индексируются
 public/
   css/site.css          - Ванильный CSS (dandangers-like dark + optional light)
-  robots.txt, favicon, og/** (PNG при необходимости)
+  sitemap.xml, robots.txt, favicon, og/** (PNG при необходимости)
 docker/
   Dockerfile, docker-compose.yml, nginx-default.conf, supervisord.conf, docker-entrypoint.sh
-  genshintop-redirects.conf, env.example (шаблон docker/.env), README.md — деплой Traefik/GHCR
+  env.example (шаблон docker/.env), README.md — деплой Traefik/GHCR
 update-from-github.sh   - С сервера: git ff + compose pull/up (исполнять из корня репо)
 grace/
   requirements/requirements.xml
@@ -167,7 +164,7 @@ grace/
 docs/
   AGENTS.md             - Этот документ
   HISTORY.md            - Журнал итераций для агентов
-  SEO-CHECKLIST.md      - Чек-лист после выката (URL, sitemap, редиректы)
+  SEO-CHECKLIST.md      - Чек-лист после выката (URL, sitemap)
 .cursor/rules/          - Правила Cursor (GRACE, история, git)
 .kilo/                  - Навыки Kilo / GRACE
 ```

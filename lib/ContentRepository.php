@@ -23,7 +23,7 @@ final class ContentRepository
             $path = $file[0];
             $relPath = str_replace('\\', '/', substr($path, strlen($dir)));
             
-            if (str_starts_with($relPath, '/_templates/')) {
+            if (str_starts_with($relPath, '/_templates/') || str_contains($relPath, '/_by-')) {
                 continue;
             }
             if (str_ends_with($relPath, 'README.md') || str_ends_with($relPath, 'STYLE.md')) {
@@ -89,6 +89,18 @@ final class ContentRepository
         return $out;
     }
 
+    /** @param array<string,mixed> $item */
+    public static function itemUrl(array $item): string
+    {
+        $section = trim((string) ($item['section'] ?? ''), '/');
+        if (!empty($item['isIndex'])) {
+            return '/' . $section;
+        }
+
+        $slug = trim((string) ($item['slug'] ?? ''), '/');
+        return '/' . ltrim($section . '/' . $slug, '/');
+    }
+
     public static function guideTimestamp(array $g): int
     {
         $meta = $g['meta'] ?? [];
@@ -132,7 +144,7 @@ final class ContentRepository
         $all = self::allLive();
         $out = [];
         foreach ($all as $item) {
-            if (!$item['isIndex'] && str_starts_with($item['section'], 'characters') && !str_starts_with($item['slug'], '_by-')) {
+            if (!$item['isIndex'] && $item['section'] === 'characters') {
                 $out[] = $item;
             }
         }
@@ -217,13 +229,8 @@ final class ContentRepository
     {
         $path = trim($urlPath, '/');
         foreach (self::allLive() as $item) {
-            // For root index files, the url is just the section. e.g. /news
-            // For items, it is /section/slug
-            $itemUrl = $item['isIndex'] ? $item['section'] : ltrim($item['section'] . '/' . $item['slug'], '/');
-            if ($itemUrl === $path || $itemUrl === $path . '/_index') {
-                return $item;
-            }
-            if (!$item['isIndex'] && $item['slug'] === $path) { // top level items?
+            $itemUrl = trim(self::itemUrl($item), '/');
+            if ($itemUrl === $path) {
                 return $item;
             }
         }

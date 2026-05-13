@@ -1,16 +1,10 @@
 # genshintop
 
-Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, живой Markdown в **`info/guides/`** и **`info/characters/`**, ванильный CSS в **`public/css/`**. В репозитории **нет Node.js, npm и `package.json`**.
+Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, живой Markdown в **`content/`**, ванильный CSS в **`public/css/`**. В репозитории **нет Node.js, npm и `package.json`**.
 
-## Карта сайта (локально / при сборке образа)
+## Карта сайта
 
-При наличии PHP в PATH:
-
-```powershell
-php lib/build-sitemap.php
-```
-
-Тот же шаг выполняется автоматически при **`docker build -f docker/Dockerfile .`** (контекст — корень репозитория).
+`public/sitemap.xml` — статический файл в git. При добавлении или удалении страниц обновляйте его вручную вместе с навигацией.
 
 ## Docker и обновление с GitHub
 
@@ -30,6 +24,6 @@ docker compose --env-file docker/.env -f docker/docker-compose.yml up -d
 - **`docker/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
-Канонический контент на сайте — **`info/{guides,characters}`**. Папка **`content/`** (архивы `guides-archive`, `characters-archive`, снимки) **не в git** — при необходимости держите копию локально для справки. Массовая генерация OG и тяжёлые пайплайны — вне этого репо при необходимости.
+Канонический контент на сайте — **`content/`**. Старый каталог `info/` перенесён в архив. Массовая генерация OG и тяжёлые пайплайны — вне этого репо при необходимости.
 
 Версия проекта: **`VERSION`** (SemVer).

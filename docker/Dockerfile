@@ -20,10 +20,6 @@ WORKDIR /var/www
 COPY lib ./lib/
 COPY content ./content/
 COPY public ./public/
-# Не класть в conf.d: в Alpine nginx туда подключается http{}, а rewrite допустим только в server/location.
-COPY docker/genshintop-redirects.conf /etc/nginx/snippets/genshintop-redirects.conf
-
-RUN php lib/build-sitemap.php
 
 EXPOSE 80
 

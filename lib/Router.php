@@ -34,17 +34,6 @@ final class Router
             return;
         }
 
-        // --- Content Generic Routing ---
-        $item = ContentRepository::findItemByUrl($path);
-        if ($item) {
-            if ($item['isIndex']) {
-                self::send($cfg, PageRenderer::contentSectionIndex($cfg, $item));
-            } else {
-                self::send($cfg, PageRenderer::contentArticle($cfg, $item));
-            }
-            return;
-        }
-
         // --- Guides ---
         if ($path === '/guides') {
             self::send($cfg, PageRenderer::guidesIndex($cfg));
@@ -59,9 +48,13 @@ final class Router
 
                 return;
             }
-            $g = ContentRepository::guideBySlug($seg);
-            if ($g) {
-                self::send($cfg, PageRenderer::guideArticle($cfg, $g));
+            $item = ContentRepository::findItemByUrl($path);
+            if ($item) {
+                if ($item['isIndex']) {
+                    self::send($cfg, PageRenderer::contentSectionIndex($cfg, $item));
+                } else {
+                    self::send($cfg, PageRenderer::contentArticle($cfg, $item));
+                }
 
                 return;
             }
@@ -109,25 +102,6 @@ final class Router
             return;
         }
 
-        // --- Regions ---
-        if ($path === '/regions') {
-            self::send($cfg, PageRenderer::regionsIndex($cfg));
-
-            return;
-        }
-        if (preg_match('#^/regions/([^/]+)$#', $path, $m)) {
-            $defs = regions_definitions();
-            if (isset($defs[$m[1]])) {
-                self::send($cfg, PageRenderer::regionPage($cfg, $defs[$m[1]]));
-
-                return;
-            }
-            http_response_code(404);
-            self::send($cfg, PageRenderer::notFound($cfg));
-
-            return;
-        }
-
         // --- LootBar ---
         if ($path === '/lootbar') {
             self::send($cfg, PageRenderer::lootbarIndex($cfg));
@@ -144,6 +118,17 @@ final class Router
             http_response_code(404);
             self::send($cfg, PageRenderer::notFound($cfg));
 
+            return;
+        }
+
+        // --- Content Generic Routing ---
+        $item = ContentRepository::findItemByUrl($path);
+        if ($item) {
+            if ($item['isIndex']) {
+                self::send($cfg, PageRenderer::contentSectionIndex($cfg, $item));
+            } else {
+                self::send($cfg, PageRenderer::contentArticle($cfg, $item));
+            }
             return;
         }
 

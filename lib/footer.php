@@ -15,30 +15,38 @@ $version = is_readable($verPath) ? trim((string) file_get_contents($verPath)) : 
       <?php endif; ?>
     </div>
     <div class="footer-col">
-      <div class="footer-heading">Гайды</div>
+      <div class="footer-heading">Каталоги</div>
       <ul class="footer-links">
-        <li><a href="/guides/game-basics">Основы игры</a></li>
-        <li><a href="/guides/advanced-guides">Продвинутые</a></li>
-        <li><a href="/guides/quest-walkthroughs">Квесты</a></li>
-        <li><a href="/guides/banners">Баннеры</a></li>
-        <li><a href="/guides/patches">Патчи</a></li>
-        <li><a href="/guides/codes">Промокоды</a></li>
-        <li><a href="/guides/tier-list">Тир-листы</a></li>
+        <li><a href="/characters">Персонажи</a></li>
+        <li><a href="/guides">Гайды</a></li>
+        <li><a href="/weapons">Оружие</a></li>
+        <li><a href="/artifacts">Артефакты</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <div class="footer-heading">Персонажи</div>
+      <div class="footer-heading">Мир</div>
       <ul class="footer-links">
-        <li><a href="/characters/pyro">Пиро</a></li>
-        <li><a href="/characters/hydro">Гидро</a></li>
-        <li><a href="/characters/dendro">Дендро</a></li>
-        <li><a href="/characters">Все</a></li>
+        <li><a href="/world">Мир и лор</a></li>
+        <li><a href="/world/regions">Регионы</a></li>
+        <li><a href="/world/factions">Фракции</a></li>
+        <li><a href="/world/lore">Лор</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading">Новости</div>
+      <ul class="footer-links">
+        <li><a href="/news">Новости</a></li>
+        <li><a href="/news/events">События</a></li>
+        <li><a href="/news/announcements">Анонсы</a></li>
+        <li><a href="/news/banners">Баннеры</a></li>
+        <li><a href="/news/patches">Патчи</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <div class="footer-heading">Инфо</div>
       <ul class="footer-links">
-        <li><a href="/regions">Регионы</a></li>
+        <li><a href="/tools">Инструменты</a></li>
+        <li><a href="/community">Сообщество</a></li>
         <li><a href="/lootbar">Пополнение</a></li>
         <li><a href="/editorial-policy">Редакция</a></li>
         <li><a href="/partnership-disclosure">Партнёрство</a></li>
