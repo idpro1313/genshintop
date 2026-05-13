@@ -1,16 +1,16 @@
 # genshintop
 
-Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, Markdown в **`content/`**, ванильный CSS в **`public/css/`**. SEO URL сохранены (гайды, персонажи, LootBar, регионы).
+Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, Markdown в **`content/`**, ванильный CSS в **`public/css/`**. В репозитории **нет Node.js, npm и `package.json`**.
 
-## Быстрый старт (контент и утилиты)
+## Карта сайта (локально / при сборке образа)
+
+При наличии PHP в PATH:
 
 ```powershell
-npm install
-npm run content:migrate    # при необходимости из gi-database → content/
-npm run og:generate        # опционально: OG PNG + data/og-manifest.json
+php scripts/build-sitemap.php
 ```
 
-Сборка **sitemap** в образе сайта: `php scripts/build-sitemap.php` (вызывается из **`Dockerfile`** при `docker build`). Локально: `npm run sitemap:build`, если в PATH есть PHP.
+Тот же шаг выполняется автоматически при **`docker build`** (см. корневой **`Dockerfile`**).
 
 ## Docker и обновление с GitHub
 
@@ -30,6 +30,6 @@ docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d
 - **`deploy/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
-Исходный корпус Markdown: **`gi-database/`** (`INDEX.md`, `database.json`).
+Исходный корпус Markdown (не входит в рантайм сайта): **`gi-database/`** (`INDEX.md`, `database.json`). Синхронизация с **`content/`** — вручную или отдельным инструментом вне этого репо.
 
 Версия проекта: **`VERSION`** (SemVer).

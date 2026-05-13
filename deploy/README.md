@@ -90,7 +90,7 @@ docker run --rm -p 8080:80 genshintop-web
 | `Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php scripts/build-sitemap.php` |
 | `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt`, include редиректов |
 | `deploy/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
-| `deploy/genshintop-redirects.conf` | Редиректы slug (генерирует также `npm run content:enrich`) |
+| `deploy/genshintop-redirects.conf` | Редиректы slug (ручная правка или внешний генератор) |
 | `deploy/SEO-CHECKLIST.md` | Чек-лист после выката |
 | `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` |
 | `deploy/update-from-github.sh` | Обновление на Linux: git fast-forward, pull образа, up -d |

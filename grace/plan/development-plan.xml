@@ -17,66 +17,6 @@
   </ArchitectureNotes>
 
   <Modules>
-    <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" LAYER="0" ORDER="1" STATUS="implemented">
-      <contract>
-        <purpose>Аудит и перенос Markdown из gi-database в content/ с frontmatter и отчётами.</purpose>
-        <inputs>
-          <param name="gi-database" type="filesystem" />
-        </inputs>
-        <outputs>
-          <param name="content" type="markdown" />
-          <param name="reports" type="json" />
-        </outputs>
-        <errors>
-          <error code="MISSING_GI" />
-        </errors>
-      </contract>
-      <interface>
-        <export-audit PURPOSE="npm run content:audit" />
-        <export-migrate PURPOSE="npm run content:migrate" />
-        <export-verify PURPOSE="npm run content:verify" />
-        <export-audit-guides PURPOSE="npm run content:audit-guides" />
-        <export-enrich PURPOSE="npm run content:enrich" />
-      </interface>
-      <depends>none</depends>
-      <target>
-        <source>scripts/audit-database.ts</source>
-        <source>scripts/process-content.ts</source>
-        <source>scripts/verify-migration.ts</source>
-        <source>scripts/audit-guides-content.ts</source>
-        <source>scripts/enrich-guides.ts</source>
-      </target>
-      <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
-    </M-CONTENT-PIPELINE>
-
-    <M-OG-PIPELINE NAME="OgImagesPipeline" TYPE="UTILITY" LAYER="0" ORDER="1" STATUS="implemented">
-      <contract>
-        <purpose>Рендер Open Graph картинок 1200×630 PNG на каждую запись коллекций characters и guides; манифест для OgManifest::imageForEntry.</purpose>
-        <inputs>
-          <param name="content/characters/*.md" type="markdown" />
-          <param name="content/guides/*.md" type="markdown" />
-        </inputs>
-        <outputs>
-          <param name="public/og/{collection}/{slug}.png" type="png" />
-          <param name="data/og-manifest.json" type="json" />
-        </outputs>
-        <errors>
-          <error code="SHARP_MISSING" />
-        </errors>
-      </contract>
-      <interface>
-        <export-og-generate PURPOSE="npm run og:generate" />
-        <export-OgManifest PURPOSE="lib/OgManifest.php: imageForEntry → /og/...png или /og-default.svg" />
-      </interface>
-      <depends>M-CONTENT-PIPELINE</depends>
-      <target>
-        <source>scripts/generate-og-images.ts</source>
-        <source>lib/OgManifest.php</source>
-        <source>data/og-manifest.json</source>
-      </target>
-      <verification-ref>V-M-OG-PIPELINE</verification-ref>
-    </M-OG-PIPELINE>
-
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
         <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php, контент Markdown в content/, шаблоны PHP в templates/, ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей, /lootbar/*, /regions/*, страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация scripts/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в templates/layout.php. Партнёрские URL — lib/Partners.php. LootBar-блоки — templates/partials и lib/LootbarConfig.php.</purpose>
@@ -95,7 +35,7 @@
         <export-docker-build PURPOSE="docker build . — nginx+supervisor+php-fpm, без Node в runtime" />
         <export-sitemap-build PURPOSE="php scripts/build-sitemap.php → public/sitemap.xml" />
       </interface>
-      <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
+      <depends>none</depends>
       <target>
         <source>Dockerfile</source>
         <source>docker/nginx-default.conf</source>
@@ -154,7 +94,7 @@
   </Modules>
 
   <DataFlow>
-    <DF-CONTENT-MIGRATE NAME="GiToSiteContent" TRIGGER="npm run content:migrate">
+    <DF-CONTENT-MIGRATE NAME="GiToSiteContent" TRIGGER="ручная или внешняя синхронизация gi-database → content/">
       <step-1>Обход gi-database/01_characters и 06_guides</step-1>
       <step-2>Очистка и извлечение метаданных, обогащение ссылками на оружие/артефакты</step-2>
       <step-3>Запись content/** и reports/migration-report.json</step-3>
@@ -181,15 +121,12 @@
   <ImplementationOrder>
     <Phase-1 name="SiteMVP" status="done">
       <goal>Рабочий прод-сайт на PHP + nginx в Docker и канонический контент в content/</goal>
-      <step-1 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">Скрипты аудита и миграции</step-1>
-      <step-2 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Роутинг, шаблоны, SEO, деплой GHCR</step-2>
+      <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Роутинг, шаблоны, SEO, деплой GHCR; контент в content/</step-1>
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
-      <goal>SEO-усиление 0.5.0: OG-картинки, обогащение фронтматтера 424 гайдов, новые хабы (events/tcg/domains/bosses/quests), регионы (sumeru/fontaine/natlan), коммерческое усиление /lootbar без скрытого текста, перелинковка, performance (асинхронный Cinzel, отложенная Метрика).</goal>
-      <step-1 module="M-OG-PIPELINE" status="done" verification="V-M-OG-PIPELINE">scripts/generate-og-images.ts + data/og-manifest.json + OgManifest.php</step-1>
-      <step-2 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">scripts/enrich-guides.ts: транслит slug, фронтматтер, чистка ](#)</step-2>
-      <step-3 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Единый sitemap.xml (build-sitemap.php), robots, приоритеты URL; хабы и регионы в PHP; glossary и Service-schema на /lootbar</step-3>
+      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node в репозитории (1.0.2).</goal>
+      <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
     </Phase-5>
 
     <!-- Phases use unique tags:

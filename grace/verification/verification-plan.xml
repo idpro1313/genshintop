@@ -30,47 +30,12 @@
   </CriticalFlows>
 
   <ModuleVerification>
-    <V-M-CONTENT-PIPELINE MODULE="M-CONTENT-PIPELINE" PRIORITY="high">
-      <test-files />
-      <module-checks>
-        <check-1>npm run content:audit — создаёт reports/content-audit.json</check-1>
-        <check-2>npm run content:migrate — заполняет content/ и migration-report.json</check-2>
-        <check-3>npm run content:verify — сверка счётчиков после полной миграции</check-3>
-        <check-4>npm run content:audit-guides — создаёт reports/guides-audit.json со статическими метриками гайдов</check-4>
-        <check-5>npm run content:enrich — обновляет фронтматтер, переименовывает кириллические slug, пишет deploy/genshintop-redirects.conf и reports/slug-redirects.json</check-5>
-      </module-checks>
-      <scenarios>
-        <scenario-1 kind="success">Отчёты созданы, число выходных файлов согласовано с отчётом</scenario-1>
-        <scenario-2 kind="failure">Отсутствует gi-database — скрипт завершается с кодом 1</scenario-2>
-        <scenario-3 kind="success">После content:enrich у каждого гайда заполнены topic, status, audience, summary; для category=codes и category=patch есть sources; ](#) отсутствует в теле; relatedGuides ссылаются только на существующие slug</scenario-3>
-      </scenarios>
-      <required-log-markers />
-      <wave-follow-up>Проверка выборочных статей на артефакты скрапинга</wave-follow-up>
-      <phase-follow-up>Удаление gi-database только после ручного подтверждения качества</phase-follow-up>
-    </V-M-CONTENT-PIPELINE>
-
-    <V-M-OG-PIPELINE MODULE="M-OG-PIPELINE" PRIORITY="medium">
-      <test-files />
-      <module-checks>
-        <check-1>npm run og:generate — создаёт public/og/{guides,characters}/&lt;slug&gt;.png 1200×630 для каждой записи</check-1>
-        <check-2>data/og-manifest.json содержит entries в формате "&lt;collection&gt;/&lt;slug&gt;" и поле generatedAt в ISO</check-2>
-        <check-3>OgManifest::imageForEntry(collection, slug) возвращает /og/&lt;collection&gt;/&lt;slug&gt;.png если slug в манифесте, иначе /og-default.svg</check-3>
-      </module-checks>
-      <scenarios>
-        <scenario-1 kind="success">PNG сгенерированы, размер 1200×630, манифест согласован со структурой каталога</scenario-1>
-        <scenario-2 kind="failure">Пакет sharp не установлен — скрипт завершается с инструкцией npm i -D sharp</scenario-2>
-      </scenarios>
-      <required-log-markers />
-      <wave-follow-up>Идемпотентность: повторный прогон не меняет mtime, если контент не изменился</wave-follow-up>
-      <phase-follow-up>Регенерация при существенных правках title или summary гайда</phase-follow-up>
-    </V-M-OG-PIPELINE>
-
     <V-M-PHP-SITE MODULE="M-PHP-SITE" PRIORITY="high">
       <test-files />
       <module-checks>
         <check-1>Статически: public/index.php, bootstrap.php, config.php; lib/Router.php отвечает 404 на /rss.xml</check-1>
         <check-2>Статически: docker/nginx-default.conf — try_files → /index.php, отдельные location для .xml/.txt/.webmanifest, include genshintop-redirects.conf*, gzip и security headers</check-2>
-        <check-3>Статически: Dockerfile копирует PHP-приложение, supervisord php-fpm+nginx, RUN php scripts/build-sitemap.php</check-3>
+        <check-3>Статически: Dockerfile копирует scripts/build-sitemap.php, supervisord php-fpm+nginx, RUN php scripts/build-sitemap.php</check-3>
         <check-4>Статически: templates/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
         <check-5>Статически: шаблоны /lootbar (templates/pages), lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
         <check-6>Статически: scripts/build-sitemap.php использует SiteRoutes и ContentRepository; пишет Sitemap 0.9 urlset (без sitemap-index)</check-6>
@@ -88,7 +53,7 @@
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">Главная, каталоги, хабы и динамические slug-страницы отдаются через PHP</scenario-1>
-        <scenario-2 kind="success">После npm run og:generate в public/og/{guides,characters}/ есть PNG; превью og:image согласовано с OgManifest</scenario-2>
+        <scenario-2 kind="success">В public/og/{guides,characters}/ присутствуют PNG для записей из og-manifest; превью og:image согласовано с OgManifest</scenario-2>
         <scenario-3 kind="success">Ключевые маршруты перечислены в едином public/sitemap.xml после сборки образа</scenario-3>
       </scenarios>
       <required-log-markers />

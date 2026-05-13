@@ -258,3 +258,9 @@
 - **Почему:** запрос пользователя убрать всё ненужное в проекте после миграции — меньше путаницы с nginx и legacy compose.
 - **Файлы:** удалены перечисленные; правки `deploy/README.md`, `deploy/genshintop-redirects.conf`, `scripts/enrich-guides.ts`, `docs/AGENTS.md`, `docs/HISTORY.md`, `VERSION`, `package.json`, `grace/knowledge-graph/knowledge-graph.xml`
 - **Решение:** не трогали **`gi-database/`** и сгенерированные отчёты — это рабочие данные/артефакты пайплайна; **`scripts/sitemap-lastmod.mjs`** в дереве уже отсутствовал.
+
+### Удаление Node/npm из репозитория (1.0.2)
+- **Что:** удалены **`package.json`**, **`package-lock.json`**, **`tsconfig.json`**, все **`scripts/*.ts`** (миграция, аудит, enrich, OG через sharp); в образ копируется только **`scripts/build-sitemap.php`** (`Dockerfile`: явный `COPY …/build-sitemap.php`). Обновлены **`README.md`**, **`docs/AGENTS.md`**, **`grace/**`** (граф, план, technology, requirements, verification), **`deploy/genshintop-redirects.conf`** / **`deploy/README.md`**, правило **`.cursor/rules/github-actions.mdc`**. Локально удалён каталог **`node_modules`**, если присутствовал.
+- **Почему:** запрос пользователя убрать npm и node_modules из проекта — сайт полностью на PHP в проде.
+- **Файлы:** удалены перечисленные; правки `Dockerfile`, `VERSION`, `docs/HISTORY.md`, и др. по диффу.
+- **Решение:** PATCH **1.0.2**. Пайплайны переноса **`gi-database` → `content/`**, массовой генерации OG и enrich редиректов остаются **вне репозитория** (ручной процесс или отдельный инструмент).

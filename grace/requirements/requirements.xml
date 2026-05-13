@@ -30,7 +30,7 @@
       <Action>Запускает миграцию контента из gi-database</Action>
       <Goal>Получить канонический контент в content/ перед удалением gi-database</Goal>
       <Preconditions>Наличие папки gi-database с 01_characters и 06_guides</Preconditions>
-      <AcceptanceCriteria>reports/migration-report.json, npm run content:verify при полном переносе</AcceptanceCriteria>
+      <AcceptanceCriteria>reports/migration-report.json при наличии; канонический контент ведётся в content/</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-002>
@@ -87,11 +87,11 @@
 
     <UC-008>
       <Actor>Редактор / агент</Actor>
-      <Action>Запускает npm run content:enrich и npm run og:generate</Action>
-      <Goal>Нормализовать фронтматтер 424 гайдов, сгенерировать OG-картинки и 301-редиректы для кириллических slug</Goal>
-      <Preconditions>src/content/guides и src/content/characters заполнены; sharp установлен</Preconditions>
-      <AcceptanceCriteria>deploy/genshintop-redirects.conf и reports/slug-redirects.json актуальны; public/og/{collection}/{slug}.png существуют; src/data/og-manifest.json согласован</AcceptanceCriteria>
-      <Priority>high</Priority>
+      <Action>Обновляет OG-изображения и карту редиректов вручную или внешним инструментом (в репозитории нет npm)</Action>
+      <Goal>Актуальные public/og/*.png, data/og-manifest.json и при необходимости deploy/genshintop-redirects.conf</Goal>
+      <Preconditions>Контент в content/guides и content/characters; редактор имеет средство генерации PNG при необходимости</Preconditions>
+      <AcceptanceCriteria>Манифест согласован с файлами в public/og/; редиректы валидны для nginx</AcceptanceCriteria>
+      <Priority>medium</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-008>
   </UseCases>

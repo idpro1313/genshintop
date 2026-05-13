@@ -7,7 +7,7 @@ alwaysApply: false
 # GitHub Actions
 
 - Workflow-файлы держи в `.github/workflows/` и называй по назначению: `build.yml`, `deploy.yml`, `docker-publish.yml`.
-- Для Node/Astro используй `npm ci`, а не `npm install`; версии Node согласуй с `Dockerfile`.
+- Для этого проекта CI ориентирован на **Docker build** корневого `Dockerfile` (PHP + nginx); отдельный шаг Node/npm не используется.
 - Не храни секреты в YAML: используй `secrets.*` и `vars.*`; не выводи секреты в логах.
 - Для Docker prefer registry build/push в CI, чтобы сервер после `git pull` мог делать `docker compose pull` + `up -d` без долгой локальной сборки.
 - Не добавляй автоматический деплой на production без явного согласования ветки, окружения и секретов.

@@ -1,10 +1,10 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.0.1">
+    <Project NAME="genshintop" VERSION="1.0.2">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
-    <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): Markdown в content/, роутинг public/index.php, шаблоны templates/, стили public/css/site.css; хабы /guides/*, /characters/*, /lootbar/*, /regions/*; единый /sitemap.xml без RSS; SearchAction на /guides?q=; деплой GHCR + Traefik.</annotation>
+    <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): Markdown в content/, роутинг public/index.php, шаблоны templates/, стили public/css/site.css; без Node/npm в репозитории; единый /sitemap.xml; деплой GHCR + Traefik.</annotation>
 
     <M-GI-DATABASE NAME="GiDatabase" TYPE="DATA_LAYER" STATUS="implemented">
-      <purpose>Исходный каталог Markdown до переноса; после миграции может быть удалён.</purpose>
+      <purpose>Исходный каталог Markdown; синхронизация с content/ — вне этого репозитория или вручную.</purpose>
       <path>gi-database/</path>
       <depends>none</depends>
       <annotations>
@@ -13,32 +13,10 @@
       </annotations>
     </M-GI-DATABASE>
 
-    <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" STATUS="implemented">
-      <purpose>Аудит gi-database, миграция в content/, отчёты в reports/, авто-нормализация фронтматтера и slug-редиректы для гайдов.</purpose>
-      <path>scripts/audit-database.ts, scripts/audit-guides-content.ts, scripts/process-content.ts, scripts/verify-migration.ts, scripts/enrich-guides.ts, scripts/guide-taxonomy.ts, scripts/seo-helpers.ts</path>
-      <depends>M-GI-DATABASE</depends>
-      <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
-      <annotations>
-        <fn-audit-guides-content PURPOSE="Статический аудит гайдов в content/guides → reports/guides-audit.json" />
-        <fn-enrich-guides PURPOSE="Транслит slug, заполнение topic/status/audience/gameVersion/updatedAt/reviewedAt/sources/relatedCharacters/relatedGuides, чистка ](#); пишет deploy/genshintop-redirects.conf" />
-      </annotations>
-    </M-CONTENT-PIPELINE>
-
-    <M-OG-PIPELINE NAME="OgImagesPipeline" TYPE="UTILITY" STATUS="implemented">
-      <purpose>Рендер OG-картинок 1200×630 PNG для записей characters и guides из SVG-шаблона через sharp.</purpose>
-      <path>scripts/generate-og-images.ts, data/og-manifest.json, public/og/, lib/OgManifest.php</path>
-      <depends>M-CONTENT-PIPELINE</depends>
-      <verification-ref>V-M-OG-PIPELINE</verification-ref>
-      <annotations>
-        <fn-generate-og-images PURPOSE="Сканирует MD в content/, рендерит SVG → PNG в public/og/{collection}/{slug}.png, пишет манифест" />
-        <fn-OgManifest-imageForEntry PURPOSE="Возвращает /og/&lt;collection&gt;/&lt;slug&gt;.png если есть в манифесте, иначе /og-default.svg" />
-      </annotations>
-    </M-OG-PIPELINE>
-
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: PHP front-controller, те же URL что ранее на Astro; персонажи/гайды из content/; кластер /lootbar/*; регионы; страницы доверия; JSON-LD и мета через lib/Seo.php; единый sitemap.xml (scripts/build-sitemap.php при docker build); **без** RSS (/rss.xml → 404); Яндекс.Метрика reachGoal в templates/layout.php; nginx try_files → index.php; редиректы deploy/genshintop-redirects.conf.</purpose>
-      <path>Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, bootstrap.php, config.php, public/index.php, lib/Router.php, lib/PageRenderer.php, lib/ContentRepository.php, lib/Seo.php, lib/Partners.php, lib/LootbarConfig.php, lib/GuideHub.php, lib/CharacterHub.php, lib/SiteRoutes.php, lib/GuideTaxonomy.php, templates/, public/css/site.css, scripts/build-sitemap.php, deploy/docker-compose.yml, deploy/genshintop-redirects.conf, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
-      <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
+      <purpose>Публичный SEO-сайт genshintop.ru: PHP front-controller; персонажи/гайды из content/; кластер /lootbar/*; регионы; JSON-LD через lib/Seo.php; sitemap через scripts/build-sitemap.php при docker build; без RSS; OgManifest + data/og-manifest.json + public/og/*.png в репозитории.</purpose>
+      <path>Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, bootstrap.php, config.php, public/index.php, lib/, templates/, public/css/site.css, scripts/build-sitemap.php, data/og-manifest.json, deploy/docker-compose.yml, deploy/genshintop-redirects.conf, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
+      <depends>none</depends>
       <verification-ref>V-M-PHP-SITE</verification-ref>
       <annotations>
         <route-lootbar-cluster PURPOSE="Хаб /lootbar и дочерние SEO-страницы партнёрского топ-апа" />
@@ -52,33 +30,10 @@
       </annotations>
     </M-PHP-SITE>
 
-    <CrossLink from="M-PHP-SITE" to="M-CONTENT-PIPELINE" relation="consumes Markdown collections content/" />
-    <CrossLink from="M-PHP-SITE" to="M-OG-PIPELINE" relation="reads data/og-manifest.json for per-entry OG images" />
-    <CrossLink from="M-OG-PIPELINE" to="M-CONTENT-PIPELINE" relation="reads enriched content/{guides,characters} markdown" />
-    <CrossLink from="M-CONTENT-PIPELINE" to="M-GI-DATABASE" relation="reads source corpus" />
+    <CrossLink from="M-PHP-SITE" to="M-GI-DATABASE" relation="опциональный исходный корпус до правок в content/" />
 
     <!-- Module declarations use unique ID-based tags.
-         Each module gets a unique ID prefix (e.g., M-CONFIG, M-DB, M-AUTH).
-
-         Example:
-         <M-CONFIG NAME="Config" TYPE="UTILITY" STATUS="planned">
-            <purpose>Application configuration and environment management</purpose>
-            <path>src/config/index.php</path>
-            <depends>none</depends>
-            <verification-ref>V-M-CONFIG</verification-ref>
-            <annotations>
-              <fn-loadConfig PURPOSE="Load and validate config from environment" />
-              <type-AppConfig PURPOSE="Configuration type definition" />
-              <export-config PURPOSE="Singleton config instance" />
-            </annotations>
-          </M-CONFIG>
-
-          Module types: ENTRY_POINT, CORE_LOGIC, DATA_LAYER, UI_COMPONENT, UTILITY, INTEGRATION
-
-          CrossLinks connect dependent modules:
-          <CrossLink from="M-SOURCE" to="M-TARGET" relation="description" />
-
-          STATUS should usually be one of: planned, partial, implemented
+         STATUS should usually be one of: planned, partial, implemented
      -->
 
   </Project>
