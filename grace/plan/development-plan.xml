@@ -19,7 +19,7 @@
   <Modules>
     <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), контент Markdown в content/, шаблоны PHP в lib/templates/, ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей, /lootbar/*, /regions/*, страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация lib/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/templates/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/templates/partials и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
+        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php (тонкий require lib/web_dispatch.php), контент Markdown в content/, шаблоны PHP в корне lib (layout.php, header.php, footer.php, lootbar_banner.php), ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей, /lootbar/*, /regions/*, страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация lib/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в lib/layout.php. Партнёрские URL — lib/Partners.php. LootBar-плашка — lib/lootbar_banner.php и lib/LootbarConfig.php; страницы кластера — lib/PageRenderer.php.</purpose>
         <inputs>
           <param name="content" type="markdown" />
           <param name="config.php" type="php-config" />
@@ -101,7 +101,7 @@
       <step-1>Пользователь видит пункт навигации, плашку под шапкой или ссылку на главной</step-1>
       <step-2>Переходит на внутренний маршрут /lootbar с SEO и JSON-LD</step-2>
       <step-3>Нажимает внешний CTA на LootBar.gg с параметром aff_short=dandnagers</step-3>
-      <evidence>lib/PageRenderer.php (кластер /lootbar), lib/templates/partials/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php</evidence>
+      <evidence>lib/PageRenderer.php (кластер /lootbar), lib/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php</evidence>
     </DF-LOOTBAR-AFFILIATE>
 
     <!-- Data flows use unique ID-based tags:
@@ -120,7 +120,7 @@
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
-      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории (1.2.0).</goal>
+      <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории; шаблоны только файлы в корне lib без подпапок (1.2.1).</goal>
       <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
     </Phase-5>
 

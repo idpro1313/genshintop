@@ -318,3 +318,9 @@
 - **Почему:** запрос пользователя — собрать все PHP в **`lib/`** (в **`public/`** остаётся минимальная точка входа для nginx/FastCGI); единый канонический путь SEO-чеклиста под **`docs/`**.
 - **Файлы:** `lib/bootstrap.php`, `lib/config.php`, `lib/web_dispatch.php`, `lib/build-sitemap.php`, `public/index.php`, `Dockerfile`, `VERSION`, удалены корневые `bootstrap.php`, `config.php`, `scripts/build-sitemap.php`, при необходимости **`deploy/SEO-CHECKLIST.md`** (дубликат).
 - **Решение:** MINOR **1.2.0**.
+
+### Плоская структура lib без подпапок (1.2.1)
+- **Что:** удалены **`lib/templates/`** и **`lib/templates/partials/`**; **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`** перенесены в корень **`lib/`**; **`Router.php`** подключает **`lib/layout.php`**; в **`layout.php`** обновлены **`require`** на одноуровневые пути. Обновлены **`docs/AGENTS.md`**, **`docs/SEO-CHECKLIST.md`**, **`grace/**/*.xml`**, **`VERSION` → 1.2.1**.
+- **Почему:** запрос пользователя — в **`lib/`** без подпапок (единый каталог PHP и шаблонов).
+- **Файлы:** `lib/layout.php`, `lib/header.php`, `lib/footer.php`, `lib/lootbar_banner.php`, `lib/Router.php`, удалены `lib/templates/**`, `VERSION`, `docs/AGENTS.md`, `docs/SEO-CHECKLIST.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`
+- **Решение:** PATCH **1.2.1** — только файловая структура и документация; публичные URL не менялись.

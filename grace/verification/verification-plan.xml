@@ -36,15 +36,15 @@
         <check-1>Статически: public/index.php подключает lib/web_dispatch.php; lib/bootstrap.php, lib/config.php; lib/Router.php отвечает 404 на /rss.xml</check-1>
         <check-2>Статически: docker/nginx-default.conf — try_files → /index.php; только location = /index.php с FastCGI и явным SCRIPT_FILENAME; location ~ \.php$ deny для прочих; без location = с 301 на /</check-2>
         <check-3>Статически: Dockerfile копирует lib/ (bootstrap, config, web_dispatch, build-sitemap, классы), supervisord php-fpm+nginx, RUN php lib/build-sitemap.php</check-3>
-        <check-4>Статически: lib/templates/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
-        <check-5>Статически: кластер /lootbar в lib/PageRenderer.php, lib/templates/partials/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
+        <check-4>Статически: lib/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
+        <check-5>Статически: кластер /lootbar в lib/PageRenderer.php, lib/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
         <check-6>Статически: lib/build-sitemap.php использует SiteRoutes и ContentRepository; пишет Sitemap 0.9 urlset (без sitemap-index)</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — docker/build-push-action на ./Dockerfile; PR без push, main — push GHCR</check-7>
         <check-8>Статически: deploy/docker-compose.yml — готовый образ GHCR, Traefik labels; update-from-github.sh — pull + up -d</check-8>
         <check-9>Статически: public/robots.txt — Sitemap: https://genshintop.ru/sitemap.xml; User-agent: Yandex с Clean-param и Host где применимо</check-9>
         <check-10>Статически: lib/Seo.php — webSiteNode с SearchAction на /guides?q=; editorialTeamPerson; stripDescriptionNoise убирает U+3164; OG-теги в шаблонах статей</check-10>
         <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — хабы events, tcg, domains, bosses, quests и пр.</check-11>
-        <check-12>Статически: страницы регионов и partials header содержат навигацию на /regions</check-12>
+        <check-12>Статически: страницы регионов и lib/header.php содержат навигацию на /regions</check-12>
         <check-13>Статически: PageRenderer или шаблоны гайда/персонажа выводят связанные персонажи/гайды из frontmatter</check-13>
         <check-14>Статически: lootbar-кластер и editorial-policy используют JSON-LD (Service, AboutPage) через lib/Seo.php</check-14>
         <check-15>Статически: шаблоны подключают Onest и Cinzel; public/css/site.css — prefers-reduced-motion и компоненты Teyvat</check-15>

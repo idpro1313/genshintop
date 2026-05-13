@@ -25,7 +25,7 @@
 
 | Имя события (`reachGoal`) | Где используется |
 |---------------------------|------------------|
-| `lootbar_banner_click` | Плашка — CTA «Получить скидку» (`lib/templates/partials/lootbar_banner.php`) |
+| `lootbar_banner_click` | Плашка — CTA «Получить скидку» (`lib/lootbar_banner.php`) |
 | `lootbar_hero_cta` | Хаб и мини-hero подстраниц — «Перейти на LootBar» |
 | `lootbar_coupon_cta` | Карточка купона — «Активировать на LootBar» |
 | `lootbar_coupon_copy` | Кнопка «Копировать код» |
@@ -36,7 +36,7 @@
 | `lootbar_bottom_welkin` | Финальный блок хаба — луна |
 | `lootbar_promo_cta`, `lootbar_crystals_cta`, `lootbar_welkin_cta`, `lootbar_howto_cta`, `lootbar_safety_cta` | Тематические страницы `/lootbar/*` |
 
-Подписка на клики: **`lib/templates/layout.php`** (обработчик `[data-reach-goal]`).
+Подписка на клики: **`lib/layout.php`** (обработчик `[data-reach-goal]`).
 
 ## Итерации
 
