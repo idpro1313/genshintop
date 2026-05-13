@@ -3,14 +3,14 @@
 declare(strict_types=1);
 
 /**
- * CLI: инвентаризация content/guides для редакционного рефакторинга.
+ * CLI: инвентаризация content/guides-archive для редакционного рефакторинга.
  * Запуск из корня: php scripts/guides-refactor-inventory.php
  */
 
 define('SITE_ROOT', dirname(__DIR__));
 require_once SITE_ROOT . '/lib/Frontmatter.php';
 
-$guidesDir = SITE_ROOT . '/content/guides';
+$guidesDir = SITE_ROOT . '/content/guides-archive';
 $files = glob($guidesDir . '/*.md') ?: [];
 
 /** @var list<array<string,mixed>> */
@@ -123,7 +123,7 @@ usort($guideRows, static fn ($a, $b) => ($b['ladderRatio'] <=> $a['ladderRatio']
 
 $out = [
     'generatedAt' => gmdate('c'),
-    'guidesDir' => 'content/guides',
+    'guidesDir' => 'content/guides-archive',
     'totalGuides' => count($guideRows),
     'guides' => $guideRows,
     'mergeCandidatesByTitle' => $mergeByTitle,

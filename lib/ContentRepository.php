@@ -13,7 +13,7 @@ final class ContentRepository
         if (self::$guidesCache !== null) {
             return self::$guidesCache;
         }
-        $dir = SITE_ROOT . '/content/guides';
+        $dir = SITE_ROOT . '/info/guides';
         $out = [];
         foreach (glob($dir . '/*.md') ?: [] as $path) {
             $slug = basename($path, '.md');

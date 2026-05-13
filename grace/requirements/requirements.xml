@@ -1,7 +1,7 @@
 <RequirementsAnalysis VERSION="0.1.0">
   <Project>
     <name>genshintop</name>
-    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; единственный канонический корпус — Markdown в content/.</annotation>
+    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; гайды в info/guides/, персонажи в content/, архивы в content/guides-archive/ и content/characters-archive/.</annotation>
     <keywords>genshin-impact, php, seo, guides, characters, docker</keywords>
   </Project>
 
@@ -27,8 +27,8 @@
 
     <UC-002>
       <Actor>Редактор / агент</Actor>
-      <Action>Ведёт и обновляет Markdown в content/guides и content/characters</Action>
-      <Goal>Актуальный канонический корпус на сайте без промежуточного каталога в репозитории</Goal>
+      <Action>Ведёт и обновляет Markdown в info/guides и content/characters</Action>
+      <Goal>Актуальные гайды в info/guides и персонажи в content/ для сборки Docker и sitemap</Goal>
       <Preconditions>Корректный frontmatter и согласованность slug с URL маршрутизации</Preconditions>
       <AcceptanceCriteria>Новые и изменённые статьи попадают в сборку Docker и в sitemap</AcceptanceCriteria>
       <Priority>high</Priority>
@@ -59,7 +59,7 @@
       <Actor>Игрок / читатель, поисковая система</Actor>
       <Action>Открывает новые хабы /guides/events, /guides/tcg, /guides/domains, /guides/bosses, /guides/quests</Action>
       <Goal>Закрыть семантические пробелы по ивентам, TCG, доменам, боссам и квестам архонтов</Goal>
-      <Preconditions>guide_hub_definitions и контент гайдов в content/guides</Preconditions>
+      <Preconditions>guide_hub_definitions и контент гайдов в info/guides</Preconditions>
       <AcceptanceCriteria>Каждый хаб доступен по своему URL, попадает в sitemap, имеет breadcrumbs и CollectionPage JSON-LD где реализовано</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
@@ -89,7 +89,7 @@
       <Actor>Редактор / агент</Actor>
       <Action>Обновляет OG-изображения и карту редиректов вручную или внешним инструментом (в репозитории нет npm)</Action>
       <Goal>Актуальные public/og/*.png, lib/og-manifest.json и при необходимости deploy/genshintop-redirects.conf</Goal>
-      <Preconditions>Контент в content/guides и content/characters; редактор имеет средство генерации PNG при необходимости</Preconditions>
+      <Preconditions>Гайды в info/guides, карточки в content/characters; редактор имеет средство генерации PNG при необходимости</Preconditions>
       <AcceptanceCriteria>Манифест согласован с файлами в public/og/; редиректы валидны для nginx</AcceptanceCriteria>
       <Priority>medium</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
@@ -97,7 +97,7 @@
 
     <UC-009>
       <Actor>Редактор / агент</Actor>
-      <Action>Выполняет редакционный рефакторинг корпуса content/guides по docs/GUIDE_EDITORIAL.md и волнам docs/guides-refactor-waves.md</Action>
+      <Action>Выполняет редакционный рефакторинг корпуса (архив content/guides-archive, живые статьи info/guides) по docs/GUIDE_EDITORIAL.md и волнам docs/guides-refactor-waves.md</Action>
       <Goal>Связная проза, корректная разметка, актуальный frontmatter; при ИА — merge/split и 301 в docker/genshintop-redirects.conf</Goal>
       <Preconditions>Отчёт reports/guides-refactor-inventory.json по желанию перед массовыми правками</Preconditions>
       <AcceptanceCriteria>Нет «лесенки» и битых якорей в отредактированных статьях; relatedGuides указывают на существующие slug; редиректы добавлены при удалении или переименовании slug</AcceptanceCriteria>

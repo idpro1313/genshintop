@@ -1,12 +1,12 @@
-# Инвентаризация content/guides (альтернатива php scripts/guides-refactor-inventory.php на машинах без PHP в PATH).
+# Инвентаризация content/guides-archive (альтернатива php scripts/guides-refactor-inventory.php на машинах без PHP в PATH).
 # Запуск из корня: pwsh scripts/guides-refactor-inventory.ps1
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-if (-not (Test-Path (Join-Path $root 'content/guides'))) {
+if (-not (Test-Path (Join-Path $root 'content/guides-archive'))) {
     $root = Get-Location
 }
-$guidesDir = Join-Path $root 'content/guides'
+$guidesDir = Join-Path $root 'content/guides-archive'
 $reportsDir = Join-Path $root 'reports'
 if (-not (Test-Path $reportsDir)) { New-Item -ItemType Directory -Path $reportsDir | Out-Null }
 
@@ -112,7 +112,7 @@ $guideRows = @($guideRows | Sort-Object @{ Expression = 'ladderRatio'; Descendin
 
 $out = [ordered]@{
     generatedAt                   = [datetime]::UtcNow.ToString('s') + 'Z'
-    guidesDir                     = 'content/guides'
+    guidesDir                     = 'content/guides-archive'
     totalGuides                   = $guideRows.Count
     guides                        = @($guideRows)
     mergeCandidatesByTitle        = @($mergeByTitle | Sort-Object normalizedTitle)

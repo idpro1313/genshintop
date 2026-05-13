@@ -1,14 +1,14 @@
 # Опорный корпус контента (редакция GenshinTop)
 
-Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт страницы только из **`content/guides/`** и **`content/characters/`** (см. [`ContentRepository`](../lib/ContentRepository.php)). Каталоги под `info/` — редакционное зеркало: правки и новые материалы ведите в `info/…`, затем **копируйте** в `content/…` для публикации.
+Два параллельных контура: **гайды** и **персонажи**. Сайт отдаёт **гайды** из **`info/guides/*.md`** и **карточки персонажей** из **`content/characters/*.md`** (см. [`ContentRepository`](../lib/ContentRepository.php)). Для персонажей каталог **`info/characters/`** — редакционное зеркало: новые правки ведите в `info/characters`, затем **копируйте** в `content/characters` для публикации. **Новые и правки гайдов** — только в **`info/guides/`** (без дублирования в `content/guides/`).
 
 ## Гайды
 
-Каталог `info/guides/` — черновик статей: новые опорные тексты с нуля по плану матрицы (без смыслового копирования из устаревшего архива). После смены корпуса старые URL уходят в [`content/guides-archive/`](../content/guides-archive); актуальные файлы из `info/guides/` копируются в [`content/guides/`](../content/guides).
+Каталог **`info/guides/`** — канон опорных гайдов для сайта (новые тексты по матрице ниже, без смыслового копирования из архива). Массовый старый корпус лежит в [`content/guides-archive/`](../content/guides-archive); пустой слой **`content/guides/`** без `.md` — см. [`content/guides/README.md`](../content/guides/README.md).
 
 ## Инвентаризация исходного корпуса (на момент работ)
 
-| Кластер | Ориентиры в старом `content/guides` | Куда смысл уходит в новом корпусе |
+| Кластер | Ориентиры в архиве `content/guides-archive` | Куда смысл уходит в новом корпусе |
 |---------|-------------------------------------|-----------------------------------|
 | Баннеры | `banner-*`, десятки датированных URL | Один вечнозелёный гайд по молитвам + хаб `/guides/banners` |
 | Патчи | `update-*` | Гайд «как читать патч» + хаб `/guides/patches` |
@@ -24,11 +24,11 @@
 | Техника | ПК, железо, FPS | Платформы и производительность |
 | Прочее | артефакты, оружие, мир | Отдельные базовые столпы |
 
-**Счётчик:** в `content/guides` было **232** файла `.md` (актуализация через `php scripts/guides-refactor-inventory.php`, если PHP доступен в среде).
+**Счётчик:** в **`content/guides-archive`** было **232** файла `.md` (актуализация: `php scripts/guides-refactor-inventory.php`, если PHP доступен в среде).
 
 ## Матрица: хаб → статья (финальные slug)
 
-Все статьи плоским списком в `info/guides/*.md`; после выкатки в **`content/guides/`** их подхватывает [`ContentRepository`](../lib/ContentRepository.php).
+Все статьи плоским списком в **`info/guides/*.md`**; [`ContentRepository`](../lib/ContentRepository.php) читает их оттуда напрямую.
 
 | Хаб сайта | Файл / slug | Назначение |
 |-----------|------------|------------|
@@ -67,7 +67,7 @@
 | lore | `teyvat-lor-bez-spoilerov` | Вход в лор без спойлеров |
 | newbie | `zhurnal-priklyucheniy-nagrady` | Справочник приключений и награды |
 
-**Итого после волны 2:** 29 статей в `info/guides/` и `content/guides/`; slug `promocodes` сохранён для преемственности URL.
+**Итого после волны 2:** 29 статей в `info/guides/`; slug `promocodes` сохранён для преемственности URL.
 
 ### Волна 3 (расширение базы — 8 статей)
 
@@ -82,7 +82,7 @@
 | party | `elementarnyy-masterstvo-kogda-kachat` | EM для реакций и билдов |
 | newbie / мир | `gadzhety-i-komfort-issledovaniya` | Гаджеты и удобство исследования |
 
-**Итого:** 37 статей в `info/guides/` и `content/guides/`.
+**Итого:** 37 статей в `info/guides/`.
 
 ### Волна 4 (расширение базы — 8 статей)
 
@@ -97,7 +97,7 @@
 | party | `kodeks-protivnikov-kak-chitat` | Кодекс противников перед боем |
 | economy / прокачка | `rastvoritel-snov-i-materialy-bossov` | Растворитель снов и материалы боссов |
 
-**Итого:** 45 статей в `info/guides/` и `content/guides/`.
+**Итого:** 45 статей в `info/guides/`.
 
 ### Волна 5 (расширение базы — 8 статей)
 
@@ -138,7 +138,7 @@
 | general | `skrytye-dostizheniya-i-namekarty` | Скрытые ачивки и карточки профиля |
 | newbie | `knigi-receptov-i-kraft-list` | Рецепты, крафт и учёт чертежей |
 
-**Итого после волн 5–7:** 69 статей в `info/guides/` и `content/guides/`.
+**Итого после волн 5–7:** 69 статей в `info/guides/`.
 
 ### Волна 8 (расширение базы — 8 статей)
 
@@ -179,7 +179,7 @@
 | patch | `predzagruzka-patch-mesto-na-diske` | Предзагрузка патча и место на диске |
 | economy | `genesis-kristally-i-oplata` | Genesis Crystals и оплата |
 
-**Итого после волн 8–10:** 93 статьи в `info/guides/` и `content/guides/`.
+**Итого после волн 8–10:** 93 статьи в `info/guides/`.
 
 ### Волна 11 (расширение базы — 8 статей)
 
@@ -233,7 +233,7 @@
 | economy | `kosmeticheskie-krylya-skin` | Крылья и скины |
 | general | `cheat-modding-politika` | Читы, моды и честная игра |
 
-**Итого после волн 11–14:** 125 статей в `info/guides/` и `content/guides/`.
+**Итого после волн 11–14:** 125 статей в `info/guides/`.
 
 ## Персонажи
 

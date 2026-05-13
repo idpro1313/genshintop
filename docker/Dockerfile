@@ -17,6 +17,7 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 WORKDIR /var/www
 
 COPY lib ./lib/
+COPY info ./info/
 COPY content ./content/
 COPY public ./public/
 # Не класть в conf.d: в Alpine nginx туда подключается http{}, а rewrite допустим только в server/location.

@@ -502,3 +502,9 @@
 - **Почему:** редакционная правка после выкатки волн 11–14.
 - **Файлы:** `info/guides/seelie-i-mir-golovolomok.md`, `content/guides/seelie-i-mir-golovolomok.md`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.10.1**.
+
+### Единый канон гайдов: info/guides, инвентаризация архива (1.10.2)
+- **Что:** гайды на сайте читаются из **`info/guides/`** (**`lib/ContentRepository.php`**); дубли опорных статей в **`content/guides/*.md`** сняты (остался **`content/guides/README.md`**). Скрипты **`scripts/guides-refactor-inventory.php`** и **`.ps1`** целят **`content/guides-archive/`**; перегенерирован **`reports/guides-refactor-inventory.json`**. Обновлены **`info/README.md`**, **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/plan/development-plan.xml`**, **`grace/requirements/requirements.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.10.2**, **`docs/HISTORY.md`**.
+- **Почему:** единый каталог правок гайдов — **`info/guides/`**, без зеркала в **`content/guides/`**.
+- **Файлы:** `content/guides/README.md`, `scripts/guides-refactor-inventory.php`, `scripts/guides-refactor-inventory.ps1`, `reports/guides-refactor-inventory.json`, `info/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.10.2** — документация и отчёты согласованы с архитектурой контента; архив — **`content/guides-archive/`**.
