@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.4.0">
+    <Project NAME="genshintop" VERSION="1.5.0">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): Markdown в content/, роутинг public/index.php, шаблоны PHP в корне lib/, стили public/css/site.css; без Node/npm в репозитории; единый /sitemap.xml; деплой GHCR + Traefik.</annotation>
 
@@ -19,6 +19,13 @@
         <fn-no-rss PURPOSE="/rss.xml возвращает 404 (Router)" />
       </annotations>
     </M-PHP-SITE>
+
+    <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" STATUS="implemented">
+      <purpose>Стандарты и инструменты редакционного рефакторинга гайдов; инвентаризация корпуса; playbook merge/split и nginx-редиректы.</purpose>
+      <path>scripts/guides-refactor-inventory.php, scripts/guides-refactor-inventory.ps1, docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md, reports/guides-refactor-inventory.json, docker/genshintop-redirects.conf</path>
+      <depends>M-PHP-SITE</depends>
+      <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
+    </M-CONTENT-GUIDE-REFACTOR>
 
     <!-- Module declarations use unique ID-based tags.
          STATUS should usually be one of: planned, partial, implemented

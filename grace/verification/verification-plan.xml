@@ -58,6 +58,20 @@
       </scenarios>
       <required-log-markers />
     </V-M-PHP-SITE>
+
+    <V-M-CONTENT-GUIDE-REFACTOR MODULE="M-CONTENT-GUIDE-REFACTOR" PRIORITY="medium">
+      <test-files />
+      <module-checks>
+        <check-1>Статически: scripts/guides-refactor-inventory.php парсит Frontmatter через lib/Frontmatter.php при запуске из корня (или эквивалент scripts/guides-refactor-inventory.ps1)</check-1>
+        <check-2>Статически: reports/guides-refactor-inventory.json содержит totalGuides и массив guides после генерации</check-2>
+        <check-3>Статически: docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md — непротиворечивы с docs/AGENTS.md</check-3>
+        <check-4>Статически: docker/genshintop-redirects.conf допускает строки rewrite для смены slug гайдов</check-4>
+      </module-checks>
+      <scenarios>
+        <scenario-1 kind="success">Редактор запускает инвентаризацию и получает JSON с mergeCandidatesByTitle</scenario-1>
+      </scenarios>
+      <required-log-markers />
+    </V-M-CONTENT-GUIDE-REFACTOR>
   </ModuleVerification>
 
   <PhaseGates>

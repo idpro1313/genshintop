@@ -16,15 +16,17 @@
 | Команда / действие | Назначение |
 |-------------------|------------|
 | `php lib/build-sitemap.php` | Локально (при установленном PHP): **`public/sitemap.xml`** |
+| `php scripts/guides-refactor-inventory.php` | Инвентаризация **`content/guides`** → **`reports/guides-refactor-inventory.json`** |
 | Docker | **`docker/README.md`** — образ GHCR, **`docker/docker-compose.yml`**, Traefik |
-| GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` |
+| GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` из корня репозитория |
 | Обновление на сервере | **`bash ./update-from-github.sh`** из корня репозитория — pull образа, `up -d` |
 
-Аудит гайдов в масштабе репозитория, генерация OG-PNG и массовые правки редиректов **не входят в обязательный состав этого репозитория** (при необходимости — вручную или отдельным инструментом).
+Редакционный стандарт гайдов: **`docs/GUIDE_EDITORIAL.md`**, волны массовой правки — **`docs/guides-refactor-waves.md`**, merge/slug/редиректы — **`docs/GUIDES_MERGE_SPLIT.md`**. Генерация OG-PNG и прочие внешние пайплайны контента при необходимости выполняются отдельно от этого репозитория.
 
 ### Модули (GRACE)
 
 - **M-PHP-SITE** — **`public/index.php`** (тонкая точка входа nginx), **`lib/`** (весь PHP приложения без подпапок: **`bootstrap.php`**, **`config.php`**, **`web_dispatch.php`**, **`build-sitemap.php`**, классы, **`layout.php`**, **`header.php`**, **`footer.php`**, **`lootbar_banner.php`**, **`og-manifest.json`**), **`public/css/site.css`** (тёмная тема и компоненты в духе [idpro1313/dandangers](https://github.com/idpro1313/dandangers) `modern-styles.css`: teal/violet, карточный prose; опционально light через `prefers-color-scheme`), **`public/og/`**, Docker/nginx, **`docker/genshintop-redirects.conf`** (в образе через **`docker/Dockerfile`**). JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
+- **M-CONTENT-GUIDE-REFACTOR** — контент **`content/guides`**, документы **`docs/GUIDE_EDITORIAL.md`**, **`docs/guides-refactor-waves.md`**, **`docs/GUIDES_MERGE_SPLIT.md`**, скрипт **`scripts/guides-refactor-inventory.php`**, отчёт **`reports/guides-refactor-inventory.json`**.
 
 ### Гайды: таксономия и frontmatter
 
@@ -155,6 +157,11 @@ docker/
   Dockerfile, docker-compose.yml, nginx-default.conf, supervisord.conf, docker-entrypoint.sh
   genshintop-redirects.conf, env.example (шаблон docker/.env), README.md — деплой Traefik/GHCR
 update-from-github.sh   - С сервера: git ff + compose pull/up (исполнять из корня репо)
+scripts/
+  guides-refactor-inventory.php — CLI: JSON-отчёт по content/guides (требуется PHP)
+  guides-refactor-inventory.ps1 — то же на PowerShell, если PHP недоступен
+reports/
+  guides-refactor-inventory.json — артефакт инвентаризации (перегенерировать скриптом)
 grace/
   requirements/requirements.xml
   technology/technology.xml

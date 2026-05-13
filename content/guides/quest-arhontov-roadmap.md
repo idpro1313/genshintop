@@ -8,10 +8,14 @@ summary: "Полная дорожная карта квестов архонто
 sourceSlug: quest-arhontov-roadmap
 date: 2026-05-07
 updatedAt: 2026-05-07
-reviewedAt: 2026-05-07
+reviewedAt: 2026-05-13
 sources:
   - "https://genshin.hoyoverse.com/news"
   - "https://www.hoyolab.com/"
+relatedGuides:
+  - "events-aktualnye-6-x"
+  - "bossy-genshin-impact"
+  - "domain-podzemelya-rasspisanie"
 ---
 
 # Квесты архонтов Genshin Impact: дорожная карта

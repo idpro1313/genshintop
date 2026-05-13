@@ -7,8 +7,12 @@ audience: all
 summary: "Гайд по карточной игре Священный призыв семи в Genshin Impact: правила, типы карт, ключевые механики, тир-лист колод и как фармить очки чести."
 sourceSlug: tcg-svyaschennyy-prizyv-semi
 date: 2026-05-07
-updatedAt: 2026-05-07
-reviewedAt: 2026-05-07
+updatedAt: 2026-05-13
+reviewedAt: 2026-05-13
+relatedGuides:
+  - "tier-list-aktualniy-6-x"
+  - "domain-podzemelya-rasspisanie"
+  - "events-aktualnye-6-x"
 sources:
   - "https://genshin.hoyoverse.com/news"
   - "https://www.hoyolab.com/"

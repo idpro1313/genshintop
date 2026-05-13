@@ -9,10 +9,14 @@ summary: "Гайд по текущим ивентам Genshin Impact 6.x: рас
 sourceSlug: events-aktualnye-6-x
 date: 2026-05-07
 updatedAt: 2026-05-07
-reviewedAt: 2026-05-07
+reviewedAt: 2026-05-13
 sources:
   - "https://genshin.hoyoverse.com/news"
   - "https://www.hoyolab.com/"
+relatedGuides:
+  - "tier-list-aktualniy-6-x"
+  - "promocodes"
+  - "events-aktualnye-6-x"
 ---
 
 # Ивенты Genshin Impact 6.x: текущие события и расписание
@@ -25,7 +29,7 @@ sources:
 
 - официальной [новостной ленте HoYoverse](https://genshin.hoyoverse.com/news);
 - [HoYoLAB](https://www.hoyolab.com/) — пост «Event Compendium» в начале каждого патча;
-- внутри игры: вкладка «События» в меню paimon → Manuals.
+- внутри игры: вкладка «События» в меню **Паймон**.
 
 ## Какие типы ивентов бывают
 

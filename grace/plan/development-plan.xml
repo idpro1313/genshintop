@@ -52,6 +52,38 @@
       <verification-ref>V-M-PHP-SITE</verification-ref>
     </M-PHP-SITE>
 
+    <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" LAYER="1" ORDER="3" STATUS="implemented">
+      <contract>
+        <purpose>Редакционная нормализация корпуса content/guides: стандарты текста, инвентаризация (метаданные, «лесенка», кандидаты merge/split), волны W0–W3, редиректы slug в docker/genshintop-redirects.conf.</purpose>
+        <inputs>
+          <param name="guides_md" type="markdown-glob" />
+          <param name="redirects_conf" type="nginx-snippet" />
+        </inputs>
+        <outputs>
+          <param name="inventory_json" type="json-report" />
+          <param name="editorial_docs" type="markdown" />
+        </outputs>
+        <errors>
+          <error code="INVENTORY_WRITE_FAIL" />
+        </errors>
+      </contract>
+      <interface>
+        <export-inventory-php PURPOSE="php scripts/guides-refactor-inventory.php → reports/guides-refactor-inventory.json" />
+        <export-inventory-ps PURPOSE="pwsh scripts/guides-refactor-inventory.ps1 — альтернатива без PHP в PATH" />
+      </interface>
+      <depends>M-PHP-SITE</depends>
+      <target>
+        <source>scripts/guides-refactor-inventory.php</source>
+        <source>scripts/guides-refactor-inventory.ps1</source>
+        <source>docs/GUIDE_EDITORIAL.md</source>
+        <source>docs/guides-refactor-waves.md</source>
+        <source>docs/GUIDES_MERGE_SPLIT.md</source>
+        <source>reports/guides-refactor-inventory.json</source>
+        <source>docker/genshintop-redirects.conf</source>
+      </target>
+      <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
+    </M-CONTENT-GUIDE-REFACTOR>
+
     <!-- Modules use unique ID-based tags:
          <M-xxx NAME="..." TYPE="..." LAYER="N" ORDER="N" STATUS="planned">
             <contract>
@@ -93,7 +125,7 @@
   <DataFlow>
     <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в content/ или внешняя подготовка файлов">
       <step-1>Изменения в content/guides и content/characters (локально или импорт из внешнего источника)</step-1>
-      <step-2>При необходимости — генерация OG, редиректов и отчётов вне этого репозитория</step-2>
+      <step-2>При смене slug — строки rewrite в docker/genshintop-redirects.conf; при необходимости инвентаризация scripts/guides-refactor-inventory.php или scripts/guides-refactor-inventory.ps1 → reports/guides-refactor-inventory.json</step-2>
       <step-3>Сборка образа: docker build -f docker/Dockerfile . ; sitemap через lib/build-sitemap.php</step-3>
       <evidence>Контент в content/**; образ сайта собирается docker build -f docker/Dockerfile .</evidence>
     </DF-CONTENT-MIGRATE>
@@ -124,6 +156,11 @@
       <goal>SEO-усиление: OG PNG и og-manifest в репозитории, хабы и регионы, /lootbar, sitemap, без Node и без gi-database в репозитории; шаблоны только файлы в корне lib без подпапок (1.2.1); Traefik/GHCR-артефакты в каталоге docker/, скрипт обновления сервера — update-from-github.sh в корне (1.3.0).</goal>
       <step-1 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">OgManifest + public/og/, единый sitemap (build-sitemap.php), хабы и регионы в PHP</step-1>
     </Phase-5>
+
+    <Phase-6 name="GuideCorpusEditorialRefactor" status="in-progress">
+      <goal>Единый редакционный стандарт гайдов, отчёт инвентаризации, редиректы при ИА; волны W1–W3 по отчёту</goal>
+      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, скрипты инвентаризации, первая волна cornerstone и merge banner→banners</step-1>
+    </Phase-6>
 
     <!-- Phases use unique tags:
          <Phase-1 name="Foundation" status="pending">

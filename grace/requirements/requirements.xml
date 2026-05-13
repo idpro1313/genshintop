@@ -94,6 +94,16 @@
       <Priority>medium</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-008>
+
+    <UC-009>
+      <Actor>Редактор / агент</Actor>
+      <Action>Выполняет редакционный рефакторинг корпуса content/guides по docs/GUIDE_EDITORIAL.md и волнам docs/guides-refactor-waves.md</Action>
+      <Goal>Связная проза, корректная разметка, актуальный frontmatter; при ИА — merge/split и 301 в docker/genshintop-redirects.conf</Goal>
+      <Preconditions>Отчёт reports/guides-refactor-inventory.json по желанию перед массовыми правками</Preconditions>
+      <AcceptanceCriteria>Нет «лесенки» и битых якорей в отредактированных статьях; relatedGuides указывают на существующие slug; редиректы добавлены при удалении или переименовании slug</AcceptanceCriteria>
+      <Priority>high</Priority>
+      <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
+    </UC-009>
   </UseCases>
 
   <Constraints>
