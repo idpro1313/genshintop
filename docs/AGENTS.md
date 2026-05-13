@@ -24,7 +24,7 @@
 
 ### Модули (GRACE)
 
-- **M-PHP-SITE** — `public/index.php`, `bootstrap.php`, `config.php`, **`lib/*.php`**, **`templates/`**, **`public/css/site.css`**, **`scripts/build-sitemap.php`**, **`data/og-manifest.json`**, **`public/og/`**, Docker/nginx, **`deploy/genshintop-redirects.conf`**. JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
+- **M-PHP-SITE** — `public/index.php`, `bootstrap.php`, `config.php`, **`lib/`** (PHP, **`lib/templates/`** шаблоны, **`lib/og-manifest.json`**), **`public/css/site.css`**, **`scripts/build-sitemap.php`**, **`public/og/`**, Docker/nginx, **`deploy/genshintop-redirects.conf`**. JSON-LD и мета через **`lib/Seo.php`**, OG через **`OgManifest`**. Партнёрские ссылки — **`lib/Partners.php`**, LootBar — **`lib/LootbarConfig.php`**. Каталог гайдов: поиск `?q=` и фильтры в **`lib/PageRenderer.php`**.
 
 ### Гайды: таксономия и frontmatter
 
@@ -142,12 +142,12 @@ Testing rules:
 ```
 public/index.php        - Front-controller (точка входа PHP)
 bootstrap.php, config.php
-lib/                    - Router, PageRenderer, ContentRepository, Seo, Partners, хабы, OG
-templates/              - PHP layout и страницы (в т.ч. lootbar, регионы)
+lib/
+  *.php                 - Router, PageRenderer, Seo, контент, хабы, OG
+  templates/            - layout.php, partials (header, footer, lootbar_banner)
+  og-manifest.json      - список ключей OG-PNG для OgManifest (ручная правка / внешний генератор)
 content/
   guides/, characters/  - Канонический Markdown
-data/
-  og-manifest.json      - Список OG-PNG для lib/OgManifest.php (поддержка вручную / внешний генератор)
 scripts/
   build-sitemap.php     - Генерация public/sitemap.xml (docker build / локально при наличии PHP)
 public/

@@ -18,8 +18,6 @@ WORKDIR /var/www
 COPY bootstrap.php config.php ./
 COPY lib ./lib/
 COPY content ./content/
-COPY templates ./templates/
-COPY data ./data/
 COPY public ./public/
 COPY scripts/build-sitemap.php scripts/build-sitemap.php
 COPY deploy/genshintop-redirects.conf /etc/nginx/conf.d/genshintop-redirects.conf

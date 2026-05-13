@@ -306,3 +306,9 @@
 - **Почему:** консоль браузера — **404** на **`/favicon.ico`** при автоматическом запросе вкладки.
 - **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.0.9**.
+
+### Перенос templates/ и data/og-manifest.json в lib/ (1.1.0)
+- **Что:** удалены корневые **`templates/`** и **`data/`**; шаблоны — **`lib/templates/`** (`layout.php`, **`partials/`**); манифест OG — **`lib/og-manifest.json`**; **`Router.php`** подключает **`lib/templates/layout.php`**; **`public/index.php`** вызывает **`OgManifest::load(.../lib/og-manifest.json)`**; **`Dockerfile`** больше не копирует отдельно **`templates/`** и **`data/`** (входит в **`COPY lib`**). Обновлены **`docs/AGENTS.md`**, **`deploy/SEO-CHECKLIST.md`**, **`grace/**/*.xml`**.
+- **Почему:** запрос пользователя — держать код сайта в **`lib/`**, без отдельных **`templates/`** и **`data/`**.
+- **Файлы:** перемещены в **`lib/templates/**`**, **`lib/og-manifest.json`**; удалены **`templates/**`**, **`data/og-manifest.json`**; правки `Dockerfile`, `lib/Router.php`, `public/index.php`, `VERSION`, GRACE, документация.
+- **Решение:** MINOR **1.1.0** — только реорганизация путей; URL сайта не менялись.

@@ -162,6 +162,6 @@ final class Router
         }
         $merged = array_merge(['cfg' => $cfg], $page);
         extract($merged, EXTR_SKIP);
-        require SITE_ROOT . '/templates/layout.php';
+        require SITE_ROOT . '/lib/templates/layout.php';
     }
 }

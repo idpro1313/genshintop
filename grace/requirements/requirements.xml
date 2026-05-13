@@ -88,7 +88,7 @@
     <UC-008>
       <Actor>Редактор / агент</Actor>
       <Action>Обновляет OG-изображения и карту редиректов вручную или внешним инструментом (в репозитории нет npm)</Action>
-      <Goal>Актуальные public/og/*.png, data/og-manifest.json и при необходимости deploy/genshintop-redirects.conf</Goal>
+      <Goal>Актуальные public/og/*.png, lib/og-manifest.json и при необходимости deploy/genshintop-redirects.conf</Goal>
       <Preconditions>Контент в content/guides и content/characters; редактор имеет средство генерации PNG при необходимости</Preconditions>
       <AcceptanceCriteria>Манифест согласован с файлами в public/og/; редиректы валидны для nginx</AcceptanceCriteria>
       <Priority>medium</Priority>

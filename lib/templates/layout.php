@@ -100,14 +100,14 @@ else{window.addEventListener('load',function(){setTimeout(loadMetrika,1500);});}
 </head>
 <body>
 <noscript><div><img src="https://mc.yandex.ru/watch/<?= (int) $ymId ?>" style="position:absolute;left:-9999px" alt="" /></div></noscript>
-<?php require SITE_ROOT . '/templates/partials/header.php'; ?>
+<?php require SITE_ROOT . '/lib/templates/partials/header.php'; ?>
 <?php if (!$hideLootBarPromo): ?>
-<?php require SITE_ROOT . '/templates/partials/lootbar_banner.php'; ?>
+<?php require SITE_ROOT . '/lib/templates/partials/lootbar_banner.php'; ?>
 <?php endif; ?>
 <main class="site-main">
   <?= $slot ?>
 </main>
-<?php require SITE_ROOT . '/templates/partials/footer.php'; ?>
+<?php require SITE_ROOT . '/lib/templates/partials/footer.php'; ?>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-reach-goal]').forEach((el) => {
