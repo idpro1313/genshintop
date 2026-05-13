@@ -458,3 +458,9 @@
 - **Почему:** запрос пользователя **«следующая волна»** опорных гайдов после волны 3.
 - **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.6.4** — только новые гайды, редиректы и метаданные версии.
+
+### Уточнение текста гайда магазина блеска (1.6.4)
+- **Что:** в **`info/guides/magazin-bleska-prioritety-zvezdnogo.md`** и **`content/guides/magazin-bleska-prioritety-zvezdnogo.md`** заменена неточная формулировка про стандартный баннер на нейтральную («вечный баннер», приоритет молитв).
+- **Почему:** вычитка после выката волны 4.
+- **Файлы:** `info/guides/magazin-bleska-prioritety-zvezdnogo.md`, `content/guides/magazin-bleska-prioritety-zvezdnogo.md`, `docs/HISTORY.md`
+- **Решение:** версия **1.6.4** без изменения **`VERSION`**.
