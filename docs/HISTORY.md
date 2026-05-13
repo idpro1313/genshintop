@@ -276,3 +276,9 @@
 - **Почему:** падение **`docker build`** на шаге **`RUN php scripts/build-sitemap.php`** (PHP parse error на строке 84).
 - **Файлы:** `lib/HtmlComponents.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.0.4**.
+
+### nginx 403 Forbidden на главной и каталогах без индекса (1.0.5)
+- **Что:** в **`docker/nginx-default.conf`** добавлены **`index index.php index.html`**, в **`location /`** заменено **`try_files $uri $uri/ …`** на **`try_files $uri /index.php$is_args$args`** (без **`$uri/`**): цепочка **`$uri/`** для **`/`** приводила к поиску только **`index.html`** по умолчанию → **403** при запрете листинга каталогов.
+- **Почему:** в проде и при локальном Docker отображался **403 Forbidden** с заголовком nginx на главной.
+- **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.0.5**.
