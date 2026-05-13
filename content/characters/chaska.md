@@ -23,14 +23,9 @@ relatedArtifacts:
   - obsidianovyy-foliant
   - ochishchenie-pamyati
 relatedGuides:
-  - all-travel-guide-gi
-  - archon-quest-5-1
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - genshin-updates-2024
-  - geshin-impact-travelguide5-8
-  - new-features-genshin-impact-part6
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Часка

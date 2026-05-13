@@ -23,14 +23,8 @@ relatedArtifacts:
   - pesn-bylykh-vremyen
   - vospominaniya-dremuchego-lesa
 relatedGuides:
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-bienie-mudrogo-serdtsa
-  - banner-bienie-mudrogo-serdtsa
-  - banner-bienie-mudrogo-serdtsa
-  - banner-dumy-nefrita-i-kamnya
-  - strimchik-razrabotchikov-36
-  - temper-thyself-journey-far
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Бай Чжу

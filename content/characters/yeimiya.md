@@ -22,14 +22,8 @@ relatedArtifacts:
   - konets-gladiatora
   - ochishchenie-pamyati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-gobelen-zolotogo-plameni
-  - banner-gobelen-zolotogo-plameni
-  - banner-gobelen-zolotogo-plameni
-  - banner-gobelen-zolotogo-plameni
-  - banner-gobelen-zolotogo-plameni
-  - banner-grom-sotryasaet-neba-ravniny
-  - kak-kritovat
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Ёимия

@@ -28,14 +28,8 @@ relatedArtifacts:
   - tsvetok-poteryannogo-raya
   - vse-artifakti-sumeru
 relatedGuides:
-  - 5voprosov-k-teiwatu
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Горо

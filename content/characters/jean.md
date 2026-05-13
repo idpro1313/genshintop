@@ -23,14 +23,8 @@ relatedArtifacts:
   - konets-gladiatora
   - tseremoniya-drevney-znati
 relatedGuides:
-  - 5veschei-chem-zanatsya-v-igre-kogda-skuchno
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Джинн

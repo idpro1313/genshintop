@@ -24,14 +24,9 @@ relatedArtifacts:
   - okhota-na-ten
   - svitok-geroya-sozhzhyennogo-goroda
 relatedGuides:
-  - all-travel-guide-gi
-  - archon-quest-5-1
-  - banner-oslepitelnoe-plamya-drevnosti
-  - banner-oslepitelnoe-plamya-drevnosti
-  - genshin-updates-2024
-  - genshinimpact-anniversary-awards-6-0
-  - new-features-genshin-impact-part6
-  - update-5-3-pylayushchaya-oda-voskreseniya
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Мавуика

@@ -22,12 +22,9 @@ relatedArtifacts:
   - serenada-shyelkovoy-luny
   - stoykost-millelita
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-lunnye-sny
-  - new-features-genshin-impact-moon-4
-  - update-6-3-pesnya-poloy-luny-final
-  - Лучшие-Советы-для-Новичков-в-2025-году-Genshin-Impact
-  - ОЧЕНЬ-ПОЛЕЗНЫЙ-ГАЙД-для-НОВИЧКОВ-в-GENSHIN-IMPACT-2024-без-игрового-сленга
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Коломбина

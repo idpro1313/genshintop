@@ -21,12 +21,9 @@ relatedArtifacts:
   - stranstvuyushchiy-ansambl
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-vitayushchie-gryezy-na-rassvete
-  - genshinimpact-anniversary-awards-6-0
-  - new-features-genshin-impact-moon-1
-  - temper-thyself-journey-far
-  - update-5-4-svet-luny-mezh-snov
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Мидзуки

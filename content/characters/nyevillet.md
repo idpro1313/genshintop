@@ -21,14 +21,10 @@ relatedArtifacts:
   - serdtse-glubin
   - stranstvuyushchiy-ansambl
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-zavet-glubin
-  - banner-zavet-glubin
-  - banner-zavet-glubin
-  - banner-zavet-glubin
-  - gi-who-is-this
-  - tier-list-4-8
-  - update-4-1-k-siyaniyu-zvyezd-v-glubine
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Нёвиллет

@@ -23,12 +23,10 @@ relatedArtifacts:
   - okhota-na-ten
   - zabludshiy-v-meteli
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bushuyushchiy-rok
-  - banner-bushuyushchiy-rok
-  - tier-list-4-8
-  - update-4-1-k-siyaniyu-zvyezd-v-glubine
-  - Гайд-на-ВСЕ-Роли-в-Отряде-_-Как-собирать-отряды_-_-Гайд-для-новичков
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Ризли

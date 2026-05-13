@@ -26,14 +26,8 @@ relatedArtifacts:
   - otgoloski-podnosheniya
   - rytsar-krovi
 relatedGuides:
-  - 5voprosov-k-teiwatu
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Рэйзор

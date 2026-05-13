@@ -23,14 +23,8 @@ relatedArtifacts:
   - konets-gladiatora
   - usmiryayushchiy-grom
 relatedGuides:
-  - 5-reasons-haitam
-  - 5-things-people-hate
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Кэ Цин

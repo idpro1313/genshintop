@@ -21,14 +21,9 @@ relatedArtifacts:
   - stoykost-millelita
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-pesn-vodam-mira
-  - banner-pesn-vodam-mira
-  - banner-pesn-vodam-mira
-  - banner-pesn-vodam-mira
-  - ka-min-6-errors
-  - oratris
-  - tier-list-4-8
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
 ---
 
 # Фурина

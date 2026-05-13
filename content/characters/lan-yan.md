@@ -24,13 +24,8 @@ relatedArtifacts:
   - ochishchenie-pamyati
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-blagoslovenie-plameni
-  - banner-bushuyushchiy-rok
-  - banner-entsiklopediya-ya-kho-kho
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Лань Янь

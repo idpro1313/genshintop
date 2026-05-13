@@ -24,14 +24,8 @@ relatedArtifacts:
   - stoykost-millelita
   - tseremoniya-drevney-znati
 relatedGuides:
-  - 5-things-people-hate
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-gory-i-rynki
-  - banner-gory-i-rynki
-  - banner-gory-i-rynki
-  - banner-gory-i-rynki
-  - banner-gory-i-rynki
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Чжун Ли

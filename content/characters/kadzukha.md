@@ -24,14 +24,8 @@ relatedArtifacts:
   - pechat-izolyatsii
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-listya-na-vetru
-  - banner-listya-na-vetru
-  - banner-listya-na-vetru
-  - banner-listya-na-vetru
-  - banner-listya-na-vetru
-  - best-geroy
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Кадзуха

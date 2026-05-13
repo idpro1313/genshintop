@@ -25,14 +25,7 @@ relatedArtifacts:
   - okhota-na-ten
   - vstrechnaya-kometa
 relatedGuides:
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Ноэлль

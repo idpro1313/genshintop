@@ -19,10 +19,9 @@ relatedArtifacts:
   - konets-gladiatora
   - ochishchenie-pamyati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-triumfalnaya-pesn-severnogo-vetra
-  - gi-who-is-this
-  - update-6-4-vozvrashchenie-lovtsa-vetra
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Варка

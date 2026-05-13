@@ -22,12 +22,10 @@ relatedArtifacts:
   - gromoglasnyy-ryev-yarosti
   - konets-gladiatora
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-svetozarnaya-molniya
-  - banner-svetozarnaya-molniya
-  - new-features-genshin-impact-part2
-  - tier-list-4-8
-  - update-obnovlenie-4-7
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Клоринда

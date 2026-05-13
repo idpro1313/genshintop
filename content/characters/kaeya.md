@@ -23,14 +23,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zabludshiy-v-meteli
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-stikhi-utrennego-vetra
-  - banner-stikhi-utrennego-vetra
-  - banner-zhazhda-stranstviy
-  - best-geroy
-  - kirara
-  - manga-po-genshin-impact
-  - paralogism-5-6
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Кэйа

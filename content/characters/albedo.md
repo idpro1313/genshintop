@@ -24,14 +24,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-stikhi-utrennego-vetra
-  - banner-stikhi-utrennego-vetra
-  - banner-tainstvennye-sekrety
-  - banner-tainstvennye-sekrety
-  - banner-tainstvennye-sekrety
-  - hexerei-team-bonus
-  - konets-igri-teorii
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Альбедо

@@ -24,14 +24,8 @@ relatedArtifacts:
   - okhota-na-ten
   - stranstvuyushchiy-ansambl
 relatedGuides:
-  - 10facts-genshin
-  - 5-bezpoleznyh-mehanik
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-moment-tsveteniya
-  - banner-moment-tsveteniya
-  - banner-moment-tsveteniya
-  - banner-moment-tsveteniya
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Ху Тао

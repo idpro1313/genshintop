@@ -23,13 +23,9 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-la-shanson-seriz
-  - banner-la-shanson-seriz
-  - new-features-genshin-impact-moon-3
-  - new-features-genshin-impact-moon-5
-  - new-features-genshin-impact-part5
-  - update-5-6-paralogizm
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Эскофье

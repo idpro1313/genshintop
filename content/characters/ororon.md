@@ -23,13 +23,8 @@ relatedArtifacts:
   - svitok-geroya-sozhzhyennogo-goroda
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - archon-quest-5-1
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-blagoslovenie-plameni
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Оророн

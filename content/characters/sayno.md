@@ -24,14 +24,8 @@ relatedArtifacts:
   - pozolochennye-sny
   - vse-artifakti-sumeru
 relatedGuides:
-  - 5-reasons-haitam
-  - all-travel-guide-gi
-  - banner-skitayushchayasya-chasha-rosy
-  - banner-sumerechnyy-vershitel
-  - banner-sumerechnyy-vershitel
-  - banner-sumerechnyy-vershitel
-  - kak-kritovat
-  - manga-po-genshin-impact
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Сайно

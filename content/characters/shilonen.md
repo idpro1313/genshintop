@@ -23,13 +23,9 @@ relatedArtifacts:
   - pechat-izolyatsii
   - svitok-geroya-sozhzhyennogo-goroda
 relatedGuides:
-  - all-travel-guide-gi
-  - archon-quest-5-1
-  - banner-blagoslovenie-plameni
-  - banner-blagoslovenie-plameni
-  - genshin-updates-2024
-  - new-features-genshin-impact-moon-1
-  - new-features-genshin-impact-part5
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Шилонен

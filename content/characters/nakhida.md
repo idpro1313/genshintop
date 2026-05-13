@@ -24,14 +24,9 @@ relatedArtifacts:
   - vse-artifakti-sumeru
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-ozarenie-lunnoy-travy
-  - banner-ozarenie-lunnoy-travy
-  - banner-ozarenie-lunnoy-travy
-  - banner-ozarenie-lunnoy-travy
-  - banner-sredotochie-chistoty-31-01-2024
-  - best-geroy
-  - genshin-updates-2024
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Нахида

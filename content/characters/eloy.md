@@ -25,9 +25,9 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zabludshiy-v-meteli
 relatedGuides:
-  - kto-tretiy-soshedshiy-genshin-impact
-  - tier-list-4-8
-  - update-2-1-lunnoe-uteshenie-dlya-brennogo-mira
+  - "bystriy-start-teyvat"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Элой

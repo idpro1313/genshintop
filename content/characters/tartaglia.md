@@ -6,7 +6,7 @@ weapon: Лук
 rating: B
 sourceSlug: tartaglia
 relatedGuides:
-  - za-kogo-iz-fatui-mojno-sygrat
+  - "bystriy-start-teyvat"
 ---
 
 # Чайльд Тарталья

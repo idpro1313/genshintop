@@ -22,14 +22,8 @@ relatedArtifacts:
   - kokon-sladkikh-gryez
   - vstrechnaya-kometa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-pirshestvo-ni
-  - banner-pirshestvo-ni
-  - banner-pirshestvo-ni
-  - banner-pirshestvo-ni
-  - best-geroy
-  - prichiny-rollyt
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Итто

@@ -24,14 +24,8 @@ relatedArtifacts:
   - khroniki-chertogov-v-pustyne
   - konets-gladiatora
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-stikhi-iz-vinnogo-kubka
-  - banner-stikhi-iz-vinnogo-kubka
-  - banner-stikhi-iz-vinnogo-kubka
-  - banner-stikhi-iz-vinnogo-kubka
-  - banner-stikhi-iz-vinnogo-kubka
-  - banner-stikhi-iz-vinnogo-kubka
-  - best-geroy
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Венти

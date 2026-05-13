@@ -22,13 +22,9 @@ relatedArtifacts:
   - konets-gladiatora
   - okhota-na-ten
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-prishestvie-zvezdy-pustoty
-  - banner-prishestvie-zvezdy-pustoty
-  - gi-who-is-this
-  - new-features-genshin-impact-moon-4
-  - new-features-genshin-impact-part6
-  - update-5-7-prostranstvo-i-vremya-dlya-tebya
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Скирк

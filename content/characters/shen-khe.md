@@ -24,14 +24,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zabludshiy-v-meteli
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-dumy-nefrita-i-kamnya
-  - banner-vozvrashchenie-v-mir-smertnykh
-  - banner-vozvrashchenie-v-mir-smertnykh
-  - banner-vozvrashchenie-v-mir-smertnykh
-  - gi-who-is-this
-  - kak-kritovat
-  - novyye-monstry-obnovleniya-36
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Шэнь Хэ

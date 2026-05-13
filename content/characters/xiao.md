@@ -27,14 +27,8 @@ relatedArtifacts:
   - okhota-na-ten
   - vse-artifakti-sumeru
 relatedGuides:
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-dumy-nefrita-i-kamnya
-  - banner-priglashenie-k-mirskoy-zhizni
-  - banner-priglashenie-k-mirskoy-zhizni
-  - banner-priglashenie-k-mirskoy-zhizni
-  - banner-priglashenie-k-mirskoy-zhizni
-  - banner-priglashenie-k-mirskoy-zhizni
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Сяо

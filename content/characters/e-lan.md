@@ -24,14 +24,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - vse-artifakti-sumeru
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - best-geroy
-  - genshinimpact-anniversary-awards-6-0
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Е Лань

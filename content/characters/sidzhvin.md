@@ -22,13 +22,10 @@ relatedArtifacts:
   - siyanie-sladkoy-rosy
   - stoykost-millelita
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-romarinskaya-bezmyatezhnost
-  - banner-romarinskaya-bezmyatezhnost
-  - new-features-genshin-impact-part4
-  - new-features-genshin-impact
-  - tier-list-4-8
-  - update-obnovlenie-4-7
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Сиджвин

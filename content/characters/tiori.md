@@ -21,14 +21,10 @@ relatedArtifacts:
   - kokon-sladkikh-gryez
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-spletenie-shyelkovykh-oblakov
-  - banner-spletenie-shyelkovykh-oblakov
-  - genshin-updates-2024
-  - new-features-genshin-impact-part3
-  - tier-list-4-8
-  - update-4-5-skreshchenie-lezviy-na-parche
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
+  - "tir-listy-kak-chitat"
 ---
 
 # Тиори

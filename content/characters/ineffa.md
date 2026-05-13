@@ -23,14 +23,9 @@ relatedArtifacts:
   - rassvetnaya-pesn-zvezdy-i-luny
   - serenada-shyelkovoy-luny
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-zvyezdnoe-probuzhdenie
-  - banner-zvyezdnoe-probuzhdenie
-  - geshin-impact-travelguide5-8
-  - new-features-genshin-impact-moon-1
-  - new-features-genshin-impact-moon-5
-  - update-5-8-leto-zhara-kurort
-  - update-6-0-tanets-vyugi-v-sizoy-chashche
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Инеффа

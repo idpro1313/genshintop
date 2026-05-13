@@ -23,14 +23,9 @@ relatedArtifacts:
   - stoykost-millelita
   - svitok-geroya-sozhzhyennogo-goroda
 relatedGuides:
-  - all-travel-guide-gi
-  - archon-quest-5-1
-  - banner-shyepot-zvyezdnoy-nochi
-  - banner-shyepot-zvyezdnoy-nochi
-  - genshin-updates-2024
-  - geshin-impact-travelguide5-8
-  - gi-who-is-this
-  - new-features-genshin-impact-moon-3
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Ситлали

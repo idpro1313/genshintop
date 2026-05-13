@@ -24,14 +24,8 @@ relatedArtifacts:
   - vozlyublennaya-yunaya-deva
   - vse-artifakti-sumeru
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-dreyfuyushchee-svechenie
-  - banner-dreyfuyushchee-svechenie
-  - banner-dreyfuyushchee-svechenie
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-zhemchuzhina-mudrosti
-  - best-geroy
-  - kratkij-gaid-po-viboru-personaja
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Кокоми

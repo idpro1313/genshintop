@@ -24,14 +24,8 @@ relatedArtifacts:
   - vse-artifakti-sumeru
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-vechnotsvetushchiy-purpur
-  - banner-vechnotsvetushchiy-purpur
-  - banner-vechnotsvetushchiy-purpur
-  - banner-vechnotsvetushchiy-purpur
-  - druzya-genshin
-  - genshinimpact-anniversary-awards-6-0
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Яэ Мико

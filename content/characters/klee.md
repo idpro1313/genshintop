@@ -29,14 +29,8 @@ relatedArtifacts:
   - stupayushchiy-po-lave
   - top-artifacts
 relatedGuides:
-  - 5-bezpoleznyh-mehanik
-  - 5-reasons-haitam
-  - 5-things-people-hate
-  - 5voprosov-k-teiwatu
-  - all-travel-guide-gi
-  - anime-genshin
-  - ban-genshin-honkai
-  - banner-stikhi-utrennego-vetra
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Кли

@@ -23,14 +23,8 @@ relatedArtifacts:
   - kinovarnoe-zagrobe
   - okhota-na-ten
 relatedGuides:
-  - 5-bezpoleznyh-mehanik
-  - all-travel-guide-gi
-  - banner-volshebstvo-sveta-i-teni
-  - banner-volshebstvo-sveta-i-teni
-  - banner-volshebstvo-sveta-i-teni
-  - easter-eggs-simulanka
-  - geshin-impact-travelguide5-8
-  - manga-po-genshin-impact
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Лини

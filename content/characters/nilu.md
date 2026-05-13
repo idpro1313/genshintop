@@ -23,14 +23,8 @@ relatedArtifacts:
   - stoykost-millelita
   - vse-artifakti-sumeru
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-kruzhashchiysya-lotos
-  - banner-kruzhashchiysya-lotos
-  - banner-kruzhashchiysya-lotos
-  - banner-skitayushchayasya-chasha-rosy
-  - kirara
-  - new-features-genshin-impact-part5
-  - prichiny-rollyt
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Нилу

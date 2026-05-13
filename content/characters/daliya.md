@@ -23,14 +23,8 @@ relatedArtifacts:
   - stoykost-millelita
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-blagoslovenie-plameni
-  - banner-entsiklopediya-ya-kho-kho
-  - banner-garmoniya-izobiliya
-  - banner-gory-i-rynki
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Далия

@@ -20,14 +20,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - vstrechnaya-kometa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Юнь Цзинь

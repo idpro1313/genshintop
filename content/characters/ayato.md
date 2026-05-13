@@ -24,14 +24,8 @@ relatedArtifacts:
   - pechat-izolyatsii
   - serdtse-glubin
 relatedGuides:
-  - 5-reasons-haitam
-  - all-travel-guide-gi
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-lazurnyy-pokhod
-  - banner-lazurnyy-pokhod
-  - banner-lazurnyy-pokhod
-  - genshinimpact-anniversary-awards-6-0
-  - kak-kritovat
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Аято

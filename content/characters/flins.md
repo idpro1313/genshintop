@@ -23,11 +23,9 @@ relatedArtifacts:
   - noch-otkrytiya-neba
   - okhota-na-ten
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-odinokiy-svet-v-nochi
-  - banner-odinokiy-svet-v-nochi
-  - new-features-genshin-impact-moon-1
-  - update-6-0-tanets-vyugi-v-sizoy-chashche
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Флинс

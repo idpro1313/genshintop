@@ -25,14 +25,8 @@ relatedArtifacts:
   - stranstvuyushchiy-ansambl
   - tseremoniya-drevney-znati
 relatedGuides:
-  - 5veschei-chem-zanatsya-v-igre-kogda-skuchno
-  - all-travel-guide-gi
-  - banner-stikhi-utrennego-vetra
-  - banner-stikhi-utrennego-vetra
-  - banner-zhazhda-stranstviy
-  - best-geroy
-  - druzya-genshin
-  - manga-po-genshin-impact
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Эмбер

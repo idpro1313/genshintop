@@ -26,13 +26,10 @@ relatedArtifacts:
   - pesn-bylykh-vremyen
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-vestnitsa-nebes
-  - banner-zhuravl-vzletaet-v-nebesa
-  - new-features-genshin-impact-part3
-  - temper-thyself-journey-far
-  - tier-list-4-8
-  - update-4-4-yarkie-ptitsy-v-vesennem-nebe
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Сянь Юнь

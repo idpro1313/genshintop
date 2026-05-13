@@ -7,7 +7,7 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. Единственный канонический корпус — Markdown в **`content/{guides,characters}`**.
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. **Живые гайды** — Markdown в **`content/guides/*.md`**; прежний корпус хранится в **`content/guides-archive/`**; редакционный черновик опорных статей — **`info/guides/`** (карта в **`info/README.md`**). Персонажи — **`content/characters`**.
 
 Рантайм и репозиторий **без Node/npm**: только PHP, Markdown и статика. Сборка прод-образа выполняет **`php lib/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
 

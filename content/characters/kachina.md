@@ -19,13 +19,8 @@ relatedArtifacts:
   - svitok-geroya-sozhzhyennogo-goroda
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-blagoslovenie-plameni
-  - banner-blagoslovenie-plameni
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Качина

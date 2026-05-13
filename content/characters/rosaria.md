@@ -25,14 +25,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zabludshiy-v-meteli
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Розария

@@ -24,14 +24,9 @@ relatedArtifacts:
   - svitok-geroya-sozhzhyennogo-goroda
   - tsvetok-poteryannogo-raya
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-pylayushchee-zoloto
-  - banner-skitayushchayasya-chasha-rosy
-  - banner-zhazhda-stranstviy
-  - genshinimpact-anniversary-awards-6-0
-  - temper-thyself-journey-far
-  - tier-list-4-8
-  - top5-ozhidaimyh-personashiy
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
 ---
 
 # Дэхья

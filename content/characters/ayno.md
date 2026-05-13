@@ -28,14 +28,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - vse-artifakti-sumeru
 relatedGuides:
-  - 5-bezpoleznyh-mehanik
-  - 5-reasons-haitam
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - ban-genshin-honkai
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-blagoslovenie-plameni
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Айно

@@ -23,14 +23,10 @@ relatedArtifacts:
   - konets-gladiatora
   - otgoloski-podnosheniya
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-pepelnaya-ten-ochaga
-  - banner-pepelnaya-ten-ochaga
-  - banner-pepelnaya-ten-ochaga
-  - new-features-genshin-impact-moon-3
-  - new-features-genshin-impact-part3
-  - tier-list-4-8
-  - update-4-6-dva-mira-pylayut-gasnet-alaya-noch
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Арлекино

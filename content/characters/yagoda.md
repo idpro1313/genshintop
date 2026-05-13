@@ -20,14 +20,8 @@ relatedArtifacts:
   - serenada-shyelkovoy-luny
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-entsiklopediya-ya-kho-kho
-  - banner-garmoniya-izobiliya
-  - banner-la-shanson-seriz
-  - banner-lunnye-sny
-  - banner-odinokiy-svet-v-nochi
-  - banner-prishestvie-zvezdy-pustoty
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Ягода

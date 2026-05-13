@@ -19,9 +19,9 @@ relatedArtifacts:
   - rassvetnaya-pesn-zvezdy-i-luny
   - serenada-shyelkovoy-luny
 relatedGuides:
-  - banner-entsiklopediya-ya-kho-kho
-  - update-6-5
-  - Артефакты-Подробный-гайд-_-Советы-для-новичков-и-опытных-в-Genshin-Impact
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
+  - "bystriy-start-teyvat"
 ---
 
 # Линнея

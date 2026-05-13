@@ -20,13 +20,9 @@ relatedArtifacts:
   - siyanie-sladkoy-rosy
   - son-nimfy
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-zubastyy-syerf
-  - banner-zubastyy-syerf
-  - genshin-updates-2024
-  - geshin-impact-travelguide5-8
-  - new-features-genshin-impact-part2
-  - update-5-0-tsvety-pod-palyashchim-solntsem
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Муалани

@@ -24,13 +24,10 @@ relatedArtifacts:
   - konets-gladiatora
   - okhota-na-ten
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-vo-imya-rozy
-  - banner-vo-imya-rozy
-  - banner-vo-imya-rozy
-  - genshinimpact-anniversary-awards-6-0
-  - tier-list-4-8
-  - update-4-3-rozy-i-mushkety
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Навия

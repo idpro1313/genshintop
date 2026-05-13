@@ -31,14 +31,7 @@ relatedArtifacts:
   - kokon-sladkikh-gryez
   - konets-gladiatora
 relatedGuides:
-  - 10facts-genshin
-  - 5-bezpoleznyh-mehanik
-  - 5-reasons-haitam
-  - 5-sovetov-novichkam
-  - 5-things-people-hate
-  - 5boss-sila-team
-  - 5veschei-chem-zanatsya-v-igre-kogda-skuchno
-  - 5voprosov-k-teiwatu
+  - "bystriy-start-teyvat"
 ---
 
 # Аль

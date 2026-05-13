@@ -16,14 +16,8 @@ relatedArtifacts:
   - serenada-shyelkovoy-luny
   - stranstvuyushchiy-ansambl
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-entsiklopediya-ya-kho-kho
-  - banner-garmoniya-izobiliya
-  - banner-la-shanson-seriz
-  - banner-odinokiy-svet-v-nochi
-  - banner-prishestvie-zvezdy-pustoty
-  - banner-triumfalnaya-pesn-severnogo-vetra
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Иллуги

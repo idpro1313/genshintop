@@ -20,9 +20,9 @@ relatedArtifacts:
   - noch-otkrytiya-neba
   - stranstvuyushchiy-ansambl
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-garmoniya-izobiliya
-  - update-6-3-pesnya-poloy-luny-final
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Цзы Бай

@@ -24,14 +24,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zabludshiy-v-meteli
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-sad-beloy-tsapli
-  - banner-sad-beloy-tsapli
-  - banner-sad-beloy-tsapli
-  - banner-sad-beloy-tsapli
-  - best-geroy
-  - genshinimpact-anniversary-awards-6-0
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Аяка

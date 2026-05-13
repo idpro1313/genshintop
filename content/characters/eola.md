@@ -24,14 +24,8 @@ relatedArtifacts:
   - pechat-izolyatsii
   - rytsar-krovi
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-rozhdyennaya-morskoy-volnoy
-  - banner-rozhdyennaya-morskoy-volnoy
-  - banner-rozhdyennaya-morskoy-volnoy
-  - banner-stikhi-utrennego-vetra
-  - banner-stikhi-utrennego-vetra
-  - druzya-genshin
-  - genshinimpact-anniversary-awards-6-0
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Эола

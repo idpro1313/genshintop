@@ -27,14 +27,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - zabludshiy-v-meteli
 relatedGuides:
-  - 5-reasons-haitam
-  - 5voprosov-k-teiwatu
-  - all-travel-guide-gi
-  - banner-dumy-nefrita-i-kamnya
-  - banner-efemernoe-nedoverie
-  - banner-efemernoe-nedoverie
-  - banner-efemernoe-nedoverie
-  - banner-efemernoe-nedoverie
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Гань Юй

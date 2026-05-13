@@ -25,14 +25,8 @@ relatedArtifacts:
   - stranstvuyushchiy-ansambl
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - bai-chzu-who
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-belaya-raduga
-  - banner-belaya-raduga
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Янь Фэй

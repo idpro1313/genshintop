@@ -27,14 +27,8 @@ relatedArtifacts:
   - tseremoniya-drevney-znati
   - uchyenyy
 relatedGuides:
-  - 10facts-genshin
-  - all-travel-guide-gi
-  - archon-quest-5-1
-  - banner-dumy-nefrita-i-kamnya
-  - banner-grom-sotryasaet-neba-ravniny
-  - banner-skitayushchayasya-chasha-rosy
-  - banner-stikhi-utrennego-vetra
-  - banner-stikhi-utrennego-vetra
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Лиза

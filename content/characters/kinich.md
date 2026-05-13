@@ -25,12 +25,9 @@ relatedArtifacts:
   - vospominaniya-dremuchego-lesa
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-iskatel-ognennykh-tayn
-  - banner-iskatel-ognennykh-tayn
-  - genshin-updates-2024
-  - new-features-genshin-impact-part3
-  - update-5-0-tsvety-pod-palyashchim-solntsem
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Кинич

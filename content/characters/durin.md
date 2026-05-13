@@ -23,12 +23,9 @@ relatedArtifacts:
   - pechat-izolyatsii
   - tseremoniya-drevney-znati
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-rubedo-voploshchyennyy-belym-kamnem
-  - hexerei-team-bonus
-  - new-features-genshin-impact-moon-3
-  - paralogism-5-6
-  - update-6-2-noktyurn-kraynego-severa
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Дурин

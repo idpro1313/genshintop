@@ -24,14 +24,8 @@ relatedArtifacts:
   - stranstvuyushchiy-ansambl
   - svitok-geroya-sozhzhyennogo-goroda
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-bagrovyy-vspolokh-metkogo-vystrela
-  - banner-belaya-raduga
-  - banner-blagoslovenie-plameni
-  - banner-entsiklopediya-ya-kho-kho
-  - banner-essentsiya-ambrozii
-  - banner-garmoniya-izobiliya
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
 ---
 
 # Ифа

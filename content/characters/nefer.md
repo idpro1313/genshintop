@@ -23,9 +23,9 @@ relatedArtifacts:
   - pozolochennye-sny
   - vospominaniya-dremuchego-lesa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-iskushenie-krasnykh-peskov
-  - update-6-1-elegiya-ugasshego-lunnogo-sveta
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Нефер

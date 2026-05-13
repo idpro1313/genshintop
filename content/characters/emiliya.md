@@ -23,11 +23,10 @@ relatedArtifacts:
   - vospominaniya-dremuchego-lesa
   - zolotaya-truppa
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-essentsiya-ambrozii
-  - new-features-genshin-impact-part4
-  - tier-list-4-8
-  - update-4-8-leto-drakony-skazka
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "tir-listy-kak-chitat"
+  - "obnovleniya-patch-notes"
 ---
 
 # Эмилия

@@ -24,10 +24,9 @@ relatedArtifacts:
   - obsidianovyy-foliant
   - okhota-na-ten
 relatedGuides:
-  - all-travel-guide-gi
-  - banner-pirshestvo-zrelishch
-  - banner-pirshestvo-zrelishch
-  - update-5-5-den-vozvrashcheniya-ognya
+  - "bystriy-start-teyvat"
+  - "bannery-sobytiya-molitvy"
+  - "obnovleniya-patch-notes"
 ---
 
 # Вареса
