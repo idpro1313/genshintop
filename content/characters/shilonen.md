@@ -25,8 +25,7 @@ relatedArtifacts:
 relatedGuides:
   - all-travel-guide-gi
   - archon-quest-5-1
-  - banner-blagoslovenie-plameni-15-04-2025
-  - banner-blagoslovenie-plameni-23-12-2025
+  - banner-blagoslovenie-plameni
   - banner-blagoslovenie-plameni
   - genshin-updates-2024
   - new-features-genshin-impact-moon-1

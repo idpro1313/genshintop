@@ -19,6 +19,7 @@
 | `php scripts/guides-refactor-inventory.php` | Инвентаризация **`content/guides`** → **`reports/guides-refactor-inventory.json`** |
 | `pwsh scripts/guides-refactor-inventory.ps1` | То же через обёртку PowerShell (если **`php`** не в PATH) |
 | `pwsh scripts/wave-w1-merge-banner-dated.ps1` | Волна **W1**: датированные дубли **`banner-*`** → канонический slug, nginx **301**, правки ссылок **`content/**`** |
+| Волна **W2** (остаточные дубли без undated в группе) | Вручную по **`mergeCandidatesByTitle`**: один канонический **`content/guides/<slug>.md`**, **301** в **`docker/genshintop-redirects.conf`**, **`relatedGuides`** в **`content/characters`**, перегенерация **`reports/guides-refactor-inventory.json`** |
 | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath content/guides/<slug>.md` | Склейка коротких строк («лесенка») в теле одного гайда |
 | Docker | **`docker/README.md`** — образ GHCR, **`docker/docker-compose.yml`**, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` из корня репозитория |

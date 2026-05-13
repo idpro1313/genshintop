@@ -35,7 +35,7 @@ relatedGuides:
   - ban-genshin-honkai
   - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-belaya-raduga
-  - banner-blagoslovenie-plameni-23-12-2025
+  - banner-blagoslovenie-plameni
 ---
 
 # Айно

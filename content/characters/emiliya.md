@@ -24,8 +24,7 @@ relatedArtifacts:
   - zolotaya-truppa
 relatedGuides:
   - all-travel-guide-gi
-  - banner-essentsiya-ambrozii-06-08-2024
-  - banner-essentsiya-ambrozii-08-07-2025
+  - banner-essentsiya-ambrozii
   - new-features-genshin-impact-part4
   - tier-list-4-8
   - update-4-8-leto-drakony-skazka

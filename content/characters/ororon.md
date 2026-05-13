@@ -29,8 +29,7 @@ relatedGuides:
   - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-belaya-raduga
-  - banner-blagoslovenie-plameni-15-04-2025
-  - banner-blagoslovenie-plameni-23-12-2025
+  - banner-blagoslovenie-plameni
 ---
 
 # Оророн

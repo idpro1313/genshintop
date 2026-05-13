@@ -27,7 +27,7 @@ relatedGuides:
   - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-bagrovyy-vspolokh-metkogo-vystrela
   - banner-belaya-raduga
-  - banner-blagoslovenie-plameni-23-12-2025
+  - banner-blagoslovenie-plameni
   - banner-entsiklopediya-ya-kho-kho
   - banner-garmoniya-izobiliya
   - banner-gory-i-rynki

@@ -28,7 +28,7 @@ relatedGuides:
   - banner-belaya-raduga
   - banner-bienie-mudrogo-serdtsa
   - banner-bienie-mudrogo-serdtsa
-  - banner-blagoslovenie-plameni-15-04-2025
+  - banner-blagoslovenie-plameni
 ---
 
 # Фремине

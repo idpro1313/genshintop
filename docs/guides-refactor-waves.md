@@ -1,6 +1,6 @@
 # Волны редакционного рефакторинга гайдов
 
-Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). Корпус гайдов после слияния датированных баннеров (**W1**) — порядка **~235** файлов в **`content/guides/`** (до объединения было ~430); работа идёт волнами с фиксированными критериями готовности и опорой на [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
+Дополняет [`docs/GUIDE_EDITORIAL.md`](GUIDE_EDITORIAL.md). Корпус гайдов после **W1** и остаточных слияний **W2** — порядка **~232** файлов в **`content/guides/`** (до объединения было ~430); работа идёт волнами с фиксированными критериями готовности и опорой на [`reports/guides-refactor-inventory.json`](../reports/guides-refactor-inventory.json).
 
 ## Инструменты
 
@@ -37,6 +37,8 @@
 **Готово, когда:** как W1; по возможности единый формат «дата / тип молитвы / персонажи и оружие».
 
 **Пример качества текста:** **`content/guides/paralogism-5-6.md`** — структура **`##`**, оглавление, якоря; при необходимости препроцессинг абзацев через **`normalize-short-line-runons.ps1`**.
+
+**Прогресс:** остаточные дубли из **`mergeCandidatesByTitle`** (без «бездатного» slug в группе) сведены к канону **`banner-essentsiya-ambrozii`** и существующему **`banner-blagoslovenie-plameni`** + **301** в **`docker/genshintop-redirects.conf`**; отчёт **`mergeCandidatesByTitle`** после правок пуст. Дальше — редакторская нормализация **`update-*`** и прочих **`banner-*`** (высокий **`ladderRatio`** у патчей — чаще списки имён, не «лесенка» абзацев).
 
 ## W3 — Общий зал (`general`), техно, кириллические slug
 
