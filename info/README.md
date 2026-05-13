@@ -140,6 +140,47 @@
 
 **Итого после волн 5–7:** 69 статей в `info/guides/` и `content/guides/`.
 
+### Волна 8 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| economy | `boevoy-propusk-i-gnosticheskiy-gimn` | Боевой пропуск и Gnostic Hymn |
+| economy | `parametricheskiy-transformator` | Параметрический преобразователь |
+| economy | `ley-linii-tsvety-i-resursy` | Лей-линии, цветы, книги опыта и мора |
+| economy | `ezhednevnye-porucheniya-nagrady` | Ежедневные поручения (комиссии) |
+| economy | `kondensirovannaya-smola-i-khrupkaya` | Конденсированная и крепкая смола |
+| general | `druzhba-personazhey-i-kompanyonstvo` | Дружба и компаньонство |
+| newbie | `zagotovki-oruzhiya-i-prototipy` | Заготовки и прототипы оружия |
+| general | `hangauty-i-istorii-zavisimyh` | Hangout и истории зависимых |
+
+### Волна 9 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| economy | `hoyolab-ezhednevnyy-vhod` | HoYoLAB и ежедневные отметки |
+| economy | `probnye-personazhi-i-nagrady` | Пробные персонажи и награды |
+| newbie | `opasnosti-sredy-led-pesok-buri` | Опасности среды регионов |
+| newbie | `vyinoslivost-lezt-plavat-boy` | Выносливость: лазание, плавание, бой |
+| general | `fizicheskiy-i-elementalnyy-uron` | Физический и стихийный урон |
+| general | `elementarnye-shchity-protivnikov` | Стихийные щиты врагов |
+| newbie | `verstak-krafta-i-materialy` | Верстак крафта и материалы чайника |
+| economy | `chaynik-monety-ukrasheniya-doverie` | Чайник: монеты, украшения, доверие |
+
+### Волна 10 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| tech | `grafika-kachestvo-render-masshtab` | Графика: качество и масштаб рендера |
+| banner | `pity-garant-i-sobytiya-oruzhiya` | Пити, гарант и события оружия |
+| newbie | `opyt-priklyucheniya-istochniki-ar` | Источники опыта приключения (AR) |
+| economy | `uluchshenie-oruzhiya-dublikaty` | Пробуждение оружия дубликатами |
+| general | `navigatsiya-po-kvestam-i-markeram` | Навигация по квестам |
+| economy | `valyuta-sobytiy-lavki-iventov` | Ивентовая валюта и лавки |
+| patch | `predzagruzka-patch-mesto-na-diske` | Предзагрузка патча и место на диске |
+| economy | `genesis-kristally-i-oplata` | Genesis Crystals и оплата |
+
+**Итого после волн 8–10:** 93 статьи в `info/guides/` и `content/guides/`.
+
 ## Персонажи
 
 Каталог `info/characters/` — зеркало [`content/characters/`](../content/characters): правки ведите в `info/characters/`, затем копируйте в `content/characters/` для публикации.

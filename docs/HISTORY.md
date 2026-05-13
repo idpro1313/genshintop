@@ -484,3 +484,9 @@
 - **Почему:** запрос пользователя **«продолжи все волны с гайдами»** — довести опорный корпус тремя волнами по плану редактуры.
 - **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.8.0** — существенное расширение тематики гайдов без смены контракта сайта.
+
+### Волны расширения: +24 гайда, волны 8–10 (1.9.0)
+- **Что:** в **`info/guides/`** и **`content/guides/`** добавлены **24** опорные статьи: боевой пропуск, параметрический преобразователь, лей-линии, ежедневные поручения, конденсированная смола, дружба, заготовки оружия, hangout’ы, HoYoLAB, пробники, опасности среды, выносливость, типы урона, стихийные щиты, верстак чайника, валюты чайника, графика, пити и события оружия, источники AR, пробуждение оружия, навигация по квестам, ивентовая валюта, предзагрузка патча, Genesis Crystals. В **`docker/genshintop-redirects.conf`** расширен negative lookahead. Обновлены **`info/README.md`** (итого **93** статьи), **`VERSION` → 1.9.0**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя **«продолжи»** после волн 5–7 — следующие три волны опорного корпуса.
+- **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.9.0** — расширение гайдов и метаданных версии.
