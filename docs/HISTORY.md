@@ -282,3 +282,9 @@
 - **Почему:** в проде и при локальном Docker отображался **403 Forbidden** с заголовком nginx на главной.
 - **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.0.5**.
+
+### Документация ACME Traefik (tls: unrecognized name) (1.0.6)
+- **Что:** в **`deploy/README.md`** добавлен раздел «Traefik и Let's Encrypt»: причина ошибки TLS-ALPN/SNI, проверки DNS и портов, диагностика **`openssl s_client`**, переход резолвера **`le`** на **HTTP-01** (`httpChallenge.entryPoint: web`); в **`deploy/env.example`** — короткая отсылка к разделу.
+- **Почему:** пользовательская ошибка выдачи сертификата Let's Encrypt через Traefik (`genshintop@docker`, certresolver `le`).
+- **Файлы:** `deploy/README.md`, `deploy/env.example`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.0.6** — правки только документации и метаданных версии; конфиг Traefik живёт в репозитории webserver.

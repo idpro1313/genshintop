@@ -83,6 +83,48 @@ docker run --rm -p 8080:80 genshintop-web
 
 ---
 
+## Traefik и Let's Encrypt (`tls: unrecognized name`)
+
+Проблема **не в образе genshintop** (контейнер слушает только **HTTP :80**; TLS терминирует **Traefik**). Ошибка возникает на стороне **[webserver](https://github.com/idpro1313/webserver)** и маршрута до Traefik.
+
+### Смысл ошибки
+
+Сообщение вида `urn:ietf:params:acme:error:tls` и **`remote error: tls: unrecognized name`** при выдаче сертификата обычно означает: Let's Encrypt для проверки **TLS-ALPN-01** подключился к вашему IP на **443**, но TLS-ответ **не тот**, который ожидается для челленджа (часто на 443 отвечает **не Traefik**, другой прокси без нужного SNI, или трафик не доходит до Traefik).
+
+### Что проверить
+
+1. **DNS:** **A** / **AAAA** для `genshintop.ru` и `www` указывают на сервер с Traefik. «Битая» запись **AAAA** (IPv6 уходит не туда) часто даёт расхождение IP при проверке LE.
+2. **Порты:** с интернета **80 и 443** проброшены на контейнер **Traefik**, не на хостовый nginx без ACME и не напрямую на образ сайта.
+3. **Кто слушает 443** на хосте — должен быть Docker/Traefik, без конфликтующего TLS-сервера поверх.
+
+### Диагностика TLS снаружи
+
+```bash
+openssl s_client -connect genshintop.ru:443 -servername genshintop.ru </dev/null 2>/dev/null | openssl x509 -noout -subject -issuer -dates
+```
+
+Если рукопожатие странное или сертификат «не тот», сначала исправьте маршрутизацию до Traefik.
+
+### Обходной путь: HTTP-01 вместо TLS-ALPN
+
+В **статической конфигурации Traefik** для резолвера **`le`** задайте **HTTP challenge** на entrypoint **`web`** (имя должно совпадать с вашим `traefik`/compose):
+
+```yaml
+certificatesResolvers:
+  le:
+    acme:
+      email: ваш-email@example.com
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: web
+```
+
+У этого же резолвера не используйте параллельно **`tlsChallenge`**. После правки перезапустите Traefik.
+
+Ответы на **`/.well-known/acme-challenge/`** отдаёт **Traefik**; nginx внутри образа genshintop к проверке LE не участвует.
+
+---
+
 ## Файлы
 
 | Файл | Назначение |
