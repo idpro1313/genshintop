@@ -101,13 +101,15 @@
 
 ## Персонажи
 
-Каталог `info/characters/` — зеркало всех карточек из [`content/characters/`](../content/characters). Редактируйте здесь (или добавляйте новые `*.md`), затем копируйте в `content/characters/` тем же способом, что гайды из `info/guides/` → `content/guides/`.
+Каталог `info/characters/` — зеркало [`content/characters/`](../content/characters): правки ведите в `info/characters/`, затем копируйте в `content/characters/` для публикации.
 
-- **Frontmatter:** `name`, `title`, `element`, `weapon`, `rating`, `sourceSlug`, списки `relatedWeapons`, `relatedArtifacts`, `relatedGuides` — как в продакшене; slug файла = slug URL (`sourceSlug`).
-- **`relatedGuides`:** только slug из актуального опорного набора гайдов (таблицы выше).
+- **Стандарт текста:** [`docs/CHARACTER_EDITORIAL.md`](../docs/CHARACTER_EDITORIAL.md) — короткий профиль без копипасты талантов из клиента, ссылками на опорные гайды.
+- **Снимок до пересборки:** при массовом переходе на новый формат прежние тексты копируются скриптом в **`content/characters-archive/`** (резерв, не в индексе сайта).
+- **Пересборка тел из YAML:** `pwsh scripts/rebuild-character-pages.ps1` из корня — копирует `*.md` в `characters-archive/`, генерирует новое **тело** из существующего frontmatter (~**114** профильных slug + компактный формат для **~83** вспомогательных страниц).
+- **Frontmatter:** `name`, `title`, `element`, `weapon`, `rating` (опц.), `sourceSlug`, `relatedWeapons`, `relatedArtifacts`, `relatedGuides`; при пересборке добавляются `summary`, `gameVersion`, `reviewedAt`, если их не было.
 
-**Счётчик:** **197** файлов `.md` в `info/characters/` и в `content/characters/` (включая подборки `why-pull-*` и сравнения `*-vs-*` — они тоже лежат в общем каталоге персонажей).
+**Счётчик:** **197** файлов `.md` (включая `why-pull-*`, `*-vs-*` и прочие вспомогательные URL в том же каталоге).
 
 ## Редкие стандарты
 
-См. [`docs/GUIDE_EDITORIAL.md`](../docs/GUIDE_EDITORIAL.md). Внутренние ссылки — на `/guides/...` и `/characters/...` только к тем slug, что реально существуют после выкатки.
+См. [`docs/GUIDE_EDITORIAL.md`](../docs/GUIDE_EDITORIAL.md) и [`docs/CHARACTER_EDITORIAL.md`](../docs/CHARACTER_EDITORIAL.md). Внутренние ссылки — на `/guides/...` и `/characters/...` только к тем slug, что реально существуют после выкатки.

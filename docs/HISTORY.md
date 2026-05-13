@@ -464,3 +464,9 @@
 - **Почему:** вычитка после выката волны 4.
 - **Файлы:** `info/guides/magazin-bleska-prioritety-zvezdnogo.md`, `content/guides/magazin-bleska-prioritety-zvezdnogo.md`, `docs/HISTORY.md`
 - **Решение:** версия **1.6.4** без изменения **`VERSION`**.
+
+### Карточки персонажей: новый корпус и архив (1.7.0)
+- **Что:** добавлен **`docs/CHARACTER_EDITORIAL.md`**; скрипт **`scripts/rebuild-character-pages.ps1`** копирует текущие файлы в **`content/characters-archive/`** и генерирует **новое тело** всех **`content/characters/*.md`** из сохранённого frontmatter (профильные страницы — развёрнутый справочный каркас со ссылками на опорные гайды; вспомогательные slug вроде `why-pull-*` / `*-vs-*` — компактный формат). В **`info/characters/`** синхронизировано зеркало; обновлены **`info/README.md`**, **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.7.0**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя — не переносить миграционный мусор, а **переписать** карточки как редакционные материалы.
+- **Файлы:** `docs/CHARACTER_EDITORIAL.md`, `scripts/rebuild-character-pages.ps1`, `content/characters/*.md`, `content/characters-archive/*.md`, `info/characters/*.md`, `info/README.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.7.0** — новая редакционная модель тел страниц персонажей; детальные тексты талантов убраны в пользу структуры и внешних гайдов; **`relatedWeapons`/`relatedArtifacts`** в YAML сохранены для дальнейшей ручной чистки.
