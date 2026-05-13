@@ -440,3 +440,9 @@
 - **Почему:** запрос пользователя продолжить написание новой базы гайдов поверх первого набора из 20 столпов.
 - **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.6.1** — только контент гайдов, редиректы и метаданные версии.
+
+### Волна расширения опорного корпуса: +8 гайдов, slug чайника (1.6.2)
+- **Что:** в **`info/guides/`** и **`content/guides/`** добавлены **8** статей волны 3 (таланты и короны, энергия и взрыв стихии, чеклист материалов на героя, введение в Чайник безмятежности, созвездия и инвестиции в крутки, щит и лечение, элементальное мастерство, гаджеты исследования). Файл **`chaynik-bespechnosti-vvedenie.md`** переименован в **`chaynik-bezmyatezhnosti-vvedenie.md`** (транслит «безмятежности»). В **`docker/genshintop-redirects.conf`** расширен negative lookahead на новые slug. Обновлены **`info/README.md`**, **`VERSION` → 1.6.2**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** продолжение выкатки новой базы гайдов после волны 2.
+- **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.6.2** — контент, редиректы, версия в GRACE; без изменений PHP.

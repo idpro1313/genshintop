@@ -63,7 +63,22 @@
 | lore | `teyvat-lor-bez-spoilerov` | Вход в лор без спойлеров |
 | newbie | `zhurnal-priklyucheniy-nagrady` | Справочник приключений и награды |
 
-**Итого:** 29 статей в `info/guides/` и `content/guides/`; slug `promocodes` сохранён для преемственности URL.
+**Итого после волны 2:** 29 статей в `info/guides/` и `content/guides/`; slug `promocodes` сохранён для преемственности URL.
+
+### Волна 3 (расширение базы — 8 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| economy / прокачка | `talanty-knigi-i-korony` | Таланты: книги по дням, еженедельники, короны |
+| party | `energiya-vosstanovlenie-vzryva` | Энергия, частицы и стабильные ульты |
+| newbie | `chekhlist-materialov-personazha` | Чеклист материалов на нового героя |
+| general | `chaynik-bezmyatezhnosti-vvedenie` | Чайник безмятежности: награды и доверие |
+| economy | `sozvezdiya-i-krutki-investicii` | Созвёрстия и разумный бюджет круток |
+| party / выживание | `schit-lechenie-i-vyzhivaemost` | Щит vs лечение, нагрузка на отряд |
+| party | `elementarnyy-masterstvo-kogda-kachat` | EM для реакций и билдов |
+| newbie / мир | `gadzhety-i-komfort-issledovaniya` | Гаджеты и удобство исследования |
+
+**Итого:** 37 статей в `info/guides/` и `content/guides/`.
 
 ## Редкие стандарты
 
