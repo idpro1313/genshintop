@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.6.0">
+    <Project NAME="genshintop" VERSION="1.6.1">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живые гайды в content/guides/, архив прежнего корпуса в content/guides-archive/, черновик опорного корпуса в info/guides/; персонажи content/characters; роутинг public/index.php; lib/; без Node/npm; sitemap lib/build-sitemap.php; GHCR + Traefik.</annotation>
 

@@ -1,4 +1,4 @@
-<TechnologyStack VERSION="1.6.0">
+<TechnologyStack VERSION="1.6.1">
   <Runtime>Продакшен: PHP 8.2 + nginx + PHP-FPM в одном Alpine-образе (supervisord). Контент: Markdown в content/. Node.js и npm в репозитории не используются.</Runtime>
   <Language>PHP, Markdown, JSON</Language>
   <Framework>Серверный рендер PHP (шаблоны в корне lib/). Ванильный CSS в public/css/site.css — тёмная тема и компоненты в духе idpro1313/dandangers modern-styles.css (teal/violet, карточные списки в .prose, опционально light через prefers-color-scheme).</Framework>

@@ -434,3 +434,9 @@
 - **Почему:** запрос пользователя — «чистый лист» опорных гайдов по плану: собрать смысл из **`content`**, новое дерево, перенос старого в архив без удаления из истории git мусорным способом.
 - **Файлы:** `info/**`, `content/guides/*.md`, `content/guides-archive/*.md`, `content/characters/*.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/AGENTS.md`, `docs/HISTORY.md`
 - **Решение:** MINOR **1.6.0** — смена редакционной модели гайдов; **`reports/guides-refactor-inventory.json`** перегенерировать при следующем запуске **`php scripts/guides-refactor-inventory.php`** (в среде с PHP).
+
+### Волна расширения опорного корпуса: +9 гайдов (1.6.1)
+- **Что:** в **`info/guides/`** и **`content/guides/`** добавлены **9** статей волны 2 (стихии и реакции, мора, окуляры и статуи, репутация, кооператив, еда, циклические боевые режимы, лор без спойлеров, справочник приключений). Обновлены **`info/README.md`**, **`docker/genshintop-redirects.conf`** (расширен negative lookahead для fallback **301**), **`VERSION` → 1.6.1**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`docs/HISTORY.md`**.
+- **Почему:** запрос пользователя продолжить написание новой базы гайдов поверх первого набора из 20 столпов.
+- **Файлы:** `info/guides/*.md`, `content/guides/*.md`, `info/README.md`, `docker/genshintop-redirects.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.6.1** — только контент гайдов, редиректы и метаданные версии.

@@ -49,7 +49,21 @@
 | newbie | `oruzhie-vozvyshenie-materialy` | Оружие и возвышение без углубления в каждый тип |
 | newbie | `issledovanie-mira-prioritety` | Открытие мира: очки, телепорты, приоритет контента |
 
-**Итого:** 20 опорных статей; slug `promocodes` сохранён для преемственности URL.
+### Волна 2 (расширение базы — 9 статей)
+
+| Хаб / тема | Файл / slug | Назначение |
+|------------|-------------|------------|
+| party | `stihii-i-reaktsii-baza` | Стихии и реакции без перегруза таблицами |
+| economy | `mora-i-traty-akkaunta` | Мора: траты и дисциплина |
+| newbie | `ochki-smelosti-statui-arhontov` | Окуляры и стамина со статуй |
+| general | `reputaciya-regionov-i-porucheniya` | Репутация и поручения |
+| general | `kooperativ-miry-i-farm` | Кооператив и этикет |
+| economy / бой | `eda-i-kulinariya-nabory` | Еда, бафы, алхимия |
+| tier-list | `spiral-i-ciklicheskie-boevye` | Бездна и циклические боевые режимы |
+| lore | `teyvat-lor-bez-spoilerov` | Вход в лор без спойлеров |
+| newbie | `zhurnal-priklyucheniy-nagrady` | Справочник приключений и награды |
+
+**Итого:** 29 статей в `info/guides/` и `content/guides/`; slug `promocodes` сохранён для преемственности URL.
 
 ## Редкие стандарты
 
