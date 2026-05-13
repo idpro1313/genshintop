@@ -29,21 +29,9 @@ rewrite ^/guides/old-slug/?$ /guides/canonical-slug permanent;
 2. Старый URL: либо редирект на **хаб** темы (`/guides/banners`, `/guides/patches`, …), либо на первую часть серии — по редакционному решению.
 3. Зафиксировать редиректы в `docker/genshintop-redirects.conf`.
 
-## Инвентаризация дублей
+## Поиск дублей
 
-Запуск:
-
-```powershell
-php scripts/guides-refactor-inventory.php
-```
-
-Если PHP не в PATH (типично для Windows без установленного интерпретатора):
-
-```powershell
-pwsh scripts/guides-refactor-inventory.ps1
-```
-
-Отчёт после запуска инвентаризации: **`reports/guides-refactor-inventory.json`** (локально, не в git) — блок `mergeCandidatesByTitle` и совпадения `sourceSlug`.
+Перед merge полезно пройти **`content/guides-archive/`** или **`info/guides/`** поиском по одинаковым **`title`** в frontmatter или по совпадению **`sourceSlug`**. Автоматического JSON-отчёта в репозитории нет.
 
 ## Пример (реализовано в репозитории)
 

@@ -30,6 +30,6 @@ docker compose --env-file docker/.env -f docker/docker-compose.yml up -d
 - **`docker/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
-Канонический контент на сайте — **`info/{guides,characters}`**. Папка **`content/`** (архивы `guides-archive`, `characters-archive`, снимки) **не в git** — держите локально при работе со скриптами рефакторинга. Массовая генерация OG и тяжёлые пайплайны — вне этого репо при необходимости.
+Канонический контент на сайте — **`info/{guides,characters}`**. Папка **`content/`** (архивы `guides-archive`, `characters-archive`, снимки) **не в git** — при необходимости держите копию локально для справки. Массовая генерация OG и тяжёлые пайплайны — вне этого репо при необходимости.
 
 Версия проекта: **`VERSION`** (SemVer).

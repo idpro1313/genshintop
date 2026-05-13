@@ -3,11 +3,9 @@ dist/
 .astro/
 *.log
 .DS_Store
-# Архивы и снимки Markdown (guides-archive, characters-archive, snapshot-*): только локально.
+# Архивы и снимки Markdown (guides-archive, characters-archive): только локально, не в git.
 # Рантайм сайта читает только info/guides и info/characters (см. lib/ContentRepository.php).
 content/
-# JSON-отчёт инвентаризации гайдов и прочие артефакты скриптов — только локально (mkdir при первом запуске).
-reports/
 docker/.env
 grace/
 docs/

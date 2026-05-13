@@ -38,5 +38,3 @@
 - [Слияние и разбиение статей, редиректы](GUIDES_MERGE_SPLIT.md)
 - [Волны массовой редакции и критерии готовности](guides-refactor-waves.md)
 - Семантическая карта: [`docs/AGENTS.md`](AGENTS.md)
-
-Инвентаризация: `php scripts/guides-refactor-inventory.php` или `pwsh scripts/guides-refactor-inventory.ps1` → локально `reports/guides-refactor-inventory.json` (каталог `reports/` не в git).

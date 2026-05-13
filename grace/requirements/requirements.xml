@@ -99,7 +99,7 @@
       <Actor>Редактор / агент</Actor>
       <Action>Выполняет редакционный рефакторинг корпуса (архив content/guides-archive, живые статьи info/guides) по docs/GUIDE_EDITORIAL.md и волнам docs/guides-refactor-waves.md</Action>
       <Goal>Связная проза, корректная разметка, актуальный frontmatter; при ИА — merge/split и 301 в docker/genshintop-redirects.conf</Goal>
-      <Preconditions>По желанию перед массовыми правками: локально запустить инвентаризацию → файл reports/guides-refactor-inventory.json (каталог reports/ не в git)</Preconditions>
+      <Preconditions>При необходимости локальный архив content/guides-archive для сверки старых slug</Preconditions>
       <AcceptanceCriteria>Нет «лесенки» и битых якорей в отредактированных статьях; relatedGuides указывают на существующие slug; редиректы добавлены при удалении или переименовании slug</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>

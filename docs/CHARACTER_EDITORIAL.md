@@ -42,9 +42,9 @@
 
 Отдельный короткий формат: о чём страница, куда углубиться ([молитвы](/guides/bannery-sobytiya-molitvy), [примогемы](/guides/primogemy-kopim-tratim), карточки `/characters/...`). Без тиражирования устаревших новостных вставок.
 
-## Техническая пересборка
+## Архив и правки
 
-Скрипт **`scripts/rebuild-character-pages.ps1`** перед записью копирует текущие файлы из **`info/characters/`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`** и генерирует новое тело из существующего frontmatter **на месте** в **`info/characters/*.md`**. Каталог **`content/characters-archive/`** в корне не затирается — там может храниться более ранний длинный корпус из истории репозитория.
+При массовой смене шаблона карточки сохраняйте резерв **`info/characters/*.md`** в **`content/characters-archive/`** (локально, не в git). Новое **тело** и поля frontmatter правьте **вручную** в **`info/characters/*.md`** по этому документу.
 
 ## Связанные документы
 

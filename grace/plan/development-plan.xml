@@ -54,34 +54,28 @@
 
     <M-CONTENT-GUIDE-REFACTOR NAME="GuideCorpusEditorialPipeline" TYPE="UTILITY" LAYER="1" ORDER="3" STATUS="implemented">
       <contract>
-        <purpose>Редакционная нормализация архива гайдов (локально content/guides-archive/, не в git) и карточек info/characters: стандарты текста (GUIDE_EDITORIAL, CHARACTER_EDITORIAL), инвентаризация архива гайдов, волны W0–W3, редиректы slug в docker/genshintop-redirects.conf; пересборка тел карточек scripts/rebuild-character-pages.ps1 (info/characters → снимок в content/characters-archive/ локально); живые гайды на сайте — info/guides/.</purpose>
+        <purpose>Редакционные стандарты и playbook для info/guides/, info/characters/: docs/GUIDE_EDITORIAL.md, CHARACTER_EDITORIAL.md, guides-refactor-waves.md, GUIDES_MERGE_SPLIT.md; смена slug через docker/genshintop-redirects.conf; опционально локальный архив content/ (не в git). Автоматические скрипты и каталог reports/ из репозитория удалены.</purpose>
         <inputs>
           <param name="guides_md" type="markdown-glob" />
           <param name="characters_md" type="markdown-glob" />
           <param name="redirects_conf" type="nginx-snippet" />
         </inputs>
         <outputs>
-          <param name="inventory_json" type="json-report" />
           <param name="editorial_docs" type="markdown" />
         </outputs>
         <errors>
-          <error code="INVENTORY_WRITE_FAIL" />
+          <error code="EDITORIAL_INCONSISTENCY" />
         </errors>
       </contract>
       <interface>
-        <export-inventory-php PURPOSE="php scripts/guides-refactor-inventory.php → локально reports/guides-refactor-inventory.json (каталог не в git)" />
-        <export-inventory-ps PURPOSE="pwsh scripts/guides-refactor-inventory.ps1 — альтернатива без PHP в PATH" />
-        <export-character-pages PURPOSE="pwsh scripts/rebuild-character-pages.ps1 → резерв из info/characters в content/characters-archive/ (локально, не в git), новое тело в info/characters/*.md" />
+        <export-editorial-playbook PURPOSE="docs/GUIDE_EDITORIAL.md, docs/guides-refactor-waves.md, docs/GUIDES_MERGE_SPLIT.md — ручная ИА и merge/split" />
       </interface>
       <depends>M-PHP-SITE</depends>
       <target>
-        <source>scripts/guides-refactor-inventory.php</source>
-        <source>scripts/guides-refactor-inventory.ps1</source>
         <source>docs/GUIDE_EDITORIAL.md</source>
         <source>docs/CHARACTER_EDITORIAL.md</source>
         <source>docs/guides-refactor-waves.md</source>
         <source>docs/GUIDES_MERGE_SPLIT.md</source>
-        <source>scripts/rebuild-character-pages.ps1</source>
         <source>docker/genshintop-redirects.conf</source>
       </target>
       <verification-ref>V-M-CONTENT-GUIDE-REFACTOR</verification-ref>
@@ -128,9 +122,9 @@
   <DataFlow>
     <DF-CONTENT-MIGRATE NAME="SiteContentEditorial" TRIGGER="правки канонического Markdown в info/ или внешняя подготовка файлов">
       <step-1>Изменения в info/guides, info/characters и при необходимости архива content/guides-archive (только локально, не в git)</step-1>
-      <step-2>При смене slug — строки rewrite в docker/genshintop-redirects.conf; при необходимости инвентаризация scripts/guides-refactor-inventory.php или scripts/guides-refactor-inventory.ps1 → локально reports/guides-refactor-inventory.json</step-2>
+      <step-2>При смене slug — строки rewrite в docker/genshintop-redirects.conf; правки перекрёстных ссылок в info/** вручную</step-2>
       <step-3>Сборка образа: docker build -f docker/Dockerfile . ; sitemap через lib/build-sitemap.php</step-3>
-      <evidence>Канон для сайта — info/**; content/** при необходимости только локально для архивов и скриптов; образ собирается docker build -f docker/Dockerfile .</evidence>
+      <evidence>Канон для сайта — info/**; content/** при необходимости только локально для архивов; образ собирается docker build -f docker/Dockerfile .</evidence>
     </DF-CONTENT-MIGRATE>
 
     <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click">
@@ -161,8 +155,8 @@
     </Phase-5>
 
     <Phase-6 name="GuideCorpusEditorialRefactor" status="in-progress">
-      <goal>Единый редакционный стандарт гайдов, отчёт инвентаризации, редиректы при ИА; волны W1–W3 по отчёту</goal>
-      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, инвентаризация, W0 cornerstone и merge banner→banners; W1 датированные дубли banner-* → канон + 301; W2 остаточные пары баннеров + 301; пример «лесенки» — paralogism-5-6.md; хвост W2 (редакторские update-* / banner-*) и W3 — по отчёту</step-1>
+      <goal>Единый редакционный стандарт гайдов, ручной playbook волн W0–W3, редиректы при смене slug</goal>
+      <step-1 module="M-CONTENT-GUIDE-REFACTOR" status="in-progress" verification="V-M-CONTENT-GUIDE-REFACTOR">Документы docs/GUIDE_EDITORIAL.md, guides-refactor-waves.md, GUIDES_MERGE_SPLIT.md; W0 cornerstone; W1/W2 дубли banner-* и патчи — вручную + 301 в nginx; W3 general и кириллические slug; без скриптов inventory/wave в репозитории</step-1>
     </Phase-6>
 
     <!-- Phases use unique tags:

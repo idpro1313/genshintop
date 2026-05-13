@@ -552,3 +552,9 @@
 - **Почему:** запрос пользователя — убрать папку **`reports/`** из репозитория; отчёт не нужен рантайму сайта.
 - **Файлы:** `.gitignore`, `docs/AGENTS.md`, `docs/GUIDE_EDITORIAL.md`, `docs/GUIDES_MERGE_SPLIT.md`, `docs/guides-refactor-waves.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/requirements/requirements.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`, снятие с индекса `reports/*`
 - **Решение:** PATCH **1.11.5** — для **`wave-w1-merge-banner-dated.ps1`** сначала сгенерировать JSON локально (`php` / `pwsh` guides-refactor-inventory).
+
+### Удаление scripts/ и reports/ из проекта (1.12.0)
+- **Что:** удалены каталог **`scripts/`** (инвентаризация гайдов, wave-w1, пересборка карточек, нормализация строк) и запись **`reports/`** из **`.gitignore`**. Документы **`docs/AGENTS.md`**, **`docs/GUIDE_EDITORIAL.md`**, **`docs/GUIDES_MERGE_SPLIT.md`**, **`docs/guides-refactor-waves.md`**, **`docs/CHARACTER_EDITORIAL.md`**, **`info/README.md`**, **`grace/**`**, **`VERSION` → 1.12.0**, **`docs/HISTORY.md`** приведены к модели **только ручная** редакция и **`docker/genshintop-redirects.conf`**.
+- **Почему:** запрос пользователя — папки **`reports`** и **`scripts`** больше не нужны.
+- **Файлы:** удалён **`scripts/**`**; `.gitignore`, перечисленные docs и grace, `VERSION`, `info/README.md`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.12.0** — снятие редакционной автоматизации из репозитория без изменения рантайма PHP-сайта.

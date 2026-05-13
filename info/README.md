@@ -40,7 +40,7 @@
 | Техника | ПК, железо, FPS | Платформы и производительность |
 | Прочее | артефакты, оружие, мир | Отдельные базовые столпы |
 
-**Счётчик:** в **`content/guides-archive`** было **232** файла `.md` (актуализация: `php scripts/guides-refactor-inventory.php`, если PHP доступен в среде).
+**Счётчик:** в **`content/guides-archive`** (локально, не в git) исторически было **~232** файла `.md`; точное число при необходимости — вручную или поиском по каталогу.
 
 ## Матрица: хаб → статья (финальные slug)
 
@@ -256,8 +256,8 @@
 Каталог **`info/characters/`** — канон карточек для сайта.
 
 - **Стандарт текста:** [`docs/CHARACTER_EDITORIAL.md`](../docs/CHARACTER_EDITORIAL.md) — короткий профиль без копипасты талантов из клиента, ссылками на опорные гайды.
-- **Снимок до пересборки:** при массовом переходе на новый формат прежние тексты копируются скриптом в **`content/characters-archive/`** (резерв, не в индексе сайта).
-- **Пересборка тел из frontmatter:** `pwsh scripts/rebuild-character-pages.ps1` из корня — копирует `*.md` из **`info/characters/`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`**, генерирует новое **тело** из существующего frontmatter (**197** slug, в том числе `why-pull-*` и `*-vs-*`).
+- **Резерв длинного текста:** при смене формата страницы имеет смысл вручную сохранить копию `*.md` в **`content/characters-archive/`** (локально, не в git) — сайт этот каталог не читает.
+- **Правки тел:** только вручную в **`info/characters/*.md`** по структуре **`docs/CHARACTER_EDITORIAL.md`** (**197** slug, в том числе `why-pull-*` и `*-vs-*`).
 - **Frontmatter:** `name`, `title`, `element`, `weapon`, `rating` (опц.), `sourceSlug`, `relatedWeapons`, `relatedArtifacts`, `relatedGuides`; при пересборке добавляются `summary`, `gameVersion`, `reviewedAt`, если их не было.
 
 **Счётчик:** **197** файлов `.md` (включая `why-pull-*`, `*-vs-*` и прочие вспомогательные URL в том же каталоге).
