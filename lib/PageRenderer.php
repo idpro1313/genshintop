@@ -1155,17 +1155,14 @@ HTML;
     /** @return array<string,mixed>|null */
     public static function lootbarSubpage(array $cfg, string $slug): ?array
     {
+        if ($slug === 'kak-popolnit-genshin-impact') {
+            return self::lootbarHowToGenshinLanding($cfg);
+        }
         if ($slug === 'skidki-i-kupony') {
             return self::lootbarDiscountsLanding($cfg);
         }
 
         $pages = [
-            'kak-popolnit-genshin-impact' => [
-                'title' => 'Как пополнить Genshin Impact через LootBar.gg — пошаговый топ-ап',
-                'description' => 'Пошаговая инструкция пополнения через LootBar.gg и применения промокода.',
-                'bodyIntro' => 'Общая последовательность для стороннего топ-апа. Поля на LootBar могут меняться.',
-                'utm' => 'lootbar_howto',
-            ],
             'promokod' => [
                 'title' => 'Промокод LootBar для Genshin Impact — купоны и скидки',
                 'description' => 'Где смотреть промокод LootBar и чем он отличается от кодов HoYoverse.',
@@ -1228,6 +1225,83 @@ HTML;
         return [
             'pageTitle' => $p['title'],
             'pageDescription' => $p['description'],
+            'canonicalPath' => $canonicalPath,
+            'hideLootBarPromo' => true,
+            'slot' => $slot,
+            'jsonLd' => $jsonLd,
+        ];
+    }
+
+    /**
+     * Инструкция пополнения по потоку витрины LootBar (ru/top-up/genshin-impact).
+     *
+     * @param array<string,mixed> $cfg
+     *
+     * @return array<string,mixed>
+     */
+    private static function lootbarHowToGenshinLanding(array $cfg): array
+    {
+        $canonicalPath = '/lootbar/kak-popolnit-genshin-impact';
+        $topupUrl = Partners::lootbarGenshinTopupUrl('lootbar_howto');
+        $outUrl = Html::e($topupUrl);
+        $pageTitle = 'Как пополнить Genshin Impact через LootBar.gg — пошаговый топ-ап';
+        $pageDescription = 'Инструкция по пополнению через витрину LootBar для Genshin Impact: UID, сервер, купон и оплата — как на странице lootbar.gg/ru/top-up/genshin-impact.';
+
+        $steps = LootbarConfig::howToStepTexts();
+        $stepsLi = '';
+        foreach ($steps as $i => $text) {
+            $n = $i + 1;
+            $stepsLi .= '<li><strong>Шаг ' . $n . '.</strong> ' . Html::e($text) . '</li>';
+        }
+
+        $howTo = Seo::howToSchema([
+            'name' => 'Как пополнить Genshin Impact через LootBar.gg',
+            'description' => 'Порядок действий на витрине Top Up для Genshin Impact.',
+            'steps' => $steps,
+        ]);
+
+        $slot = <<<HTML
+<article class="article prose-flow lootbar-howto-page">
+<p class="back-link"><a href="/lootbar">← Хаб LootBar</a></p>
+<p class="muted"><a href="/partnership-disclosure">Раскрытие партнёрства</a></p>
+<h1>{$pageTitle}</h1>
+<p class="lead">Ниже — типовой сценарий того же экрана заказа, что открывается по адресу <strong>lootbar.gg/ru/top-up/genshin-impact</strong> (в т.ч. если вы попали на сайт по ссылке с параметрами вроде <code>utm_campaign=p_invite</code>). Подписи полей и порядок шагов на стороне LootBar могут слегка меняться — ориентируйтесь на актуальную форму на сайте партнёра.</p>
+<p><a class="btn btn-lootbar" href="{$outUrl}" rel="noopener noreferrer sponsored" target="_blank" data-reach-goal="lootbar_howto_open_vitrina">Открыть пополнение Genshin Impact на LootBar.gg</a></p>
+<h2>Пошагово</h2>
+<ol class="lootbar-howto-steps">
+{$stepsLi}
+</ol>
+<h2>Где посмотреть UID в Genshin Impact</h2>
+<p>В клиенте откройте меню паузы (иконка Паймона) → <strong>Настройки</strong> (шестерёнка, слева внизу) → раздел про аккаунт / пользовательское соглашение — там отображается <strong>UID</strong>. Его копируют в форму на LootBar; <strong>пароль от аккаунта HoYoverse не передавайте</strong> сторонним сервисам.</p>
+<h2>Купоны и скидки</h2>
+<p>Промокоды магазина LootBar применяются на шаге оплаты. Если только что зарегистрировались, проверьте профиль и страницу <a href="/lootbar/skidki-i-kupony">Скидки и купоны</a>.</p>
+<p><a class="btn btn-secondary" href="/lootbar/bezopasnost-i-oplata">Безопасность и оплата →</a></p>
+</article>
+HTML;
+
+        $url = Seo::absoluteUrl($cfg, $canonicalPath);
+        $jsonLd = Seo::jsonLdGraph([
+            Seo::publisherOrganization($cfg),
+            Seo::webSiteNode($cfg),
+            Seo::breadcrumbListSchema($cfg, [
+                ['label' => 'Главная', 'href' => '/'],
+                ['label' => 'LootBar', 'href' => '/lootbar'],
+                ['label' => 'Как пополнить', 'href' => $canonicalPath],
+            ]),
+            [
+                '@type' => 'WebPage',
+                '@id' => $url . '#webpage',
+                'name' => $pageTitle,
+                'url' => $url,
+                'description' => $pageDescription,
+                'isPartOf' => ['@id' => Seo::siteUrl($cfg) . '/#website'],
+            ],
+            $howTo,
+        ]);
+
+        return [
+            'pageTitle' => $pageTitle . ' — GenshinTop',
+            'pageDescription' => $pageDescription,
             'canonicalPath' => $canonicalPath,
             'hideLootBarPromo' => true,
             'slot' => $slot,

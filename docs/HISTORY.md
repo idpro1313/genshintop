@@ -390,3 +390,9 @@
 - **Почему:** запрос пользователя — чтобы баннер вёл на такую же по смыслу страницу, как у dandangers.
 - **Файлы:** `lib/PageRenderer.php`, `lib/lootbar_banner.php`, `lib/SiteRoutes.php`, `public/css/site.css`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.8** — точные рублёвые строки как у другой игры не копировались; акцент на актуальные цены на LootBar.gg и локальной инструкции.
+
+### Инструкция пополнения под витрину lootbar.gg/ru/top-up/genshin-impact (1.3.9)
+- **Что:** **`lib/LootbarConfig.php`** — расширены шаги HowTo под реальный поток Top Up Genshin Impact на LootBar. **`lib/PageRenderer.php`** — **`/lootbar/kak-popolnit-genshin-impact`** вынесена в **`lootbarHowToGenshinLanding`**: развёрнутый текст, явная отсылка к пути **`lootbar.gg/ru/top-up/genshin-impact`** и к ссылкам с параметрами вроде **`utm_campaign=p_invite`**, кнопка «Открыть пополнение…», блок про UID и купоны, JSON-LD **HowTo**. **`public/css/site.css`** — стили списка шагов. **`grace/verification`** — цель **`lootbar_howto_open_vitrina`** в VF-002.
+- **Почему:** запрос пользователя — опереться на официальную витрину [LootBar Genshin Impact](https://lootbar.gg/ru/top-up/genshin-impact?utm_source=copy&utm_medium=social&utm_campaign=p_invite); SPA LootBar не отдаёт полный текст через простой fetch, поэтому на сайте зафиксирован типовой сценарий формы и предупреждение сверяться с актуальным UI партнёра.
+- **Файлы:** `lib/LootbarConfig.php`, `lib/PageRenderer.php`, `public/css/site.css`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.9**.
