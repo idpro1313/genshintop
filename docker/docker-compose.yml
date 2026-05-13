@@ -1,5 +1,8 @@
 # Запуск сайта в Docker за Traefik (сеть web должна существовать — см. webserver).
 # Скопируйте docker/env.example → docker/.env и подставьте домены.
+# Имя проекта Compose зафиксировано (name), чтобы не путаться со вторым сайтом на том же хосте.
+
+name: genshintop
 
 services:
   web:

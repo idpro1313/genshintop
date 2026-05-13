@@ -40,7 +40,7 @@
         <check-5>Статически: кластер /lootbar в lib/PageRenderer.php, lib/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
         <check-6>Статически: lib/build-sitemap.php использует SiteRoutes и ContentRepository; пишет Sitemap 0.9 urlset (без sitemap-index)</check-6>
         <check-7>Статически: .github/workflows/docker-image.yml — docker/build-push-action на ./docker/Dockerfile (context .); PR без push, main — push GHCR</check-7>
-        <check-8>Статически: docker/docker-compose.yml — готовый образ GHCR, Traefik labels; корневой update-from-github.sh — compose pull + up -d с docker/.env</check-8>
+        <check-8>Статически: docker/docker-compose.yml — имя проекта Compose name: genshintop; готовый образ GHCR, Traefik labels; корневой update-from-github.sh — compose pull + up -d с docker/.env</check-8>
         <check-9>Статически: public/robots.txt — Sitemap: https://genshintop.ru/sitemap.xml; User-agent: Yandex с Clean-param и Host где применимо</check-9>
         <check-10>Статически: lib/Seo.php — webSiteNode с SearchAction на /guides?q=; editorialTeamPerson; stripDescriptionNoise убирает U+3164; OG-теги в шаблонах статей</check-10>
         <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — хабы events, tcg, domains, bosses, quests и пр.</check-11>

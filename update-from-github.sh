@@ -21,6 +21,9 @@ fi
 BRANCH="${1:-main}"
 REMOTE="${REMOTE:-origin}"
 
+echo ">>> параметры из $ENV_FILE (проверьте, что это этот сайт, не копия .env с другого):"
+grep -E '^(SITE_CONTAINER_NAME|TRAEFIK_ROUTER|SITE_IMAGE)=' "$ENV_FILE" || true
+
 echo ">>> git fetch $REMOTE $BRANCH"
 git fetch "$REMOTE" "$BRANCH"
 

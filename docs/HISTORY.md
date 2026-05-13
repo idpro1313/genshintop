@@ -354,3 +354,9 @@
 - **Почему:** запрос пользователя — использовать актуальный релиз **1.8.0**.
 - **Файлы:** `lib/Parsedown.php`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.2** — **`ContentRepository::markdownToHtml`** по-прежнему использует **`Parsedown::text()`** и **`setSafeMode(false)`**.
+
+### Compose: проект genshintop и защита от чужого docker/.env (1.3.3)
+- **Что:** в **`docker/docker-compose.yml`** добавлено верхнеуровневое **`name: genshintop`** (изолированное имя проекта Compose); **`docker/env.example`** и **`docker/README.md`** — предупреждение не копировать **`docker/.env`** между сайтами на одном хосте и проверка **`SITE_CONTAINER_NAME`**/**`TRAEFIK_ROUTER`**; **`update-from-github.sh`** перед **`git fetch`** выводит строки **`SITE_CONTAINER_NAME`**, **`TRAEFIK_ROUTER`**, **`SITE_IMAGE`** из **`docker/.env`** для визуальной проверки; **`grace/verification`** уточнён чек по compose.
+- **Почему:** на сервере при обновлении из каталога genshintop пересоздавался контейнер **`dandangers_web`** — типичный случай **`SITE_CONTAINER_NAME`** из чужого **`.env`**.
+- **Файлы:** `docker/docker-compose.yml`, `docker/env.example`, `docker/README.md`, `update-from-github.sh`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.3.3** — на проде в **`genshintop/docker/.env`** должны быть **`SITE_CONTAINER_NAME=genshintop_web`** и **`TRAEFIK_ROUTER=genshintop`** (не значения с dandangers).

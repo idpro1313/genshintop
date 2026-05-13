@@ -6,6 +6,18 @@
 
 Общее требование: на сервере уже поднят **Traefik** и внешняя сеть Docker **`web`** (как в [webserver](https://github.com/idpro1313/webserver)).
 
+### Несколько сайтов на одном хосте (genshintop + dandangers и т.д.)
+
+У каждого репозитория свой файл **`docker/.env`**. **Не копируйте** его между каталогами: переменные **`SITE_CONTAINER_NAME`**, **`TRAEFIK_ROUTER`**, **`TRAEFIK_RULE`**, при необходимости **`SITE_IMAGE`** должны соответствовать **этому** сайту. Если в genshintop случайно останется **`SITE_CONTAINER_NAME=dandangers_web`**, команда **`docker compose up`** из genshintop пересоздаст контейнер **dandangers** с образом genshintop — ровно то, что вы видели в логе.
+
+Проверка на сервере:
+
+```bash
+grep -E '^(SITE_CONTAINER_NAME|TRAEFIK_ROUTER|SITE_IMAGE)=' docker/.env
+```
+
+Для genshintop ожидаются **`genshintop_web`**, **`genshintop`**, образ **`ghcr.io/…/genshintop`**.
+
 ---
 
 ## Docker из GHCR
