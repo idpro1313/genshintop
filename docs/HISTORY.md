@@ -244,3 +244,11 @@
 - **Почему:** продолжение миграции с Astro на PHP: приложение до этого падало из‑за отсутствия `PageRenderer` и неполной маршрутизации главной.
 - **Файлы:** `bootstrap.php`, `config.php`, `lib/PageRenderer.php`, `lib/Router.php`, `lib/*.php`, `templates/**`, `content/**`, `data/og-manifest.json`, `public/index.php`, `public/css/site.css`, `VERSION`, `package.json`, `package-lock.json`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/AGENTS.md`, `docs/HISTORY.md`
 - **Решение:** PATCH `0.7.0 → 0.7.1`. Контент по-прежнему читается из `content/`; Docker/nginx пока отдаёт статический Astro `dist` — включение PHP-FPM запланировано отдельной фазой. Локальный запуск PHP/nginx для проверки не выполнялся (`no-local-app-verification`).
+
+## Фаза: cutover на PHP + nginx (1.0.0)
+
+### Завершение миграции dandangers-стека (MAJOR 1.0.0)
+- **Что:** удалены дерево **`src/`**, **`astro.config.mjs`**, **`tailwind.config.mjs`**, **`scripts/sitemap-lastmod.mjs`**; рантайм сайта — корневой **`Dockerfile`** (php-fpm-alpine + nginx + supervisor), активный nginx — **`docker/nginx-default.conf`**; единый **`public/sitemap.xml`** через **`scripts/build-sitemap.php`** при сборке образа; **`/rss.xml`** — 404 в **`lib/Router.php`**; скрипты миграции переведены на **`content/`** и локальные **`scripts/guide-taxonomy.ts`**, **`scripts/seo-helpers.ts`** (паритет с PHP). Обновлены **`docs/AGENTS.md`**, **`README.md`**, **`deploy/README.md`** (откат образом, паритет URL), **`deploy/SEO-CHECKLIST.md`**, **`grace/**/*.xml`**, **`package-lock.json`** после `npm install`.
+- **Почему:** запрос пользователя — полный переход с Astro SSG на стек как у dandangers с сохранением URL и без RSS.
+- **Файлы:** удалены `src/**`, `astro.config.mjs`, `tailwind.config.mjs`, `scripts/sitemap-lastmod.mjs`; добавлены `scripts/guide-taxonomy.ts`, `scripts/seo-helpers.ts`; правки в `scripts/*.ts`, `public/css/site.css`, `grace/**`, `docs/**`, `deploy/**`, `README.md`, `package-lock.json`, и др. по диффу.
+- **Решение:** версия **`VERSION` = 1.0.0** (MAJOR cutover). Локальный запуск приложения для проверки не выполнялся (`no-local-app-verification`).

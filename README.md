@@ -1,34 +1,33 @@
 # genshintop
 
-Сайт **GenshinTop** (genshintop.ru) на **Astro 5**: гайды и каталог персонажей **Genshin Impact**, SEO, статическая сборка в **`dist/`**.
+Сайт **GenshinTop** (genshintop.ru): **PHP + nginx** в Docker, Markdown в **`content/`**, ванильный CSS в **`public/css/`**. SEO URL сохранены (гайды, персонажи, LootBar, регионы).
 
-## Быстрый старт
+## Быстрый старт (контент и утилиты)
 
 ```powershell
 npm install
-npm run content:migrate
-npm run build
+npm run content:migrate    # при необходимости из gi-database → content/
+npm run og:generate        # опционально: OG PNG + data/og-manifest.json
 ```
 
-Перед первой полной миграцией можно оставить заглушки в `src/content/**` — они заменятся при `content:migrate`. После переноса **`gi-database/`** можно удалить (см. `npm run content:verify`).
+Сборка **sitemap** в образе сайта: `php scripts/build-sitemap.php` (вызывается из **`Dockerfile`** при `docker build`). Локально: `npm run sitemap:build`, если в PATH есть PHP.
 
 ## Docker и обновление с GitHub
 
-На сервере с Traefik и сетью `web`:
-
 ```bash
 cp deploy/env.example deploy/.env   # настроить домены
-docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d --build
-./deploy/update-from-github.sh      # дальше обновления
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml pull
+docker compose --env-file deploy/.env -f deploy/docker-compose.yml up -d
+./deploy/update-from-github.sh      # дальше обновления с тем же compose
 ```
 
-Подробно: **`deploy/README.md`**.
+Подробно: **`deploy/README.md`** (откат образом, паритет URL).
 
 ## Документация
 
 - **`docs/AGENTS.md`** — карта проекта для агентов и разработчиков  
 - **`docs/HISTORY.md`** — журнал итераций  
-- **`deploy/README.md`** — Docker, Traefik, скрипты обновления, альтернатива через [webserver](https://github.com/idpro1313/webserver)  
+- **`deploy/README.md`** — Docker, Traefik, откат  
 - **`grace/`** — GRACE (требования, план, верификация, граф знаний)
 
 Исходный корпус Markdown: **`gi-database/`** (`INDEX.md`, `database.json`).

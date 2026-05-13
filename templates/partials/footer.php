@@ -6,7 +6,7 @@ $verPath = SITE_ROOT . DIRECTORY_SEPARATOR . 'VERSION';
 $version = is_readable($verPath) ? trim((string) file_get_contents($verPath)) : '';
 ?>
 <footer class="site-footer">
-  <div class="site-footer-inner">
+  <div class="footer-inner">
     <div class="footer-col">
       <div class="footer-brand">GenshinTop</div>
       <p class="footer-muted">Неофициальные гайды и справка по Genshin Impact.</p>

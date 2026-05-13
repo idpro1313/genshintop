@@ -1,0 +1,131 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * CLI: собирает единый public/sitemap.xml (Sitemap 0.9).
+ * Запуск: php scripts/build-sitemap.php (из корня репозитория).
+ */
+
+require dirname(__DIR__) . '/bootstrap.php';
+
+$cfg = require SITE_ROOT . '/config.php';
+$base = rtrim((string) ($cfg['site_url'] ?? 'https://genshintop.ru'), '/');
+
+/** @return array{0: string, 1: string} priority, changefreq */
+function sitemap_meta(string $path): array
+{
+    $priority = '0.5';
+    $changefreq = 'monthly';
+    $p = $path === '' ? '/' : $path;
+    if ($p !== '/' && str_ends_with($p, '/')) {
+        $p = rtrim($p, '/') ?: '/';
+    }
+
+    if ($p === '/') {
+        $priority = '1.0';
+        $changefreq = 'daily';
+    } elseif (preg_match('#^/(guides|characters|lootbar)$#', $p)) {
+        $priority = '0.9';
+        $changefreq = 'weekly';
+    } elseif (preg_match('#^/lootbar/[^/]+$#', $p)) {
+        $priority = '0.85';
+        $changefreq = 'weekly';
+    } elseif (preg_match('#^/guides/(banners|patches|codes|newbie|economy|tier-list|events|tcg|domains|bosses|quests)$#', $p)) {
+        $priority = '0.85';
+        $changefreq = 'weekly';
+    } elseif (preg_match('#^/characters/(pyro|hydro|electro|cryo|anemo|geo|dendro|sword|claymore|polearm|catalyst|bow|4-star|5-star)$#', $p)) {
+        $priority = '0.85';
+        $changefreq = 'weekly';
+    } elseif (preg_match('#^/(guides|characters)/[^/]+$#', $p)) {
+        $priority = '0.7';
+        $changefreq = 'monthly';
+    } elseif (preg_match('#^/regions(/[^/]+)?$#', $p)) {
+        $priority = '0.7';
+        $changefreq = 'monthly';
+    } elseif (preg_match('#^/(about|editorial-policy|partnership-disclosure|contacts|content-updates)$#', $p)) {
+        $priority = '0.4';
+        $changefreq = 'monthly';
+    }
+
+    return [$priority, $changefreq];
+}
+
+/** @param array<string, array{lastmod?: int, priority: string, changefreq: string}> $urls */
+function write_sitemap(string $baseUrl, array $urls): void
+{
+    ksort($urls);
+    $out = SITE_ROOT . '/public/sitemap.xml';
+    $fh = fopen($out, 'wb');
+    if ($fh === false) {
+        throw new RuntimeException('Cannot write ' . $out);
+    }
+    fwrite($fh, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+    fwrite($fh, '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n");
+
+    foreach ($urls as $path => $meta) {
+        $loc = $baseUrl . ($path === '/' ? '/' : $path);
+        fwrite($fh, "  <url>\n");
+        fwrite($fh, '    <loc>' . htmlspecialchars($loc, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</loc>\n");
+        if (!empty($meta['lastmod'])) {
+            fwrite($fh, '    <lastmod>' . gmdate('Y-m-d', $meta['lastmod']) . "</lastmod>\n");
+        }
+        fwrite($fh, '    <changefreq>' . htmlspecialchars($meta['changefreq'], ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</changefreq>\n");
+        fwrite($fh, '    <priority>' . htmlspecialchars($meta['priority'], ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</priority>\n");
+        fwrite($fh, "  </url>\n");
+    }
+
+    fwrite($fh, "</urlset>\n");
+    fclose($fh);
+}
+
+$urls = [];
+
+foreach (SiteRoutes::staticPaths() as $p) {
+    if ($p === '/404') {
+        continue;
+    }
+    [$pr, $cf] = sitemap_meta($p);
+    $urls[$p] = ['priority' => $pr, 'changefreq' => $cf];
+}
+
+foreach (ContentRepository::guides() as $g) {
+    $slug = (string) ($g['slug'] ?? '');
+    if ($slug === '' || str_contains($slug, '_placeholder')) {
+        continue;
+    }
+    $path = '/guides/' . $slug;
+    [$pr, $cf] = sitemap_meta($path);
+    $urls[$path] = [
+        'lastmod' => ContentRepository::guideTimestamp($g),
+        'priority' => $pr,
+        'changefreq' => $cf,
+    ];
+}
+
+foreach (ContentRepository::characters() as $c) {
+    $slug = (string) ($c['slug'] ?? '');
+    if ($slug === '' || str_contains($slug, '_placeholder')) {
+        continue;
+    }
+    $path = '/characters/' . $slug;
+    [$pr, $cf] = sitemap_meta($path);
+    $lm = (int) @filemtime((string) ($c['path'] ?? ''));
+    $urls[$path] = [
+        'lastmod' => $lm > 0 ? $lm : null,
+        'priority' => $pr,
+        'changefreq' => $cf,
+    ];
+}
+
+// Главная — lastmod по точке входа
+if (isset($urls['/'])) {
+    $lm = @filemtime(SITE_ROOT . '/public/index.php');
+    if ($lm !== false) {
+        $urls['/']['lastmod'] = $lm;
+    }
+}
+
+write_sitemap($base, $urls);
+
+echo 'Written ' . SITE_ROOT . "/public/sitemap.xml (" . count($urls) . " urls)\n";

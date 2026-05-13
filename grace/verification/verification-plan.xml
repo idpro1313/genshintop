@@ -12,11 +12,11 @@
   </GlobalPolicy>
 
   <CriticalFlows>
-    <VF-001 NAME="StaticSiteBuild" USE_CASES="UC-001" DATA_FLOW="DF-CONTENT-MIGRATE" PRIORITY="high">
-      <scenario>Сборка Astro после миграции контента</scenario>
-      <expected-outcome>npm run build завершается без ошибок, dist/ содержит HTML маршрутов</expected-outcome>
+    <VF-001 NAME="DockerPhpSiteImage" USE_CASES="UC-001" DATA_FLOW="DF-CONTENT-MIGRATE" PRIORITY="high">
+      <scenario>Сборка прод Docker-образа сайта (PHP + nginx)</scenario>
+      <expected-outcome>docker build завершается без ошибок; этап RUN php scripts/build-sitemap.php создаёт public/sitemap.xml; образ слушает порт 80</expected-outcome>
       <required-signals>
-        <log-marker>[Build] astro build SUCCESS</log-marker>
+        <log-marker>[Docker] php-fpm + nginx healthy</log-marker>
       </required-signals>
     </VF-001>
 
@@ -34,7 +34,7 @@
       <test-files />
       <module-checks>
         <check-1>npm run content:audit — создаёт reports/content-audit.json</check-1>
-        <check-2>npm run content:migrate — заполняет src/content и migration-report.json</check-2>
+        <check-2>npm run content:migrate — заполняет content/ и migration-report.json</check-2>
         <check-3>npm run content:verify — сверка счётчиков после полной миграции</check-3>
         <check-4>npm run content:audit-guides — создаёт reports/guides-audit.json со статическими метриками гайдов</check-4>
         <check-5>npm run content:enrich — обновляет фронтматтер, переименовывает кириллические slug, пишет deploy/genshintop-redirects.conf и reports/slug-redirects.json</check-5>
@@ -53,8 +53,8 @@
       <test-files />
       <module-checks>
         <check-1>npm run og:generate — создаёт public/og/{guides,characters}/&lt;slug&gt;.png 1200×630 для каждой записи</check-1>
-        <check-2>src/data/og-manifest.json содержит entries в формате "&lt;collection&gt;/&lt;slug&gt;" и поле generatedAt в ISO</check-2>
-        <check-3>getOgImageForEntry(collection, slug) возвращает /og/&lt;collection&gt;/&lt;slug&gt;.png если slug в манифесте, иначе DEFAULT_OG_IMAGE_PATH</check-3>
+        <check-2>data/og-manifest.json содержит entries в формате "&lt;collection&gt;/&lt;slug&gt;" и поле generatedAt в ISO</check-2>
+        <check-3>OgManifest::imageForEntry(collection, slug) возвращает /og/&lt;collection&gt;/&lt;slug&gt;.png если slug в манифесте, иначе /og-default.svg</check-3>
       </module-checks>
       <scenarios>
         <scenario-1 kind="success">PNG сгенерированы, размер 1200×630, манифест согласован со структурой каталога</scenario-1>
@@ -65,36 +65,34 @@
       <phase-follow-up>Регенерация при существенных правках title или summary гайда</phase-follow-up>
     </V-M-OG-PIPELINE>
 
-    <V-M-WEBSITE MODULE="M-WEBSITE" PRIORITY="high">
+    <V-M-PHP-SITE MODULE="M-PHP-SITE" PRIORITY="high">
       <test-files />
       <module-checks>
-        <check-1>npm run build</check-1>
-        <check-2>npx astro check (при необходимости типизации)</check-2>
-        <check-3>После сборки: в dist/*.html наличие og:image и JSON-LD @graph на главной и каталогах (выборочно)</check-3>
-        <check-4>Статически проверить в src/layouts/BaseLayout.astro наличие счётчика Яндекс.Метрики 109020836 и noscript fallback</check-4>
-        <check-5>Статически: маршрут `src/pages/lootbar/`, компоненты LootBarOutboundLink / LootBarDisclosure, поле reviewedAt/sources в guides</check-5>
-        <check-6>Статически: deploy/nginx-docker.conf — error_page 404 /404.html; location для *.xml без SPA-fallback; deploy/SEO-CHECKLIST.md для пост-деплоя</check-6>
-        <check-7>Статически: .github/workflows/docker-image.yml — pull_request выполняет build без push, main пушит Docker image в GHCR, секреты не хардкодятся</check-7>
-        <check-8>Статически: deploy/docker-compose.yml использует готовый SITE_IMAGE/GHCR image без build; update-from-github.sh выполняет docker compose pull перед up -d и объясняет GHCR unauthorized</check-8>
-        <check-10>Статически: src/data/lootbar.ts и компоненты LootBarCouponCard, LootBarBenefitsGrid, LootBarStepsList, LootBarPriceTable, LootBarPrimogemCalc, LootBarMiniHero; deploy/SEO-CHECKLIST.md перечисляет новые reachGoal</check-10>
-        <check-11>Статически: astro.config.mjs передаёт sitemap() с serialize (priority/changefreq) и filter, исключающим /404 и _placeholder; public/robots.txt содержит блок User-agent: Yandex с Clean-param и Host: genshintop.ru</check-11>
-        <check-12>Статически: src/components/Seo.astro отдаёт og:image:alt, og:image:type и опциональные yandex/google verification meta из import.meta.env</check-12>
-        <check-13>Статически: deploy/nginx-docker.conf включает include /etc/nginx/conf.d/genshintop-redirects.conf*; Dockerfile копирует deploy/genshintop-redirects.conf в /etc/nginx/conf.d/</check-13>
-        <check-14>Статически: src/lib/guide-hub.ts экспортирует matchHubEvents, matchHubTcg, matchHubDomains, matchHubBosses, matchHubQuests; страницы src/pages/guides/{events,tcg,domains,bosses,quests}.astro существуют и используют GuideHubPage</check-14>
-        <check-15>Статически: src/pages/regions/index.astro и src/pages/regions/{sumeru,fontaine,natlan}.astro используют RegionPage; Header содержит ссылку на /regions</check-15>
-        <check-16>Статически: src/pages/guides/[slug].astro рендерит блок Связанные персонажи из relatedCharacters; src/pages/characters/[slug].astro рендерит блок Гайды по персонажу из relatedGuides</check-16>
-        <check-17>Статически: src/lib/seo.ts экспортирует editorialTeamPerson и lootbarServiceSchema; /lootbar/index.astro подключает Service-schema и LootBarGlossary; editorial-policy.astro перечисляет процесс публикации и обновления</check-17>
-        <check-18>Статически: src/styles/global.css не содержит @import url(...fonts.googleapis...); BaseLayout.astro использует preconnect и асинхронный link rel=stylesheet с media=print onload; счётчик Яндекс.Метрики обёрнут в requestIdleCallback / load с очередью команд ym</check-18>
-        <check-19>Статически: BaseLayout подключает семейство Onest вместе с Cinzel; tailwind.config задаёт font-sans Onest; stripDescriptionNoise в src/lib/seo.ts удаляет U+3164; в разметке head BaseLayout нет HTML-комментариев; global.css содержит hero-glow и prefers-reduced-motion для .lootbar-cta-shine; elementCardAccentClass в src/lib/elements.ts</check-19>
-        <check-20>Статически: scripts/sitemap-lastmod.mjs импортируется из astro.config.mjs; serialize добавляет lastmod для динамических URL; src/pages/rss.xml.ts существует; BaseLayout — link alternate на RSS и meta theme-color; webSiteNode в src/lib/seo.ts содержит potentialAction SearchAction на /guides?q=; publisherOrganization поддерживает optional sameAs из PUBLIC_ORGANIZATION_SAME_AS; guides/index — форма поиска q, data-атрибут на карточках, ItemList в JSON-LD ограничен недавними записями</check-20>
+        <check-1>Статически: public/index.php, bootstrap.php, config.php; lib/Router.php отвечает 404 на /rss.xml</check-1>
+        <check-2>Статически: docker/nginx-default.conf — try_files → /index.php, отдельные location для .xml/.txt/.webmanifest, include genshintop-redirects.conf*, gzip и security headers</check-2>
+        <check-3>Статически: Dockerfile копирует PHP-приложение, supervisord php-fpm+nginx, RUN php scripts/build-sitemap.php</check-3>
+        <check-4>Статически: templates/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
+        <check-5>Статически: шаблоны /lootbar (templates/pages), lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
+        <check-6>Статически: scripts/build-sitemap.php использует SiteRoutes и ContentRepository; пишет Sitemap 0.9 urlset (без sitemap-index)</check-6>
+        <check-7>Статически: .github/workflows/docker-image.yml — docker/build-push-action на ./Dockerfile; PR без push, main — push GHCR</check-7>
+        <check-8>Статически: deploy/docker-compose.yml — готовый образ GHCR, Traefik labels; update-from-github.sh — pull + up -d</check-8>
+        <check-9>Статически: public/robots.txt — Sitemap: https://genshintop.ru/sitemap.xml; User-agent: Yandex с Clean-param и Host где применимо</check-9>
+        <check-10>Статически: lib/Seo.php — webSiteNode с SearchAction на /guides?q=; editorialTeamPerson; stripDescriptionNoise убирает U+3164; OG-теги в шаблонах статей</check-10>
+        <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — хабы events, tcg, domains, bosses, quests и пр.</check-11>
+        <check-12>Статически: страницы регионов и partials header содержат навигацию на /regions</check-12>
+        <check-13>Статически: PageRenderer или шаблоны гайда/персонажа выводят связанные персонажи/гайды из frontmatter</check-13>
+        <check-14>Статически: lootbar-кластер и editorial-policy используют JSON-LD (Service, AboutPage) через lib/Seo.php</check-14>
+        <check-15>Статически: шаблоны подключают Onest и Cinzel; public/css/site.css — prefers-reduced-motion и компоненты Teyvat</check-15>
+        <check-16>Статически: в шаблонах нет ссылки alternate на /rss.xml; маршрут RSS отсутствует по контракту</check-16>
+        <check-17>Статически: guides/index — поиск ?q= и фильтрация карточек (JS или сервер), согласовано с SearchAction</check-17>
       </module-checks>
       <scenarios>
-        <scenario-1 kind="success">Главная, каталоги и динамические slug-страницы генерируются</scenario-1>
-        <scenario-2 kind="success">После npm run og:generate в dist/og/{guides,characters}/ есть PNG для каждой записи; в dist/*.html в og:image указан абсолютный URL соответствующего PNG</scenario-2>
-        <scenario-3 kind="success">/regions, /regions/{sumeru,fontaine,natlan}, /guides/{events,tcg,domains,bosses,quests} попадают в sitemap-0.xml</scenario-3>
+        <scenario-1 kind="success">Главная, каталоги, хабы и динамические slug-страницы отдаются через PHP</scenario-1>
+        <scenario-2 kind="success">После npm run og:generate в public/og/{guides,characters}/ есть PNG; превью og:image согласовано с OgManifest</scenario-2>
+        <scenario-3 kind="success">Ключевые маршруты перечислены в едином public/sitemap.xml после сборки образа</scenario-3>
       </scenarios>
       <required-log-markers />
-    </V-M-WEBSITE>
+    </V-M-PHP-SITE>
   </ModuleVerification>
 
   <PhaseGates>

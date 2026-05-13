@@ -1,28 +1,16 @@
 {
   "name": "genshintop",
   "type": "module",
-  "version": "0.7.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
     "content:audit": "tsx scripts/audit-database.ts",
     "content:migrate": "tsx scripts/process-content.ts",
     "content:verify": "tsx scripts/verify-migration.ts",
     "content:audit-guides": "tsx scripts/audit-guides-content.ts",
     "content:enrich": "tsx scripts/enrich-guides.ts",
-    "og:generate": "tsx scripts/generate-og-images.ts"
-  },
-  "dependencies": {
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/tailwind": "^6.0.2",
-    "@tailwindcss/typography": "^0.5.15",
-    "astro": "^5.16.0",
-    "tailwindcss": "^3.4.17",
-    "zod": "^3.24.1"
+    "og:generate": "tsx scripts/generate-og-images.ts",
+    "sitemap:build": "php scripts/build-sitemap.php"
   },
   "devDependencies": {
     "sharp": "^0.33.5",

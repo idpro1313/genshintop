@@ -1,8 +1,8 @@
 <RequirementsAnalysis VERSION="0.1.0">
   <Project>
     <name>genshintop</name>
-    <annotation>Публичный сайт genshintop.ru (Astro SSG) и перенос знаний из gi-database в src/content/. Исходный корпус Markdown остаётся в gi-database до завершения миграции.</annotation>
-    <keywords>genshin-impact, astro, ssg, seo, gi-database, guides, characters</keywords>
+    <annotation>Публичный сайт genshintop.ru на PHP + nginx в Docker; канонический контент в content/. Исходный корпус gi-database до завершения миграции и вычищения.</annotation>
+    <keywords>genshin-impact, php, seo, gi-database, guides, characters, docker</keywords>
   </Project>
 
   <Actors>
@@ -19,8 +19,8 @@
       <Actor>Игрок / читатель</Actor>
       <Action>Открывает каталог персонажей и гайдов на genshintop.ru</Action>
       <Goal>Найти структурированную информацию по Genshin Impact на русском</Goal>
-      <Preconditions>Сайт собран (npm run build) и задеплоена статика dist/</Preconditions>
-      <AcceptanceCriteria>Доступны маршруты /characters, /guides, корректные meta и sitemap; глобальный футер показывает версию сайта из VERSION</AcceptanceCriteria>
+      <Preconditions>Сайт собирается в Docker-образе и выкатывается через GHCR + compose</Preconditions>
+      <AcceptanceCriteria>Доступны маршруты /characters, /guides, корректные meta и единый /sitemap.xml; футер показывает VERSION</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-001>
@@ -28,7 +28,7 @@
     <UC-002>
       <Actor>Редактор / агент</Actor>
       <Action>Запускает миграцию контента из gi-database</Action>
-      <Goal>Получить канонический контент в src/content/ перед удалением gi-database</Goal>
+      <Goal>Получить канонический контент в content/ перед удалением gi-database</Goal>
       <Preconditions>Наличие папки gi-database с 01_characters и 06_guides</Preconditions>
       <AcceptanceCriteria>reports/migration-report.json, npm run content:verify при полном переносе</AcceptanceCriteria>
       <Priority>high</Priority>
@@ -49,8 +49,8 @@
       <Actor>Игрок / читатель, поисковая система</Actor>
       <Action>Открывает тематические хабы /guides/* и /characters/*</Action>
       <Goal>Индексируемые подборки по баннерам, патчам, экономике, стихии и т.п.</Goal>
-      <Preconditions>Сборка SSG завершена</Preconditions>
-      <AcceptanceCriteria>Каждый хаб отдаёт статический HTML с ItemList или эквивалентной перелинковкой</AcceptanceCriteria>
+      <Preconditions>Сборка Docker и деплой завершены</Preconditions>
+      <AcceptanceCriteria>Каждый хаб отдаёт HTML с перелинковкой и JSON-LD где предусмотрено шаблоном</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-004>
@@ -59,8 +59,8 @@
       <Actor>Игрок / читатель, поисковая система</Actor>
       <Action>Открывает новые хабы /guides/events, /guides/tcg, /guides/domains, /guides/bosses, /guides/quests</Action>
       <Goal>Закрыть семантические пробелы по ивентам, TCG, доменам, боссам и квестам архонтов</Goal>
-      <Preconditions>guide-hub.ts содержит matcher-функции; стартовые статьи добавлены в src/content/guides</Preconditions>
-      <AcceptanceCriteria>Каждый хаб собирается в статический HTML, попадает в sitemap, имеет breadcrumbs и CollectionPage JSON-LD</AcceptanceCriteria>
+      <Preconditions>guide_hub_definitions и контент гайдов в content/guides</Preconditions>
+      <AcceptanceCriteria>Каждый хаб доступен по своему URL, попадает в sitemap, имеет breadcrumbs и CollectionPage JSON-LD где реализовано</AcceptanceCriteria>
       <Priority>high</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-005>
@@ -69,8 +69,8 @@
       <Actor>Игрок / читатель, поисковая система</Actor>
       <Action>Открывает раздел /regions и страницы /regions/{sumeru,fontaine,natlan}</Action>
       <Goal>Получить обзор регионов Тейвата с ключевыми механиками и нативными персонажами</Goal>
-      <Preconditions>RegionPage.astro и страницы регионов созданы; Header содержит ссылку</Preconditions>
-      <AcceptanceCriteria>Каждая страница имеет JSON-LD Place+Article, breadcrumbs, список нативных персонажей</AcceptanceCriteria>
+      <Preconditions>Шаблоны регионов и навигация подключены</Preconditions>
+      <AcceptanceCriteria>Каждая страница имеет JSON-LD Place+Article где предусмотрено, breadcrumbs, список нативных персонажей</AcceptanceCriteria>
       <Priority>medium</Priority>
       <RelatedFlows>DF-CONTENT-MIGRATE</RelatedFlows>
     </UC-006>

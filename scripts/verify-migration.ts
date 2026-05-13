@@ -1,5 +1,5 @@
 /**
- * Сверка: сколько .md в gi-database (MVP-категории) vs сколько в src/content после миграции.
+ * Сверка: сколько .md в gi-database (MVP-категории) vs сколько в content/ после миграции.
  * Запуск: npx tsx scripts/verify-migration.ts
  */
 import fs from 'node:fs';
@@ -26,8 +26,8 @@ function countMd(dir: string): number {
 function main() {
   const giChars = countMd(path.join(ROOT, 'gi-database', '01_characters'));
   const giGuides = countMd(path.join(ROOT, 'gi-database', '06_guides'));
-  const outChars = countMd(path.join(ROOT, 'src', 'content', 'characters'));
-  const outGuides = countMd(path.join(ROOT, 'src', 'content', 'guides'));
+  const outChars = countMd(path.join(ROOT, 'content', 'characters'));
+  const outGuides = countMd(path.join(ROOT, 'content', 'guides'));
 
   const repPath = path.join(ROOT, 'reports', 'migration-report.json');
   let migrated = { characters: 0, guides: 0 };
@@ -49,8 +49,8 @@ function main() {
   console.log('--- Верификация переноса (MVP) ---');
   console.log('gi-database/01_characters:', giChars);
   console.log('gi-database/06_guides (включая подпапки):', giGuides);
-  console.log('src/content/characters:', outChars);
-  console.log('src/content/guides:', outGuides);
+  console.log('content/characters:', outChars);
+  console.log('content/guides:', outGuides);
   console.log('migration-report.json ok:', migrated);
 
   const charOk = giChars >= 0 && outChars === giChars && migrated.characters === outChars;

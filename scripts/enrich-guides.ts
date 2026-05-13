@@ -1,6 +1,6 @@
 /**
  * GRACE[M-CONTENT-PIPELINE][enrich-guides][BLOCK_ENRICH]
- * PURPOSE: Авто-нормализация уже мигрированных гайдов в src/content/guides/*.md.
+ * PURPOSE: Авто-нормализация уже мигрированных гайдов в content/guides/*.md.
  * SCOPE:
  *  - транслитерация slug (имена файлов с кириллицей);
  *  - заполнение недостающих frontmatter-полей: topic, status, audience, gameVersion,
@@ -13,19 +13,19 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { GuideCategory } from '../src/lib/guide-taxonomy';
+import type { GuideCategory } from './guide-taxonomy.js';
 import {
   extractGameVersion,
   inferAudience,
   inferStatus,
   inferTopic,
-} from '../src/lib/guide-taxonomy';
-import { cleanMetaDescription } from '../src/lib/seo';
+} from './guide-taxonomy.js';
+import { cleanMetaDescription } from './seo-helpers.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
-const GUIDES_DIR = path.join(ROOT, 'src', 'content', 'guides');
-const CHAR_DIR = path.join(ROOT, 'src', 'content', 'characters');
+const GUIDES_DIR = path.join(ROOT, 'content', 'guides');
+const CHAR_DIR = path.join(ROOT, 'content', 'characters');
 const REPORTS_DIR = path.join(ROOT, 'reports');
 const REDIRECTS_JSON = path.join(REPORTS_DIR, 'slug-redirects.json');
 const REDIRECTS_CONF = path.join(ROOT, 'deploy', 'genshintop-redirects.conf');

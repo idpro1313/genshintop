@@ -7,50 +7,48 @@
 
 ## Назначение проекта
 
-Публичный **сайт GenshinTop** (домен **genshintop.ru**): Astro 5 SSG, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, глобальный футер с версией из корневого `VERSION`. Канонический контент после миграции — **`src/content/`** (коллекции `characters`, `guides`). Исходный корпус для переноса — **`gi-database/`** (можно удалить после проверки полноты миграции).
+Публичный **сайт GenshinTop** (домен **genshintop.ru**): **PHP front-controller** (стек как [dandangers](https://github.com/idpro1313/dandangers)), **nginx + PHP-FPM** в Docker, SEO, Яндекс.Метрика, каталоги **персонажей** и **гайдов**, партнёрский раздел **`/lootbar`**, футер с версией из **`VERSION`**. Канонический контент — Markdown в **`content/{guides,characters}`**. Исходный корпус до вычищения — **`gi-database/`**.
 
-### PHP runtime (параллельная миграция)
-
-В репозитории развивается **PHP-версия сайта** (по образцу dandangers): Markdown в **`content/{guides,characters}`**, точка входа **`public/index.php`**, **`bootstrap.php`**, **`config.php`**, библиотеки **`lib/*.php`** (`Router`, `PageRenderer`, `ContentRepository`, таксономия и пр.), шаблоны **`templates/`**, ванильный CSS **`public/css/site.css`**, дубликат OG-манифеста **`data/og-manifest.json`**. Образ Docker и nginx по умолчанию по-прежнему отдают статический вывод Astro из **`dist/`**; перевод деплоя на PHP-FPM — отдельный шаг.
+Рантайм **без Node**: опциональные dev-скрипты на TypeScript (`tsx`) только для миграции контента и генерации OG (`sharp`). Сборка прод-образа выполняет **`php scripts/build-sitemap.php`** → **`public/sitemap.xml`**. Маршрут **`/rss.xml` не используется** (ответ 404).
 
 ### Команды
 
 | Команда | Назначение |
 |--------|------------|
-| `npm install` | Зависимости |
+| `npm install` | Dev-зависимости (`tsx`, `typescript`, `sharp`) для скриптов |
 | `npm run content:audit` | Аудит gi-database → `reports/content-audit.json` |
-| `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `src/content/` |
+| `npm run content:migrate` | Перенос `01_characters`, `06_guides` → `content/` |
 | `npm run content:verify` | Сверка счётчиков с `migration-report.json` |
-| `npm run content:audit-guides` | Статический аудит `src/content/guides/*.md` → `reports/guides-audit.json` |
-| `npm run content:enrich` | Авто-нормализация гайдов: транслит slug, заполнение `topic`/`status`/`audience`/`gameVersion`/`updatedAt`/`reviewedAt`/`sources`/`relatedCharacters`/`relatedGuides`, чистка `](#)`. Пишет `deploy/genshintop-redirects.conf` и `reports/slug-redirects.json`. |
-| `npm run og:generate` | Генерация OG-картинок 1200×630 PNG для `/guides/<slug>` и `/characters/<slug>` через `sharp`. Пишет `public/og/**` и `src/data/og-manifest.json`. |
-| `npm run build` | Сборка статики в **`dist/`** |
-| Docker | **`deploy/README.md`** — GHCR image `ghcr.io/idpro1313/genshintop:latest`, `deploy/docker-compose.yml`, Traefik |
-| GitHub Actions | `.github/workflows/docker-image.yml` — сборка Docker-образа; push в GHCR на `main` |
-| Обновление на сервере | `bash deploy/update-from-github.sh` — `git ff-only`, `docker compose pull`, `up -d` |
+| `npm run content:audit-guides` | Статический аудит `content/guides/*.md` → `reports/guides-audit.json` |
+| `npm run content:enrich` | Авто-нормализация гайдов: транслит slug, поля frontmatter, редиректы → `deploy/genshintop-redirects.conf`, `reports/slug-redirects.json` |
+| `npm run og:generate` | OG PNG 1200×630 → `public/og/**`, манифест **`data/og-manifest.json`** |
+| `npm run sitemap:build` | Локально (если есть PHP): `public/sitemap.xml` |
+| Docker | **`deploy/README.md`** — образ GHCR, `deploy/docker-compose.yml`, Traefik |
+| GitHub Actions | `.github/workflows/docker-image.yml` — `docker build` корневого Dockerfile |
+| Обновление на сервере | `bash deploy/update-from-github.sh` — pull образа, `up -d` |
 
 ### Модули (GRACE)
 
-- **M-WEBSITE** — `src/pages`, `src/layouts`, `src/components`, `src/data/lootbar.ts` (купоны/прайс LootBar, fallback до данных партнёра), `src/data/og-manifest.json`, `src/lib/seo.ts` (включая `getOgImageForEntry`, `editorialTeamPerson`, `lootbarServiceSchema`, `webSiteNode` с `SearchAction` на `/guides?q={search_term_string}`, опционально `organizationSameAsFromEnv` / `PUBLIC_ORGANIZATION_SAME_AS`), `src/lib/elements.ts` (`elementCardAccentClass` — левая полоса стихии на карточке персонажа), `src/lib/guide-taxonomy.ts`, `src/lib/guide-hub.ts` (расширен хабами `events`, `tcg`, `domains`, `bosses`, `quests`), `src/lib/character-hub.ts`, `src/lib/partners.ts`, `tailwind.config.mjs` (`font-sans`: **Onest** + системный стек; `font-display`: Cinzel), `src/styles/global.css` (фон «звёздное небо», `hero-glow`, `prefers-reduced-motion` для shine LootBar CTA), `astro.config.mjs` (sitemap `priority`/`changefreq`/`lastmod` через `serialize` + `scripts/sitemap-lastmod.mjs`, фильтр `_placeholder`/`404`), пакет `@astrojs/rss` и `src/pages/rss.xml.ts`, в `BaseLayout.astro` — `meta theme-color` и `<link rel="alternate" type="application/rss+xml">`, каталог гайдов с параметром `?q=` и усечённый `ItemList` в JSON-LD на `src/pages/guides/index.astro`
-- **M-CONTENT-PIPELINE** — `scripts/audit-database.ts`, `scripts/audit-guides-content.ts`, `scripts/process-content.ts`, `scripts/verify-migration.ts`, `scripts/enrich-guides.ts` (авто-нормализация фронтматтера + slug-редиректы)
-- **M-OG-PIPELINE** — `scripts/generate-og-images.ts` (`sharp`-рендер SVG → PNG в `public/og/{collection}/{slug}.png`, манифест `src/data/og-manifest.json`); `getOgImageForEntry` в `src/lib/seo.ts`
-- **M-GI-DATABASE** — исходные данные `gi-database/` (до удаления)
+- **M-PHP-SITE** — `public/index.php`, `bootstrap.php`, `config.php`, **`lib/*.php`** (`Router`, `PageRenderer`, `ContentRepository`, `Seo`, `GuideTaxonomy`, `OgManifest`, хабы LootBar/регионы), **`templates/`**, **`public/css/site.css`**, **`scripts/build-sitemap.php`**, Docker/nginx (`docker/nginx-default.conf`), **`deploy/genshintop-redirects.conf`**. JSON-LD и мета через **`lib/Seo.php`** (`webSiteNode` / SearchAction на `/guides?q=`), OG через **`OgManifest`** и **`data/og-manifest.json`**. Партнёрские ссылки — **`lib/Partners.php`**, конфиг рекламных блоков — **`lib/LootbarConfig.php`**. Каталог гайдов: форма поиска `?q=` и фильтры (`lib/PageRenderer.php`).
+- **M-CONTENT-PIPELINE** — `scripts/*.ts`, общая таксономия для скриптов: **`scripts/guide-taxonomy.ts`**, **`scripts/seo-helpers.ts`** (паритет с `lib/GuideTaxonomy.php` и `lib/Seo.php`).
+- **M-OG-PIPELINE** — `scripts/generate-og-images.ts`, **`data/og-manifest.json`**, чтение манифеста в рантайме через **`lib/OgManifest.php`**.
+- **M-GI-DATABASE** — исходные данные **`gi-database/`** (до удаления).
 
 ### Гайды: таксономия и frontmatter
 
-Коллекция **`guides`** в [`src/content.config.ts`](src/content.config.ts): обязательные `title`, `category`, `sourceSlug`; опционально `date`, `summary`, `sourcePath`, а также **`topic`** (сценарий: `banner`, `patch`, `codes`, `newbie`, `party`, `economy`, `lore`, `tech`, `general`), **`gameVersion`**, **`status`** (`active` | `dated` | `historical`), **`audience`** (`all` | `beginner` | `returning` | `meta`), **`relatedCharacters`**, **`relatedGuides`**, **`updatedAt`**, **`reviewedAt`**, **`sources`**. Подписи и эвристики — [`src/lib/guide-taxonomy.ts`](src/lib/guide-taxonomy.ts). Фильтры хабов `/guides/*` — [`src/lib/guide-hub.ts`](src/lib/guide-hub.ts). Партнёрские URL — [`src/lib/partners.ts`](src/lib/partners.ts) (`lootbarGenshinTopupUrl`, `LOOTBAR_GENSHIN_TOPUP_URL`). На страницах при отсутствии полей `topic`/`status`/… используются вычисляемые значения (`effective*` в guide-taxonomy). После полной миграции из `gi-database` часть полей может заполнять [`scripts/process-content.ts`](scripts/process-content.ts).
+В **`content/guides/*.md`**: как минимум **`title`**, **`category`**, **`sourceSlug`**; опционально **`topic`**, **`gameVersion`**, **`status`**, **`audience`**, **`relatedCharacters`**, **`relatedGuides`**, даты, **`sources`**, **`summary`**. Эвристики на сайте — **`lib/GuideTaxonomy.php`**; в скриптах — **`scripts/guide-taxonomy.ts`**. Хабы **`/guides/*`** задаются **`lib/guide_hub_definitions.php`** / **`lib/GuideHub.php`**. Партнёрские URL — **`lib/Partners.php`** (`LOOTBAR_GENSHIN_TOPUP_URL` в окружении при необходимости).
 
 ### Деплой
 
-Инструкция для Traefik + nginx: **`deploy/README.md`** (шаблон **static-site** из [webserver](https://github.com/idpro1313/webserver)).
+Инструкция для Traefik + Docker: **`deploy/README.md`** (готовый образ GHCR; локально — `docker build` корневого `Dockerfile`).
 
 # GRACE Framework - Project Engineering Protocol
 
 ## Keywords
-genshin-impact, astro, ssg, seo, gi-database, genshintop.ru, guides, characters, lootbar, hubs
+genshin-impact, php, nginx, seo, gi-database, genshintop.ru, guides, characters, lootbar, docker
 
 ## Annotation
-Репозиторий сайта на Astro + скрипты миграции контента. При изменении маршрутов, коллекций или деплоя — обновляйте `grace/**`, этот файл и `docs/HISTORY.md`.
+Репозиторий сайта на PHP + Markdown и Node-only утилитах для контента/OG. При изменении маршрутов, nginx или деплоя обновляйте `grace/**`, этот файл и `docs/HISTORY.md`.
 
 ## Core Principles
 
@@ -150,27 +148,26 @@ Testing rules:
 
 ## File Structure
 ```
-src/
-  pages/                 - Маршруты Astro: /, /characters, /guides, хабы /guides/{banners,patches,codes,newbie,economy,tier-list,events,tcg,domains,bosses,quests}, /characters/{pyro,hydro,...}, /lootbar/*, /regions, /regions/{sumeru,fontaine,natlan}, /about, /404, доверие (/editorial-policy, /partnership-disclosure, /contacts, /content-updates)
-  layouts/               - BaseLayout, ArticleLayout
-  components/            - Header, Footer, Seo, карточки, хлебные крошки
-  content/               - Коллекции Markdown (после миграции)
-  content.config.ts      - Zod-схемы и glob-лоадеры коллекций
-  lib/guide-taxonomy.ts  - Темы/статусы гайдов и эвристики для UI и миграции
-  lib/partners.ts        - Партнёрские ссылки и внешние affiliate URL
-  styles/global.css      - Tailwind + тема сайта
+public/index.php        - Front-controller (точка входа PHP)
+bootstrap.php, config.php
+lib/                    - Router, PageRenderer, ContentRepository, Seo, Partners, хабы, OG
+templates/              - PHP layout и страницы (в т.ч. lootbar, регионы)
+content/
+  guides/, characters/  - Канонический Markdown
+data/
+  og-manifest.json      - Список сгенерированных OG-PNG (npm run og:generate)
 scripts/
-  audit-database.ts      - Аудит gi-database
-  audit-guides-content.ts - Статический аудит src/content/guides → reports/guides-audit.json
-  enrich-guides.ts       - Авто-нормализация фронтматтера гайдов + транслит slug + redirects map
-  generate-og-images.ts  - Рендер OG-картинок 1200×630 (sharp) → public/og/**, манифест src/data/og-manifest.json
-  process-content.ts     - Миграция в src/content
-  verify-migration.ts    - Проверка полноты переноса
-public/                  - favicon.svg, og-default.svg, robots.txt, og/<collection>/<slug>.png (после `npm run og:generate`)
-Dockerfile               - multi-stage: Astro build + nginx
-deploy/                  - docker-compose.yml, nginx-docker.conf, env.example, update-from-github.sh
-gi-database/             - Исходный корпус (до удаления после миграции)
-reports/                 - content-audit.json, migration-report.json, guides-audit.json (после скриптов)
+  audit-database.ts, audit-guides-content.ts, process-content.ts, verify-migration.ts,
+  enrich-guides.ts, guide-taxonomy.ts, seo-helpers.ts, generate-og-images.ts, build-sitemap.php
+public/
+  css/site.css          - Ванильный CSS
+  robots.txt, favicon, og/** (PNG после og:generate)
+docker/
+  nginx-default.conf, supervisord.conf, docker-entrypoint.sh
+Dockerfile              - php-fpm-alpine + nginx + supervisor; без Node в runtime
+deploy/                 - docker-compose.yml, genshintop-redirects.conf, env.example, update-from-github.sh, SEO-CHECKLIST.md
+gi-database/            - Исходный корпус (до удаления)
+reports/                - content-audit.json, migration-report.json, guides-audit.json
 grace/
   requirements/requirements.xml
   technology/technology.xml
@@ -178,10 +175,10 @@ grace/
   verification/verification-plan.xml
   knowledge-graph/knowledge-graph.xml
 docs/
-  AGENTS.md              - Этот документ
-  HISTORY.md             - Журнал итераций для агентов
-.cursor/rules/           - Правила Cursor (GRACE, история, git)
-.kilo/                   - Навыки Kilo / GRACE
+  AGENTS.md             - Этот документ
+  HISTORY.md            - Журнал итераций для агентов
+.cursor/rules/          - Правила Cursor (GRACE, история, git)
+.kilo/                  - Навыки Kilo / GRACE
 ```
 При появлении `tests/` — описать здесь и в `grace/knowledge-graph/knowledge-graph.xml`.
 

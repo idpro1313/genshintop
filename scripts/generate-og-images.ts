@@ -1,7 +1,7 @@
 /**
  * Генератор OG-картинок 1200×630 PNG для страниц коллекций.
  *
- * Сканирует `src/content/{characters,guides}/*.md`, рендерит уникальный SVG-шаблон
+ * Сканирует `content/{characters,guides}/*.md`, рендерит уникальный SVG-шаблон
  * и конвертирует в PNG через `sharp`. Идемпотентен: пропускает запись, если PNG
  * уже есть и его mtime новее MD.
  *
@@ -22,7 +22,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = resolve(fileURLToPath(import.meta.url), '..', '..');
 const PUBLIC_DIR = join(ROOT, 'public');
 const OG_DIR = join(PUBLIC_DIR, 'og');
-const MANIFEST_PATH = join(ROOT, 'src', 'data', 'og-manifest.json');
+const MANIFEST_PATH = join(ROOT, 'data', 'og-manifest.json');
 
 interface Frontmatter {
   title?: string;
@@ -224,14 +224,14 @@ async function main() {
 
   const tasks: RenderTask[] = [];
 
-  for (const file of listMd(join(ROOT, 'src', 'content', 'characters'))) {
+  for (const file of listMd(join(ROOT, 'content', 'characters'))) {
     const slug = file.replace(/\\/g, '/').split('/').pop()!.replace(/\.md$/, '');
     const raw = readFileSync(file, 'utf8');
     const fm = parseFrontmatter(raw);
     tasks.push(buildCharacterTask(slug, fm, file));
   }
 
-  for (const file of listMd(join(ROOT, 'src', 'content', 'guides'))) {
+  for (const file of listMd(join(ROOT, 'content', 'guides'))) {
     const slug = file.replace(/\\/g, '/').split('/').pop()!.replace(/\.md$/, '');
     const raw = readFileSync(file, 'utf8');
     const fm = parseFrontmatter(raw);

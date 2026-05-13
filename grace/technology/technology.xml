@@ -1,66 +1,32 @@
-<TechnologyStack VERSION="0.1.4">
-  <Runtime>Node.js (сборка); продакшен — статический HTML за nginx (Docker + Traefik)</Runtime>
-  <Language>TypeScript, Markdown (контент), JSON (отчёты)</Language>
-  <Framework>Astro 5 (SSG), Tailwind CSS 3, Zod (схемы коллекций)</Framework>
+<TechnologyStack VERSION="1.0.0">
+  <Runtime>Продакшен: PHP 8.2 + nginx + PHP-FPM в одном Alpine-образе (supervisord). Контент: Markdown в content/. Локальные утилиты: Node.js + tsx + sharp только для скриптов (миграция, OG).</Runtime>
+  <Language>PHP, TypeScript (scripts only), Markdown, JSON</Language>
+  <Framework>Фронт: серверный рендер в PHP (шаблоны templates/). Без Astro/Tailwind в проде.</Framework>
 
   <Dependencies>
-    <dep name="astro" version="^5.16.0" purpose="SSG и маршрутизация" />
-    <dep name="@astrojs/tailwind" version="^6.0.2" purpose="Стили" />
-    <dep name="@astrojs/sitemap" version="^3.6.0" purpose="sitemap.xml" />
-    <dep name="@tailwindcss/typography" version="^0.5.15" purpose="оформление статей" />
-    <dep name="zod" version="^3.24.1" purpose="валидация frontmatter коллекций" />
-    <dep name="tsx" version="^4.19.2" purpose="запуск скриптов миграции (dev)" />
+    <dep name="php" version="8.2-fpm-alpine (Docker)" purpose="Рантайм сайта, сборка sitemap в образе" />
+    <dep name="nginx" version="Alpine package" purpose="TLS terminator перед приложением (behind Traefik), статика из public/" />
+    <dep name="sharp" version="^0.33.x" purpose="npm run og:generate → PNG 1200×630" scope="dev" />
+    <dep name="tsx" version="^4.19.x" purpose="Запуск TypeScript-скриптов контента" scope="dev" />
+    <dep name="typescript" version="^5.7.x" purpose="Типизация скриптов" scope="dev" />
   </Dependencies>
 
   <VersionConstraints>
-    <!-- Pin critical API ranges so agents do not generate code for the wrong surface.
-
-         <constraint lib="react" min="19.0.0" max="19.x" reason="The app depends on React 19 APIs" />
-    -->
   </VersionConstraints>
 
   <Tooling>
-    <tool name="github-actions" value=".github/workflows/docker-image.yml" purpose="CI-сборка Docker-образа; push в GitHub Container Registry на main, pull_request только build" />
-    <!-- Core workspace tooling.
-
-         <tool name="workspace" value="pnpm workspaces" version="9.x" />
-         <tool name="bundler" value="vite" version="6.x" />
-         <tool name="linter" value="eslint" version="9.x" />
-         <tool name="formatter" value="prettier" version="3.x" />
-         <tool name="test-runner" value="TBD" version="TBD_VERSION" />
-    -->
+    <tool name="github-actions" value=".github/workflows/docker-image.yml" purpose="docker build ./Dockerfile; push GHCR на main" />
   </Tooling>
 
   <Testing>
-    <!-- Make test strategy explicit early. This drives execution packets later.
-
-         <module-level>
-           <command>npm test -- src/example/index.test.ts</command>
-           <focus>Fast deterministic unit and contract checks</focus>
-         </module-level>
-         <wave-level>
-           <command>npm test -- src/example/integration.test.ts</command>
-           <focus>Checks only merged surfaces touched by a wave</focus>
-         </wave-level>
-         <phase-level>
-           <command>npm test</command>
-           <focus>Broader integration and regression confidence</focus>
-         </phase-level>
-         <mocking-policy>Prefer fakes and narrow stubs over broad monkey-patching.</mocking-policy>
-    -->
   </Testing>
 
   <Observability>
-    <!-- Log-driven development needs stable evidence surfaces.
-
-         <logger>TBD</logger>
-         <log-format>[Module][function][BLOCK_NAME] message</log-format>
-         <required-fields>correlationId, actorId, requestId</required-fields>
-         <redaction>Never log secrets, credentials, or raw high-risk payloads.</redaction>
-    -->
+    <log-format>[Module][function][BLOCK_NAME] message</log-format>
+    <redaction>Never log secrets, credentials, raw tokens, or high-risk payloads.</redaction>
   </Observability>
 
   <DeliveryShape>
-    <shape>Статика: GitHub Actions публикует Docker-образ в GHCR, а серверный deploy/docker-compose.yml запускает готовый image через docker compose pull + up -d без локальной сборки. Альтернатива: выдача готового dist/ через шаблон static-site из webserver (Traefik, TLS Let&apos;s Encrypt).</shape>
+    <shape>GitHub Actions публикует Docker-образ в GHCR; сервер использует deploy/docker-compose.yml (pull готового image, Traefik, TLS Let&apos;s Encrypt).</shape>
   </DeliveryShape>
 </TechnologyStack>

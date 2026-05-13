@@ -1,15 +1,14 @@
 # Деплой genshintop.ru
 
-Два варианта:
+Основной способ: **Docker из GHCR**. Образ содержит **nginx + PHP-FPM + приложение** (стек как dandangers); статические файлы в **`public/`**, страницы рендерит **`public/index.php`**.
 
-1. **Docker из GHCR** — GitHub Actions собирает Astro в образ и публикует `ghcr.io/idpro1313/genshintop:latest`; сервер только скачивает готовый образ и перезапускает контейнер.
-2. **Только статика + шаблон webserver** — собираете `dist/` локально/в CI и монтируете в `templates/static-site` из [webserver](https://github.com/idpro1313/webserver).
+**Legacy:** прежняя схема «чистая статика Astro в `dist/`» после релиза **1.0.0** не является основной; см. исторический контент в `docs/HISTORY.md`.
 
-Общее требование: на сервере уже поднят **Traefik** и внешняя сеть Docker **`web`** (как в webserver).
+Общее требование: на сервере уже поднят **Traefik** и внешняя сеть Docker **`web`** (как в [webserver](https://github.com/idpro1313/webserver)).
 
 ---
 
-## Вариант 1: Docker из GHCR
+## Docker из GHCR
 
 ### Подготовка на сервере
 
@@ -50,7 +49,7 @@ chmod +x deploy/update-from-github.sh   # один раз
 
 Переменная окружения **`REMOTE`** (по умолчанию `origin`) задаёт имя remote.
 
-Скрипт делает `git fetch` + `git merge --ff-only` и затем `docker compose pull` + `up -d`. Локальная сборка на сервере больше не выполняется: образ должен быть опубликован workflow `.github/workflows/docker-image.yml`.
+Скрипт делает `git fetch` + `git merge --ff-only` и затем `docker compose pull` + `up -d`. Сборка образа выполняется в CI (**`.github/workflows/docker-image.yml`**), не на прод-сервере.
 
 ### Локальный просмотр без Traefik
 
@@ -62,11 +61,25 @@ docker run --rm -p 8080:80 genshintop-web
 
 ---
 
-## Вариант 2: только `dist/` + static-site из webserver
+## Откат после выката
 
-См. прежнюю схему в корне репозитория [`README.md`](../README.md): `npm run build`, копирование `dist/` в `SITE_ROOT`, `templates/static-site` из webserver.
+1. В GitHub Packages найти предыдущий образ по digest или по тегу (`sha-<gitsha>` публикует workflow).
+2. На сервере в `deploy/.env` задать `SITE_IMAGE=ghcr.io/…@sha256:…` (или конкретный тег).
+3. Выполнить `docker compose --env-file deploy/.env -f deploy/docker-compose.yml pull && … up -d`.
 
-Файл [`docker-compose.example.yml`](./docker-compose.example.yml) остаётся ориентиром для монтирования готовой статики без сборки в Docker.
+Без смены тега `latest` откат — только через указание другого `SITE_IMAGE`.
+
+---
+
+## Паритет URL и SEO (кратко)
+
+После миграции на PHP проверьте вручную (или по **`deploy/SEO-CHECKLIST.md`**):
+
+- Ключевые маршруты (`/`, `/guides`, `/characters`, хабы, `/lootbar/*`, `/regions/*`, trust-страницы) открываются с ожидаемым HTTP-кодом.
+- **`https://genshintop.ru/sitemap.xml`** — единый `urlset`, без индекса из нескольких файлов.
+- **`robots.txt`** содержит одну строку **`Sitemap:`** на этот файл.
+- **`/rss.xml`** возвращает **404** (RSS отключён).
+- Редиректы slug работают (**`deploy/genshintop-redirects.conf`** подключается из **`docker/nginx-default.conf`**).
 
 ---
 
@@ -74,12 +87,14 @@ docker run --rm -p 8080:80 genshintop-web
 
 | Файл | Назначение |
 |------|------------|
-| `Dockerfile` | Node → `npm run build` → nginx |
-| `deploy/docker-compose.yml` | Сервис `web`, готовый образ GHCR, labels Traefik |
-| `deploy/nginx-docker.conf` | gzip, кэш статики, 404 → `404.html`, XML/robots без SPA-fallback |
-| `deploy/SEO-CHECKLIST.md` | Чек-лист после выката: sitemap, `/lootbar`, кабинеты поиска |
-| `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` для GHCR |
+| `Dockerfile` | php-fpm-alpine + nginx + supervisor; `RUN php scripts/build-sitemap.php` |
+| `docker/nginx-default.conf` | Активный server-блок в образе: gzip, заголовки, try_files → `index.php`, типы `.xml`/`.txt` |
+| `deploy/nginx-docker.conf` | Наследие / подсказки; боевой конфиг в образе — **`docker/nginx-default.conf`** |
+| `deploy/docker-compose.yml` | Сервис `web`, образ GHCR, labels Traefik |
+| `deploy/genshintop-redirects.conf` | Редиректы slug (генерирует также `npm run content:enrich`) |
+| `deploy/SEO-CHECKLIST.md` | Чек-лист после выката |
+| `deploy/env.example` | Шаблон `deploy/.env`, включая `SITE_IMAGE` |
 | `deploy/update-from-github.sh` | Обновление на Linux: git fast-forward, pull образа, up -d |
-| `.dockerignore` | Исключает `node_modules`, `gi-database` и т.д. из контекста сборки |
+| `.dockerignore` | Контекст сборки образа |
 
 `deploy/.env` в репозиторий не коммитится (см. `.gitignore`).

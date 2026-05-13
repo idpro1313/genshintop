@@ -1,7 +1,7 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="0.7.1">
-    <keywords>genshin-impact, astro, ssg, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat, youthful-ui, rss, sitemap-lastmod</keywords>
-    <annotation>Статический сайт GenshinTop (Astro 5): контент src/content/, хабы, /regions/*, /lootbar/*; SEO: sitemap с lastmod из frontmatter/fs, RSS /rss.xml, SearchAction на /guides?q=, optional sameAs; визуал Teyvat для молодёжи; nginx без SPA-fallback на XML.</annotation>
+    <Project NAME="genshintop" VERSION="1.0.0">
+    <keywords>genshin-impact, php, nginx, php-fpm, markdown, gi-database, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
+    <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): Markdown в content/, роутинг public/index.php, шаблоны templates/, стили public/css/site.css; хабы /guides/*, /characters/*, /lootbar/*, /regions/*; единый /sitemap.xml без RSS; SearchAction на /guides?q=; деплой GHCR + Traefik.</annotation>
 
     <M-GI-DATABASE NAME="GiDatabase" TYPE="DATA_LAYER" STATUS="implemented">
       <purpose>Исходный каталог Markdown до переноса; после миграции может быть удалён.</purpose>
@@ -14,63 +14,47 @@
     </M-GI-DATABASE>
 
     <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" STATUS="implemented">
-      <purpose>Аудит gi-database, миграция в src/content/, отчёты в reports/, авто-нормализация фронтматтера и slug-редиректы для уже мигрированных гайдов.</purpose>
-      <path>scripts/audit-database.ts, scripts/audit-guides-content.ts, scripts/process-content.ts, scripts/verify-migration.ts, scripts/enrich-guides.ts</path>
+      <purpose>Аудит gi-database, миграция в content/, отчёты в reports/, авто-нормализация фронтматтера и slug-редиректы для гайдов.</purpose>
+      <path>scripts/audit-database.ts, scripts/audit-guides-content.ts, scripts/process-content.ts, scripts/verify-migration.ts, scripts/enrich-guides.ts, scripts/guide-taxonomy.ts, scripts/seo-helpers.ts</path>
       <depends>M-GI-DATABASE</depends>
       <verification-ref>V-M-CONTENT-PIPELINE</verification-ref>
       <annotations>
-        <fn-audit-guides-content PURPOSE="Статический аудит гайдов в src/content/guides → reports/guides-audit.json" />
+        <fn-audit-guides-content PURPOSE="Статический аудит гайдов в content/guides → reports/guides-audit.json" />
         <fn-enrich-guides PURPOSE="Транслит slug, заполнение topic/status/audience/gameVersion/updatedAt/reviewedAt/sources/relatedCharacters/relatedGuides, чистка ](#); пишет deploy/genshintop-redirects.conf" />
       </annotations>
     </M-CONTENT-PIPELINE>
 
     <M-OG-PIPELINE NAME="OgImagesPipeline" TYPE="UTILITY" STATUS="implemented">
-      <purpose>Рендер OG-картинок 1200×630 PNG для каждой записи коллекций characters и guides из SVG-шаблона через sharp.</purpose>
-      <path>scripts/generate-og-images.ts, src/data/og-manifest.json, public/og/, src/lib/seo.ts (getOgImageForEntry)</path>
+      <purpose>Рендер OG-картинок 1200×630 PNG для записей characters и guides из SVG-шаблона через sharp.</purpose>
+      <path>scripts/generate-og-images.ts, data/og-manifest.json, public/og/, lib/OgManifest.php</path>
       <depends>M-CONTENT-PIPELINE</depends>
       <verification-ref>V-M-OG-PIPELINE</verification-ref>
       <annotations>
-        <fn-generate-og-images PURPOSE="Сканирует MD коллекций, рендерит SVG → PNG в public/og/{collection}/{slug}.png, пишет манифест" />
-        <fn-getOgImageForEntry PURPOSE="Возвращает /og/<collection>/<slug>.png если есть в манифесте, иначе DEFAULT_OG_IMAGE_PATH" />
+        <fn-generate-og-images PURPOSE="Сканирует MD в content/, рендерит SVG → PNG в public/og/{collection}/{slug}.png, пишет манифест" />
+        <fn-OgManifest-imageForEntry PURPOSE="Возвращает /og/&lt;collection&gt;/&lt;slug&gt;.png если есть в манифесте, иначе /og-default.svg" />
       </annotations>
     </M-OG-PIPELINE>
 
-    <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" STATUS="implemented">
-      <purpose>Публичный SEO-сайт genshintop.ru: персонажи, гайды, хабы и /regions/*, кластер /lootbar/*; sitemap с **lastmod** (scripts/sitemap-lastmod.mjs), RSS **/rss.xml**, JSON-LD **SearchAction** на поиск по /guides?q=; UI Teyvat; мета/OG/schema.org; футер; nginx.</purpose>
-      <path>src/, src/lib/elements.ts (elementCardAccentClass), src/pages/rss.xml.ts, scripts/sitemap-lastmod.mjs, src/data/lootbar.ts, src/data/og-manifest.json, src/lib/seo.ts, src/lib/guide-taxonomy.ts, src/lib/guide-hub.ts (matchHubEvents/Tcg/Domains/Bosses/Quests), src/lib/partners.ts, src/lib/character-hub.ts, src/components/RegionPage.astro, src/components/LootBarGlossary.astro, src/content.config.ts, astro.config.mjs (sitemap serialize + lastmod), public/og-default.svg, Dockerfile, deploy/genshintop-redirects.conf, deploy/nginx-docker.conf, deploy/docker-compose.yml, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml; параллельно каркас PHP: bootstrap.php, public/index.php, lib/PageRenderer.php, lib/Router.php, lib/ContentRepository.php, content/, templates/, public/css/site.css</path>
+    <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" STATUS="implemented">
+      <purpose>Публичный SEO-сайт genshintop.ru: PHP front-controller, те же URL что ранее на Astro; персонажи/гайды из content/; кластер /lootbar/*; регионы; страницы доверия; JSON-LD и мета через lib/Seo.php; единый sitemap.xml (scripts/build-sitemap.php при docker build); **без** RSS (/rss.xml → 404); Яндекс.Метрика reachGoal в templates/layout.php; nginx try_files → index.php; редиректы deploy/genshintop-redirects.conf.</purpose>
+      <path>Dockerfile, docker/nginx-default.conf, docker/supervisord.conf, bootstrap.php, config.php, public/index.php, lib/Router.php, lib/PageRenderer.php, lib/ContentRepository.php, lib/Seo.php, lib/Partners.php, lib/LootbarConfig.php, lib/GuideHub.php, lib/CharacterHub.php, lib/SiteRoutes.php, lib/GuideTaxonomy.php, templates/, public/css/site.css, scripts/build-sitemap.php, deploy/docker-compose.yml, deploy/genshintop-redirects.conf, deploy/update-from-github.sh, deploy/SEO-CHECKLIST.md, .github/workflows/docker-image.yml</path>
       <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
-      <verification-ref>V-M-WEBSITE</verification-ref>
+      <verification-ref>V-M-PHP-SITE</verification-ref>
       <annotations>
-        <route-lootbar-cluster PURPOSE="Хаб /lootbar и дочерние SEO-страницы партнёрского топ-апа: глоссарий, Service+Offer schema, расширенный FAQ details" />
-        <route-guide-hubs PURPOSE="Статические хабы /guides/banners, codes, patches, newbie, economy, tier-list, events, tcg, domains, bosses, quests" />
+        <route-lootbar-cluster PURPOSE="Хаб /lootbar и дочерние SEO-страницы партнёрского топ-апа" />
+        <route-guide-hubs PURPOSE="Статические хабы /guides/* по guide_hub_definitions" />
         <route-character-hubs PURPOSE="Хабы /characters по стихии, редкости и типу оружия" />
-        <route-regions PURPOSE="Раздел /regions: index с CollectionPage и подстраницы /regions/{sumeru,fontaine,natlan} с JSON-LD Place + Article и фильтром нативных персонажей" />
-        <route-trust PURPOSE="E-E-A-T: editorial-policy (расширена под Person/процессы), partnership-disclosure, contacts, content-updates" />
-        <data-lootbar PURPOSE="Купоны и прайс LootBar: пустые слоты до данных партнёра, типы LootBarCoupon/LootBarPriceRow" />
-        <data-og-manifest PURPOSE="Список сгенерированных OG-PNG для getOgImageForEntry; обновляется scripts/generate-og-images.ts" />
-        <component-LootBarHub PURPOSE="Продающий хаб /lootbar: hero, глоссарий, купоны, таблица, калькулятор молитв, HowTo/FAQ details, Service-schema" />
-        <component-LootBarPromoBanner PURPOSE="Баннер под шапкой: оффер из данных, CTA на LootBar.gg, reachGoal lootbar_banner_click" />
-        <component-LootBarGlossary PURPOSE="Видимый глоссарий валют и терминов Genshin Impact для SEO без скрытого текста" />
-        <component-RegionPage PURPOSE="Шаблон страницы региона: hero, ключевые механики, секции, фильтрация нативных персонажей" />
-        <component-Footer PURPOSE="4-колоночный футер: персонажи по стихии, хабы гайдов, регионы, LootBar-подстраницы" />
-        <ui-youth-teyvat PURPOSE="Тёмный фон со «звёздами», градиенты, pill-навигация, карточки с border-accent стихии, гротеск Onest + Cinzel" />
-        <fn-webSiteSearchAction PURPOSE="webSiteNode: potentialAction SearchAction на /guides?q={search_term_string}" />
-        <fn-rss-guides PURPOSE="src/pages/rss.xml.ts — RSS последних гайдов через @astrojs/rss" />
-        <fn-sitemapLastmod PURPOSE="scripts/sitemap-lastmod.mjs — даты для serialize sitemap" />
-        <fn-getOgImageForEntry PURPOSE="Возвращает per-entry PNG из манифеста, иначе fallback /og-default.svg" />
-        <fn-editorialTeamPerson PURPOSE="JSON-LD узел Редакции GenshinTop как author для Article/BlogPosting" />
-        <fn-lootbarServiceSchema PURPOSE="JSON-LD Service+Offer для коммерческого кластера /lootbar" />
-        <fn-matchHubEvents PURPOSE="Фильтр коллекции под /guides/events" />
-        <fn-matchHubTcg PURPOSE="Фильтр под /guides/tcg" />
-        <fn-matchHubDomains PURPOSE="Фильтр под /guides/domains" />
-        <fn-matchHubBosses PURPOSE="Фильтр под /guides/bosses" />
-        <fn-matchHubQuests PURPOSE="Фильтр под /guides/quests" />
+        <route-regions PURPOSE="Раздел /regions и подстраницы регионов" />
+        <route-trust PURPOSE="E-E-A-T: editorial-policy, partnership-disclosure, contacts, content-updates" />
+        <fn-sitemap-build PURPOSE="scripts/build-sitemap.php — единый urlset 0.9 в public/sitemap.xml" />
+        <fn-webSiteSearchAction PURPOSE="Seo::webSiteNode — SearchAction на /guides?q={search_term_string}" />
+        <fn-no-rss PURPOSE="/rss.xml возвращает 404 (Router)" />
       </annotations>
-    </M-WEBSITE>
+    </M-PHP-SITE>
 
-    <CrossLink from="M-WEBSITE" to="M-CONTENT-PIPELINE" relation="consumes migrated Markdown collections" />
-    <CrossLink from="M-WEBSITE" to="M-OG-PIPELINE" relation="reads og-manifest.json for per-entry OG images" />
-    <CrossLink from="M-OG-PIPELINE" to="M-CONTENT-PIPELINE" relation="reads enriched src/content/{guides,characters} markdown" />
+    <CrossLink from="M-PHP-SITE" to="M-CONTENT-PIPELINE" relation="consumes Markdown collections content/" />
+    <CrossLink from="M-PHP-SITE" to="M-OG-PIPELINE" relation="reads data/og-manifest.json for per-entry OG images" />
+    <CrossLink from="M-OG-PIPELINE" to="M-CONTENT-PIPELINE" relation="reads enriched content/{guides,characters} markdown" />
     <CrossLink from="M-CONTENT-PIPELINE" to="M-GI-DATABASE" relation="reads source corpus" />
 
     <!-- Module declarations use unique ID-based tags.
@@ -79,7 +63,7 @@
          Example:
          <M-CONFIG NAME="Config" TYPE="UTILITY" STATUS="planned">
             <purpose>Application configuration and environment management</purpose>
-            <path>src/config/index.ts</path>
+            <path>src/config/index.php</path>
             <depends>none</depends>
             <verification-ref>V-M-CONFIG</verification-ref>
             <annotations>

@@ -1,24 +1,24 @@
 /**
- * Перенос gi-database -> src/content (персонажи + гайды), очистка, frontmatter, отчёт.
+ * Перенос gi-database -> content/ (персонажи + гайды), очистка, frontmatter, отчёт.
  * Запуск: npm run content:migrate
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { cleanMetaDescription } from '../src/lib/seo';
-import type { GuideCategory } from '../src/lib/guide-taxonomy';
+import { cleanMetaDescription } from './seo-helpers.js';
+import type { GuideCategory } from './guide-taxonomy.js';
 import {
   extractGameVersion,
   inferAudience,
   inferStatus,
   inferTopic,
-} from '../src/lib/guide-taxonomy';
+} from './guide-taxonomy.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
 const GI = path.join(ROOT, 'gi-database');
-const OUT_CHAR = path.join(ROOT, 'src', 'content', 'characters');
-const OUT_GUIDES = path.join(ROOT, 'src', 'content', 'guides');
+const OUT_CHAR = path.join(ROOT, 'content', 'characters');
+const OUT_GUIDES = path.join(ROOT, 'content', 'guides');
 
 const ELEMENT_RU_TO_EN: Record<string, string> = {
   Пиро: 'Pyro',

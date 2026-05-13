@@ -19,12 +19,12 @@
   <Modules>
     <M-CONTENT-PIPELINE NAME="ContentPipeline" TYPE="UTILITY" LAYER="0" ORDER="1" STATUS="implemented">
       <contract>
-        <purpose>Аудит и перенос Markdown из gi-database в src/content с frontmatter и отчётами.</purpose>
+        <purpose>Аудит и перенос Markdown из gi-database в content/ с frontmatter и отчётами.</purpose>
         <inputs>
           <param name="gi-database" type="filesystem" />
         </inputs>
         <outputs>
-          <param name="src/content" type="markdown" />
+          <param name="content" type="markdown" />
           <param name="reports" type="json" />
         </outputs>
         <errors>
@@ -51,14 +51,14 @@
 
     <M-OG-PIPELINE NAME="OgImagesPipeline" TYPE="UTILITY" LAYER="0" ORDER="1" STATUS="implemented">
       <contract>
-        <purpose>Рендер Open Graph картинок 1200×630 PNG на каждую запись коллекций characters и guides; манифест для getOgImageForEntry.</purpose>
+        <purpose>Рендер Open Graph картинок 1200×630 PNG на каждую запись коллекций characters и guides; манифест для OgManifest::imageForEntry.</purpose>
         <inputs>
-          <param name="src/content/characters/*.md" type="markdown" />
-          <param name="src/content/guides/*.md" type="markdown" />
+          <param name="content/characters/*.md" type="markdown" />
+          <param name="content/guides/*.md" type="markdown" />
         </inputs>
         <outputs>
           <param name="public/og/{collection}/{slug}.png" type="png" />
-          <param name="src/data/og-manifest.json" type="json" />
+          <param name="data/og-manifest.json" type="json" />
         </outputs>
         <errors>
           <error code="SHARP_MISSING" />
@@ -66,74 +66,54 @@
       </contract>
       <interface>
         <export-og-generate PURPOSE="npm run og:generate" />
-        <export-getOgImageForEntry PURPOSE="src/lib/seo.ts: возвращает путь к PNG или fallback SVG" />
+        <export-OgManifest PURPOSE="lib/OgManifest.php: imageForEntry → /og/...png или /og-default.svg" />
       </interface>
       <depends>M-CONTENT-PIPELINE</depends>
       <target>
         <source>scripts/generate-og-images.ts</source>
-        <source>src/lib/seo.ts</source>
-        <source>src/data/og-manifest.json</source>
+        <source>lib/OgManifest.php</source>
+        <source>data/og-manifest.json</source>
       </target>
       <verification-ref>V-M-OG-PIPELINE</verification-ref>
     </M-OG-PIPELINE>
 
-    <M-WEBSITE NAME="GenshinTopWeb" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
+    <M-PHP-SITE NAME="GenshinTopPhpSite" TYPE="ENTRY_POINT" LAYER="1" ORDER="2" STATUS="implemented">
       <contract>
-        <purpose>Статический сайт Astro: маршруты /, /characters, /guides, тематические хабы, кластер /lootbar/* (купоны/прайс из src/data/lootbar.ts с fallback), страницы доверия, SEO (мета, OG, FAQ и HowTo schema.org), RSS `/rss.xml`, sitemap с **lastmod** для динамики (scripts/sitemap-lastmod.mjs + serialize в astro.config.mjs), SearchAction на `/guides?q=`, sitemap, Яндекс.Метрика reachGoal (в т.ч. lootbar_hero_cta, lootbar_coupon_*, lootbar_table_cta, lootbar_calc_cta, lootbar_bottom_*), визуал для молодёжной аудитории в духе Teyvat (Onest+Cinzel, стихийные акценты на карточках, pill-навигация, «звёздный» фон), глобальный футер с версией сайта из VERSION, nginx 404/XML и деплой готового GHCR-образа без сборки на сервере.</purpose>
+        <purpose>Сайт genshintop.ru на стеке как dandangers: nginx + PHP-FPM в Docker, единая точка входа public/index.php, контент Markdown в content/, шаблоны PHP в templates/, ванильный CSS в public/css/site.css. Сохранены публичные URL (хабы гайдов/персонажей, /lootbar/*, /regions/*, страницы доверия). SEO: lib/Seo.php (meta, canonical, JSON-LD), единый файл public/sitemap.xml (генерация scripts/build-sitemap.php при docker build), public/robots.txt с одной директивой Sitemap. RSS не поддерживается: маршрут /rss.xml отдаёт 404. Яндекс.Метрика и reachGoal в templates/layout.php. Партнёрские URL — lib/Partners.php. LootBar-блоки — templates/partials и lib/LootbarConfig.php.</purpose>
         <inputs>
-          <param name="collections" type="astro-content" />
+          <param name="content" type="markdown" />
+          <param name="config.php" type="php-config" />
         </inputs>
         <outputs>
-          <param name="dist" type="static-html" />
+          <param name="html" type="http-response" />
         </outputs>
         <errors>
-          <error code="BUILD_FAIL" />
+          <error code="ROUTER_404" />
         </errors>
       </contract>
       <interface>
-        <export-build PURPOSE="npm run build" />
-        <export-Footer PURPOSE="Глобальный футер сайта с версией из корневого VERSION" />
-        <export-LOOTBAR_GENSHIN_TOPUP_URL PURPOSE="Партнёрский URL LootBar.gg по умолчанию" />
-        <export-lootbarGenshinTopupUrl PURPOSE="Партнёрский URL с параметром UTM-кампании" />
-        <export-editorialTeamPerson PURPOSE="JSON-LD автор Редакция GenshinTop для Article/BlogPosting" />
-        <export-lootbarServiceSchema PURPOSE="JSON-LD Service+Offer для коммерческого кластера /lootbar" />
-        <export-getOgImageForEntry PURPOSE="Динамический выбор OG-картинки по slug" />
-        <export-RegionPage PURPOSE="Шаблон региональных хабов /regions/*" />
-        <export-LootBarGlossary PURPOSE="Видимый глоссарий ключевых терминов на /lootbar" />
+        <export-docker-build PURPOSE="docker build . — nginx+supervisor+php-fpm, без Node в runtime" />
+        <export-sitemap-build PURPOSE="php scripts/build-sitemap.php → public/sitemap.xml" />
       </interface>
       <depends>M-CONTENT-PIPELINE, M-OG-PIPELINE</depends>
       <target>
-        <source>src/pages</source>
-        <source>src/pages/regions</source>
-        <source>src/pages/guides/events.astro</source>
-        <source>src/pages/guides/tcg.astro</source>
-        <source>src/pages/guides/domains.astro</source>
-        <source>src/pages/guides/bosses.astro</source>
-        <source>src/pages/guides/quests.astro</source>
-        <source>src/layouts</source>
-        <source>src/components</source>
-        <source>src/components/LootBarGlossary.astro</source>
-        <source>src/components/RegionPage.astro</source>
-        <source>src/data/lootbar.ts</source>
-        <source>src/data/og-manifest.json</source>
-        <source>src/lib/partners.ts</source>
-        <source>src/lib/guide-hub.ts</source>
-        <source>src/lib/character-hub.ts</source>
-        <source>src/lib/elements.ts</source>
-        <source>tailwind.config.mjs</source>
-        <source>src/styles/global.css</source>
-        <source>public/robots.txt</source>
-        <source>astro.config.mjs</source>
-        <source>scripts/sitemap-lastmod.mjs</source>
-        <source>src/pages/rss.xml.ts</source>
-        <source>deploy/nginx-docker.conf</source>
-        <source>deploy/genshintop-redirects.conf</source>
+        <source>Dockerfile</source>
+        <source>docker/nginx-default.conf</source>
+        <source>docker/supervisord.conf</source>
+        <source>bootstrap.php</source>
+        <source>config.php</source>
+        <source>public/index.php</source>
+        <source>lib/</source>
+        <source>templates/</source>
+        <source>scripts/build-sitemap.php</source>
         <source>deploy/docker-compose.yml</source>
+        <source>deploy/genshintop-redirects.conf</source>
         <source>deploy/update-from-github.sh</source>
         <source>deploy/SEO-CHECKLIST.md</source>
+        <source>.github/workflows/docker-image.yml</source>
       </target>
-      <verification-ref>V-M-WEBSITE</verification-ref>
-    </M-WEBSITE>
+      <verification-ref>V-M-PHP-SITE</verification-ref>
+    </M-PHP-SITE>
 
     <!-- Modules use unique ID-based tags:
          <M-xxx NAME="..." TYPE="..." LAYER="N" ORDER="N" STATUS="planned">
@@ -177,16 +157,16 @@
     <DF-CONTENT-MIGRATE NAME="GiToSiteContent" TRIGGER="npm run content:migrate">
       <step-1>Обход gi-database/01_characters и 06_guides</step-1>
       <step-2>Очистка и извлечение метаданных, обогащение ссылками на оружие/артефакты</step-2>
-      <step-3>Запись src/content/** и reports/migration-report.json</step-3>
-      <step-4>Повторяемая чистка Markdown-артефактов в src/content/guides</step-4>
-      <evidence>reports/migration-report.json, успешный astro build</evidence>
+      <step-3>Запись content/** и reports/migration-report.json</step-3>
+      <step-4>Повторяемая чистка Markdown-артефактов в content/guides</step-4>
+      <evidence>reports/migration-report.json; образ сайта собирается docker build</evidence>
     </DF-CONTENT-MIGRATE>
 
     <DF-LOOTBAR-AFFILIATE NAME="LootBarAffiliateNavigation" TRIGGER="user click">
       <step-1>Пользователь видит пункт навигации, плашку под шапкой или ссылку на главной</step-1>
       <step-2>Переходит на внутренний маршрут /lootbar с SEO и JSON-LD</step-2>
       <step-3>Нажимает внешний CTA на LootBar.gg с параметром aff_short=dandnagers</step-3>
-      <evidence>src/pages/lootbar/index.astro, src/data/lootbar.ts, src/components/LootBarPromoBanner.astro, src/lib/partners.ts</evidence>
+      <evidence>templates/pages/lootbar*.php, templates/partials/lootbar_banner.php, lib/Partners.php, lib/LootbarConfig.php</evidence>
     </DF-LOOTBAR-AFFILIATE>
 
     <!-- Data flows use unique ID-based tags:
@@ -200,16 +180,16 @@
 
   <ImplementationOrder>
     <Phase-1 name="SiteMVP" status="done">
-      <goal>Рабочий Astro SSG + миграция MVP-контента (персонажи, гайды)</goal>
+      <goal>Рабочий прод-сайт на PHP + nginx в Docker и канонический контент в content/</goal>
       <step-1 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">Скрипты аудита и миграции</step-1>
-      <step-2 module="M-WEBSITE" status="done" verification="V-M-WEBSITE">Страницы, SEO, деплой-документация</step-2>
+      <step-2 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Роутинг, шаблоны, SEO, деплой GHCR</step-2>
     </Phase-1>
 
     <Phase-5 name="SeoBoostAndSemanticGaps" status="done">
       <goal>SEO-усиление 0.5.0: OG-картинки, обогащение фронтматтера 424 гайдов, новые хабы (events/tcg/domains/bosses/quests), регионы (sumeru/fontaine/natlan), коммерческое усиление /lootbar без скрытого текста, перелинковка, performance (асинхронный Cinzel, отложенная Метрика).</goal>
-      <step-1 module="M-OG-PIPELINE" status="done" verification="V-M-OG-PIPELINE">scripts/generate-og-images.ts + og-manifest.json + getOgImageForEntry</step-1>
+      <step-1 module="M-OG-PIPELINE" status="done" verification="V-M-OG-PIPELINE">scripts/generate-og-images.ts + data/og-manifest.json + OgManifest.php</step-1>
       <step-2 module="M-CONTENT-PIPELINE" status="done" verification="V-M-CONTENT-PIPELINE">scripts/enrich-guides.ts: транслит slug, фронтматтер, чистка ](#)</step-2>
-      <step-3 module="M-WEBSITE" status="done" verification="V-M-WEBSITE">Sitemap-приоритеты, robots Yandex Clean-param, og:image:alt, verification meta, security headers, новые хабы и регионы, перелинковка, glossary и Service-schema на /lootbar</step-3>
+      <step-3 module="M-PHP-SITE" status="done" verification="V-M-PHP-SITE">Единый sitemap.xml (build-sitemap.php), robots, приоритеты URL; хабы и регионы в PHP; glossary и Service-schema на /lootbar</step-3>
     </Phase-5>
 
     <!-- Phases use unique tags:

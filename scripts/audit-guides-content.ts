@@ -1,23 +1,23 @@
 /**
  * GRACE[M-CONTENT-PIPELINE][audit-guides-content][BLOCK_AUDIT]
- * PURPOSE: Статический аудит коллекции гайдов без запуска Astro — метрики качества и риски для редакции.
+ * PURPOSE: Статический аудит коллекции гайдов без рантайма сайта — метрики качества и риски для редакции.
  * Запуск: npm run content:audit-guides
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { GuideCategory } from '../src/lib/guide-taxonomy';
+import type { GuideCategory } from './guide-taxonomy.js';
 import {
   extractGameVersion,
   inferAudience,
   inferStatus,
   inferTopic,
   topicFromCategory,
-} from '../src/lib/guide-taxonomy';
+} from './guide-taxonomy.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, '..');
-const GUIDES = path.join(ROOT, 'src', 'content', 'guides');
+const GUIDES = path.join(ROOT, 'content', 'guides');
 
 function parseFmKeys(fm: string): Record<string, string> {
   const out: Record<string, string> = {};
