@@ -293,4 +293,10 @@
 - **Что:** удалён блок **`location = /index.php`** с **`return 301 …/`** в **`docker/nginx-default.conf`** (оставлен комментарий почему). Внутренний переход **`try_files` → `/index.php`** попадал в тот же **`location =`** и снова отдавал **301** на **`/`**, что давало бесконечный редирект в браузере (часто за Traefik).
 - **Почему:** сообщение пользователя «слишком много переадресаций» на **`genshintop.ru`**.
 - **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
-- **Решение:** PATCH **1.0.7**. Прямой заход на **`/index.php`** теперь обрабатывается тем же **`location ~ ^/index\.php$`**, что и внутренний роутинг (контент главной; при желании каноникал задаётся в приложении).
+- **Решение:** PATCH **1.0.7** — убран конфликтующий **301** с внутренним **try_files**. Способ передачи **`/index.php`** в FastCGI зафиксирован в **1.0.8** (см. ниже).
+
+### nginx: отдача исходников PHP вместо выполнения (1.0.8)
+- **Что:** для **`/index.php`** задано **`location = /index.php`** с FastCGI и явным **`SCRIPT_FILENAME`** (`$document_root/index.php`); добавлено **`location ~ \.php$ { deny all; }`** для любых других `.php` под **`public/`**. Блок **`location ~ ^/index\.php$`** убран — точное совпадение **`=`** однозначно отдаёт запись только в PHP-FPM.
+- **Почему:** в браузере отображалась «простыня» исходного кода (на скриншоте — класс Parsedown); признак того, что **`index.php`** отдавался как статика без PHP-FPM.
+- **Файлы:** `docker/nginx-default.conf`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** PATCH **1.0.8**. После выката проверить **`docker compose logs`** на **`php-fpm`** и nginx 502; если симптом сохраняется — убедиться, что Traefik ведёт на контейнер образа GHCR, а не на статический хост без PHP.

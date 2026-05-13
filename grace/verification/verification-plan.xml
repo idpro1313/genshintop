@@ -34,7 +34,7 @@
       <test-files />
       <module-checks>
         <check-1>Статически: public/index.php, bootstrap.php, config.php; lib/Router.php отвечает 404 на /rss.xml</check-1>
-        <check-2>Статически: docker/nginx-default.conf — try_files → /index.php (без location = /index.php с 301 на / — цикл редиректов), отдельные location для .xml/.txt/.webmanifest, include genshintop-redirects.conf*, gzip и security headers</check-2>
+        <check-2>Статически: docker/nginx-default.conf — try_files → /index.php; только location = /index.php с FastCGI и явным SCRIPT_FILENAME; location ~ \.php$ deny для прочих; без location = с 301 на /</check-2>
         <check-3>Статически: Dockerfile копирует scripts/build-sitemap.php, supervisord php-fpm+nginx, RUN php scripts/build-sitemap.php</check-3>
         <check-4>Статически: templates/layout.php — счётчик Яндекс.Метрики 109020836, noscript, обработчик data-reach-goal → ym reachGoal</check-4>
         <check-5>Статически: шаблоны /lootbar (templates/pages), lib/Partners.php, lib/LootbarConfig.php; в контенте гайдов допускаются reviewedAt/sources</check-5>
