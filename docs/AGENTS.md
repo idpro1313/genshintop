@@ -21,7 +21,7 @@
 | `pwsh scripts/wave-w1-merge-banner-dated.ps1` | Волна **W1**: датированные дубли **`banner-*`** → канонический slug, nginx **301**, правки ссылок **`content/**`** |
 | Волна **W2** (остаточные дубли без undated в группе) | Вручную по **`mergeCandidatesByTitle`**: один канонический slug (часто **`info/guides/<slug>.md`** или архив), **301** в **`docker/genshintop-redirects.conf`**, **`relatedGuides`** в **`info/characters`**, перегенерация **`reports/guides-refactor-inventory.json`** |
 | `pwsh scripts/normalize-short-line-runons.ps1 -RelativePath info/guides/<slug>.md` | Склейка коротких строк («лесенка») в теле одного гайда |
-| `pwsh scripts/rebuild-character-pages.ps1` | Резервная копия **`info/characters/*.md`** в **`content/characters-archive/`**, новое тело страниц из frontmatter по **`docs/CHARACTER_EDITORIAL.md`** |
+| `pwsh scripts/rebuild-character-pages.ps1` | Перед пересборкой — копия **`info/characters/*.md`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`**; новое тело из frontmatter по **`docs/CHARACTER_EDITORIAL.md`** (корень **`content/characters-archive/`** не перезаписывается) |
 | Docker | **`docker/README.md`** — образ GHCR, **`docker/docker-compose.yml`**, Traefik |
 | GitHub Actions | `.github/workflows/docker-image.yml` — `docker build -f docker/Dockerfile .` из корня репозитория |
 | Обновление на сервере | **`bash ./update-from-github.sh`** из корня репозитория — pull образа, `up -d` |

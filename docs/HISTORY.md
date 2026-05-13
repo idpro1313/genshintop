@@ -514,3 +514,17 @@
 - **Почему:** запрос пользователя — **убрать зеркало** `info/characters` ↔ `content/characters`; один каталог правок, как у гайдов.
 - **Файлы:** `lib/ContentRepository.php`, `content/characters/README.md`, удалены `content/characters/*.md` (кроме README), `scripts/rebuild-character-pages.ps1`, `info/README.md`, `docs/AGENTS.md`, `docs/CHARACTER_EDITORIAL.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/requirements/requirements.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.10.3** — архив **`content/characters-archive/`** без изменений по смыслу.
+
+## Фаза: ИА гайдов и пересборка карточек (1.11.0)
+
+### Разграничение тем и новый корпус персонажей
+- **Что:** в **`info/README.md`** добавлен блок информационной архитектуры опорных гайдов (таблица пересечений без снятия URL). В **`info/guides/*.md`** — явные вводные «зона статьи», склейка дублирующего этикета кооператива, уточнены мировые vs архонт-квесты vs UI журнала, справочник vs ежедневки vs путеводитель, бездна vs циклические режимы, валюта F2P vs Genesis vs партнёрский раздел, неймкарты vs ачивки; точечные опечатки (**«квесты»**, summary стамины, HoYoLAB, «ноты патча»). **`scripts/rebuild-character-pages.ps1`** — снимок в **`content/characters-archive/snapshot-YYYY-MM-DD/`** без перезаписи корня архива (длинные тексты в корне репозитория сохраняются); выполнен прогон на **197** файлах **`info/characters/*.md`**. Обновлены **`docs/CHARACTER_EDITORIAL.md`**, **`docs/AGENTS.md`**, **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`**, **`VERSION` → 1.11.0**.
+- **Почему:** запрос пользователя — реализовать план: структура базы гайдов без смысловых дублей при сохранении slug и рефакторинг статей по персонажам с переносом прежнего текста в архив.
+- **Файлы:** `info/README.md`, множество `info/guides/*.md`, `info/characters/*.md`, `content/characters-archive/snapshot-2026-05-13/*`, `scripts/rebuild-character-pages.ps1`, `docs/CHARACTER_EDITORIAL.md`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.11.0** — контент и контент-пайплайн; опциональный скрипт «пересечений фраз» между гайдами не добавлялся.
+
+### Документация и GRACE после контентного коммита (1.11.1)
+- **Что:** закоммичены **`docs/AGENTS.md`**, **`docs/CHARACTER_EDITORIAL.md`**, **`docs/HISTORY.md`** (фаза 1.11.0), **`grace/knowledge-graph/knowledge-graph.xml`**, **`grace/technology/technology.xml`** с версией проекта и уточнением архива **`snapshot-YYYY-MM-DD`**; **`VERSION` → 1.11.1**.
+- **Почему:** в коммите **1.11.0** на `origin/main` вошли **`info/**`**, скрипт и **`VERSION`**, а отслеживаемые правки **docs/** и **grace/** остались только в рабочей копии — перенос в git отдельным патчем.
+- **Файлы:** `docs/AGENTS.md`, `docs/CHARACTER_EDITORIAL.md`, `docs/HISTORY.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `VERSION`
+- **Решение:** PATCH **1.11.1** — синхронизация журнала и GRACE с фактическим контентным релизом.

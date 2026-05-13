@@ -44,7 +44,7 @@
 
 ## Техническая пересборка
 
-Скрипт **`scripts/rebuild-character-pages.ps1`** копирует текущие файлы из **`info/characters/`** в **`content/characters-archive/`** и генерирует новое тело из существующего frontmatter **на месте** в **`info/characters/*.md`**.
+Скрипт **`scripts/rebuild-character-pages.ps1`** перед записью копирует текущие файлы из **`info/characters/`** в **`content/characters-archive/snapshot-YYYY-MM-DD/`** и генерирует новое тело из существующего frontmatter **на месте** в **`info/characters/*.md`**. Каталог **`content/characters-archive/`** в корне не затирается — там может храниться более ранний длинный корпус из истории репозитория.
 
 ## Связанные документы
 
