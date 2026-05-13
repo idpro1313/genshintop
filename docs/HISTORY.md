@@ -396,3 +396,9 @@
 - **Почему:** запрос пользователя — опереться на официальную витрину [LootBar Genshin Impact](https://lootbar.gg/ru/top-up/genshin-impact?utm_source=copy&utm_medium=social&utm_campaign=p_invite); SPA LootBar не отдаёт полный текст через простой fetch, поэтому на сайте зафиксирован типовой сценарий формы и предупреждение сверяться с актуальным UI партнёра.
 - **Файлы:** `lib/LootbarConfig.php`, `lib/PageRenderer.php`, `public/css/site.css`, `VERSION`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
 - **Решение:** PATCH **1.3.9**.
+
+### Оформление и стили по эталону idpro1313/dandangers (1.4.0)
+- **Что:** **`public/css/site.css`** — переход на тёмную палитру и паттерны как у репозитория **[idpro1313/dandangers](https://github.com/idpro1313/dandangers)** (`modern-styles.css`): токены teal/violet, градиенты, свечение фона, карточки и шапка, стилизация **`.prose`** (списки-карточки, таблицы, blockquote, code), кнопки и таблицы LootBar; алиасы legacy-переменных (**`--wiki-accent`**, **`--surface`** и т.д.) для совместимости классов; блок **`prefers-color-scheme: light`** для пользователей со светлой ОС. **`lib/layout.php`** — **`theme-color`** **`#0a0e14`** под тёмный дефолт. Обновлены **`grace/knowledge-graph`**, **`grace/technology`**, **`grace/verification`** (**check-15**), **`docs/AGENTS.md`**, **`VERSION` → 1.4.0**.
+- **Почему:** запрос пользователя — взять «более красивое» оформление с сайта/репо dandangers.
+- **Файлы:** `public/css/site.css`, `lib/layout.php`, `VERSION`, `docs/AGENTS.md`, `grace/knowledge-graph/knowledge-graph.xml`, `grace/technology/technology.xml`, `grace/verification/verification-plan.xml`, `docs/HISTORY.md`
+- **Решение:** MINOR **1.4.0** — только визуальный слой и документация; разметка PHP без перестройки под новые классы.
