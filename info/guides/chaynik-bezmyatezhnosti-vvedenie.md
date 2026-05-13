@@ -1,6 +1,7 @@
 ---
 title: Чайник безмятежности в Genshin Impact — награды, доверие и удобство
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

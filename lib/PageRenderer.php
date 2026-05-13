@@ -18,6 +18,9 @@ final class PageRenderer
     private static function hubMatcher(string $hub): callable
     {
         return match ($hub) {
+            'game-basics' => fn (array $g) => GuideHub::matchHubGameBasics($g),
+            'advanced-guides' => fn (array $g) => GuideHub::matchHubAdvancedGuides($g),
+            'quest-walkthroughs' => fn (array $g) => GuideHub::matchHubQuestWalkthroughs($g),
             'banners' => fn (array $g) => GuideHub::matchHubBanners($g),
             'codes' => fn (array $g) => GuideHub::matchHubCodes($g),
             'patches' => fn (array $g) => GuideHub::matchHubPatches($g),
@@ -307,6 +310,14 @@ HTML;
 <article class="article catalog-page">
 <h1>Гайды Genshin Impact</h1>
 <p class="lead">Материалы по игре: баннеры, патчи, промокоды. Фильтры работают на устройстве; каждая статья — отдельный URL.</p>
+<section class="callout">
+  <h2>По структуре сайта</h2>
+  <p class="hub-links">
+    <a href="/guides/game-basics">Основы игры</a> ·
+    <a href="/guides/advanced-guides">Продвинутые гайды</a> ·
+    <a href="/guides/quest-walkthroughs">Квесты и прохождения</a>
+  </p>
+</section>
 <form class="guide-search-form" method="get" action="/guides" role="search">
   <label class="sr-only" for="guide-search">Поиск по гайдам</label>
   <input id="guide-search" type="search" name="q" data-guide-search value="{$qEsc}" maxlength="200" placeholder="Поиск по названию и описанию…" autocomplete="off" />
@@ -628,7 +639,7 @@ HTML;
 <p class="lead">Каталог героев: стихия, оружие, редкость. Фильтры на клиенте; все карточки — в HTML для индексации.</p>
 <section class="callout">
   <h2>Ещё по теме</h2>
-  <p><a href="/guides/banners">Баннеры</a> · <a href="/guides/patches">Патчи</a> · <a href="/guides/tier-list">Тир-листы</a> · <a href="/guides/newbie">Новичкам</a> · <a href="/guides/codes">Промокоды</a></p>
+  <p><a href="/guides/game-basics">Основы</a> · <a href="/guides/advanced-guides">Продвинутые</a> · <a href="/guides/quest-walkthroughs">Квесты</a> · <a href="/guides/banners">Баннеры</a> · <a href="/guides/patches">Патчи</a> · <a href="/guides/tier-list">Тир-листы</a> · <a href="/guides/newbie">Новичкам</a> · <a href="/guides/codes">Промокоды</a></p>
   <p class="hub-links">
     <a href="/characters/pyro">Пиро</a> <a href="/characters/hydro">Гидро</a> <a href="/characters/electro">Электро</a>
     <a href="/characters/cryo">Крио</a> <a href="/characters/anemo">Анемо</a> <a href="/characters/geo">Гео</a> <a href="/characters/dendro">Дендро</a>

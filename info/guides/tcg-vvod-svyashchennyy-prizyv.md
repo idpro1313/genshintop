@@ -1,6 +1,7 @@
 ---
 title: Священный призыв семи в Genshin Impact — короткий вход в TCG
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

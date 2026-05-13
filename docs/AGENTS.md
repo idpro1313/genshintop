@@ -31,7 +31,7 @@ Merge/split слагов, редиректы и правки **`info/*.md`** —
 
 ### Гайды: таксономия и frontmatter
 
-В **`info/guides/*.md`**: как минимум **`title`**, **`category`**, **`sourceSlug`**; опционально **`topic`**, **`gameVersion`**, **`status`**, **`audience`**, **`relatedCharacters`**, **`relatedGuides`**, даты, **`sources`**, **`summary`**. Эвристики на сайте — **`lib/GuideTaxonomy.php`**. Хабы **`/guides/*`** — **`lib/guide_hub_definitions.php`** / **`lib/GuideHub.php`**. Партнёрские URL — **`lib/Partners.php`**.
+В **`info/guides/*.md`**: как минимум **`title`**, **`category`**, **`sourceSlug`**; **`planTrack`** (`basics` | `advanced` | `walkthroughs`) — столп [`PLAN.md`](PLAN.md), см. [`info/README.md`](../info/README.md); опционально **`topic`**, **`gameVersion`**, **`status`**, **`audience`**, **`relatedCharacters`**, **`relatedGuides`**, даты, **`sources`**, **`summary`**. Эвристики на сайте — **`lib/GuideTaxonomy.php`**. Хабы **`/guides/*`** — **`lib/guide_hub_definitions.php`** / **`lib/GuideHub.php`** (включая **`game-basics`**, **`advanced-guides`**, **`quest-walkthroughs`**). Партнёрские URL — **`lib/Partners.php`**.
 
 ### Деплой
 

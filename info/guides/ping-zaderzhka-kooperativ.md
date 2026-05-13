@@ -1,6 +1,7 @@
 ---
 title: Пинг и задержка в кооперативе Genshin Impact
 category: hardware
+planTrack: basics
 topic: tech
 status: active
 audience: all

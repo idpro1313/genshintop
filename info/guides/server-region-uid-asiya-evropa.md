@@ -1,6 +1,7 @@
 ---
 title: Выбор сервера Genshin Impact — Asia, EU, America и ваш UID
 category: general
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

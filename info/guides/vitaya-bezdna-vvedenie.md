@@ -1,6 +1,7 @@
 ---
 title: Витая Бездна в Genshin Impact — введение без лишней теории
 category: tier
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

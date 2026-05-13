@@ -1,6 +1,7 @@
 ---
 title: Исследование мира Genshin Impact — приоритеты телепортов, Бездны и доп-квестов
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

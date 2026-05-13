@@ -1,6 +1,7 @@
 ---
 title: Аккаунт HoYoverse и кросс-сохранение в Genshin Impact
 category: general
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

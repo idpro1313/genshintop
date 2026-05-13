@@ -1,6 +1,7 @@
 ---
 title: Театр и демонстрации персонажей в Genshin Impact
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: beginner

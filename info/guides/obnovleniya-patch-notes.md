@@ -1,6 +1,7 @@
 ---
 title: Обновления Genshin Impact — как читать ноты патча и что проверить в первый день
 category: patch
+planTrack: advanced
 topic: patch
 status: active
 audience: all

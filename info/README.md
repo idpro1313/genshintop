@@ -12,6 +12,58 @@
 - **Один файл — одна зона ответственности**: общие тезисы не копируются; при пересечении тем вводный абзац отсылает к «ведущему» материалу по той же строке матрицы.
 - **URL не снимаем** ради дедупликации: пересечения закрываются редакцией текста и перекрёстными ссылками.
 
+### Соответствие [docs/PLAN.md](../docs/PLAN.md): три столпа гайдов и `planTrack`
+
+Во фронтматтере каждого файла [`info/guides/*.md`](guides/) задаётся **`planTrack`**: `basics` | `advanced` | `walkthroughs`. Он управляет попаданием в хабы **`/guides/game-basics`**, **`/guides/advanced-guides`**, **`/guides/quest-walkthroughs`** (дополнительно к тематическим хабам `newbie`, `economy`, `quests` и т.д.). Полный перечень slug по трекам — в таблице ниже; при смене смысла статьи правьте и трек, и эту таблицу.
+
+**Различие хабов по квестам:** `/guides/quests` — узкая подборка по regex (архонты/легенды в тексте); **`/guides/quest-walkthroughs`** — столп PLAN «Квесты и прохождения» по полю `planTrack: walkthroughs` и тем же материалам.
+
+#### Основы игры (Game Basics) — `planTrack: basics`
+
+| Пункт PLAN | Slug (опорные материалы) | Заметка |
+|------------|--------------------------|---------|
+| Ранги приключений | `uroven-priklyucheniya-sovety`, `opyt-priklyucheniya-istochniki-ar`, `uroven-mira-i-nagrady-teyvata` | AR и уровень мира |
+| Элементальные реакции и стихии | `stihii-i-reaktsii-baza` | Обзор реакций и аур; семь стихий — якоря внутри статьи |
+| Роли персонажей | Черновое понятие отряда в `bystriy-start-teyvat`; полная модель ролей и резонансов — `otryady-roli-elementy` (**`planTrack: advanced`**) | PLAN помещает роли в основы; углублённый материал в хабе «Продвинутые» |
+| Быстрый старт и мир | `bystriy-start-teyvat`, `issledovanie-mira-prioritety`, `oshibki-novichka`, … | Остальные `basics`-slug из таблицы полного списка |
+
+#### Продвинутые гайды (Advanced Guides) — `planTrack: advanced`
+
+| Пункт PLAN | Slug | Заметка |
+|------------|------|---------|
+| Билдостроение и статы | `krit-shans-i-krit-uron-baza`, `elementarnyy-masterstvo-kogda-kachat`, `bonus-stihii-i-soprotivleniya-vragov`, `artefakty-farm-i-vybor` | Крит, ЭМ, бонус стихии, артефакты |
+| Расчёт урона и калькуляторы | `fizicheskiy-i-elementalnyy-uron`, **`raschet-urona-mnozhiteli-i-kalkulyatory`**, `storonnie-instrumenty-i-meta` | Мост «цепочка множителей» + внешние калькуляторы |
+| Энергия и ротации | `energiya-vosstanovlenie-vzryva`, `poryadok-slota-otryada-i-snimok` | Частицы, ульты, порядок бафов |
+| Резонансы и ауры | `otryady-roli-elementy` | Совместно с basics |
+| Патчи | `obnovleniya-patch-notes`, `predzagruzka-patch-mesto-na-diske` | Чтение патчей |
+| Мета бездны и молитвы | `vitaya-bezdna-vvedenie`, `spiral-i-ciklicheskie-boevye`, `tir-listy-kak-chitat`, `bannery-sobytiya-molitvy`, `molitvy-piti-zhurnal`, `pity-garant-i-sobytiya-oruzhiya`, `sozvezdiya-i-krutki-investicii` | Тир-листы, баннеры, питти |
+
+#### Квесты и прохождения — `planTrack: walkthroughs`
+
+| Пункт PLAN | Slug |
+|------------|------|
+| Задания архонтов | `kvesty-arhontov-bez-spoilerov` |
+| Задания легенд | `syuzhetnye-klyuchi-i-zadaniya-legend` |
+| Встречи (Hangout) | `hangauty-i-istorii-zavisimyh` — обзор; отдельные прохождения всех концовок по персонажам не входят в опорный корпус (вторая волна / архив) |
+| Задания мира | `mirovye-kvesty-i-arhonty`, `navigatsiya-po-kvestam-i-markeram` |
+
+#### Фундамент PLAN (база знаний): персонажи и смежные темы
+
+На сайте это не отдельные коллекции Markdown, а **карточки** [`info/characters/*.md`](../characters/) и **перекрёстные гайды**:
+
+| Раздел PLAN | Где на сайте |
+|-------------|----------------|
+| Персонажи: билд, оружие, артефакты, команды, таланты, созвёздия | Структура карточки — [`docs/CHARACTER_EDITORIAL.md`](../docs/CHARACTER_EDITORIAL.md); эталон текста — [`bennett.md`](characters/bennett.md) |
+| Оружие / артефакты / материалы / противники (справочно) | `oruzhie-vozvyshenie-materialy`, `artefakty-farm-i-vybor`, `lokalnye-spetsialtety-sbor`, `bossy-materialy-talantov`, `kodeks-protivnikov-kak-chitat`, `mirovyi-boss-i-materialy-domena` |
+
+Пробелы по смыслу закрываются **адаптацией** материалов из [`content/guides-archive/`](../content/guides-archive/) (и при необходимости `content/characters-archive/`), без второго канона на ту же тему.
+
+#### Полный список `planTrack` по slug (126 статей с мостом по урону)
+
+- **`walkthroughs` (5):** `hangauty-i-istorii-zavisimyh`, `kvesty-arhontov-bez-spoilerov`, `mirovye-kvesty-i-arhonty`, `navigatsiya-po-kvestam-i-markeram`, `syuzhetnye-klyuchi-i-zadaniya-legend`
+- **`advanced` (40):** `artefakty-farm-i-vybor`, `bannery-sobytiya-molitvy`, `bonus-stihii-i-soprotivleniya-vragov`, `bossy-materialy-talantov`, `boevye-parametry-ekrana`, `bystrye-sbory-otryada`, `elementarnye-shchity-protivnikov`, `elementarnyy-masterstvo-kogda-kachat`, `energiya-vosstanovlenie-vzryva`, `fizicheskiy-i-elementalnyy-uron`, `konvertatsiya-knig-talantov`, `korona-zhemchuzhina-mudrosti`, `kodeks-protivnikov-kak-chitat`, `kondensirovannaya-smola-i-khrupkaya`, `krit-shans-i-krit-uron-baza`, `magazin-bleska-prioritety-zvezdnogo`, `mirovyi-boss-i-materialy-domena`, `molitvy-piti-zhurnal`, `nedelnij-rutin-smola-bossy`, `obnovleniya-patch-notes`, `otryady-roli-elementy`, `podzemelya-solo-ili-koop-smola`, `pity-garant-i-sobytiya-oruzhiya`, `poryadok-slota-otryada-i-snimok`, `predzagruzka-patch-mesto-na-diske`, `raschet-urona-mnozhiteli-i-kalkulyatory`, `rastvoritel-snov-i-materialy-bossov`, `schit-lechenie-i-vyzhivaemost`, `smola-domeny-raspisanie`, `sozvezdiya-i-krutki-investicii`, `spiral-i-ciklicheskie-boevye`, `storonnie-instrumenty-i-meta`, `sunduk-artefaktov-i-obmen`, `talanty-knigi-i-korony`, `tcg-reyting-taverny-nagrady`, `teatr-demo-personazhey`, `tir-listy-kak-chitat`, `uluchshenie-oruzhiya-dublikaty`, `vitaya-bezdna-vvedenie`
+- **`basics`:** все остальные текущие slug из [`info/guides/`](guides/), не перечисленные выше
+
 | Кластер тем | Slug (примеры) | Кто про что (без дубля смысла) |
 |-------------|----------------|--------------------------------|
 | Кооператив | `kooperativ-miry-i-farm`, `kooperativ-kick-limity` | Первый — зачем заходить в чужой мир и фарм; второй — лимиты мира, кик, этикет, безопасность. |
@@ -249,7 +301,7 @@
 | economy | `kosmeticheskie-krylya-skin` | Крылья и скины |
 | general | `cheat-modding-politika` | Читы, моды и честная игра |
 
-**Итого после волн 11–14:** 125 статей в `info/guides/`.
+**Итого после волн 11–14 и PLAN-моста:** 126 статей в `info/guides/` (включая `raschet-urona-mnozhiteli-i-kalkulyatory`).
 
 ## Персонажи
 

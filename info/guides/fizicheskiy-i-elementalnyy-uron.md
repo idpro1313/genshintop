@@ -1,6 +1,7 @@
 ---
 title: Физический и стихийный урон в Genshin Impact — база без формул
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: beginner
@@ -13,6 +14,7 @@ reviewedAt: 2026-05-13
 sources:
   - "https://genshin.hoyoverse.com/"
 relatedGuides:
+  - "raschet-urona-mnozhiteli-i-kalkulyatory"
   - "bonus-stihii-i-soprotivleniya-vragov"
   - "stihii-i-reaktsii-baza"
   - "elementarnyy-masterstvo-kogda-kachat"
@@ -28,6 +30,10 @@ relatedGuides:
 ## Элементальное мастерство
 
 [EM](/guides/elementarnyy-masterstvo-kogda-kachat) усиливает именно трансформативные/реакционные компоненты, а не каждую белую цифру подряд.
+
+## Цепочка множителей и калькуляторы
+
+Если нужно понять **порядок**, в каком игра складывает статы, резисты и бонусы (без выкладки полного датамайна), см. отдельный мост: [расчёт урона: множители и калькуляторы](/guides/raschet-urona-mnozhiteli-i-kalkulyatory).
 
 ## Итог
 

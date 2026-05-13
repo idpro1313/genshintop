@@ -1,6 +1,7 @@
 ---
 title: Звёздный блеск и блеск в Genshin Impact — что покупать в первую очередь
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: beginner

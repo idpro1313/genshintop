@@ -1,6 +1,7 @@
 ---
 title: Предзагрузка патча Genshin Impact — место на диске и «день обновления»
 category: patch
+planTrack: advanced
 topic: patch
 status: active
 audience: all

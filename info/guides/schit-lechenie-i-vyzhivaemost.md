@@ -1,6 +1,7 @@
 ---
 title: Щит, лечение и выживаемость в Genshin Impact — как удержаться в бою
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

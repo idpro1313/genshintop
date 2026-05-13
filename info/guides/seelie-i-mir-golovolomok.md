@@ -1,6 +1,7 @@
 ---
 title: Феи Seelie и мирные головоломки в Genshin Impact — паттерны без метро-карты
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

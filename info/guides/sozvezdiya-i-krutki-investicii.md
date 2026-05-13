@@ -1,6 +1,7 @@
 ---
 title: Созвездия в Genshin Impact — когда крутить ради C1 и выше, а когда хватит C0
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

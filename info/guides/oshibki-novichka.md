@@ -1,6 +1,7 @@
 ---
 title: Типичные ошибки новичка в Genshin Impact и как их избежать
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

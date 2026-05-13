@@ -1,6 +1,7 @@
 ---
 title: Скрытые достижения и именные карточки в Genshin Impact
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: all

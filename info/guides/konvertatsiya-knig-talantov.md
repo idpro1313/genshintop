@@ -1,6 +1,7 @@
 ---
 title: Конвертация книг талантов в Genshin Impact — алхимия и таблица дней
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

@@ -1,6 +1,7 @@
 ---
 title: Промокоды Genshin Impact — где брать коды и как активировать
 category: codes
+planTrack: basics
 topic: codes
 status: active
 audience: all

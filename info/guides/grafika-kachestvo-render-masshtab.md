@@ -1,6 +1,7 @@
 ---
 title: Графика Genshin Impact — сглаживание, масштаб и баланс FPS
 category: hardware
+planTrack: basics
 topic: tech
 status: active
 audience: beginner

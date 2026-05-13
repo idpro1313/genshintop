@@ -1,6 +1,7 @@
 ---
 title: HoYoLAB — ежедневный вход, отметки и награды для Genshin Impact
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

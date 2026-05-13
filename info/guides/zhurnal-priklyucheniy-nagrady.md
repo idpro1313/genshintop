@@ -1,6 +1,7 @@
 ---
 title: Справочник приключений и одноразовые награды в Genshin Impact
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

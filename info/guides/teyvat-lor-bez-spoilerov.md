@@ -1,6 +1,7 @@
 ---
 title: Лор Teyvat без спойлеров — как смотреть на сюжет Genshin Impact
 category: general
+planTrack: basics
 topic: lore
 status: active
 audience: all

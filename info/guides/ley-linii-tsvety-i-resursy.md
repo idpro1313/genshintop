@@ -1,6 +1,7 @@
 ---
 title: Лей-линии в Genshin Impact — цветы опыта, моры и расход смолы
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

@@ -1,6 +1,7 @@
 ---
 title: Баннеры и молитвы события в Genshin Impact — как устроена ротация
 category: banner
+planTrack: advanced
 topic: banner
 status: active
 audience: all

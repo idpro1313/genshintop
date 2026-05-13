@@ -1,6 +1,7 @@
 ---
 title: Портативные телепорты и якоря в Genshin Impact — как уменьшить беготню
 category: general
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

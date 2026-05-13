@@ -1,6 +1,7 @@
 ---
 title: Hangout-события и истории зависимых в Genshin Impact
 category: general
+planTrack: walkthroughs
 topic: newbie
 status: active
 audience: beginner

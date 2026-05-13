@@ -1,6 +1,7 @@
 ---
 title: Выносливость в Genshin Impact — лазание, плавание и бой под дождём
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

@@ -1,6 +1,7 @@
 ---
 title: Как читать тир-листы Genshin Impact и не перегореть от меты
 category: tier
+planTrack: advanced
 topic: party
 status: active
 audience: meta

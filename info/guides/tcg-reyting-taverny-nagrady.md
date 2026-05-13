@@ -1,6 +1,7 @@
 ---
 title: Рейтинг TCG, таверны и награды Священного призыва в Genshin Impact
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: beginner

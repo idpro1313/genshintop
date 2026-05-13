@@ -1,6 +1,7 @@
 ---
 title: Верстак крафта в Genshin Impact — заготовки мебели, дроп и мора
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

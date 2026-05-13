@@ -1,6 +1,7 @@
 ---
 title: Везервёр и водные маршруты в Genshin Impact
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

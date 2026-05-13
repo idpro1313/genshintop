@@ -1,6 +1,7 @@
 ---
 title: Критический шанс и критический урон в Genshin Impact — с чего начать
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

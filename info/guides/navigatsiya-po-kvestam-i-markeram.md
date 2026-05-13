@@ -1,6 +1,7 @@
 ---
 title: Навигация по квестам в Genshin Impact — трекер, маркеры и перегруженный журнал
 category: general
+planTrack: walkthroughs
 topic: general
 status: active
 audience: beginner

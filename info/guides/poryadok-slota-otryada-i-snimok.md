@@ -1,6 +1,7 @@
 ---
 title: Порядок слотов отряда и «снимок» характеристик в Genshin Impact
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: all

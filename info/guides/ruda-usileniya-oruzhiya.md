@@ -1,6 +1,7 @@
 ---
 title: Руда усиления оружия в Genshin Impact — кристаллы опыта и мора без смолы
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

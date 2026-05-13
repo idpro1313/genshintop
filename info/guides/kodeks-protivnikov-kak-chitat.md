@@ -1,6 +1,7 @@
 ---
 title: Кодекс противников в Genshin Impact — как читать записи перед боем
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

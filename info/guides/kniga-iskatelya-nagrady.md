@@ -1,6 +1,7 @@
 ---
 title: Путеводитель искателя приключений в Genshin Impact — главы и разовые награды
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

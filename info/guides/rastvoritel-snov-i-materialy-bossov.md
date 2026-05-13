@@ -1,6 +1,7 @@
 ---
 title: Растворитель снов и конвертация материалов боссов в Genshin Impact
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

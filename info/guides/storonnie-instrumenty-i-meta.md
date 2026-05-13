@@ -1,6 +1,7 @@
 ---
 title: Сторонние калькуляторы и сайты по Genshin Impact — как пользоваться осторожно
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: all
@@ -13,6 +14,8 @@ reviewedAt: 2026-05-13
 sources:
   - "https://genshin.hoyoverse.com/"
 relatedGuides:
+  - "raschet-urona-mnozhiteli-i-kalkulyatory"
+  - "fizicheskiy-i-elementalnyy-uron"
   - "bezopasnost-akkaunta-2fa"
   - "tir-listy-kak-chitat"
   - "artefakty-farm-i-vybor"

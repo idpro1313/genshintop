@@ -1,6 +1,7 @@
 ---
 title: Артефакты в Genshin Impact — подземелья, сеты и приоритет статов
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

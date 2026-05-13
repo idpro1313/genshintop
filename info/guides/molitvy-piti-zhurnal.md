@@ -1,6 +1,7 @@
 ---
 title: Молитвы и питти в Genshin Impact — как работает «журнал молитвы»
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

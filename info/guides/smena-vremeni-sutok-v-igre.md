@@ -1,6 +1,7 @@
 ---
 title: Смена времени суток в Genshin Impact — когда нужна и где не работает
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

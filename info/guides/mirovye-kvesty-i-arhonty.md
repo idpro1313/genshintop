@@ -1,6 +1,7 @@
 ---
 title: Мировые квесты и архонт-квесты в Genshin Impact — что в каком журнале
 category: general
+planTrack: walkthroughs
 topic: lore
 status: active
 audience: beginner

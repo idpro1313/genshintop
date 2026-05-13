@@ -1,6 +1,7 @@
 ---
 title: Быстрый старт в Genshin Impact — первые часы в Teyvat
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

@@ -1,6 +1,7 @@
 ---
 title: Пробные персонажи и забор наград в Genshin Impact
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

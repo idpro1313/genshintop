@@ -1,6 +1,7 @@
 ---
 title: Региональные гаджеты в Genshin Impact — электрогранум и аналоги
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

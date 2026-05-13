@@ -1,6 +1,7 @@
 ---
 title: Примогемы в Genshin Impact — копим и тратим с планом
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: all

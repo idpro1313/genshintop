@@ -1,6 +1,7 @@
 ---
 title: ПК и мобильный клиент Genshin Impact — производительность и комфорт
 category: hardware
+planTrack: basics
 topic: tech
 status: active
 audience: all

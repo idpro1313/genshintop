@@ -1,6 +1,7 @@
 ---
 title: Чайник безмятежности — монеты уюта, украшения и репутация
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

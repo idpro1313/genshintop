@@ -1,6 +1,7 @@
 ---
 title: Официальная интерактивная карта HoYoverse и сторонние карты
 category: general
+planTrack: basics
 topic: tech
 status: active
 audience: beginner

@@ -43,7 +43,7 @@
         <check-8>Статически: docker/docker-compose.yml — имя проекта Compose name: genshintop; готовый образ GHCR, Traefik labels; корневой update-from-github.sh — compose pull + up -d с docker/.env</check-8>
         <check-9>Статически: public/robots.txt — Sitemap: https://genshintop.ru/sitemap.xml; User-agent: Yandex с Clean-param и Host где применимо</check-9>
         <check-10>Статически: lib/Seo.php — webSiteNode с SearchAction на /guides?q=; editorialTeamPerson; stripDescriptionNoise убирает U+3164; OG-теги в шаблонах статей</check-10>
-        <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — хабы events, tcg, domains, bosses, quests и пр.</check-11>
+        <check-11>Статически: lib/GuideHub.php / guide_hub_definitions — тематические хабы (events, tcg, domains, bosses, quests и др.) и столпы PLAN: game-basics, advanced-guides, quest-walkthroughs; фильтрация по полю planTrack во фронтматтере гайдов</check-11>
         <check-12>Статически: страницы регионов и lib/header.php содержат навигацию на /regions</check-12>
         <check-13>Статически: PageRenderer или шаблоны гайда/персонажа выводят связанные персонажи/гайды из frontmatter</check-13>
         <check-14>Статически: lootbar-кластер и editorial-policy используют JSON-LD (Service, AboutPage) через lib/Seo.php</check-14>
@@ -63,7 +63,7 @@
       <test-files />
       <module-checks>
         <check-1>Статически: в репозитории отсутствуют каталоги scripts/ и reports/</check-1>
-        <check-2>Статически: docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md не ссылаются на удалённые скрипты инвентаризации или wave-w1 и не ссылаются на удалённые плановые MD (волны / merge-split)</check-2>
+        <check-2>Статически: docs/GUIDE_EDITORIAL.md, docs/CHARACTER_EDITORIAL.md описывают planTrack и соответствие docs/PLAN.md (матрица в info/README.md); не ссылаются на удалённые скрипты инвентаризации или wave-w1 и не ссылаются на удалённые плановые MD (волны / merge-split)</check-2>
         <check-3>Статически: docker/genshintop-redirects.conf присутствует и допускает строки rewrite для смены slug гайдов</check-3>
       </module-checks>
       <scenarios>

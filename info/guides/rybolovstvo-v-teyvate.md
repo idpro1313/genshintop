@@ -1,6 +1,7 @@
 ---
 title: Рыбалка в Genshin Impact — где начать, наживка и зачем она нужна
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

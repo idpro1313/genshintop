@@ -1,6 +1,7 @@
 ---
 title: Звёздное воссоединение в Genshin Impact — бонусы возвращения на аккаунт
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: returning

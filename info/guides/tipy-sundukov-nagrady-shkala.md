@@ -1,6 +1,7 @@
 ---
 title: Типы сундуков в Genshin Impact — от обычного до роскошного
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

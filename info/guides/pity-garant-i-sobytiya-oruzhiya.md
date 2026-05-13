@@ -1,6 +1,7 @@
 ---
 title: Пити, гарант и события оружия в Genshin Impact — кратко и по делу
 category: banner
+planTrack: advanced
 topic: banner
 status: active
 audience: all

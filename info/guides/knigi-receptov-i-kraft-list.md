@@ -1,6 +1,7 @@
 ---
 title: Книги рецептов и крафт-листы в Genshin Impact
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

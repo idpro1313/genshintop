@@ -1,6 +1,7 @@
 ---
 title: Отряды в Genshin Impact — роли, стихии и элементальные резонансы
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: all

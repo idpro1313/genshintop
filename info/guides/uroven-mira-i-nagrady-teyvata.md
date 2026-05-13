@@ -1,6 +1,7 @@
 ---
 title: Уровень мира в Genshin Impact — награды, сложность и когда его понижать
 category: general
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

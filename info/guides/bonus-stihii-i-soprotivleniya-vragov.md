@@ -1,6 +1,7 @@
 ---
 title: Бонус стихии и сопротивления врагов в Genshin Impact
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

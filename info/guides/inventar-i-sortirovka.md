@@ -1,6 +1,7 @@
 ---
 title: Инвентарь Genshin Impact — сортировка, лимиты и спасение от перегруза
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: all

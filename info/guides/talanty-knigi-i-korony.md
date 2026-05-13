@@ -1,6 +1,7 @@
 ---
 title: Таланты персонажей в Genshin Impact — книги, боссы и короны
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

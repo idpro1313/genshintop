@@ -1,6 +1,7 @@
 ---
 title: Крепкая и космическая смола в Genshin Impact — когда тратить и когда копить
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

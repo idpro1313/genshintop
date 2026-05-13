@@ -1,6 +1,7 @@
 ---
 title: Корона талантов и жемчужина прозрения в Genshin Impact
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

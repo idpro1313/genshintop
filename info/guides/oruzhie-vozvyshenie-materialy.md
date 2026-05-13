@@ -1,6 +1,7 @@
 ---
 title: Оружие и возвышение в Genshin Impact — базовый гайд по материалам
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

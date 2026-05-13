@@ -1,6 +1,7 @@
 ---
 title: Квесты архонтов в Genshin Impact — дорожная карта без спойлеров
 category: general
+planTrack: walkthroughs
 topic: lore
 status: active
 audience: beginner

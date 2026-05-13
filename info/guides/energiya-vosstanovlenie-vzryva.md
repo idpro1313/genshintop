@@ -1,6 +1,7 @@
 ---
 title: Энергия и взрыв стихии в Genshin Impact — как отряд заряжает ультимейт
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

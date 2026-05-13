@@ -1,6 +1,7 @@
 ---
 title: Репутация регионов и поручения в Genshin Impact
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: all

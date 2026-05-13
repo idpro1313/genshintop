@@ -1,6 +1,7 @@
 ---
 title: Региональная валюта и магазины в Genshin Impact (эмблемы, жетоны, знаки)
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

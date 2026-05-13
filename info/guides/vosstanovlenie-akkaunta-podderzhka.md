@@ -1,6 +1,7 @@
 ---
 title: Потеря доступа к аккаунту Genshin Impact — поддержка и восстановление
 category: general
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

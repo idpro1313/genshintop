@@ -1,6 +1,7 @@
 ---
 title: Ивентовая валюта и лавки временных событий в Genshin Impact
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

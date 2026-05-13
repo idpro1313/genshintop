@@ -1,6 +1,7 @@
 ---
 title: Опыт приключения в Genshin Impact — откуда растёт AR и зачем торопиться
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

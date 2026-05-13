@@ -1,6 +1,7 @@
 ---
 title: Сюжетные ключи и задания легенд в Genshin Impact
 category: general
+planTrack: walkthroughs
 topic: newbie
 status: active
 audience: beginner

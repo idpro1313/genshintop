@@ -31,7 +31,7 @@ function sitemap_meta(string $path): array
     } elseif (preg_match('#^/lootbar/[^/]+$#', $p)) {
         $priority = '0.85';
         $changefreq = 'weekly';
-    } elseif (preg_match('#^/guides/(banners|patches|codes|newbie|economy|tier-list|events|tcg|domains|bosses|quests)$#', $p)) {
+    } elseif (preg_match('#^/guides/(game-basics|advanced-guides|quest-walkthroughs|banners|patches|codes|newbie|economy|tier-list|events|tcg|domains|bosses|quests)$#', $p)) {
         $priority = '0.85';
         $changefreq = 'weekly';
     } elseif (preg_match('#^/characters/(pyro|hydro|electro|cryo|anemo|geo|dendro|sword|claymore|polearm|catalyst|bow|4-star|5-star)$#', $p)) {

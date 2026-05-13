@@ -23,6 +23,7 @@ relatedArtifacts:
   - pechat-izolyatsii
   - tseremoniya-drevney-znati
 relatedGuides:
+  - "raschet-urona-mnozhiteli-i-kalkulyatory"
   - "bystriy-start-teyvat"
   - "bannery-sobytiya-molitvy"
 summary: "Беннет — краткий справочный материал GenshinTop: стихия Пиро, оружие «Одноручное». Без копипасты текстов талантов из клиента."

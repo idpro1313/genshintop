@@ -1,6 +1,7 @@
 ---
 title: Именные карточки и оформление профиля в Genshin Impact
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

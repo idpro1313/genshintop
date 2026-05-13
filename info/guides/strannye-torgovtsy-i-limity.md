@@ -1,6 +1,7 @@
 ---
 title: Странствующие торговцы и лимитные витрины в Genshin Impact
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

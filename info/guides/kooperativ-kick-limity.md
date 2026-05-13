@@ -1,6 +1,7 @@
 ---
 title: Кооператив в Genshin Impact — кик, лимиты мира и этикет
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

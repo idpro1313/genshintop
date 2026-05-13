@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.12.1">
+    <Project NAME="genshintop" VERSION="1.12.2">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, lootbar, regions, og-images, eeat, sitemap</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живые гайды info/guides/, живые карточки info/characters/; папка content/ (архивы) только локально, не в git; каталоги scripts/ и reports/ отсутствуют; зеркал нет; роутинг public/index.php; lib/; без Node/npm; sitemap lib/build-sitemap.php; GHCR + Traefik.</annotation>
 
@@ -10,7 +10,7 @@
       <verification-ref>V-M-PHP-SITE</verification-ref>
       <annotations>
         <route-lootbar-cluster PURPOSE="Хаб /lootbar и дочерние SEO-страницы партнёрского топ-апа" />
-        <route-guide-hubs PURPOSE="Статические хабы /guides/* по guide_hub_definitions" />
+        <route-guide-hubs PURPOSE="Хабы /guides/* по guide_hub_definitions: тематические + столпы PLAN (game-basics, advanced-guides, quest-walkthroughs); фильтр по planTrack в GuideHub" />
         <route-character-hubs PURPOSE="Хабы /characters по стихии, редкости и типу оружия" />
         <route-regions PURPOSE="Раздел /regions и подстраницы регионов" />
         <route-trust PURPOSE="E-E-A-T: editorial-policy, partnership-disclosure, contacts, content-updates" />

@@ -1,6 +1,7 @@
 ---
 title: Фоторежим в Genshin Impact — кадр, скрытие интерфейса и снимки
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

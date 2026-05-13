@@ -1,6 +1,7 @@
 ---
 title: Боевой пропуск в Genshin Impact — Блессинг, уровни и когда покупать Gnostic Hymn
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: all

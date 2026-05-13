@@ -1,6 +1,7 @@
 ---
 title: Игровые ивенты в Genshin Impact — награды, время и приоритеты
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: all

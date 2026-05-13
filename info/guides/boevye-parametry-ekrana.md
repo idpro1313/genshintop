@@ -1,6 +1,7 @@
 ---
 title: Боевые параметры на экране Genshin Impact — что означают числа
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: beginner

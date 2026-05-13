@@ -1,6 +1,7 @@
 ---
 title: Дружба с персонажами в Genshin Impact — компаньонство, голосовые строки и награды
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

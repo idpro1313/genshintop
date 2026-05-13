@@ -1,6 +1,7 @@
 ---
 title: Мировые боссы и материалы доменов в Genshin Impact — куда бежать первым
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: beginner

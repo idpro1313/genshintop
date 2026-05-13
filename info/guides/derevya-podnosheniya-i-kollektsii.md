@@ -1,6 +1,7 @@
 ---
 title: Деревья подношений и коллекции ключей в регионах Genshin Impact
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

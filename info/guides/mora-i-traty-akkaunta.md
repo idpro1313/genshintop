@@ -1,6 +1,7 @@
 ---
 title: Мора в Genshin Impact — зачем нужна и как не остаться без копейки
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: all

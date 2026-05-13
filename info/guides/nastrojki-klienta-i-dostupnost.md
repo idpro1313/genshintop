@@ -1,6 +1,7 @@
 ---
 title: Настройки клиента Genshin Impact — комфорт, звук и подсказки
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

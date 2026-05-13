@@ -1,6 +1,7 @@
 ---
 title: Еда и кулинария в Genshin Impact — наборы и крафт без головной боли
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

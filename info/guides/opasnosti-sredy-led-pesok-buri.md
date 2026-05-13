@@ -1,6 +1,7 @@
 ---
 title: Опасности среды в Genshin Impact — холод Драконьего хребта, бури и эрозия
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

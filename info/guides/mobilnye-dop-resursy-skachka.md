@@ -1,6 +1,7 @@
 ---
 title: Дополнительные ресурсы клиента Genshin Impact на мобильных
 category: hardware
+planTrack: basics
 topic: tech
 status: active
 audience: beginner

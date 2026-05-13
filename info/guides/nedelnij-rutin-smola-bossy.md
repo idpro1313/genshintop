@@ -1,6 +1,7 @@
 ---
 title: Недельный рутин Genshin Impact — смола, боссы и поручения
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

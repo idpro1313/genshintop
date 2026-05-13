@@ -1,6 +1,7 @@
 ---
 title: Заготовки и прототипы оружия в Genshin Impact — кузница, бильты и крафт
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

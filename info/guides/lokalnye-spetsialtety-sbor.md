@@ -1,6 +1,7 @@
 ---
 title: Локальные специалитеты регионов в Genshin Impact — сбор без выгорания
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

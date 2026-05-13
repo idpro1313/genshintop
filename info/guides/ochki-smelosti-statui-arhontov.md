@@ -1,6 +1,7 @@
 ---
 title: Очки смелости и статуи Архонтов — быстрее стамина и чуть сильнее аккаунт
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

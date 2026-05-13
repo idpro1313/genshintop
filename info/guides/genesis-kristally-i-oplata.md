@@ -1,6 +1,7 @@
 ---
 title: Genesis Crystals и прямая оплата в Genshin Impact — на что обмениваются кристаллы
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

@@ -1,6 +1,7 @@
 ---
 title: Пробуждение оружия в Genshin Impact — дубликаты ★4 и ★5
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

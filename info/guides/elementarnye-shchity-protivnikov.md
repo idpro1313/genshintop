@@ -1,6 +1,7 @@
 ---
 title: Стихийные щиты врагов в Genshin Impact — как читать и ломать
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

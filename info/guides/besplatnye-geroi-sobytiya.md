@@ -1,6 +1,7 @@
 ---
 title: Бесплатные персонажи в Genshin Impact — события, магазины и наборы
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

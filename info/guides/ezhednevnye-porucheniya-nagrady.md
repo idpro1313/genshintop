@@ -1,6 +1,7 @@
 ---
 title: Ежедневные поручения в Genshin Impact — комиссии, примогемы и выбор региона
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

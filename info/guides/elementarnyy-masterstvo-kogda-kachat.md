@@ -1,6 +1,7 @@
 ---
 title: Элементальное мастерство в Genshin Impact — когда качать EM вместо атаки
 category: general
+planTrack: advanced
 topic: party
 status: active
 audience: beginner

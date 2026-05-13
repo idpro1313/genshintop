@@ -26,6 +26,60 @@ final class GuideHub
         return GuideTaxonomy::effectiveTopic($g['meta'] ?? [], $slugFile, self::bodyHint($g));
     }
 
+    /** Canonical PLAN pillar from guide frontmatter; null if unset or invalid. */
+    public static function planTrack(array $g): ?string
+    {
+        $meta = $g['meta'] ?? [];
+        if (!is_array($meta)) {
+            return null;
+        }
+        $p = $meta['planTrack'] ?? null;
+        if (!is_string($p) || $p === '') {
+            return null;
+        }
+
+        return match ($p) {
+            'basics', 'advanced', 'walkthroughs' => $p,
+            default => null,
+        };
+    }
+
+    /** @param array<string,mixed> $g */
+    public static function matchHubGameBasics(array $g): bool
+    {
+        $t = self::planTrack($g);
+        if ($t !== null) {
+            return $t === 'basics';
+        }
+
+        return self::matchHubNewbie($g) || self::matchHubCodes($g);
+    }
+
+    /** @param array<string,mixed> $g */
+    public static function matchHubAdvancedGuides(array $g): bool
+    {
+        $t = self::planTrack($g);
+        if ($t !== null) {
+            return $t === 'advanced';
+        }
+
+        return self::matchHubPatches($g) || self::matchHubTierList($g);
+    }
+
+    /** @param array<string,mixed> $g */
+    public static function matchHubQuestWalkthroughs(array $g): bool
+    {
+        $t = self::planTrack($g);
+        if ($t !== null) {
+            return $t === 'walkthroughs';
+        }
+
+        $full = self::fullText($g);
+
+        return self::matchHubQuests($g)
+            || (bool) preg_match('/hangout|истори(?:я|и)\s+зависим|миров(?:ые|ой)\s+квест|навигаци.*квест/ui', $full);
+    }
+
     /** @param array<string,mixed> $g */
     public static function matchHubBanners(array $g): bool
     {

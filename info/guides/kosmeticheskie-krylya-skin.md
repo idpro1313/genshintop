@@ -1,6 +1,7 @@
 ---
 title: Крылья планера и скины персонажей в Genshin Impact — чистая косметика
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

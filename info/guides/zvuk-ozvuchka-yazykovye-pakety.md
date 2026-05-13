@@ -1,6 +1,7 @@
 ---
 title: Звук и озвучка в Genshin Impact — языковые пакеты и размер загрузки
 category: hardware
+planTrack: basics
 topic: tech
 status: active
 audience: beginner

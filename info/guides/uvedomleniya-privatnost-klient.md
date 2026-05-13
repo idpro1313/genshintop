@@ -1,6 +1,7 @@
 ---
 title: Уведомления клиента Genshin Impact и приватность
 category: general
+planTrack: basics
 topic: tech
 status: active
 audience: beginner

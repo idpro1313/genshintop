@@ -1,6 +1,7 @@
 ---
 title: Витая Бездна, недельные боссы режима и боевые события — циклы наград
 category: tier
+planTrack: advanced
 topic: party
 status: active
 audience: all

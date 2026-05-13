@@ -1,6 +1,7 @@
 ---
 title: Карта Teyvat — метки, фильтры и навигация без потерь
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

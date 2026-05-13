@@ -1,6 +1,7 @@
 ---
 title: Опросы HoYoverse и веб-формы с примогемами
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: all

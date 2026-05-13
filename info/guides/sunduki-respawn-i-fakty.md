@@ -1,6 +1,7 @@
 ---
 title: Сундуки в Genshin Impact — респавнятся ли и что реально «обновляется»
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

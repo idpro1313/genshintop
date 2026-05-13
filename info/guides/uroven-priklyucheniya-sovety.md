@@ -1,6 +1,7 @@
 ---
 title: Уровень приключения и расход смолы — советы для стабильного прогресса
 category: newbie
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

@@ -1,6 +1,7 @@
 ---
 title: Подземелья в одиночку и в кооперативе — смола и правила входа
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: beginner

@@ -1,6 +1,7 @@
 ---
 title: Параметрический преобразователь в Genshin Impact — как пользоваться и не забыть
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

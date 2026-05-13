@@ -1,6 +1,7 @@
 ---
 title: Почта, награды и официальные раздачи в Genshin Impact
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: beginner

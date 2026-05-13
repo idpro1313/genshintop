@@ -1,6 +1,7 @@
 ---
 title: Возрастной рейтинг и региональные ограничения Genshin Impact
 category: general
+planTrack: basics
 topic: general
 status: active
 audience: beginner

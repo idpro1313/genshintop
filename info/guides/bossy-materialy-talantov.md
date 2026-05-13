@@ -1,6 +1,7 @@
 ---
 title: Боссы в Genshin Impact — мировые, еженедельные и материалы прокачки
 category: general
+planTrack: advanced
 topic: economy
 status: active
 audience: all

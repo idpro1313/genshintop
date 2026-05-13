@@ -21,6 +21,7 @@ reviewedAt: 2026-05-13
 - [Примогемы и планирование](/guides/primogemy-kopim-tratim)
 - [Созвёздия и бюджет круток](/guides/sozvezdiya-i-krutki-investicii)
 - [Тир-листы: как читать](/guides/tir-listy-kak-chitat)
+- [Расчёт урона и калькуляторы](/guides/raschet-urona-mnozhiteli-i-kalkulyatory)
 - [Каталог персонажей](/characters)
 
 ## Примечание

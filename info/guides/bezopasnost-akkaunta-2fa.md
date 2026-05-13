@@ -1,6 +1,7 @@
 ---
 title: Безопасность аккаунта Genshin Impact — пароль, почта и фишинг
 category: general
+planTrack: basics
 topic: newbie
 status: active
 audience: beginner

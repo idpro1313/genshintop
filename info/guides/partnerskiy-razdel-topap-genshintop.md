@@ -1,6 +1,7 @@
 ---
 title: Партнёрский раздел и безопасное пополнение в GenshinTop
 category: general
+planTrack: basics
 topic: economy
 status: active
 audience: all

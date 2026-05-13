@@ -1,6 +1,7 @@
 ---
 title: Быстрые сборки отряда в Genshin Impact — пресеты и смена перед боем
 category: general
+planTrack: advanced
 topic: general
 status: active
 audience: all
