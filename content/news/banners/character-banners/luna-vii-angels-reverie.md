@@ -19,7 +19,7 @@ related:
   - /news/patches/6.6
 ---
 
-**Angel's Reverie** — стартовый баннер **Luna VII**: **Николь (5★)** и сопровождающий **Прун (4★)**. На соседнем слоте фазы I размещается **Rubedo, of White Stone Born** с повторами Дурина.
+**Angel's Reverie** — стартовый баннер **Luna VII**: **Николь (5★)** и сопровождающий **Прун (4★)**. На соседнем слоте фазы I размещается **Rubedo, of White Stone Born** с повторами Дурина — см. **[карточку rerun](/news/banners/character-banners/luna-vii-rubedo-rerun)** и дебют [**6.2**](/news/banners/character-banners/luna-iii-rubedo-white-stone-born).
 
 ## Источники
 

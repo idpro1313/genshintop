@@ -54,8 +54,8 @@
 | world/npc | 20 | 0 | 0 | 20 |
 | news/events | 9 | 0 | 0 | 9 |
 | news/announcements | 5 | 0 | 0 | 5 |
-| news/banners | 38 | 0 | 0 | 38 |
+| news/banners | 43 | 0 | 0 | 43 |
 | news/patches | 50 | 0 | 0 | 50 |
 | community | 4 | 0 | 0 | 4 |
 
-Снимок: после **Wave 6.1 / продолжение Luna** (2026-05-14): доп. баннеры фаз 6.1–6.5, **Symphonist of Scents**, диковина Windrest Flower, материал Pine Amber, ивент Lanternlit Ode 6.3.
+Снимок: после **Wave Luna 6.0 / 6.6** (2026-05-14): доп. баннеры **Snowlit Echoes**, **Discerner of Enigmas**, **Frostedge Nocturne**, **Ancient Flame Ablaze**, **Rubedo rerun 6.6**; также волна 6.1–6.5 (**Symphonist of Scents**, Windrest Flower, Pine Amber, Lanternlit Ode 6.3).
