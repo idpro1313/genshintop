@@ -468,3 +468,8 @@
 
 ### Sync
 - Что: `VERSION` 1.19.1 → **1.19.2** (PATCH — надёжность CLI + синхронизация верификации). Обновлены `docs/AGENTS.md` (заметка про `--match` и BEL), `grace/knowledge-graph/knowledge-graph.xml` (`Project` VERSION и `fn-indexnow`), `grace/verification/verification-plan.xml` (`check-6` M-CONTENT-V2, `check-25` V-M-PHP-SITE).
+
+### Повторная сверка (2026-05-14)
+- Что: повторный прогон того же контура: диагностика IDE по `lib/` и `bin/indexnow-ping.php` (замечаний нет); `VERSION` ↔ атрибут `Project` в `grace/knowledge-graph/knowledge-graph.xml` — **1.19.2**; PowerShell-сверка live-URL из `content/` с `public/sitemap.xml` и whitelist статических/хаб-маршрутов; фактический список `lib/*.php` на диске (22 файла — без «фантомных» `SiteRoutes`/`build-sitemap`/`regions_data` из индекса IDE); выборочно `rg` по `content/**/*.md` на топ-уровневые `kebab-case` ключи в первом блоке frontmatter — не найдено.
+- Почему: запрос пользователя «проверь ещё раз».
+- Результат: **437** канонических live-URL; **0** дубликатов `urlPath`; **0** отсутствующих в sitemap; **0** sitemap-«сирот» вне whitelist+content. На машине агента **PHP по-прежнему не в PATH** — `php -l` локально не выполнялся.
