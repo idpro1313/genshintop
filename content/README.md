@@ -42,9 +42,9 @@
 | Раздел | live | draft | stub | total |
 |--------|-----:|------:|-----:|------:|
 | characters | 110 | 0 | 0 | 110 |
-| weapons | 69 | 0 | 0 | 69 |
+| weapons | 70 | 0 | 0 | 70 |
 | artifacts | 41 | 0 | 0 | 41 |
-| materials | 28 | 0 | 0 | 28 |
+| materials | 34 | 0 | 0 | 34 |
 | enemies | 20 | 0 | 0 | 20 |
 | guides | 37 | 0 | 0 | 37 |
 | tools | 4 | 0 | 0 | 4 |
@@ -52,10 +52,10 @@
 | world/lore | 6 | 0 | 0 | 6 |
 | world/factions | 24 | 0 | 0 | 24 |
 | world/npc | 20 | 0 | 0 | 20 |
-| news/events | 8 | 0 | 0 | 8 |
+| news/events | 9 | 0 | 0 | 9 |
 | news/announcements | 5 | 0 | 0 | 5 |
-| news/banners | 28 | 0 | 0 | 28 |
+| news/banners | 38 | 0 | 0 | 38 |
 | news/patches | 50 | 0 | 0 | 50 |
 | community | 4 | 0 | 0 | 4 |
 
-Снимок: после **Wave 6 / Luna 6.x** (2026-05-14): добавлены патчи **6.1–6.6**, карточки персонажей Luna, оружие и артефакты; `/sitemap.xml` генерируется динамически (`lib/SitemapBuild.php`).
+Снимок: после **Wave 6.1 / продолжение Luna** (2026-05-14): доп. баннеры фаз 6.1–6.5, **Symphonist of Scents**, диковина Windrest Flower, материал Pine Amber, ивент Lanternlit Ode 6.3.

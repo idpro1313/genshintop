@@ -23,6 +23,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Linnea", title: "Linnea — Wiki", accessed: "2026-05-14"}
 related:
   - /news/patches/6.5
+  - /materials/local-specialties/mondstadt/windrest-flower
 ---
 
 Линнея (**Augur of Wonders**) — **5★ Гео лучник** в патче **6.5 Luna VI**, связанная с расширением **Windrest Peak** и **Temple of Space**. Имеет Story Quest **Alcyon Chapter**.

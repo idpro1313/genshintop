@@ -520,3 +520,23 @@
 - Что: `VERSION` **1.19.3 → 1.20.0** (MINOR — крупное расширение корпуса). `grace/knowledge-graph/knowledge-graph.xml` — `Project VERSION`, аннотация **ax-status** под Luna 6.x. Этот журнал.
 - Файлы: `VERSION`, `content/**`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`.
 
+## Фаза 1.20.1 — Продолжение Luna: баннеры фаз, материалы, Symphonist
+
+### Баннеры
+- Что: **11** новых карточек: персонажные **Luna II–V** (Temptation of Crimson Sands, Hearth Ashen Shadow, Cornucopia, Harmonious Abundance, Northerly Wind) и оружейные **Epitome 6.1–6.5**.
+- Почему: закрыть пробел плана — не только «главные» баннеры патча, но и **фазы II**, weapon-баннеры каждой малый версии.
+
+### Оружие и материалы
+- Что: [`content/weapons/symphonist-of-scents.md`](content/weapons/symphonist-of-scents.md) (ссылка из [`escoffier.md`](content/characters/escoffier.md)); [`windrest-flower.md`](content/materials/local-specialties/mondstadt/windrest-flower.md); [`pine-amber.md`](content/materials/ascension-materials/world/pine-amber.md).
+- Почему: убрать «битый» slug оружия; поддержать фарм **6.5 / 6.3**.
+
+### Ивенты
+- Что: [`lanternlit-ode-silver-moon-6-3.md`](content/news/events/lanternlit-ode-silver-moon-6-3.md) — обвязка **Luna IV** и Lantern Rite-линии.
+
+### Карта прогресса
+- Что: обновлён [`content/README.md`](content/README.md).
+
+### Sync
+- Что: `VERSION` **1.20.0 → 1.20.1** (PATCH). `grace/knowledge-graph/knowledge-graph.xml` — `Project VERSION`. Этот журнал.
+- Файлы: `VERSION`, `content/**`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`.
+

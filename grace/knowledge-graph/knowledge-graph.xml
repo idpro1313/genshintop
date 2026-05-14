@@ -1,5 +1,5 @@
 <KnowledgeGraph>
-    <Project NAME="genshintop" VERSION="1.20.0">
+    <Project NAME="genshintop" VERSION="1.20.1">
     <keywords>genshin-impact, php, nginx, php-fpm, markdown, genshintop.ru, seo, yandex, lootbar, regions, og-images, eeat, sitemap, indexnow, last-modified</keywords>
     <annotation>Публичный сайт GenshinTop на PHP + nginx (образ как dandangers): живой контент в content/; служебные content/**/_by-* не индексируются; каталоги scripts/ и reports/ отсутствуют; зеркал нет; роутинг public/index.php; lib/; без Node/npm; динамический /sitemap.xml с &lt;lastmod&gt; (lib/SitemapBuild.php + Router + nginx location = /sitemap.xml). GHCR + Traefik. С 1.19.0: Last-Modified/304, 301 trailing slash, IndexNow. С 1.19.1: аудит-фиксы URL. С 1.19.2: сверка sitemap/content, IndexNow CLI BEL. С 1.19.3: lastmod в карте сайта, OG топ-страниц, SEO в content/STYLE.md.</annotation>
 
