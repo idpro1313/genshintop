@@ -23,6 +23,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Nefer", title: "Nefer — Genshin Impact Wiki", accessed: "2026-05-14"}
 related:
   - /news/patches/6.1
+  - /news/banners/character-banners/luna-vi-temptation-crimson-sands-rerun
 ---
 
 Нефер — центральный новый герой **Luna II (6.1)**; в версионном трейлере представлен как **«Secret Beneath the Sands»**, **5★ Дендро-катализатор**.

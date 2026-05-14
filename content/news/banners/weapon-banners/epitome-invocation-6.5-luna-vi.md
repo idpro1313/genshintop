@@ -15,9 +15,10 @@ sources:
 related:
   - /characters/linnea
   - /news/patches/6.5
+  - /news/banners/weapon-banners/epitome-invocation-6.5-phase-ii
 ---
 
-**Golden Frostbound Oath** закреплён за **Линнеей** в **6.5**; соседний слот — повтор существующего **5★** (уточняется в Special Program).
+**Golden Frostbound Oath** — оружейный rate-up **фазы I** **Luna VI** под Линнею. Вторая половина **6.5** см. **[Epitome Invocation 6.5 (фаза II)](/news/banners/weapon-banners/epitome-invocation-6.5-phase-ii)** (**Nightweaver's Looking Glass** + **Reliquary of Truth**).
 
 ## Источники
 

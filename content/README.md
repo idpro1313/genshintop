@@ -41,7 +41,7 @@
 
 | Раздел | live | draft | stub | total |
 |--------|-----:|------:|-----:|------:|
-| characters | 110 | 0 | 0 | 110 |
+| characters | 111 | 0 | 0 | 111 |
 | weapons | 70 | 0 | 0 | 70 |
 | artifacts | 41 | 0 | 0 | 41 |
 | materials | 34 | 0 | 0 | 34 |
@@ -54,8 +54,8 @@
 | world/npc | 20 | 0 | 0 | 20 |
 | news/events | 9 | 0 | 0 | 9 |
 | news/announcements | 5 | 0 | 0 | 5 |
-| news/banners | 47 | 0 | 0 | 47 |
+| news/banners | 51 | 0 | 0 | 51 |
 | news/patches | 50 | 0 | 0 | 50 |
 | community | 4 | 0 | 0 | 4 |
 
-Снимок: после **Wave Luna V 6.4** (2026-05-14): Lone Light Knocks / Void Star's Advent / La Chanson Cerise / Chronicled Ode to Dawn Breeze + правки «Northerly Wind»; ранее **Luna 6.0 / 6.6** и волна 6.1–6.5.
+Снимок: после **Luna VI 6.5 фаза II** (2026-05-14): rerun **Temptation / Moonsong**, **Epitome 04-28**, **Chronicled Dewlit Tranquility**, карточка **Лаума**; ранее **Luna V 6.4**, **Luna 6.0/6.6**, волны 6.1–6.4.

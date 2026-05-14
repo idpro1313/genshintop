@@ -20,6 +20,8 @@ sources:
 related:
   - /news/patches/6.0
   - /characters/aino
+  - /characters/lauma
+  - /news/banners/weapon-banners/epitome-invocation-6.5-phase-ii
 ---
 
 Катализатор **Luna I** с высоким **крит-уроном** и пассивой, ориентированной на **Lunar-Charged** и реакции на стыке Гидро/Электро/Дендро (формулировка переосмыслена; точные числа см. в справочнике клиента).

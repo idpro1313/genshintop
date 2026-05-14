@@ -15,9 +15,10 @@ sources:
 related:
   - /characters/nefer
   - /news/patches/6.1
+  - /news/banners/character-banners/luna-vi-temptation-crimson-sands-rerun
 ---
 
-Первый баннер **Luna II** — **Temptation of the Crimson Sands** с дебютом **Нефер** и параллельным **Chanson of Many Waters** с **Фуриной**.
+Первый баннер **Luna II** — **Temptation of the Crimson Sands** с дебютом **Нефер** и параллельным **Chanson of Many Waters** с **Фуриной**. Позже то же официальное имя получила **повторная** раздача в середине **[6.5](/news/patches/6.5)** — см. **[rerun Luna VI](/news/banners/character-banners/luna-vi-temptation-crimson-sands-rerun)**.
 
 ## Источники
 

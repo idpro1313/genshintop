@@ -19,7 +19,9 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Reliquary_of_Truth", title: "Reliquary of Truth — Wiki", accessed: "2026-05-14"}
 related:
   - /characters/nefer
+  - /characters/lauma
   - /news/patches/6.1
+  - /news/banners/weapon-banners/epitome-invocation-6.5-phase-ii
 ---
 
 Катализатор **Reliquary of Truth** даёт **EM** и пассиву, усиливающую **дендро-урон** при цепочках реакций — оптимален для **Нефер** и других spread/bloom DPS.
