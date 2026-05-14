@@ -149,7 +149,7 @@ lib/
   layout.php, header.php, footer.php, lootbar_banner.php — общая оболочка страниц
   og-manifest.json      - список ключей OG-PNG для OgManifest (ручная правка / внешний генератор)
 bin/
-  indexnow-ping.php     - CLI: пингует Yandex IndexNow по public/sitemap.xml
+  indexnow-ping.php     - CLI: IndexNow по public/sitemap.xml; --match принимает PCRE (разделитель BEL U+0007, можно матчить URL с символом #)
 content/                - Канон Markdown для сайта (читает ContentRepository); _by-* служебные и не индексируются
 public/
   css/site.css          - Ванильный CSS (dandangers-like dark + optional light)

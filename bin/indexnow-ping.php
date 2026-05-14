@@ -43,13 +43,29 @@ if ($xml === false) {
 }
 
 $urls = [];
+/**
+ * Разделитель для regexp в --match: не '#', чтобы в шаблоне можно использовать фрагменты URL (#…).
+ * Символ U+0007 (BEL) в паттерне не допускается.
+ */
+$matchDelim = "\x07";
 foreach ($xml->url as $u) {
     $loc = trim((string) ($u->loc ?? ''));
     if ($loc === '') {
         continue;
     }
-    if ($match !== null && @preg_match('#' . $match . '#u', $loc) !== 1) {
-        continue;
+    if ($match !== null) {
+        if (str_contains($match, $matchDelim)) {
+            fwrite(STDERR, "--match regexp must not contain character U+0007 (BEL)\n");
+            exit(4);
+        }
+        $matched = preg_match($matchDelim . $match . $matchDelim . 'u', $loc);
+        if ($matched === false) {
+            fwrite(STDERR, "Invalid --match regexp (PCRE error).\n");
+            exit(4);
+        }
+        if ($matched !== 1) {
+            continue;
+        }
     }
     $urls[] = $loc;
     if ($limit > 0 && count($urls) >= $limit) {

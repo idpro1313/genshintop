@@ -444,3 +444,27 @@
 - Почему: в образе не было версии футера и IndexNow CLI; на статике могли теряться security headers; документация ссылалась на отсутствующий SEO-чеклист.
 - Файлы: `VERSION`, `docker/Dockerfile`, `docker/nginx-default.conf`, `docker/env.example`, `docs/SEO-CHECKLIST.md`, `docs/AGENTS.md`, `grace/**/*.xml`.
 - Решение: версия поднята `1.19.0 → 1.19.1` как PATCH; GRACE и карта агентов синхронизированы.
+
+## Фаза 1.19.2 — аудит кодовой базы по плану
+
+### Объём проверки
+- Что: план «проверка всего кода на ошибки и нестыковки»: синтаксис PHP (локально недоступен `php.exe` в PATH — линтер IDE по `lib/` без замечаний), обход ключевых модулей (Router, PageRenderer, ContentRepository, Frontmatter, IndexNow), уникальность канонических URL live-контента, сверка `public/sitemap.xml`, статический SEO (`robots.txt`, `site.webmanifest`, nginx), GRACE/`docs/AGENTS.md`/верификация.
+- Почему: запрос пользователя выполнить план аудита полностью.
+- Файлы: этот журнал; правки ниже по списку.
+
+### Результаты (без ошибок блокирующего уровня)
+- **critical**: не выявлено.
+- **major**: исправлена нестыковка **GRACE** — `grace/verification/verification-plan.xml` → `V-M-CONTENT-V2/check-6` утверждало, что рантайм читает `info/` и `content/` не подключён; фактически `lib/ContentRepository.php` уже индексирует только `content/`. Чек переформулирован под текущее поведение.
+- **minor**:
+  - **IndexNow CLI** (`bin/indexnow-ping.php`): прежний разделитель PCRE `'#' . $match . '#'` ломал валидные шаблоны с символом `#` в строке URL; заменено на разделитель **U+0007 (BEL)** с запретом BEL в паттерне, при ошибке разбора PCRE — STDERR и exit 4 (вместо тихого сбоя `@preg_match`).
+  - **`php -l`**: на агентской Windows PHP CLI не установлен в PATH — рекомендация держать PHP в PATH или добавить lint-джоб в CI.
+  - **Frontmatter**: ключи frontmatter топ-уровня только `[A-Za-z0-9_]`; при появлении `kebab-case` ключей в YAML они молча не попадают в `meta` — риск на будущее, не наблюдался в текущем выборке.
+  - **Старые блоки HISTORY** про «не переключали ContentRepository на content/» в ранних фазах исторически устарели (нагрузочно см. актуальный `docs/AGENTS.md`).
+
+### Автоматизированная сверка контента и sitemap (PowerShell)
+- Живых канонических URL из `content/` (по тем же фильтрам, что и PHP: исключены `_templates/`, `/_by-*`, `README.md`, `STYLE.md`, статус только `live`): **437** уникальных путей без дубликатов `urlPath`.
+- Коллизий slug персонажей со служебными сегментами хабов (`/characters/*`, тематические `/guides/*`) не найдено.
+- `public/sitemap.xml`: путей **471** после нормализации `https://genshintop.ru` → путь; **0** живых канонических URL отсутствуют в sitemap; **0** «висящих» `<loc>` вне объединённого набора «live content + whitelist статических и хаб-маршрутов» (whitelist: `/about`, контакты, политики, `/guides`, 13 thematic hubs, три LootBar URL, фильтры персонажей).
+
+### Sync
+- Что: `VERSION` 1.19.1 → **1.19.2** (PATCH — надёжность CLI + синхронизация верификации). Обновлены `docs/AGENTS.md` (заметка про `--match` и BEL), `grace/knowledge-graph/knowledge-graph.xml` (`Project` VERSION и `fn-indexnow`), `grace/verification/verification-plan.xml` (`check-6` M-CONTENT-V2, `check-25` V-M-PHP-SITE).
