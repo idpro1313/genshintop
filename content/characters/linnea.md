@@ -24,6 +24,9 @@ sources:
 related:
   - /news/patches/6.5
   - /materials/local-specialties/mondstadt/windrest-flower
+  - /materials/local-specialties/mondstadt/etherwing-moth
+  - /materials/ascension-materials/boss/plume-of-the-fallen-watcher
+  - /enemies/world-bosses/the-open-eyed
 ---
 
 Линнея (**Augur of Wonders**) — **5★ Гео лучник** в патче **6.5 Luna VI**, связанная с расширением **Windrest Peak** и **Temple of Space**. Имеет Story Quest **Alcyon Chapter**.

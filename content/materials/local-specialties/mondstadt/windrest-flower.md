@@ -13,6 +13,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Windrest_Flower", title: "Windrest Flower — Wiki", accessed: "2026-05-14"}
 related:
   - /materials/local-specialties/mondstadt
+  - /materials/local-specialties/mondstadt/etherwing-moth
   - /characters/linnea
   - /news/patches/6.5
 ---

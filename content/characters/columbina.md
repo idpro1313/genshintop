@@ -23,6 +23,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Columbina", title: "Columbina — Wiki", accessed: "2026-05-14"}
 related:
   - /news/patches/6.3
+  - /news/banners/character-banners/luna-iv-somnias-a-luna
   - /world/factions/fatui-harbingers/columbina
 ---
 

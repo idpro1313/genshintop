@@ -23,10 +23,11 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Ineffa", title: "Ineffa — Wiki", accessed: "2026-05-14"}
 related:
   - /news/patches/6.3
+  - /news/banners/character-banners/luna-iv-astral-actuation
   - /characters/aino
 ---
 
-Инеффа появляется в первой фазе **6.3** на баннере **Astral Actuation** вместе с рerun С5 героев; это **Электро копейщик 5★**, созданный **Айно** как «семья из болтов и шестерёнок» (по лору квестов).
+Инеффа появляется в первой фазе **6.3** на отдельном баннере **[Astral Actuation](/news/banners/character-banners/luna-iv-astral-actuation)** параллельно **[Somnias a Luna](/news/banners/character-banners/luna-iv-somnias-a-luna)** с **Коломбиной**. Это **Электро копейщик 5★**, созданный **Айно** как «семья из болтов и шестерёнок» (по лору квестов).
 
 ## Роль
 

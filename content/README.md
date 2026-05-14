@@ -44,8 +44,8 @@
 | characters | 111 | 0 | 0 | 111 |
 | weapons | 70 | 0 | 0 | 70 |
 | artifacts | 41 | 0 | 0 | 41 |
-| materials | 34 | 0 | 0 | 34 |
-| enemies | 20 | 0 | 0 | 20 |
+| materials | 36 | 0 | 0 | 36 |
+| enemies | 21 | 0 | 0 | 21 |
 | guides | 37 | 0 | 0 | 37 |
 | tools | 4 | 0 | 0 | 4 |
 | world/regions | 7 | 0 | 0 | 7 |
@@ -54,8 +54,8 @@
 | world/npc | 20 | 0 | 0 | 20 |
 | news/events | 9 | 0 | 0 | 9 |
 | news/announcements | 5 | 0 | 0 | 5 |
-| news/banners | 51 | 0 | 0 | 51 |
+| news/banners | 53 | 0 | 0 | 53 |
 | news/patches | 50 | 0 | 0 | 50 |
 | community | 4 | 0 | 0 | 4 |
 
-Снимок: после **Luna VI 6.5 фаза II** (2026-05-14): rerun **Temptation / Moonsong**, **Epitome 04-28**, **Chronicled Dewlit Tranquility**, карточка **Лаума**; ранее **Luna V 6.4**, **Luna 6.0/6.6**, волны 6.1–6.4.
+Снимок: после волны **Luna VI материалы + Luna IV баннеры 6.3** (2026-05-14): Etherwing Moth, Plume, **The Open-Eyed**, **Astral Actuation** / **Decree**; ранее **Luna VI 6.5 фаза II**, **Luna V 6.4**, **Luna 6.0/6.6**.

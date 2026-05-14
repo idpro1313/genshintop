@@ -16,10 +16,13 @@ sources:
 related:
   - /characters/zibai
   - /characters/illuga
+  - /news/banners/character-banners/luna-iv-decree-of-the-deeps
   - /news/patches/6.3
 ---
 
-**Harmonious Abundance** объединяет **Цзыбая** и **Иллугу** на одном rate-up; второй слот фазы — **Decree of the Deeps** с **Невиллетом**.
+**Harmonious Abundance** — один из двух **персонажеских** баннеров **фазы II**: **Цзыбай (5★)** и **Иллуга (4★)** как сопровождающая.
+
+На соседнем слоте — **[Decree of the Deeps](/news/banners/character-banners/luna-iv-decree-of-the-deeps)** с **Невиллетом**.
 
 ## Источники
 
