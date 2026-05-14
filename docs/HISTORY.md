@@ -473,3 +473,23 @@
 - Что: повторный прогон того же контура: диагностика IDE по `lib/` и `bin/indexnow-ping.php` (замечаний нет); `VERSION` ↔ атрибут `Project` в `grace/knowledge-graph/knowledge-graph.xml` — **1.19.2**; PowerShell-сверка live-URL из `content/` с `public/sitemap.xml` и whitelist статических/хаб-маршрутов; фактический список `lib/*.php` на диске (22 файла — без «фантомных» `SiteRoutes`/`build-sitemap`/`regions_data` из индекса IDE); выборочно `rg` по `content/**/*.md` на топ-уровневые `kebab-case` ключи в первом блоке frontmatter — не найдено.
 - Почему: запрос пользователя «проверь ещё раз».
 - Результат: **437** канонических live-URL; **0** дубликатов `urlPath`; **0** отсутствующих в sitemap; **0** sitemap-«сирот» вне whitelist+content. На машине агента **PHP по-прежнему не в PATH** — `php -l` локально не выполнялся.
+
+## Фаза 1.19.3 — внутреннее SEO (план)
+
+### Редакционный playbook
+- Что: раздел **«SEO и поиск»** в [`content/STYLE.md`](content/STYLE.md): summary, даты, интент, внутренние ссылки, alt у изображений, напоминание про `status: live`.
+- Почему: фиксация редакционного процесса из плана «Внутреннее SEO сайта».
+- Файлы: `content/STYLE.md`, перекрёстная ссылка на `docs/SEO-CHECKLIST.md`.
+
+### Динамический sitemap с lastmod
+- Что: удалён статический [`public/sitemap.xml`](public/sitemap.xml); добавлены [`lib/SitemapBuild.php`](lib/SitemapBuild.php), ранний обработчик [`Router::sendSitemap`](lib/Router.php), в [`docker/nginx-default.conf`](docker/nginx-default.conf) — `location = /sitemap.xml` → FastCGI. [`bin/generate-sitemap.php`](bin/generate-sitemap.php) выводит тот же XML в CLI. [`bin/indexnow-ping.php`](bin/indexnow-ping.php) берёт URL из `SitemapBuild::absoluteUrls` (simplexml по файлу не используется).
+- Почему: `<lastmod>` и отказ от расхождения git-файла с контентом.
+- Решение: приоритеты/changefreq как раньше по типам путей; корневые разделы одним сегментом — weekly 0.9.
+
+### OG 1200×630 для топ-страниц
+- Что: [`lib/og-manifest.json`](lib/og-manifest.json) с записями; [`OgManifest::imageForCanonicalPath`](lib/OgManifest.php); плейсхолдеры PNG 1200×630 в [`public/og/`](public/og/) (PowerShell + System.Drawing). В [`PageRenderer`](lib/PageRenderer.php) заданы `ogImage`/`ogAlt` для главной, `/guides`, `/characters`, трёх страниц LootBar; гайды и персонажи из manifest по-прежнему через `imageForEntry`.
+- Почему: плановое расширение OG для соцсниппетов.
+
+### Документация и GRACE
+- Что: обновлены [`docs/AGENTS.md`](docs/AGENTS.md), [`docs/SEO-CHECKLIST.md`](docs/SEO-CHECKLIST.md), [`README.md`](README.md), [`docker/README.md`](docker/README.md); `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`.
+- Синхронизация: `VERSION` **1.19.2 → 1.19.3** (PATCH).

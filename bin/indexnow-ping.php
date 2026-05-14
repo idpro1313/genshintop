@@ -4,7 +4,7 @@
 declare(strict_types=1);
 
 /**
- * CLI: пинг IndexNow по списку URL из public/sitemap.xml.
+ * CLI: пинг IndexNow по каноническому списку URL (как в SitemapBuild / /sitemap.xml).
  *
  * Использование:
  *   php bin/indexnow-ping.php [--match=REGEX] [--limit=N] [--dry-run]
@@ -23,24 +23,17 @@ if (PHP_SAPI !== 'cli') {
 }
 
 define('SITE_ROOT', dirname(__DIR__));
+require SITE_ROOT . '/lib/bootstrap.php';
 require SITE_ROOT . '/lib/IndexNow.php';
+
+$cfg = require SITE_ROOT . '/lib/config.php';
 
 $opts = getopt('', ['match::', 'limit::', 'dry-run']);
 $match = isset($opts['match']) && is_string($opts['match']) && $opts['match'] !== '' ? $opts['match'] : null;
 $limit = isset($opts['limit']) ? (int) $opts['limit'] : 0;
 $dryRun = array_key_exists('dry-run', $opts);
 
-$sitemapPath = SITE_ROOT . '/public/sitemap.xml';
-if (!is_readable($sitemapPath)) {
-    fwrite(STDERR, "sitemap.xml not found: $sitemapPath\n");
-    exit(2);
-}
-
-$xml = simplexml_load_string((string) file_get_contents($sitemapPath));
-if ($xml === false) {
-    fwrite(STDERR, "Failed to parse sitemap.xml\n");
-    exit(2);
-}
+$r = SitemapBuild::absoluteUrls($cfg);
 
 $urls = [];
 /**
@@ -48,8 +41,7 @@ $urls = [];
  * Символ U+0007 (BEL) в паттерне не допускается.
  */
 $matchDelim = "\x07";
-foreach ($xml->url as $u) {
-    $loc = trim((string) ($u->loc ?? ''));
+foreach ($r as $loc) {
     if ($loc === '') {
         continue;
     }
@@ -94,9 +86,9 @@ if ($dryRun) {
 
 $results = IndexNow::submitMany($urls);
 $failed = 0;
-foreach ($results as $i => $r) {
-    printf("Batch %d: status=%d ok=%s body=%.200s\n", $i + 1, $r['status'], $r['ok'] ? 'true' : 'false', $r['body']);
-    if (!$r['ok']) {
+foreach ($results as $i => $res) {
+    printf("Batch %d: status=%d ok=%s body=%.200s\n", $i + 1, $res['status'], $res['ok'] ? 'true' : 'false', $res['body']);
+    if (!$res['ok']) {
         $failed++;
     }
 }

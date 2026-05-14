@@ -1,4 +1,17 @@
 {
-  "generatedAt": null,
-  "entries": []
+  "generatedAt": "2026-05-14",
+  "entries": [
+    "page/home",
+    "page/guides",
+    "page/characters",
+    "page/lootbar",
+    "page/lootbar/skidki-i-kupony",
+    "page/lootbar/kak-popolnit-genshin-impact",
+    "guides/adventure-rank",
+    "guides/elemental-reactions",
+    "guides/pity-and-banners",
+    "guides/build-theory",
+    "characters/zhongli",
+    "characters/hu-tao"
+  ]
 }

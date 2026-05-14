@@ -17,6 +17,12 @@ final class Router
             return;
         }
 
+        if ($path === '/sitemap.xml') {
+            self::sendSitemap($cfg);
+
+            return;
+        }
+
         if ($path === '/rss.xml') {
             http_response_code(404);
             self::send($cfg, PageRenderer::notFound($cfg));
@@ -200,5 +206,30 @@ final class Router
         $merged = array_merge(['cfg' => $cfg], $page);
         extract($merged, EXTR_SKIP);
         require SITE_ROOT . '/lib/layout.php';
+    }
+
+    /**
+     * @param array<string,mixed> $cfg
+     */
+    public static function sendSitemap(array $cfg): void
+    {
+        $ts = SitemapBuild::latestChangeTs();
+        if (!headers_sent()) {
+            header('Content-Type: application/xml; charset=utf-8');
+            header('Cache-Control: public, max-age=3600');
+            if ($ts > 0) {
+                header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $ts) . ' GMT');
+                $ifMod = $_SERVER['HTTP_IF_MODIFIED_SINCE'] ?? '';
+                if (is_string($ifMod) && $ifMod !== '') {
+                    $clientTs = strtotime($ifMod);
+                    if ($clientTs !== false && $clientTs >= $ts) {
+                        http_response_code(304);
+
+                        return;
+                    }
+                }
+            }
+        }
+        echo SitemapBuild::xml($cfg);
     }
 }

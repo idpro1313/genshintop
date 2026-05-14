@@ -16,6 +16,7 @@ require_once SITE_ROOT . '/lib/ContentRepository.php';
 require_once SITE_ROOT . '/lib/LootbarConfig.php';
 require_once SITE_ROOT . '/lib/guide_hub_definitions.php';
 require_once SITE_ROOT . '/lib/CharacterHub.php';
+require_once SITE_ROOT . '/lib/SitemapBuild.php';
 require_once SITE_ROOT . '/lib/SectionLabels.php';
 require_once SITE_ROOT . '/lib/HtmlComponents.php';
 require_once SITE_ROOT . '/lib/PageRenderer.php';

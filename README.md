@@ -4,7 +4,7 @@
 
 ## Карта сайта
 
-`public/sitemap.xml` — статический файл в git. При добавлении или удалении страниц обновляйте его вручную вместе с навигацией.
+`/sitemap.xml` генерируется PHP (`lib/SitemapBuild.php`) с `<lastmod>`; локальный просмотр: `php bin/generate-sitemap.php`. IndexNow: `php bin/indexnow-ping.php` читает тот же список URL.
 
 ## Docker и обновление с GitHub
 

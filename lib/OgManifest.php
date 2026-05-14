@@ -36,4 +36,16 @@ final class OgManifest
         }
         return Seo::DEFAULT_OG_IMAGE_PATH;
     }
+
+    /** OG для синтетических страниц: главная, каталоги, LootBar (ключи `page/...` в manifest). */
+    public static function imageForCanonicalPath(string $canonicalPath): string
+    {
+        $p = $canonicalPath === '' ? '/' : (str_starts_with($canonicalPath, '/') ? $canonicalPath : '/' . $canonicalPath);
+        $key = $p === '/' ? 'page/home' : ('page' . $p);
+        if (isset(self::$set[$key])) {
+            return '/og/' . $key . '.png';
+        }
+
+        return Seo::DEFAULT_OG_IMAGE_PATH;
+    }
 }

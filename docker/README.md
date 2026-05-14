@@ -90,7 +90,7 @@ docker run --rm -p 8080:80 genshintop-web
 После миграции на PHP проверьте вручную (или по **`docs/SEO-CHECKLIST.md`**):
 
 - Ключевые маршруты (`/`, `/guides`, `/characters`, хабы, `/lootbar/*`, `/world/regions/*`, trust-страницы) открываются с ожидаемым HTTP-кодом.
-- **`https://genshintop.ru/sitemap.xml`** — единый `urlset`, без индекса из нескольких файлов.
+- **`https://genshintop.ru/sitemap.xml`** — единый динамический `urlset` с `<lastmod>` (роутер + `lib/SitemapBuild.php`), без индекса из нескольких файлов; в nginx задан `location = /sitemap.xml` → PHP.
 - **`robots.txt`** содержит одну строку **`Sitemap:`** на этот файл.
 - **`/rss.xml`** возвращает **404** (RSS отключён).
 - Legacy-редиректов нет: сайт ещё не использовался публично, канонические URL публикуются сразу.
