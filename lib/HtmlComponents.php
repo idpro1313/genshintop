@@ -145,16 +145,16 @@ HTML;
 
     public static function contentCard(array $c): string
     {
-        $url = '/' . ltrim(($c['section'] ?? '') . '/' . ($c['slug'] ?? ''), '/');
+        $url = ContentRepository::itemUrl($c);
         $title = (string) ($c['title'] ?? '');
         $summary = isset($c['summary']) && is_string($c['summary']) ? $c['summary'] : '';
         $meta = is_array($c['meta'] ?? null) ? $c['meta'] : [];
-        
+
         $urlEsc = Html::e($url);
         $titleEsc = Html::e($title);
         $excerpt = Seo::cleanMetaDescription($summary, $title, 220);
         $excerptEsc = Html::e($excerpt);
-        
+
         $timeHtml = '';
         $displayTs = null;
         foreach (['updatedAt', 'date'] as $dk) {

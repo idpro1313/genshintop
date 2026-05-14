@@ -22,7 +22,7 @@ final class ContentRepository
         foreach ($mdFiles as $file) {
             $path = $file[0];
             $relPath = str_replace('\\', '/', substr($path, strlen($dir)));
-            
+
             if (str_starts_with($relPath, '/_templates/') || str_contains($relPath, '/_by-')) {
                 continue;
             }
@@ -40,7 +40,8 @@ final class ContentRepository
             }
 
             $isIndex = basename($path) === '_index.md';
-            
+            $urlPath = self::urlPathFromContentPath($path);
+
             $slug = $meta['slug'] ?? basename($path, '.md');
             $section = $meta['section'] ?? trim(dirname($relPath), '/');
 
@@ -56,6 +57,7 @@ final class ContentRepository
 
             $out[] = [
                 'path' => $path,
+                'urlPath' => $urlPath,
                 'slug' => $slug,
                 'section' => $section,
                 'isIndex' => $isIndex,
@@ -92,6 +94,10 @@ final class ContentRepository
     /** @param array<string,mixed> $item */
     public static function itemUrl(array $item): string
     {
+        if (isset($item['urlPath']) && is_string($item['urlPath']) && $item['urlPath'] !== '') {
+            return $item['urlPath'];
+        }
+
         $section = trim((string) ($item['section'] ?? ''), '/');
         if (!empty($item['isIndex'])) {
             return '/' . $section;
@@ -99,6 +105,26 @@ final class ContentRepository
 
         $slug = trim((string) ($item['slug'] ?? ''), '/');
         return '/' . ltrim($section . '/' . $slug, '/');
+    }
+
+    private static function urlPathFromContentPath(string $path): string
+    {
+        $root = str_replace('\\', '/', SITE_ROOT . '/content');
+        $normalized = str_replace('\\', '/', $path);
+        if (!str_starts_with($normalized, $root . '/')) {
+            return '';
+        }
+
+        $rel = substr($normalized, strlen($root) + 1);
+        $rel = preg_replace('/\.md$/i', '', $rel) ?? $rel;
+        if (str_ends_with($rel, '/_index')) {
+            $rel = substr($rel, 0, -strlen('/_index'));
+        }
+        if ($rel === '_index') {
+            $rel = '';
+        }
+
+        return '/' . trim($rel, '/');
     }
 
     public static function guideTimestamp(array $g): int
@@ -120,19 +146,20 @@ final class ContentRepository
 
     /**
      * Возвращает best-effort Unix timestamp последней модификации записи:
-     * meta.updatedAt → meta.reviewedAt → meta.date → filemtime.
+     * максимум из meta.updatedAt / meta.reviewedAt / meta.date / filemtime.
      *
      * @param array<string,mixed> $item
      */
     public static function itemMtime(array $item): int
     {
+        $max = 0;
         $meta = $item['meta'] ?? [];
         if (is_array($meta)) {
             foreach (['updatedAt', 'reviewedAt', 'date'] as $k) {
                 if (!empty($meta[$k]) && is_string($meta[$k])) {
                     $t = strtotime($meta[$k]);
                     if ($t !== false) {
-                        return $t;
+                        $max = max($max, $t);
                     }
                 }
             }
@@ -141,10 +168,10 @@ final class ContentRepository
         if ($path !== '') {
             $t = @filemtime($path);
             if ($t !== false) {
-                return $t;
+                $max = max($max, $t);
             }
         }
-        return 0;
+        return $max;
     }
 
     /**
@@ -252,7 +279,8 @@ final class ContentRepository
             return '<img' . $attrs . '>';
         }, $html);
 
-        $siteHost = 'genshintop.ru';
+        $siteUrl = getenv('SITE_URL') ?: 'https://genshintop.ru';
+        $siteHost = parse_url((string) $siteUrl, PHP_URL_HOST) ?: 'genshintop.ru';
 
         $html = (string) preg_replace_callback(
             '#<a\b([^>]*?)\bhref=("|\')(https?://[^"\']+)\2([^>]*)>#i',
@@ -291,12 +319,13 @@ final class ContentRepository
         }
 
         return (string) preg_replace_callback(
-            '#<a\b([^>]*?)\bhref="([^"]*)"([^>]*)>(.*?)</a>#is',
+            '#<a\b([^>]*?)\bhref=("|\')([^"\']*)\2([^>]*)>(.*?)</a>#is',
             static function (array $m): string {
                 $preAttrs = $m[1];
-                $href = $m[2];
-                $postAttrs = $m[3];
-                $inner = $m[4];
+                $quote = $m[2];
+                $href = $m[3];
+                $postAttrs = $m[4];
+                $inner = $m[5];
 
                 $isAbsolute = preg_match('~^(?:[a-z][a-z0-9+.\-]*:|//|mailto:|tel:|\#)~i', $href) === 1;
 
@@ -312,7 +341,7 @@ final class ContentRepository
                 };
 
                 if ($isAbsolute) {
-                    return '<a' . $preAttrs . 'href="' . $href . '"' . $postAttrs . '>' . $cleanInner($inner) . '</a>';
+                    return '<a' . $preAttrs . 'href=' . $quote . $href . $quote . $postAttrs . '>' . $cleanInner($inner) . '</a>';
                 }
 
                 $stripped = ltrim($href, './');
@@ -329,7 +358,7 @@ final class ContentRepository
 
                 $newHref = preg_replace('/\.md(?=$|[?#])/i', '', $href) ?? $href;
 
-                return '<a' . $preAttrs . 'href="' . $newHref . '"' . $postAttrs . '>' . $cleanInner($inner) . '</a>';
+                return '<a' . $preAttrs . 'href=' . $quote . $newHref . $quote . $postAttrs . '>' . $cleanInner($inner) . '</a>';
             },
             $html
         ) ?: $html;

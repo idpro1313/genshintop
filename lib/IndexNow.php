@@ -15,7 +15,7 @@ final class IndexNow
 {
     public const DEFAULT_KEY = 'cfee9df50829202f695cf93c8b24f554';
     public const ENDPOINT = 'https://yandex.com/indexnow';
-    public const HOST = 'genshintop.ru';
+    public const DEFAULT_HOST = 'genshintop.ru';
     public const BATCH_SIZE = 10000;
 
     public static function key(): string
@@ -29,7 +29,14 @@ final class IndexNow
 
     public static function keyLocation(): string
     {
-        return 'https://' . self::HOST . '/' . self::key() . '.txt';
+        return 'https://' . self::host() . '/' . self::key() . '.txt';
+    }
+
+    public static function host(): string
+    {
+        $siteUrl = getenv('SITE_URL') ?: ('https://' . self::DEFAULT_HOST);
+        $host = parse_url((string) $siteUrl, PHP_URL_HOST);
+        return is_string($host) && $host !== '' ? $host : self::DEFAULT_HOST;
     }
 
     /**
@@ -63,7 +70,7 @@ final class IndexNow
         $results = [];
         foreach (array_chunk($urls, self::BATCH_SIZE) as $batch) {
             $payload = [
-                'host' => self::HOST,
+                'host' => self::host(),
                 'key' => self::key(),
                 'keyLocation' => self::keyLocation(),
                 'urlList' => $batch,

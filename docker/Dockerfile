@@ -16,7 +16,9 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /var/www
 
-# Каталог info/ перенесён в archive/info/, рантайм читает content/
+# Рантайм читает content/; legacy info/ не копируется в образ.
+COPY VERSION ./VERSION
+COPY bin ./bin/
 COPY lib ./lib/
 COPY content ./content/
 COPY public ./public/

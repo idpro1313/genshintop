@@ -13,7 +13,7 @@ updatedAt: 2026-05-13
 ## Что в подразделе
 
 - Семь королевств: [Мондштадт](/world/regions/mondstadt), [Ли Юэ](/world/regions/liyue), [Инадзума](/world/regions/inazuma), [Сумеру](/world/regions/sumeru), [Фонтейн](/world/regions/fontaine), [Натлан](/world/regions/natlan), [Снежная](/world/regions/snezhnaya).
-- Лор-территории: [Кхэнри'а](/world/regions/khaenri-ah), [Селестия](/world/regions/celestia).
-- Подрегионы и аномалии: [Энканомия](/world/regions/enkanomiya), [Чазм](/world/regions/chasm).
+- Лор-территории: [Кхэнри'а](/world/lore/khaenri-ah), [Селестия](/world/lore/celestia).
+- Подрегионы и аномалии: Энканомия, Чазм и Драконий хребет будут вынесены в отдельные карточки после наполнения раздела.
 
 Карточки регионов и подрегионов показаны ниже автоматически.

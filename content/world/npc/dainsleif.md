@@ -12,7 +12,7 @@ sources:
   web:
     - {url: "https://genshin-impact.fandom.com/wiki/Dainsleif", title: "Dainsleif — Wiki", accessed: "2026-05-13"}
 related:
-  - /world/lore/khaenriah
+  - /world/lore/khaenri-ah
 ---
 
 Дайнслейф — таинственный «Двенадцатый» (Twelfth), бывший рыцарь Королевской гвардии Каэнри'а. После Катастрофы 500 лет назад превратился в полу-бессмертного бродягу. Помогает Путешественнику в архонт-квестах, особенно ивентах «Caribert» и «Shadows Amidst Snowstorms».

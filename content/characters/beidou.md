@@ -105,7 +105,7 @@ C2 — главный breakpoint. C6 — хороший team-DPS upgrade в Elec
 
 ### Driver команда
 
-Бэй Доу + [Тарталья](/characters/childe) / [Аято](/characters/ayato) + Фишль + Кадзуха.
+Бэй Доу + [Тарталья](/characters/tartaglia) / [Аято](/characters/ayato) + Фишль + Кадзуха.
 
 Hydro driver быстро активирует молнии Q, Фишль закрывает energy.
 

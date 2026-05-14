@@ -30,6 +30,13 @@ final class Router
             return;
         }
 
+        if ($path === '/404') {
+            http_response_code(404);
+            self::send($cfg, PageRenderer::notFound($cfg));
+
+            return;
+        }
+
         // --- Static exact ---
         $static = PageRenderer::staticExactPages($cfg);
         if (isset($static[$path])) {
@@ -56,6 +63,8 @@ final class Router
             if ($item) {
                 if ($item['isIndex']) {
                     self::send($cfg, PageRenderer::contentSectionIndex($cfg, $item));
+                } elseif (str_starts_with((string) ($item['section'] ?? ''), 'guides')) {
+                    self::send($cfg, PageRenderer::guideArticle($cfg, $item));
                 } else {
                     self::send($cfg, PageRenderer::contentArticle($cfg, $item));
                 }
@@ -130,6 +139,8 @@ final class Router
         if ($item) {
             if ($item['isIndex']) {
                 self::send($cfg, PageRenderer::contentSectionIndex($cfg, $item));
+            } elseif (str_starts_with((string) ($item['section'] ?? ''), 'guides')) {
+                self::send($cfg, PageRenderer::guideArticle($cfg, $item));
             } else {
                 self::send($cfg, PageRenderer::contentArticle($cfg, $item));
             }

@@ -120,10 +120,11 @@ final class Seo
     }
 
     /** @param list<array{label:string,href:string}> $items */
-    public static function breadcrumbListSchema(array $cfg, array $items): array
+    public static function breadcrumbListSchema(array $cfg, array $items, ?string $id = null): array
     {
-        return [
+        return array_filter([
             '@type' => 'BreadcrumbList',
+            '@id' => $id,
             'itemListElement' => array_map(
                 fn ($item, $i) => [
                     '@type' => 'ListItem',
@@ -134,7 +135,7 @@ final class Seo
                 $items,
                 array_keys($items),
             ),
-        ];
+        ], static fn ($v) => $v !== null);
     }
 
     /** @param list<array<string,mixed>> $nodes */
@@ -203,43 +204,6 @@ final class Seo
                 'url' => 'https://www.hoyoverse.com/',
             ],
             'url' => 'https://genshin.hoyoverse.com/',
-        ];
-    }
-
-    /** @param array<string,mixed> $cfg */
-    public static function lootbarServiceSchema(array $cfg, array $params): array
-    {
-        $site = self::siteUrl($cfg);
-        return [
-            '@type' => 'Service',
-            '@id' => self::absoluteUrl($cfg, (string) $params['url']) . '#service',
-            'name' => $params['name'],
-            'description' => $params['description'],
-            'serviceType' => 'Genshin Impact top-up',
-            'areaServed' => ['RU', 'BY', 'KZ', 'UA'],
-            'inLanguage' => 'ru-RU',
-            'provider' => [
-                '@type' => 'Organization',
-                'name' => 'LootBar.gg',
-                'url' => 'https://lootbar.gg/',
-            ],
-            'audience' => [
-                '@type' => 'Audience',
-                'audienceType' => 'Игроки Genshin Impact',
-            ],
-            'isRelatedTo' => [
-                '@type' => 'VideoGame',
-                'name' => 'Genshin Impact',
-                'publisher' => 'HoYoverse',
-            ],
-            'offers' => [
-                '@type' => 'Offer',
-                'url' => $params['affiliateUrl'],
-                'priceCurrency' => 'RUB',
-                'availability' => 'https://schema.org/InStock',
-                'category' => 'in-game-currency',
-            ],
-            'mainEntityOfPage' => self::absoluteUrl($cfg, (string) $params['url']),
         ];
     }
 

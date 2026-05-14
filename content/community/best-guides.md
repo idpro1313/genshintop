@@ -39,7 +39,7 @@ Best Guides — редакционная подборка материалов, 
 
 - [Teyvat Overview](/world/lore/teyvat-overview)
 - [Archons](/world/lore/archons)
-- [Khaenri'ah](/world/lore/khaenriah)
+- [Khaenri'ah](/world/lore/khaenri-ah)
 - [Descenders](/world/lore/descenders)
 
 ### Для эндгейма

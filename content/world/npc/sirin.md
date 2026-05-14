@@ -13,7 +13,7 @@ sources:
     - {url: "https://genshin-impact.fandom.com/wiki/Sirin", title: "Sirin — Wiki", accessed: "2026-05-13"}
 related:
   - /characters/razor
-  - /world/lore/khaenriah
+  - /world/lore/khaenri-ah
 ---
 
 Сирин — древнее существо, появляющееся в ивенте 1.2 «The Chalk Prince and the Dragon». Связана с лором Каэнри'а и Lupus Boreas (Андриусом). Передала [Razor](/characters/razor) часть способностей Wolves of the North.

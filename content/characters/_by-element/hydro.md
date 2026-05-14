@@ -17,7 +17,7 @@ element: Hydro
 - [Невиллетт](/characters/neuvillette) — charged beam Hydro DPS.
 - [Е Лань](/characters/yelan) — off-field Hydro sub-DPS.
 - [Син Цю](/characters/xingqiu) — 4★ off-field Hydro core.
-- [Тарталья](/characters/childe) — on-field Hydro driver.
+- [Тарталья](/characters/tartaglia) — on-field Hydro driver.
 - [Мона](/characters/mona) — burst buffer.
 - [Кокоми](/characters/kokomi) — healer + Hydro applier.
 - [Камисато Аято](/characters/ayato) — on-field Hydro DPS.

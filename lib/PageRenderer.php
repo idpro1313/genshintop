@@ -33,6 +33,39 @@ final class PageRenderer
         };
     }
 
+    /** @return list<string> */
+    private static function sourceLines(mixed $sources): array
+    {
+        if (is_string($sources) && $sources !== '') {
+            return [$sources];
+        }
+        if (!is_array($sources)) {
+            return [];
+        }
+
+        $out = [];
+        foreach ($sources as $value) {
+            foreach (self::sourceLines($value) as $line) {
+                $out[] = $line;
+            }
+        }
+        return $out;
+    }
+
+    /** @param list<string> $relativePaths */
+    private static function filesMtime(array $relativePaths): ?int
+    {
+        $max = 0;
+        foreach ($relativePaths as $rel) {
+            $path = SITE_ROOT . '/' . ltrim($rel, '/');
+            $t = @filemtime($path);
+            if ($t !== false) {
+                $max = max($max, $t);
+            }
+        }
+        return $max > 0 ? $max : null;
+    }
+
     /** @param array<string,mixed> $cfg */
     public static function notFound(array $cfg): array
     {
@@ -437,8 +470,9 @@ HTML;
             . '<p class="catalog-count">Материалов в хабе: ' . $countHub . '</p>'
             . '<div class="grid-guides">' . $cards . '</div></article>';
 
+        $listedGuides = array_slice($guides, 0, 48);
         $items = [];
-        foreach (array_slice($guides, 0, 48) as $i => $g) {
+        foreach ($listedGuides as $i => $g) {
             $items[] = [
                 '@type' => 'ListItem',
                 'position' => $i + 1,
@@ -464,7 +498,7 @@ HTML;
                 'url' => $url,
                 'mainEntity' => [
                     '@type' => 'ItemList',
-                    'numberOfItems' => count($guides),
+                    'numberOfItems' => count($listedGuides),
                     'itemListElement' => $items,
                 ],
             ],
@@ -492,7 +526,7 @@ HTML;
     public static function guideArticle(array $cfg, array $g): array
     {
         $slug = (string) ($g['slug'] ?? '');
-        $canonicalPath = '/guides/' . $slug;
+        $canonicalPath = ContentRepository::itemUrl($g);
         $meta = is_array($g['meta'] ?? null) ? $g['meta'] : [];
         $title = (string) ($g['title'] ?? $slug);
         $summary = isset($g['summary']) && is_string($g['summary']) ? $g['summary'] : '';
@@ -541,12 +575,10 @@ HTML;
         $relatedCharsHtml = HtmlComponents::characterBadgeLinks($relatedCharSlugs);
 
         $sourcesHtml = '';
-        if (!empty($meta['sources']) && is_array($meta['sources'])) {
+        $sourceLines = self::sourceLines($meta['sources'] ?? []);
+        if ($sourceLines !== []) {
             $sourcesHtml = '<section class="sources"><h2>Источники</h2><ul>';
-            foreach ($meta['sources'] as $s) {
-                if (!is_string($s) || $s === '') {
-                    continue;
-                }
+            foreach ($sourceLines as $s) {
                 $sourcesHtml .= '<li>' . Html::e($s) . '</li>';
             }
             $sourcesHtml .= '</ul></section>';
@@ -821,8 +853,9 @@ HTML;
         $slot = $bc . '<article class="article catalog-page"><h1>' . Html::e($title) . '</h1><p class="lead">' . Html::e($intro) . '</p>'
             . '<p class="catalog-count">Персонажей: ' . count($items) . '</p><div class="grid-cards">' . $cards . '</div></article>';
 
+        $listedCharacters = array_slice($items, 0, 60);
         $listLd = [];
-        foreach (array_slice($items, 0, 60) as $i => $c) {
+        foreach ($listedCharacters as $i => $c) {
             $slug = (string) ($c['slug'] ?? '');
             $listLd[] = [
                 '@type' => 'ListItem',
@@ -844,7 +877,7 @@ HTML;
                 'url' => $url,
                 'mainEntity' => [
                     '@type' => 'ItemList',
-                    'numberOfItems' => count($items),
+                    'numberOfItems' => count($listedCharacters),
                     'itemListElement' => $listLd,
                 ],
             ],
@@ -1065,6 +1098,7 @@ HTML;
             'hideLootBarPromo' => true,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => self::filesMtime(['lib/PageRenderer.php', 'lib/LootbarConfig.php', 'lib/Partners.php']),
         ];
     }
 
@@ -1154,6 +1188,7 @@ HTML;
             'hideLootBarPromo' => true,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => self::filesMtime(['lib/PageRenderer.php', 'lib/LootbarConfig.php', 'lib/Partners.php']),
         ];
     }
 
@@ -1282,6 +1317,7 @@ HTML;
             'hideLootBarPromo' => true,
             'slot' => $slot,
             'jsonLd' => $jsonLd,
+            'lastModifiedTs' => self::filesMtime(['lib/PageRenderer.php', 'lib/LootbarConfig.php', 'lib/Partners.php']),
         ];
     }
 
@@ -1289,23 +1325,23 @@ HTML;
     {
         $title = (string) $item['title'];
         $desc = (string) ($item['summary'] ?? $title);
-        $section = trim((string) $item['section'], '/');
         $canonicalPath = ContentRepository::itemUrl($item);
+        $sectionPath = trim($canonicalPath, '/');
 
         $htmlBody = ContentRepository::markdownToHtml($item['body_md']);
 
         $subsections = [];
         $articles = [];
         foreach (ContentRepository::allLive() as $child) {
-            $childSection = trim((string) ($child['section'] ?? ''), '/');
-            if ($child === $item || $childSection === '') {
+            $childPath = trim(ContentRepository::itemUrl($child), '/');
+            if ($child === $item || $childPath === '') {
                 continue;
             }
 
             if ($child['isIndex']) {
-                $prefix = $section === '' ? '' : $section . '/';
-                if (str_starts_with($childSection, $prefix)) {
-                    $relative = substr($childSection, strlen($prefix));
+                $prefix = $sectionPath === '' ? '' : $sectionPath . '/';
+                if (str_starts_with($childPath, $prefix)) {
+                    $relative = substr($childPath, strlen($prefix));
                     if ($relative !== '' && !str_contains($relative, '/')) {
                         $subsections[] = $child;
                     }
@@ -1313,7 +1349,9 @@ HTML;
                 continue;
             }
 
-            if ($childSection === $section) {
+            $parentPath = trim(str_replace('\\', '/', dirname($childPath)), '.');
+            $parentPath = trim($parentPath, '/');
+            if ($parentPath === $sectionPath) {
                 $articles[] = $child;
             }
         }
@@ -1338,7 +1376,7 @@ HTML;
             $articlesHtml .= '</div></section>';
         }
 
-        $bcList = SectionLabels::breadcrumbsForSection($section);
+        $bcList = SectionLabels::breadcrumbsForSection($sectionPath);
         if (isset($bcList[array_key_last($bcList)])) {
             $bcList[array_key_last($bcList)] = ['label' => $title, 'href' => $canonicalPath];
         }
@@ -1350,7 +1388,7 @@ HTML;
         $jsonLd = Seo::jsonLdGraph([
             Seo::publisherOrganization($cfg),
             Seo::webSiteNode($cfg),
-            Seo::breadcrumbListSchema($cfg, $bcList),
+            Seo::breadcrumbListSchema($cfg, $bcList, $sectionUrl . '#breadcrumb'),
             [
                 '@type' => 'CollectionPage',
                 '@id' => $sectionUrl . '#webpage',
@@ -1395,7 +1433,8 @@ HTML;
 
         $htmlBody = ContentRepository::markdownToHtml($item['body_md']);
 
-        $bcList = SectionLabels::breadcrumbsForSection((string) $item['section']);
+        $sectionPath = trim(str_replace('\\', '/', dirname(trim($canonicalPath, '/'))), '.');
+        $bcList = SectionLabels::breadcrumbsForSection(trim($sectionPath, '/'));
         $bcList[] = ['label' => $title, 'href' => $canonicalPath];
 
         $bc = HtmlComponents::breadcrumbs($cfg, $bcList);

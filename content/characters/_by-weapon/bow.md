@@ -16,7 +16,7 @@ weapon: bow
 - [Гань Юй](/characters/ganyu) — Cryo charged-shot DPS.
 - [Тигнари](/characters/tighnari) — Dendro charged-shot DPS.
 - [Е Лань](/characters/yelan) — Hydro sub-DPS.
-- [Тарталья](/characters/childe) — Hydro stance DPS.
+- [Тарталья](/characters/tartaglia) — Hydro stance DPS.
 - [Лини](/characters/lyney) — Pyro charged-shot DPS.
 - [Венти](/characters/venti) — Anemo crowd control.
 - [Эмбер](/characters/amber) — starter Pyro bow.

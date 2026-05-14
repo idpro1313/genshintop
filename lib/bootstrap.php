@@ -14,7 +14,6 @@ require_once SITE_ROOT . '/lib/Seo.php';
 require_once SITE_ROOT . '/lib/OgManifest.php';
 require_once SITE_ROOT . '/lib/ContentRepository.php';
 require_once SITE_ROOT . '/lib/LootbarConfig.php';
-require_once SITE_ROOT . '/lib/SiteRoutes.php';
 require_once SITE_ROOT . '/lib/guide_hub_definitions.php';
 require_once SITE_ROOT . '/lib/CharacterHub.php';
 require_once SITE_ROOT . '/lib/SectionLabels.php';
