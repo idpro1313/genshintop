@@ -41,9 +41,9 @@
 
 | Раздел | live | draft | stub | total |
 |--------|-----:|------:|-----:|------:|
-| characters | 115 | 0 | 0 | 115 |
-| weapons | 57 | 0 | 0 | 57 |
-| artifacts | 38 | 0 | 0 | 38 |
+| characters | 110 | 0 | 0 | 110 |
+| weapons | 69 | 0 | 0 | 69 |
+| artifacts | 41 | 0 | 0 | 41 |
 | materials | 28 | 0 | 0 | 28 |
 | enemies | 20 | 0 | 0 | 20 |
 | guides | 37 | 0 | 0 | 37 |
@@ -52,10 +52,10 @@
 | world/lore | 6 | 0 | 0 | 6 |
 | world/factions | 24 | 0 | 0 | 24 |
 | world/npc | 20 | 0 | 0 | 20 |
-| news/events | 6 | 0 | 0 | 6 |
+| news/events | 8 | 0 | 0 | 8 |
 | news/announcements | 5 | 0 | 0 | 5 |
-| news/banners | 19 | 0 | 0 | 19 |
-| news/patches | 43 | 0 | 0 | 43 |
+| news/banners | 28 | 0 | 0 | 28 |
+| news/patches | 50 | 0 | 0 | 50 |
 | community | 4 | 0 | 0 | 4 |
 
-Снимок: после **Wave 4** (2026-05-13). В рабочих разделах `content/` больше нет `draft`/`stub` во frontmatter: шаблонные `stub` остаются только в `content/_templates/` как намеренный пример статуса для новых материалов. Wave 5 — расширение следующих compact карточек персонажей до full wiki и точечная ревизия URL/frontmatter.
+Снимок: после **Wave 6 / Luna 6.x** (2026-05-14): добавлены патчи **6.1–6.6**, карточки персонажей Luna, оружие и артефакты; `/sitemap.xml` генерируется динамически (`lib/SitemapBuild.php`).

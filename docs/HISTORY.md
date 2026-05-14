@@ -493,3 +493,30 @@
 ### Документация и GRACE
 - Что: обновлены [`docs/AGENTS.md`](docs/AGENTS.md), [`docs/SEO-CHECKLIST.md`](docs/SEO-CHECKLIST.md), [`README.md`](README.md), [`docker/README.md`](docker/README.md); `grace/knowledge-graph/knowledge-graph.xml`, `grace/plan/development-plan.xml`, `grace/verification/verification-plan.xml`.
 - Синхронизация: `VERSION` **1.19.2 → 1.19.3** (PATCH).
+
+## Фаза 1.20.0 — Волна контента Luna 6.x (план «недостающие статьи»)
+
+### Патчи и новости
+- Что: добавлены страницы **`content/news/patches/6.1.md`–`6.6.md`**; полностью переписан **`6.0.md`** (убрана заглушка TBA, данные по *A Dance of Snowy Tides and Hoarfrost Groves*); обновлены индексы **`content/news/patches/_index.md`**, связь **`5.7.md` → `6.0`**.
+- Почему: закрыть разрыв версий после **5.7** по официально документированной цепочке **Genshin Impact Wiki** (сверка 2026-05-14).
+
+### Персонажи
+- Что: **15** новых карточек: **flins, aino, nefer, wonderland-manekin, durin, jahoda, columbina, zibai, illuga, ineffa, varka, linnea, nicole, prune, lohen** — компактный wiki-формат + `sources.web`.
+- Почему: дебюты **Luna I–VII** по вики-координатам.
+
+### Оружие и артефакты
+- Что: **14** оружий (6.0–6.6) и **6** артефактных сетов (**silken-moons-serenade**, **night-of-the-skys-unveiling**, **aubade-of-morningstar-and-moon**, **a-day-carved-from-rising-winds**, **celestial-gift**, **disenchantment-in-deep-shadow** и др.).
+- Почему: параллельная нить плана — расширение каталога по **docs/PLAN.md**.
+
+### Баннеры и ивенты
+- Что: **6** файлов в **`news/banners/**`** (Rubedo 6.2, Somnias 6.3, Ya-hoho 6.5, Angel's Reverie 6.6, Epitome 6.0 / 6.6) + **`news/events/luna-vii-launch-events.md`**.
+- Почему: привязать баннерные названия к патчам и датам вики.
+
+### Карта прогресса
+- Что: обновлены **`content/README.md`**, **`content/characters/_index.md`** (актуальные счётчики файлов).
+- Решение: статического `public/sitemap.xml` в репозитории **нет** — после 1.19.3 карта генерируется **динамически** (`lib/SitemapBuild.php`); новые URL попадают в sitemap автоматически.
+
+### Sync
+- Что: `VERSION` **1.19.3 → 1.20.0** (MINOR — крупное расширение корпуса). `grace/knowledge-graph/knowledge-graph.xml` — `Project VERSION`, аннотация **ax-status** под Luna 6.x. Этот журнал.
+- Файлы: `VERSION`, `content/**`, `grace/knowledge-graph/knowledge-graph.xml`, `docs/HISTORY.md`.
+
